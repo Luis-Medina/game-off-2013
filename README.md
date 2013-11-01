@@ -1,4 +1,4 @@
-![GitHub Game Off Game Jam](https://github.com/josegallegos07/game-off-2013/blob/development/1120/raw_assets/github_banner.png)
+![GitHub Game Off Game Jam](https://raw.github.com/josegallegos07/game-off-2013/development/1120/raw_assets/github_banner.png)
 
 ## 1120
 
