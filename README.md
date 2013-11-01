@@ -1,13 +1,13 @@
-![GitHub Game Off Game Jam](https://raw.github.com/josegallegos07/game-off-2013/development/1120/raw_assets/github_banner.png)
+![Unimpressed Turtle](https://raw.github.com/josegallegos07/game-off-2013/development/1120/raw_assets/github_banner.png)
 
-## 1120
+# 1120
 
 Source Code for 2013 Github Game Off Game Jam
 
-## CONTACT
+# CONTACT
 
 * [josegallegos07@gmail.com](mailto:josegallegos07@gmail.com) 
-* [Website](https://www.unimpressedturtle.com)
+* [Website](http://www.unimpressedturtle.com)
 
-## PLAYABLE DEMO
+# PLAYABLE DEMO
 * TBD
