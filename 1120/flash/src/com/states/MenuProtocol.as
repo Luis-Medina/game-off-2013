@@ -7,7 +7,7 @@ package com.states
 	import com.constants.Game;
 	import com.constants.Textures;
 	import com.events.CreateEvent;
-	import com.states.AnarchoProtocol;
+	import com.states.CarnageProtocol;
 	
 	import flash.display.BitmapData;
 	
@@ -119,7 +119,7 @@ package com.states
 			// ** TODO: How should I be switching states?
 			// dispatchEvent(new CreateEvent(CreateEvent.CREATE, {type: "CREATE"}, true));
 			clear();
-			var state:StarlingState = new AnarchoProtocol;
+			var state:StarlingState = new CarnageProtocol;
 		}
 		
 		private function terminate():void
