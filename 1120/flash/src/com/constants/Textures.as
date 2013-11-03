@@ -4,10 +4,10 @@ package com.constants
 
 	public class Textures
 	{
-		[Embed(source="../assets/textures/blank.png")]
+		[Embed(source="../assets/textures/blank.png", mimeType="image/png")]
 		public static const BLANK:Class;
 		
-		[Embed(source="../assets/textures/splash.png")]
+		[Embed(source="../assets/textures/splash.png", mimeType="image/png")]
 		public static const SPLASH:Class;
 		
 	}
