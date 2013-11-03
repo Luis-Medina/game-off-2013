@@ -1,9 +1,12 @@
 package
 {
 	import citrus.core.starling.StarlingCitrusEngine;
+	import citrus.objects.CitrusSprite;
 	
 	import com.constants.Game;
 	import com.states.MenuProtocol;
+	
+	import flash.events.Event;
 	
 	import starling.core.Starling;
 		
@@ -13,8 +16,15 @@ package
 
 		public function Main() {
 			
+			super();
+			this.addEventListener(Event.ADDED_TO_STAGE, onAddedToStage);
+		}
+		
+		private function onAddedToStage(event:Event):void
+		{
+			this.removeEventListener(Event.ADDED_TO_STAGE, onAddedToStage);
+			
 			setUpStarling(true);
-	
 			state = new MenuProtocol();
 		}
 	}
