@@ -1,15 +1,21 @@
 package
 {
-	import flash.display.Sprite;
+	import citrus.core.starling.StarlingCitrusEngine;
 	
-	import com.constants.Colors;
+	import com.constants.Game;
+	import com.states.MenuProtocol;
 	
-	[SWF(width='700', height='525',backgroundColor='#191919', frameRate='30')]
+	import starling.core.Starling;
+		
+	[SWF(width='960', height='600', backgroundColor='#191919', frameRate='30', pageTitle='1120')]
 	
-	public class Main extends Sprite
-	{
-		public function Main()
-		{
+	public class Main extends StarlingCitrusEngine {
+
+		public function Main() {
+			
+			setUpStarling(true);
+	
+			state = new MenuProtocol();
 		}
 	}
 }
