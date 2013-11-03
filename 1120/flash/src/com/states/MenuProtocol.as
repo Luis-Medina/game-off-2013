@@ -10,6 +10,8 @@ package com.states
 	import com.states.CarnageProtocol;
 	
 	import flash.display.BitmapData;
+	import flash.ui.Mouse;
+	import flash.ui.MouseCursor;
 	
 	import starling.core.Starling;
 	import starling.display.Button;
@@ -25,8 +27,8 @@ package com.states
 	{
 		private var _size:Number = 32;
 		private var _fontFamily:String = "DestroyEarthRoughBB";
-		private var _col:uint = Colors.BLUE;
-		private var _hoverCol:uint = Colors.WHITE;
+		private var _col:uint = Colors.WHITE;
+		private var _hoverCol:uint = Colors.BLUE;
 		private var _height:Number = 60;
 		private var _width:Number = 100;
 		
@@ -89,28 +91,34 @@ package com.states
 		private function buttonHandler(e:TouchEvent):void
 		{
 			var touch:Touch = e.getTouch(stage);
-			
 			if(touch)
 			{
-				if(touch.phase == TouchPhase.BEGAN)
-				{
+				var button:Button = e.currentTarget as Button;
+				if (button)
+				{					
+					/** HANDLE HOVER **/
+					if (touch.phase == TouchPhase.HOVER)
+					{
+						// HANDLING HOVER KINDA SUCKS.
+					}
 					
-				}
-				else if(touch.phase == TouchPhase.ENDED)
-				{
-					var button:Button = e.currentTarget as Button;
-					if (button)
+					/** HANDLE CLICKS **/	
+					if(touch.phase == TouchPhase.BEGAN)
+					{
+					}
+					else if(touch.phase == TouchPhase.ENDED)
 					{
 						if (button.name == START)
 							create();
 						else if (button.name == EXIT)
 							terminate();
+					}	
+					else if(touch.phase == TouchPhase.MOVED)
+					{
 					}
-				}	
-				else if(touch.phase == TouchPhase.MOVED)
-				{
 					
 				}
+				
 			}
 			
 		}
