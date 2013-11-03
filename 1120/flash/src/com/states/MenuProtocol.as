@@ -8,8 +8,12 @@ package com.states
 	import com.constants.Game;
 	import com.constants.Textures;
 	
+	import flash.display.BitmapData;
+	
 	import starling.display.Button;
 	import starling.display.DisplayObject;
+	import starling.display.Image;
+	import starling.display.Sprite;
 	import starling.events.Event;
 	import starling.events.Touch;
 	import starling.events.TouchEvent;
@@ -46,6 +50,12 @@ package com.states
 		private function drawMenu():void
 		{
 			trace("MENU PROTOCOL 1120")		
+			
+			/** SPLASH **/
+			var bg:Image = new Image(Texture.fromBitmap(new Textures.SPLASH));
+			this.addChild(bg);
+			
+			/** MENU **/
 			var _buttons:Array = ['START', 'EXIT'];
 			_buttonTexture = Texture.fromBitmap(new Textures.BLANK);
 			
@@ -59,7 +69,7 @@ package com.states
 				_button.text = _buttons[i];
 				_button.enabled = true;
 				_button.x = Game.STAGE_WIDTH/2 - _width/2;
-				_button.y = (Game.STAGE_HEIGHT/2) + (i * _size*1.5);
+				_button.y = 100 + (Game.STAGE_HEIGHT/2) + (i * _size*1.5);
 				_button.useHandCursor = true;
 				_button.name = _buttons[i];
 				
