@@ -6,14 +6,13 @@ package com.states
 	{
 		public function AnarchoProtocol() {
 			
+			trace("ANARCHO PROTOCOL")
 			super();
+			commenceCarnage();
 		}
 		
-		override public function initialize():void {
-			
-			super.initialize();
-			
-			trace("HERE")
+		public function commenceCarnage():void
+		{
 			
 		}
 	}
