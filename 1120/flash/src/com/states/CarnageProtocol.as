@@ -30,10 +30,13 @@ package com.states
 			add(box2d);
 			
 			var hero:Hero = new Hero("hero", {x:210, y:100, width:20, height:20});
+			//hero.acceleration = 100;
+			//hero.jumpAcceleration = 5;
 			add(hero);
 			
 			/** WALLS **/
-			add(new Platform("bottom", {x:stage.stageWidth / 2, y:stage.stageHeight, width:stage.stageWidth}));
+			add(new Platform("bottom", {x:stage.stageWidth / 2, y:stage.stageHeight, width:stage.stageWidth, height: 20}));
+			add(new Platform("roof", {x:stage.stageWidth / 2, y:0, width:stage.stageWidth, height: 10}));
 			add(new Platform("left_wall", {x:0, y: stage.stageHeight,  width:10, height: stage.stageHeight * 2}));
 			add(new Platform("right_wall", {x: stage.stageWidth, y: stage.stageHeight,  width:10, height: stage.stageHeight * 2}));
 			
