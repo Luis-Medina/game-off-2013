@@ -22,12 +22,12 @@ package com.states
 
 	public class MenuProtocol extends StarlingState
 	{
-		private var _size:Number = 36;
+		private var _size:Number = 32;
 		private var _fontFamily:String = "DestroyEarthRoughBB";
 		private var _col:uint = Colors.BLUE;
 		private var _hoverCol:uint = Colors.WHITE;
-		private var _height:Number = 100;
-		private var _width:Number = 300;
+		private var _height:Number = 60;
+		private var _width:Number = 100;
 		
 		public static const START:String = 'START';
 		public static const EXIT:String = 'EXIT';
@@ -70,6 +70,8 @@ package com.states
 				_button.fontName = _fontFamily;
 				_button.text = _buttons[i];
 				_button.enabled = true;
+				_button.width = _width;
+				_button.height = _height;
 				_button.x = Game.STAGE_WIDTH/2 - _width/2;
 				_button.y = 100 + (Game.STAGE_HEIGHT/2) + (i * _size*1.5);
 				_button.useHandCursor = true;
