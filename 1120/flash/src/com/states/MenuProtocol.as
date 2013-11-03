@@ -6,6 +6,8 @@ package com.states
 	import com.constants.Fonts;
 	import com.constants.Game;
 	import com.constants.Textures;
+	import com.events.CreateEvent;
+	import com.states.AnarchoProtocol;
 	
 	import flash.display.BitmapData;
 	
@@ -26,6 +28,9 @@ package com.states
 		private var _hoverCol:uint = Colors.WHITE;
 		private var _height:Number = 100;
 		private var _width:Number = 300;
+		
+		public static const START:String = 'START';
+		public static const EXIT:String = 'EXIT';
 		
 		private var _buttonTexture:Texture;
 		private var _button:Button;
@@ -53,7 +58,7 @@ package com.states
 			this.addChild(bg);
 			
 			/** MENU **/
-			var _buttons:Array = ['START', 'EXIT'];
+			var _buttons:Array = [START, EXIT];
 			_buttonTexture = Texture.fromBitmap(new Textures.BLANK);
 			
 			for (var i:int = 0; i < _buttons.length; i++)
@@ -74,6 +79,7 @@ package com.states
 				this.addChild(_button);
 			}
 			
+			this.addEventListener(TouchEvent.TOUCH, buttonHandler);
 			this.visible = true;
 		}
 
@@ -90,7 +96,13 @@ package com.states
 				else if(touch.phase == TouchPhase.ENDED)
 				{
 					var button:Button = e.currentTarget as Button;
-					if (button) trace(button.name);
+					if (button)
+					{
+						if (button.name == START)
+							create();
+						else if (button.name == EXIT)
+							terminate();
+					}
 				}	
 				else if(touch.phase == TouchPhase.MOVED)
 				{
@@ -102,11 +114,20 @@ package com.states
 		
 		private function create():void
 		{
-			
+			// ** TODO: How should I be switching states?
+			// dispatchEvent(new CreateEvent(CreateEvent.CREATE, {type: "CREATE"}, true));
+			clear();
+			var state:StarlingState = new AnarchoProtocol;
 		}
 		
 		private function terminate():void
 		{
+			clear();
+		}
+		
+		private function clear():void
+		{
+			this.removeChildren();
 		}
 		
 	}
