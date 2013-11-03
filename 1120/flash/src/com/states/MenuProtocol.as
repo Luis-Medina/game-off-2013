@@ -11,6 +11,7 @@ package com.states
 	
 	import flash.display.BitmapData;
 	
+	import starling.core.Starling;
 	import starling.display.Button;
 	import starling.display.Image;
 	import starling.events.Event;
@@ -125,6 +126,7 @@ package com.states
 		private function terminate():void
 		{
 			clear();
+			var state:StarlingState = new TerminateProtocol;
 		}
 		
 		private function clear():void
