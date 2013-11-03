@@ -7,13 +7,11 @@ package com.states
 	import com.constants.Game;
 	import com.constants.Textures;
 	import com.events.CreateEvent;
-	import com.states.CarnageProtocol;
 	
 	import flash.display.BitmapData;
 	import flash.ui.Mouse;
 	import flash.ui.MouseCursor;
 	
-	import starling.core.Starling;
 	import starling.display.Button;
 	import starling.display.Image;
 	import starling.events.Event;
@@ -37,6 +35,9 @@ package com.states
 		
 		private var _buttonTexture:Texture;
 		private var _button:Button;
+		
+		private var _carnage:CarnageProtocol;
+		private var _terminate:TerminateProtocol;
 		
 		public function MenuProtocol()
 		{
@@ -125,16 +126,14 @@ package com.states
 		
 		private function create():void
 		{
-			// ** TODO: How should I be switching states?
-			// dispatchEvent(new CreateEvent(CreateEvent.CREATE, {type: "CREATE"}, true));
 			clear();
-			var state:StarlingState = new CarnageProtocol;
+			dispatchEvent(new CreateEvent(CreateEvent.CREATE, {type: "CREATE"}, true));
 		}
 		
 		private function terminate():void
 		{
 			clear();
-			var state:StarlingState = new TerminateProtocol;
+			dispatchEvent(new CreateEvent(CreateEvent.CREATE, {type: "TERMINATE"}, true));
 		}
 		
 		private function clear():void
