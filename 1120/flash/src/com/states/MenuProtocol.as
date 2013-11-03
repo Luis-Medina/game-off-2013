@@ -1,7 +1,6 @@
 package com.states
 {	
 	import citrus.core.starling.StarlingState;
-	import citrus.input.Input;
 	
 	import com.constants.Colors;
 	import com.constants.Fonts;
@@ -11,9 +10,7 @@ package com.states
 	import flash.display.BitmapData;
 	
 	import starling.display.Button;
-	import starling.display.DisplayObject;
 	import starling.display.Image;
-	import starling.display.Sprite;
 	import starling.events.Event;
 	import starling.events.Touch;
 	import starling.events.TouchEvent;
@@ -71,18 +68,16 @@ package com.states
 				_button.x = Game.STAGE_WIDTH/2 - _width/2;
 				_button.y = 100 + (Game.STAGE_HEIGHT/2) + (i * _size*1.5);
 				_button.useHandCursor = true;
-				_button.addEventListener(TouchEvent.TOUCH, onTouch);
+				_button.addEventListener(TouchEvent.TOUCH, buttonHandler);
 				_button.name = _buttons[i];
 				
 				this.addChild(_button);
 			}
 			
-			// this.addEventListener(TouchEvent.TOUCH, buttonTouchEventHandler);
-			
 			this.visible = true;
 		}
 
-		private function onTouch(e:TouchEvent):void
+		private function buttonHandler(e:TouchEvent):void
 		{
 			var touch:Touch = e.getTouch(stage);
 			
