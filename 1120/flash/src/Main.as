@@ -40,7 +40,6 @@ package
 		private function switchStates(Event:CreateEvent):void
 		{
 			var type:String = Event.params.type
-			trace("type", type);
 				
 			if(type == 'CREATE' || type == 'RESTART')
 				state = new CarnageProtocol();
