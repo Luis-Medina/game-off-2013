@@ -3,7 +3,6 @@ package com.states
 	import citrus.core.starling.StarlingState;
 	
 	import com.components.GameButton;
-	
 	import com.constants.Colors;
 	import com.constants.Fonts;
 	import com.constants.Game;
@@ -29,6 +28,7 @@ package com.states
 		private var _height:Number = 60;
 		private var _width:Number = 100;
 		
+		private var _bg:Image;
 		private var _buttonTexture:Texture;
 		private var _button:Button;
 		
@@ -54,12 +54,16 @@ package com.states
 			trace("MENU PROTOCOL")		
 			
 			/** SPLASH **/
-			var bg:Image = new Image(Texture.fromBitmap(new Textures.SPLASH));
-			this.addChild(bg);
+			if (!_bg)
+				_bg = new Image(Texture.fromBitmap(new Textures.SPLASH));
+			
+			this.addChild(_bg);
 			
 			/** MENU **/
 			var _buttons:Array = [Game.START, Game.EXIT];
-			_buttonTexture = Texture.fromBitmap(new Textures.BLANK);
+			
+			if(!_buttonTexture)
+				_buttonTexture = Texture.fromBitmap(new Textures.BLANK);
 			
 			var x:Number, y:Number;
 			for (var i:int = 0; i < _buttons.length; i++)
@@ -72,7 +76,6 @@ package com.states
 				this.addChild(_button);
 			}
 			
-			this.addEventListener(TouchEvent.TOUCH, buttonHandler);
 			this.visible = true;
 		}
 
@@ -83,10 +86,11 @@ package com.states
 			{
 				var button:Button = e.currentTarget as Button;
 				if (button)
-				{					
+				{		
 					if(touch.phase == TouchPhase.ENDED)
 					{
 						clear();
+						button.removeEventListener(TouchEvent.TOUCH, buttonHandler);
 						if (button.name == Game.START)
 							dispatchEvent(new CreateEvent(CreateEvent.CREATE, {type: Game.START}, true));
 						else if (button.name == Game.EXIT)
