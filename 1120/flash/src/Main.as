@@ -35,6 +35,7 @@ package
 		private function switchStates(Event:CreateEvent):void
 		{
 			var type:String = Event.params.type
+			state.destroy();
 				
 			if(type == Game.START || type == Game.RESTART)
 				state = new CarnageProtocol();

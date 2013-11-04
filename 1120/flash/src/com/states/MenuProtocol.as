@@ -84,17 +84,7 @@ package com.states
 				var button:Button = e.currentTarget as Button;
 				if (button)
 				{					
-					/** HANDLE HOVER **/
-					if (touch.phase == TouchPhase.HOVER)
-					{
-						// HANDLING HOVER KINDA SUCKS.
-					}
-					
-					/** HANDLE CLICKS **/	
-					if(touch.phase == TouchPhase.BEGAN)
-					{
-					}
-					else if(touch.phase == TouchPhase.ENDED)
+					if(touch.phase == TouchPhase.ENDED)
 					{
 						clear();
 						if (button.name == Game.START)
@@ -102,12 +92,7 @@ package com.states
 						else if (button.name == Game.EXIT)
 							dispatchEvent(new CreateEvent(CreateEvent.CREATE, {type: Game.EXIT}, true));
 					}	
-					else if(touch.phase == TouchPhase.MOVED)
-					{
-					}
-					
 				}
-				
 			}
 			
 		}
