@@ -7,7 +7,7 @@ package com.constants
 		[Embed(source="../assets/textures/blank.png", mimeType="image/png")]
 		public static const BLANK:Class;
 		
-		[Embed(source="../assets/textures/splash.png", mimeType="image/png")]
+		[Embed(source="../assets/textures/splash2.png", mimeType="image/png")]
 		public static const SPLASH:Class;
 		
 	}
