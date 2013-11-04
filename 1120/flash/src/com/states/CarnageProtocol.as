@@ -9,6 +9,7 @@ package com.states
 	import citrus.physics.box2d.Box2D;
 	
 	import com.components.GameButton;
+	import com.constants.Game;
 	import com.events.CreateEvent;
 	
 	import starling.display.Button;
@@ -49,8 +50,8 @@ package com.states
 			
 			
 			/** UI **/
-			var _restartButton:Button = GameButton.textButton('O', "RESTART", 42, 40, 40, 860, 15); 
-			var _splashButton:Button = GameButton.textButton('X', "SPLASH", 42, 40, 40, 900, 15); 
+			var _restartButton:Button = GameButton.textButton('O', Game.RESTART, 42, 40, 40, 860, 15); 
+			var _splashButton:Button = GameButton.textButton('X', Game.SPLASH, 42, 40, 40, 900, 15); 
 			_restartButton.addEventListener(TouchEvent.TOUCH, handleUI);
 			_splashButton.addEventListener(TouchEvent.TOUCH, handleUI);
 			addChild(_restartButton);
@@ -69,10 +70,10 @@ package com.states
 				{					
 					 if(touch.phase == TouchPhase.ENDED)
 					{
-						 if(button.name == "RESTART")
-						 	dispatchEvent(new CreateEvent(CreateEvent.CREATE, {type: "RESTART"}, true));
-						 else if (button.name == "SPLASH")
-							 dispatchEvent(new CreateEvent(CreateEvent.CREATE, {type: "SPLASH"}, true));
+						 if(button.name == Game.RESTART)
+						 	dispatchEvent(new CreateEvent(CreateEvent.CREATE, {type: Game.RESTART}, true));
+						 else if (button.name == Game.SPLASH)
+							 dispatchEvent(new CreateEvent(CreateEvent.CREATE, {type: Game.SPLASH}, true));
 					}	
 					
 				}

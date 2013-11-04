@@ -29,9 +29,6 @@ package com.states
 		private var _height:Number = 60;
 		private var _width:Number = 100;
 		
-		public static const START:String = 'START';
-		public static const EXIT:String = 'EXIT';
-		
 		private var _buttonTexture:Texture;
 		private var _button:Button;
 		
@@ -54,14 +51,14 @@ package com.states
 		
 		private function drawMenu():void
 		{
-			trace("MENU PROTOCOL 1120")		
+			trace("MENU PROTOCOL")		
 			
 			/** SPLASH **/
 			var bg:Image = new Image(Texture.fromBitmap(new Textures.SPLASH));
 			this.addChild(bg);
 			
 			/** MENU **/
-			var _buttons:Array = [START, EXIT];
+			var _buttons:Array = [Game.START, Game.EXIT];
 			_buttonTexture = Texture.fromBitmap(new Textures.BLANK);
 			
 			var x:Number, y:Number;
@@ -99,9 +96,9 @@ package com.states
 					}
 					else if(touch.phase == TouchPhase.ENDED)
 					{
-						if (button.name == START)
+						if (button.name == Game.START)
 							create();
-						else if (button.name == EXIT)
+						else if (button.name == Game.EXIT)
 							terminate();
 					}	
 					else if(touch.phase == TouchPhase.MOVED)
@@ -117,13 +114,13 @@ package com.states
 		private function create():void
 		{
 			clear();
-			dispatchEvent(new CreateEvent(CreateEvent.CREATE, {type: "CREATE"}, true));
+			dispatchEvent(new CreateEvent(CreateEvent.CREATE, {type: Game.START}, true));
 		}
 		
 		private function terminate():void
 		{
 			clear();
-			dispatchEvent(new CreateEvent(CreateEvent.CREATE, {type: "TERMINATE"}, true));
+			dispatchEvent(new CreateEvent(CreateEvent.CREATE, {type: Game.EXIT}, true));
 		}
 		
 		private function clear():void
