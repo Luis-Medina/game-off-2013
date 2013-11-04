@@ -40,9 +40,12 @@ package
 		private function switchStates(Event:CreateEvent):void
 		{
 			var type:String = Event.params.type
-			
-			if(type == 'CREATE' || 'RESTART')
+			trace("type", type);
+				
+			if(type == 'CREATE' || type == 'RESTART')
 				state = new CarnageProtocol();
+			else if (type == "SPLASH")
+				state = new MenuProtocol();
 			else if (type == 'TERMINATE')
 				state = new TerminateProtocol();
 		}
