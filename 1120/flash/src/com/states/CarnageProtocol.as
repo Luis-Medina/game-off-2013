@@ -86,6 +86,7 @@ package com.states
 		{
 			this.removeEventListener(TouchEvent.TOUCH, handleUI);
 			this.removeChildren();
+			this.dispose();
 		}
 		
 	}

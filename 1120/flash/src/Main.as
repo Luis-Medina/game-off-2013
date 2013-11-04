@@ -36,7 +36,7 @@ package
 		{
 			var type:String = Event.params.type
 			state.destroy();
-				
+			
 			if(type == Game.START || type == Game.RESTART)
 				state = new CarnageProtocol();
 			else if (type == Game.SPLASH)
@@ -44,6 +44,5 @@ package
 			else if (type == Game.EXIT)
 				state = new TerminateProtocol();
 		}
-
 	}
 }

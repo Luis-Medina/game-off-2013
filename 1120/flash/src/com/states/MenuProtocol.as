@@ -101,6 +101,7 @@ package com.states
 		{
 			this.removeEventListener(TouchEvent.TOUCH, buttonHandler);
 			this.removeChildren();
+			this.dispose();
 		}
 		
 	}
