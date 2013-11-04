@@ -99,6 +99,7 @@ package com.states
 		
 		private function clear():void
 		{
+			this.removeEventListener(TouchEvent.TOUCH, buttonHandler);
 			this.removeChildren();
 		}
 		
