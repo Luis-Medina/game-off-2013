@@ -41,11 +41,11 @@ package
 		{
 			var type:String = Event.params.type
 				
-			if(type == 'CREATE' || type == 'RESTART')
+			if(type == Game.START || type == Game.RESTART)
 				state = new CarnageProtocol();
-			else if (type == "SPLASH")
+			else if (type == Game.SPLASH)
 				state = new MenuProtocol();
-			else if (type == 'TERMINATE')
+			else if (type == Game.EXIT)
 				state = new TerminateProtocol();
 		}
 
