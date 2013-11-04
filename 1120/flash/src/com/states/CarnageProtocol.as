@@ -50,8 +50,11 @@ package com.states
 			
 			/** UI **/
 			var _restartButton:Button = GameButton.textButton('X', "RESTART", 42, 40, 40, 900, 15); 
+			var _splashButton:Button = GameButton.textButton('O', "SPLASH", 42, 40, 40, 860, 15); 
 			_restartButton.addEventListener(TouchEvent.TOUCH, handleUI);
+			_splashButton.addEventListener(TouchEvent.TOUCH, handleUI);
 			addChild(_restartButton);
+			addChild(_splashButton);
 			
 			this.visible = true;
 		}
@@ -68,6 +71,8 @@ package com.states
 					{
 						 if(button.name == "RESTART")
 						 	dispatchEvent(new CreateEvent(CreateEvent.CREATE, {type: "RESTART"}, true));
+						 else if (button.name == "SPLASH")
+							 dispatchEvent(new CreateEvent(CreateEvent.CREATE, {type: "SPLASH"}, true));
 					}	
 					
 				}
