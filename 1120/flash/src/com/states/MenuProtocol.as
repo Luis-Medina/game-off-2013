@@ -96,10 +96,11 @@ package com.states
 					}
 					else if(touch.phase == TouchPhase.ENDED)
 					{
+						clear();
 						if (button.name == Game.START)
-							create();
+							dispatchEvent(new CreateEvent(CreateEvent.CREATE, {type: Game.START}, true));
 						else if (button.name == Game.EXIT)
-							terminate();
+							dispatchEvent(new CreateEvent(CreateEvent.CREATE, {type: Game.EXIT}, true));
 					}	
 					else if(touch.phase == TouchPhase.MOVED)
 					{
@@ -109,18 +110,6 @@ package com.states
 				
 			}
 			
-		}
-		
-		private function create():void
-		{
-			clear();
-			dispatchEvent(new CreateEvent(CreateEvent.CREATE, {type: Game.START}, true));
-		}
-		
-		private function terminate():void
-		{
-			clear();
-			dispatchEvent(new CreateEvent(CreateEvent.CREATE, {type: Game.EXIT}, true));
 		}
 		
 		private function clear():void
