@@ -2,6 +2,8 @@ package com.states
 {	
 	import citrus.core.starling.StarlingState;
 	
+	import com.components.GameButton;
+	
 	import com.constants.Colors;
 	import com.constants.Fonts;
 	import com.constants.Game;
@@ -24,9 +26,6 @@ package com.states
 	public class MenuProtocol extends StarlingState
 	{
 		private var _size:Number = 32;
-		private var _fontFamily:String = "DestroyEarthRoughBB";
-		private var _col:uint = Colors.WHITE;
-		private var _hoverCol:uint = Colors.BLUE;
 		private var _height:Number = 60;
 		private var _width:Number = 100;
 		
@@ -65,22 +64,13 @@ package com.states
 			var _buttons:Array = [START, EXIT];
 			_buttonTexture = Texture.fromBitmap(new Textures.BLANK);
 			
+			var x:Number, y:Number;
 			for (var i:int = 0; i < _buttons.length; i++)
 			{
-				_button = new Button(_buttonTexture);
-				_button.visible = true;
-				_button.fontSize = _size;
-				_button.fontColor = _col;
-				_button.fontName = _fontFamily;
-				_button.text = _buttons[i];
-				_button.enabled = true;
-				_button.width = _width;
-				_button.height = _height;
-				_button.x = Game.STAGE_WIDTH/2 - _width/2;
-				_button.y = 100 + (Game.STAGE_HEIGHT/2) + (i * _size*1.5);
-				_button.useHandCursor = true;
+				x = Game.STAGE_WIDTH/2 - _width/2;
+				y = 100 + (Game.STAGE_HEIGHT/2) + (i * _size*1.5);
+				_button = GameButton.textButton(_buttons[i], _buttons[i], _size, _width, _height, x, y); 
 				_button.addEventListener(TouchEvent.TOUCH, buttonHandler);
-				_button.name = _buttons[i];
 				
 				this.addChild(_button);
 			}
