@@ -50,13 +50,13 @@ package com.states
 			
 			/** UI **/
 			var _restartButton:Button = GameButton.textButton('X', "RESTART", 42, 40, 40, 900, 15); 
-			_restartButton.addEventListener(TouchEvent.TOUCH, restartLevel);
+			_restartButton.addEventListener(TouchEvent.TOUCH, handleUI);
 			addChild(_restartButton);
 			
 			this.visible = true;
 		}
 		
-		public function restartLevel(e:TouchEvent):void
+		public function handleUI(e:TouchEvent):void
 		{
 			var touch:Touch = e.getTouch(stage);
 			if(touch)
@@ -66,7 +66,8 @@ package com.states
 				{					
 					 if(touch.phase == TouchPhase.ENDED)
 					{
-						 dispatchEvent(new CreateEvent(CreateEvent.CREATE, {type: "RESTART"}, true));
+						 if(button.name == "RESTART")
+						 	dispatchEvent(new CreateEvent(CreateEvent.CREATE, {type: "RESTART"}, true));
 					}	
 					
 				}
