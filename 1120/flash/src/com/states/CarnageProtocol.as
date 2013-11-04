@@ -9,6 +9,7 @@ package com.states
 	import citrus.physics.box2d.Box2D;
 	
 	import com.components.GameButton;
+	import com.events.CreateEvent;
 	
 	import starling.display.Button;
 	import starling.display.Image;
@@ -57,7 +58,20 @@ package com.states
 		
 		public function restartLevel(e:TouchEvent):void
 		{
-			
+			var touch:Touch = e.getTouch(stage);
+			if(touch)
+			{
+				var button:Button = e.currentTarget as Button;
+				if (button)
+				{					
+					 if(touch.phase == TouchPhase.ENDED)
+					{
+						 dispatchEvent(new CreateEvent(CreateEvent.CREATE, {type: "RESTART"}, true));
+					}	
+					
+				}
+				
+			}	
 		}
 		
 	}
