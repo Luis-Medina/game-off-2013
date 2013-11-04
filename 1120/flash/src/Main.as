@@ -41,7 +41,7 @@ package
 		{
 			var type:String = Event.params.type
 			
-			if(type == 'CREATE')
+			if(type == 'CREATE' || 'RESTART')
 				state = new CarnageProtocol();
 			else if (type == 'TERMINATE')
 				state = new TerminateProtocol();
