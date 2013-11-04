@@ -10,15 +10,10 @@ package
 	import com.states.TerminateProtocol;
 	
 	import flash.events.Event;
-	
-	import starling.core.Starling;
 		
 	[SWF(width='960', height='600', backgroundColor='#191919', frameRate='30', pageTitle='1120')]
 	
 	public class Main extends StarlingCitrusEngine {
-		
-		private var _carnage:CarnageProtocol;
-		private var _terminate:TerminateProtocol;
 
 		public function Main() {
 			
