@@ -10,6 +10,7 @@ package com.states
 	
 	import com.components.GameButton;
 	import com.constants.Game;
+	import com.constants.Textures;
 	import com.events.CreateEvent;
 	
 	import starling.display.Button;
@@ -18,9 +19,13 @@ package com.states
 	import starling.events.Touch;
 	import starling.events.TouchEvent;
 	import starling.events.TouchPhase;
+	import starling.textures.Texture;
 	
 	public class CarnageProtocol extends StarlingState
 	{
+		private var _bg:Image;
+		private var _restartButton:Button;
+		private var _splashButton:Button;
 		
 		public function CarnageProtocol() {
 			
@@ -32,6 +37,11 @@ package com.states
 		override public function initialize():void {
 			
 			super.initialize();
+			
+			if (!_bg)
+				_bg = new Image(Texture.fromBitmap(new Textures.LEVEL_1_BG));
+			
+			addChild(_bg);
 			
 			var box2d:Box2D = new Box2D("box2d");
 			box2d.visible = true;
@@ -50,8 +60,8 @@ package com.states
 			
 			
 			/** UI **/
-			var _restartButton:Button = GameButton.textButton('O', Game.RESTART, 42, 40, 40, 860, 15); 
-			var _splashButton:Button = GameButton.textButton('X', Game.SPLASH, 42, 40, 40, 900, 15); 
+			_restartButton = GameButton.textButton('O', Game.RESTART, 42, 40, 40, 860, 15); 
+			_splashButton = GameButton.textButton('X', Game.SPLASH, 42, 40, 40, 900, 15); 
 			_restartButton.addEventListener(TouchEvent.TOUCH, handleUI);
 			_splashButton.addEventListener(TouchEvent.TOUCH, handleUI);
 			addChild(_restartButton);
@@ -84,6 +94,21 @@ package com.states
 		
 		private function clear():void
 		{
+			if (_bg)
+				_bg = null;
+			
+			if (_restartButton)
+			{
+				_restartButton.removeEventListener(TouchEvent.TOUCH, handleUI);
+				_restartButton = null;
+			}
+			
+			if (_splashButton)
+			{
+				_splashButton.removeEventListener(TouchEvent.TOUCH, handleUI);
+				_splashButton = null;
+			}
+			
 			this.removeEventListener(TouchEvent.TOUCH, handleUI);
 			this.removeChildren();
 			this.dispose();
