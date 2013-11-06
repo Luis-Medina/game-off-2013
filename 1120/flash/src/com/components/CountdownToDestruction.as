@@ -14,8 +14,8 @@ package com.components
 	public class CountdownToDestruction extends Sprite
 	{
 		private var _timer:Timer;
-		private var _totalTime:Number = 11200;
-		private var _rate:Number = 1120;
+		private var _totalTime:Number = 10000;
+		private var _rate:Number = 1000;
 		private var _numTimes:int = _totalTime/_rate;
 		
 		private var _count:int = 0;
@@ -55,7 +55,7 @@ package com.components
 		
 		private function updateLabel(newTime:*):void
 		{
-			_label.text = newTime.toString();
+			_label.text = (newTime/1000).toString();
 		}
 		
 		private function handleTimeEvent(e:TimerEvent):void
