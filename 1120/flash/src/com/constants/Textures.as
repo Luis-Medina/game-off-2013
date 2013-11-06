@@ -19,5 +19,11 @@ package com.constants
 		[Embed(source="../assets/textures/label_time.png", mimeType="image/png")]
 		public static const TIME_LABEL:Class;
 		
+		[Embed(source="../assets/textures/button_exit.png", mimeType="image/png")]
+		public static const BUTTON_EXIT:Class;
+		
+		[Embed(source="../assets/textures/button_restart.png", mimeType="image/png")]
+		public static const BUTTON_RESTART:Class;
+		
 	}
 }
