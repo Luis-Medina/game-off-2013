@@ -19,7 +19,7 @@ package com.components
 		private var _timer:Timer;
 		private var _totalTime:Number = 10000;
 		private var _rate:Number = 1000;
-		private var _numTimes:int = _totalTime/_rate;
+		private var _numTimes:int = _totalTime/_rate + 1;
 		
 		private var _count:int = 0;
 		private var _timeRemaining:Number = _totalTime;
