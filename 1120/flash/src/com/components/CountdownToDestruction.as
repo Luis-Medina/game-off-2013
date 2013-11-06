@@ -24,7 +24,7 @@ package com.components
 		private var _count:int = 0;
 		private var _timeRemaining:Number = _totalTime;
 		
-		private var _display:TextField;
+		private var _timerDisplay:TextField;
 		private var _timerLabel:Image;
 		
 		public function CountdownToDestruction()
@@ -37,10 +37,10 @@ package com.components
 		{
 			this.removeEventListener(Event.ADDED_TO_STAGE, onAddedToStage);
 			
-			_display = new TextField(80, 40, '', "ProtestPaintBB", 38, Colors.WHITE, false);
-			_display.x = 320;
-			_display.y = 12;
-			addChild(_display);
+			_timerDisplay = new TextField(80, 40, '', "ProtestPaintBB", 38, Colors.WHITE, false);
+			_timerDisplay.x = 320;
+			_timerDisplay.y = 12;
+			addChild(_timerDisplay);
 			
 			if (!_timerLabel)
 				_timerLabel = new Image(Texture.fromBitmap(new Textures.TIME_LABEL));
@@ -66,7 +66,7 @@ package com.components
 		
 		private function updateDisplay(newTime:*):void
 		{
-			_display.text = (newTime/1000).toString();
+			_timerDisplay.text = (newTime/1000).toString();
 		}
 		
 		private function handleTimeEvent(e:TimerEvent):void
