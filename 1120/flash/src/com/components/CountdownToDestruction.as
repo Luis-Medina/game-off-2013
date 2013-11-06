@@ -37,7 +37,7 @@ package com.components
 		{
 			this.removeEventListener(Event.ADDED_TO_STAGE, onAddedToStage);
 			
-			_display = new TextField(80, 40, '', "ProtestPaintBB", 36, Colors.WHITE, false);
+			_display = new TextField(80, 40, '', "ProtestPaintBB", 38, Colors.WHITE, false);
 			_display.x = 320;
 			_display.y = 12;
 			addChild(_display);
