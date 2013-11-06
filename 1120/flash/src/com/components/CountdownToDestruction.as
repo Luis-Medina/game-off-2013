@@ -2,14 +2,17 @@ package com.components
 {
 	import com.constants.Colors;
 	import com.constants.Game;
+	import com.constants.Textures;
 	import com.events.ElevenTwentyEvent;
 	
 	import flash.events.TimerEvent;
 	import flash.utils.Timer;
 	
+	import starling.display.Image;
 	import starling.display.Sprite;
 	import starling.events.Event;
 	import starling.text.TextField;
+	import starling.textures.Texture;
 
 	public class CountdownToDestruction extends Sprite
 	{
@@ -22,6 +25,7 @@ package com.components
 		private var _timeRemaining:Number = _totalTime;
 		
 		private var _display:TextField;
+		private var _timerLabel:Image;
 		
 		public function CountdownToDestruction()
 		{
@@ -33,10 +37,17 @@ package com.components
 		{
 			this.removeEventListener(Event.ADDED_TO_STAGE, onAddedToStage);
 			
-			_display = new TextField(80, 40, '', "ProtestPaintBB", 32, Colors.WHITE, false);
+			_display = new TextField(80, 40, '', "ProtestPaintBB", 36, Colors.WHITE, false);
 			_display.x = 320;
 			_display.y = 12;
 			addChild(_display);
+			
+			if (!_timerLabel)
+				_timerLabel = new Image(Texture.fromBitmap(new Textures.TIME_LABEL));
+			
+			_timerLabel.x = 255;
+			_timerLabel.y = 12;
+			addChild(_timerLabel);
 			
 			initTimer();
 		}
