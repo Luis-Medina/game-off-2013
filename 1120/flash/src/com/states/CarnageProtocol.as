@@ -64,7 +64,7 @@ package com.states
 			
 			
 			/** UI **/
-			_restartButton = GameButton.imageButton(Textures.BUTTON_RESTART, Game.RESTART, 46, 46, 850, 15); 
+			_restartButton = GameButton.imageButton(Textures.BUTTON_RESTART, Game.RESTART, 46, 46, 845, 15); 
 			_splashButton = GameButton.imageButton(Textures.BUTTON_EXIT, Game.SPLASH, 46, 46, 900, 15); 
 			_restartButton.addEventListener(TouchEvent.TOUCH, handleUI);
 			_splashButton.addEventListener(TouchEvent.TOUCH, handleUI);
