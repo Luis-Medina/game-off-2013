@@ -8,12 +8,14 @@ package com.states
 	import citrus.objects.platformer.box2d.Sensor;
 	import citrus.physics.box2d.Box2D;
 	
+	import com.components.CountdownToDestruction;
 	import com.components.GameButton;
 	import com.constants.Game;
 	import com.constants.Textures;
 	import com.events.CreateEvent;
 	
 	import starling.display.Button;
+	import starling.display.DisplayObject;
 	import starling.display.Image;
 	import starling.events.Event;
 	import starling.events.Touch;
@@ -26,6 +28,8 @@ package com.states
 		private var _bg:Image;
 		private var _restartButton:Button;
 		private var _splashButton:Button;
+		
+		private var _countDown:CountdownToDestruction;
 		
 		public function CarnageProtocol() {
 			
@@ -68,6 +72,9 @@ package com.states
 			addChild(_splashButton);
 			
 			this.visible = true;
+			
+			_countDown = new CountdownToDestruction();
+			addChild(_countDown);
 		}
 		
 		public function handleUI(e:TouchEvent):void
@@ -96,6 +103,12 @@ package com.states
 		{
 			if (_bg)
 				_bg = null;
+			
+			if (_countDown)
+			{
+				_countDown.clear();
+				_countDown = null;
+			}
 			
 			if (_restartButton)
 			{
