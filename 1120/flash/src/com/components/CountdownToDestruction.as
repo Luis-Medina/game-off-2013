@@ -38,14 +38,14 @@ package com.components
 			this.removeEventListener(Event.ADDED_TO_STAGE, onAddedToStage);
 			
 			_timerDisplay = new TextField(80, 40, '', "ProtestPaintBB", 38, Colors.WHITE, false);
-			_timerDisplay.x = 320;
+			_timerDisplay.x = 440;
 			_timerDisplay.y = 12;
 			addChild(_timerDisplay);
 			
 			if (!_timerLabel)
 				_timerLabel = new Image(Texture.fromBitmap(new Textures.TIME_LABEL));
 			
-			_timerLabel.x = 255;
+			_timerLabel.x = 375;
 			_timerLabel.y = 12;
 			addChild(_timerLabel);
 			
