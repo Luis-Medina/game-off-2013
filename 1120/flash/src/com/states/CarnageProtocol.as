@@ -1,5 +1,6 @@
 package com.states
 {
+	import citrus.core.CitrusGroup;
 	import citrus.core.starling.StarlingCitrusEngine;
 	import citrus.core.starling.StarlingState;
 	import citrus.objects.Box2DPhysicsObject;
@@ -30,6 +31,7 @@ package com.states
 		private var _splashButton:Button;
 		
 		private var _countDown:CountdownToDestruction;
+		private var _unstablePlatform:CitrusGroup;
 		
 		public function CarnageProtocol() {
 			
@@ -61,8 +63,7 @@ package com.states
 			add(new Platform("roof", {x:stage.stageWidth / 2, y:0, width:stage.stageWidth, height: 10}));
 			add(new Platform("left_wall", {x:0, y: stage.stageHeight,  width:10, height: stage.stageHeight * 2}));
 			add(new Platform("right_wall", {x: stage.stageWidth, y: stage.stageHeight,  width:10, height: stage.stageHeight * 2}));
-			
-			
+					
 			/** UI **/
 			_restartButton = GameButton.imageButton(Textures.BUTTON_RESTART, Game.RESTART, 46, 46, 845, 15); 
 			_splashButton = GameButton.imageButton(Textures.BUTTON_EXIT, Game.SPLASH, 46, 46, 900, 15); 
@@ -73,8 +74,73 @@ package com.states
 			
 			this.visible = true;
 			
+			_unstablePlatform = createUnstablePlatform();
+			addEntity(_unstablePlatform);
+			
 			_countDown = new CountdownToDestruction();
 			addChild(_countDown);
+		}
+		
+		public function createUnstablePlatform(name:String="UnstablePlatform"):CitrusGroup
+		{
+			var _platformGroup:CitrusGroup = new CitrusGroup(name);
+
+			var _numCols:int = 7;
+			var _numRows:int = _numCols; // yep.
+			var _colHeight:Number = 70;
+			var _colWidth:Number = 10;
+			var _rowHeight:Number = 10;
+			var _rowWidth:Number = (Game.STAGE_WIDTH) / _numCols;
+			
+			var _yPos:Number = (Game.STAGE_HEIGHT - _colHeight/2) - 10;
+			var _xPos:Number = 0;
+			var _platform:Platform;
+			var _name:String;
+			var _count:int = 0;
+			
+			var _width:Number = 0;
+			var _height:Number = 0;
+			
+			/** ADD COLUMNS **/
+			for (var i:int = 1; i < _numCols; i++)
+			{
+				_xPos = _rowWidth;
+				for (var j:int = 2; j < _numRows + 1; j++)
+				{
+					_name = "col_" + _count;
+					_height = _colHeight;
+					_width = _colWidth;
+					
+					_platform = new Platform(_name, {x:_xPos, y:_yPos, width:_width, height: _height, oneWay:true});
+					add(_platform);
+					
+					_xPos = j * _rowWidth;
+					_count++
+				}
+				_yPos -= (_colHeight + _rowHeight*1.5);
+			}
+			
+			/** ADD ROWS **/
+			_yPos = (Game.STAGE_HEIGHT) - (_colHeight + _rowHeight*1.7);
+			for (var k:int = 1; k < _numCols; k++)
+			{
+				_xPos = _rowWidth;
+				for (var l:int = 2; l < _numRows + 1; l++)
+				{
+					_name = "row_" + _count;
+					_height = _rowHeight;
+					_width = _rowWidth;
+					
+					_platform = new Platform(_name, {x:_xPos, y:_yPos, width:_width, height: _height, oneWay:true});
+					add(_platform);
+					
+					_xPos = l * _rowWidth;
+					_count++
+				}
+				_yPos -= _colHeight + _rowHeight;
+			}
+			
+			return _platformGroup;
 		}
 		
 		public function handleUI(e:TouchEvent):void
