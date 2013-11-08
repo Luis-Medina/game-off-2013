@@ -92,6 +92,7 @@ package com.components
 		private function destruction():void
 		{
 			// trace("******** DESTROYED")
+			dispatchEvent(new ElevenTwentyEvent(ElevenTwentyEvent.ELEVEN, {}, true));
 			clear();
 			initTimer();
 		}
