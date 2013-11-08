@@ -2,6 +2,7 @@ package com.states
 {
 
 	import citrus.core.CitrusGroup;
+	import citrus.core.CitrusObject;
 	import citrus.core.starling.StarlingCitrusEngine;
 	import citrus.core.starling.StarlingState;
 	import citrus.objects.NapePhysicsObject;
@@ -16,6 +17,7 @@ package com.states
 	import com.constants.Textures;
 	import com.events.CreateEvent;
 	import com.events.ElevenTwentyEvent;
+	import com.utils.ArrayUtils;
 	
 	import starling.display.Button;
 	import starling.display.DisplayObject;
@@ -181,7 +183,29 @@ package com.states
 		
 		public function updateUnstablePlatform(Event:ElevenTwentyEvent):void
 		{
-			trace("HERE")	
+			var _jitter:Number = Math.floor(Math.random() * 15);
+			trace("jitter", _jitter);
+			
+			var _allPlatforms:Vector.<CitrusObject> = getObjectsByType(Platform);
+			var _toChange:Array = ArrayUtils.getNumRandomValuesInRange(5, 40, _jitter);
+			
+			var _platForm:Platform;
+			var _idx:int;
+			var _name:String;
+			for (var i:int = 0; i < _toChange.length; i++)
+			{
+				_idx = _toChange[i];
+				_platForm = _allPlatforms[_idx] as Platform;
+				_name = _platForm.name;
+				
+				if (_name.indexOf("row_") != -1 || _name.indexOf("col_") != -1)
+				{
+					_platForm.visible = false;
+					_platForm.touchable = false;
+					// _platForm.kill = true;
+				}
+			}
+			
 		}
 		
 		public function handleUI(e:TouchEvent):void
