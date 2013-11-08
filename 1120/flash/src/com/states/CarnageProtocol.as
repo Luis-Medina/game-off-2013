@@ -117,7 +117,7 @@ package com.states
 					_width = _colWidth;
 					
 					// COLUMNS
-					_platform = new Platform(_name, {x:_xPos, y:_yPos-1, width:_width, height: _height + 1.5});
+					_platform = new Platform(_name, {x:_xPos, y:_yPos-1, width:_width, height: _height + 10});
 					_rowXPosArr.push(_platform.x);
 					_rowYPosArr.push(_platform.y);
 					add(_platform);
