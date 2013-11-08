@@ -4,9 +4,10 @@ package com.events
 	
 	public class ElevenTwentyEvent extends Event
 	{
+		public static const ELEVEN:String = "ELEVEN";
 		public var params:Object = {};
 		
-		public function CreateEvent(type:String, _params:Object, bubbles:Boolean=true)
+		public function ElevenTwentyEvent(type:String, _params:Object, bubbles:Boolean=true)
 		{
 			super(type, bubbles);
 			params = _params;
