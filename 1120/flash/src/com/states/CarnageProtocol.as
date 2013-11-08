@@ -104,7 +104,7 @@ package com.states
 			
 			var _width:Number = 0;
 			var _height:Number = 0;
-			
+
 			/** ADD COLUMNS **/
 			for (var i:int = 1; i < _numCols; i++)
 			{
@@ -128,10 +128,13 @@ package com.states
 			}
 			
 			/** ADD ROWS **/
+			var _lastXPosArr:Array = [];
+			var _lastYPosArr:Array = [];
 			var _rowCount:int = 0;
-			for (var k:int = 1; k < _numCols; k++)
+			var _gapCount:int = 0;
+			for (var k:int = 0; k < _numCols; k++)
 			{
-				for (var l:int = 2; l < _numRows + 1; l++)
+				for (var l:int = 1; l < _numRows; l++)
 				{
 					_name = "row_" + _rowCount;		
 					_xPos = _rowXPosArr[_rowCount] - _rowWidth/2;
@@ -141,12 +144,29 @@ package com.states
 					add(_platform);
 					
 					// GAPS
-					_platform = new Platform("gap_" + _count, {x:_rowXPosArr[_rowCount] , y:_yPos, width:_colWidth, height: _rowHeight});
+					_platform = new Platform("gap_" + _gapCount, {x:_rowXPosArr[_rowCount] , y:_yPos, width:_colWidth, height: _rowHeight});
 					add(_platform);
 					
 					_rowCount++
+					_gapCount++
+				}
+				
+				if (!isNaN(_xPos))
+				{
+					_lastXPosArr.push(_xPos + _rowWidth);
+					_lastYPosArr.push(_yPos)
 				}
 			}
+			
+			for (var y:int = 0; y < _lastXPosArr.length; y++)
+			{
+				_xPos = _lastXPosArr[y];
+				_yPos = _lastYPosArr[y];
+				_platform = new Platform("row_" + _rowCount, {x:_xPos , y:_yPos, width:_rowWidth - _gapWidth, height: _rowHeight});
+				add(_platform);
+				
+				_rowCount++
+			} 
 			
 			return _platformGroup;
 		}
