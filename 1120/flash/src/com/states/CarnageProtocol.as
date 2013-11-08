@@ -1,15 +1,9 @@
 package com.states
 {
-	// import Box2D.Common.Math.b2Vec2;
-	
+
 	import citrus.core.CitrusGroup;
 	import citrus.core.starling.StarlingCitrusEngine;
 	import citrus.core.starling.StarlingState;
-	//import citrus.objects.Box2DPhysicsObject;
-	//import citrus.objects.platformer.box2d.Hero;
-	//import citrus.objects.platformer.box2d.Platform;
-	//import citrus.objects.platformer.box2d.Sensor;
-	//import citrus.physics.box2d.Box2D;
 	import citrus.objects.NapePhysicsObject;
 	import citrus.objects.platformer.nape.Hero;
 	import citrus.physics.nape.Nape;
@@ -54,21 +48,12 @@ package com.states
 				_bg = new Image(Texture.fromBitmap(new Textures.LEVEL_1_BG));
 			
 			addChild(_bg);
-			
-			//var box2d:Box2D = new Box2D("box2d");
-			//box2d.visible = true;
-			//box2d.gravity = new b2Vec2(0, 12); 
-			//add(box2d);
-			
+
 			var physics:Nape = new Nape("physics");
 			physics.visible = true;
 			add(physics);
 			
 			var hero:Hero = new Hero("hero", {x: 15, y: 16, width:20, height:20});
-			//hero.acceleration = 0.066;
-			//hero.jumpAcceleration = 0.3;
-			//hero.jumpHeight = 7;
-			//hero.canDuck = false;
 			add(hero);
 			
 			/** WALLS **/
