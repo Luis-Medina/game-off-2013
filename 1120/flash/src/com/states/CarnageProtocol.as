@@ -1,16 +1,22 @@
 package com.states
 {
+	// import Box2D.Common.Math.b2Vec2;
+	
 	import citrus.core.CitrusGroup;
 	import citrus.core.starling.StarlingCitrusEngine;
 	import citrus.core.starling.StarlingState;
-	import citrus.objects.Box2DPhysicsObject;
-	import citrus.objects.platformer.box2d.Hero;
-	import citrus.objects.platformer.box2d.Platform;
-	import citrus.objects.platformer.box2d.Sensor;
-	import citrus.physics.box2d.Box2D;
+	//import citrus.objects.Box2DPhysicsObject;
+	//import citrus.objects.platformer.box2d.Hero;
+	//import citrus.objects.platformer.box2d.Platform;
+	//import citrus.objects.platformer.box2d.Sensor;
+	//import citrus.physics.box2d.Box2D;
+	import citrus.objects.NapePhysicsObject;
+	import citrus.objects.platformer.nape.Hero;
+	import citrus.physics.nape.Nape;
 	
 	import com.components.CountdownToDestruction;
 	import com.components.GameButton;
+	import com.components.Platform;
 	import com.constants.Game;
 	import com.constants.Textures;
 	import com.events.CreateEvent;
@@ -49,20 +55,27 @@ package com.states
 			
 			addChild(_bg);
 			
-			var box2d:Box2D = new Box2D("box2d");
-			box2d.visible = true;
-			add(box2d);
+			//var box2d:Box2D = new Box2D("box2d");
+			//box2d.visible = true;
+			//box2d.gravity = new b2Vec2(0, 12); 
+			//add(box2d);
 			
-			var hero:Hero = new Hero("hero", {x:210, y:100, width:20, height:20});
-			hero.acceleration = 100;
-			hero.jumpAcceleration = 5;
+			var physics:Nape = new Nape("physics");
+			physics.visible = true;
+			add(physics);
+			
+			var hero:Hero = new Hero("hero", {x: 15, y: 16, width:20, height:20});
+			//hero.acceleration = 0.066;
+			//hero.jumpAcceleration = 0.3;
+			//hero.jumpHeight = 7;
+			//hero.canDuck = false;
 			add(hero);
 			
 			/** WALLS **/
-			add(new Platform("bottom", {x:stage.stageWidth / 2, y:stage.stageHeight, width:stage.stageWidth, height: 20}));
-			add(new Platform("roof", {x:stage.stageWidth / 2, y:0, width:stage.stageWidth, height: 10}));
-			add(new Platform("left_wall", {x:0, y: stage.stageHeight,  width:10, height: stage.stageHeight * 2}));
-			add(new Platform("right_wall", {x: stage.stageWidth, y: stage.stageHeight,  width:10, height: stage.stageHeight * 2}));
+			add(new Platform("bottom", {x:stage.stageWidth / 2, y:stage.stageHeight, width:stage.stageWidth, height: 20, oneWay:false}));
+			add(new Platform("roof", {x:stage.stageWidth / 2, y:-6, width:stage.stageWidth, height: 10, oneWay:false}));
+			add(new Platform("left_wall", {x:-6, y: stage.stageHeight,  width:10, height: stage.stageHeight * 2, oneWay:false}));
+			add(new Platform("right_wall", {x: stage.stageWidth + 5, y: stage.stageHeight,  width:10, height: stage.stageHeight * 2, oneWay:false}));
 					
 			/** UI **/
 			_restartButton = GameButton.imageButton(Textures.BUTTON_RESTART, Game.RESTART, 46, 46, 845, 15); 
@@ -84,19 +97,25 @@ package com.states
 		public function createUnstablePlatform(name:String="UnstablePlatform"):CitrusGroup
 		{
 			var _platformGroup:CitrusGroup = new CitrusGroup(name);
-
-			var _numCols:int = 7;
-			var _numRows:int = _numCols; // yep.
-			var _colHeight:Number = 70;
-			var _colWidth:Number = 10;
-			var _rowHeight:Number = 10;
-			var _rowWidth:Number = (Game.STAGE_WIDTH) / _numCols;
 			
-			var _yPos:Number = (Game.STAGE_HEIGHT - _colHeight/2) - 12;
+			var _numCols:int = 7;
+			var _numRows:int = 7;
+			var _colHeight:Number = 64;
+			var _colWidth:Number = 12;
+			var _rowHeight:Number = 12;
+			var _gapHeight:Number = _rowHeight;
+			var _gapWidth:Number = _colWidth;
+			var _rowWidth:Number = (Game.STAGE_WIDTH / (_numCols));
+			
+			var _yPos:Number = (Game.STAGE_HEIGHT - _colHeight/2) - 11;
 			var _xPos:Number = 0;
 			var _platform:Platform;
 			var _name:String;
 			var _count:int = 0;
+			
+			var _gapYPos:Number = 0;
+			var _rowXPosArr:Array = [];
+			var _rowYPosArr:Array = [];
 			
 			var _width:Number = 0;
 			var _height:Number = 0;
@@ -112,38 +131,37 @@ package com.states
 					_width = _colWidth;
 					
 					// COLUMNS
-					_platform = new Platform(_name, {x:_xPos, y:_yPos, width:_width, height: _height, oneWay:true});
-					add(_platform);
-					
-					// GAPS
-					_platform = new Platform("gap_" + _count, {x:_xPos, y: (_yPos - (_colHeight/2 + _rowHeight/2 - 10) - 12), width:_width, height: _rowHeight + 1, oneWay:true});
+					_platform = new Platform(_name, {x:_xPos, y:_yPos-1, width:_width, height: _height + 1.5});
+					_rowXPosArr.push(_platform.x);
+					_rowYPosArr.push(_platform.y);
 					add(_platform);
 					
 					_xPos = j * _rowWidth;
 					_count++
 				}
-				_yPos -= (_colHeight + _rowHeight*1.5);
+				_yPos -= (_colHeight + _rowHeight*1.5) - 1;
 			}
 			
 			/** ADD ROWS **/
-			/*_yPos = (Game.STAGE_HEIGHT) - (_colHeight + _rowHeight*1.7);
+			var _rowCount:int = 0;
 			for (var k:int = 1; k < _numCols; k++)
 			{
-				_xPos = _rowWidth;
 				for (var l:int = 2; l < _numRows + 1; l++)
 				{
-					_name = "row_" + _count;
-					_height = _rowHeight;
-					_width = _rowWidth;
+					_name = "row_" + _rowCount;		
+					_xPos = _rowXPosArr[_rowCount] - _rowWidth/2;
+					_yPos = _rowYPosArr[_rowCount] - _colHeight/2 - _rowHeight/2 - 1.5;
 					
-					_platform = new Platform(_name, {x:_xPos, y:_yPos, width:_width, height: _height, oneWay:true});
+					_platform = new Platform(_name, {x:_xPos, y:_yPos, width:_rowWidth - _colWidth - 0.5, height: _rowHeight});
 					add(_platform);
 					
-					_xPos = l * _rowWidth;
-					_count++
+					// GAPS
+					_platform = new Platform("gap_" + _count, {x:_rowXPosArr[_rowCount] , y:_yPos, width:_colWidth, height: _rowHeight});
+					add(_platform);
+					
+					_rowCount++
 				}
-				_yPos -= _colHeight + _rowHeight;
-			}*/
+			}
 			
 			return _platformGroup;
 		}
