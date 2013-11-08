@@ -14,7 +14,7 @@ package com.components
 	import starling.text.TextField;
 	import starling.textures.Texture;
 
-	public class CountdownToDestruction extends Sprite
+	public class Countdown extends Sprite
 	{
 		private var _timer:Timer;
 		private var _totalTime:Number = 10000;
@@ -27,7 +27,7 @@ package com.components
 		private var _timerDisplay:TextField;
 		private var _timerLabel:Image;
 		
-		public function CountdownToDestruction()
+		public function Countdown()
 		{
 			super();
 			this.addEventListener(Event.ADDED_TO_STAGE, onAddedToStage);
