@@ -6,6 +6,7 @@ package com.states
 	import citrus.core.starling.StarlingState;
 	import citrus.objects.NapePhysicsObject;
 	import citrus.objects.platformer.nape.Hero;
+	import citrus.objects.platformer.nape.MovingPlatform;
 	import citrus.physics.nape.Nape;
 	
 	import com.components.CountdownToDestruction;
@@ -53,7 +54,7 @@ package com.states
 			physics.visible = true;
 			add(physics);
 			
-			var hero:Hero = new Hero("hero", {x: 15, y: 16, width:20, height:20});
+			var hero:Hero = new Hero("hero", {x: 15, y: stage.height - 16, width:20, height:20});
 			add(hero);
 			
 			/** WALLS **/
@@ -140,6 +141,7 @@ package com.states
 					_xPos = _rowXPosArr[_rowCount] - _rowWidth/2;
 					_yPos = _rowYPosArr[_rowCount] - _colHeight/2 - _rowHeight/2 - 1.5;
 					
+					// ROWS
 					_platform = new Platform(_name, {x:_xPos, y:_yPos, width:_rowWidth - _colWidth - 0.5, height: _rowHeight});
 					add(_platform);
 					
@@ -157,13 +159,16 @@ package com.states
 					_lastYPosArr.push(_yPos)
 				}
 			}
-			
+			var _movingPlatform:MovingPlatform;
 			for (var y:int = 0; y < _lastXPosArr.length; y++)
 			{
+				// LAST ROWS
 				_xPos = _lastXPosArr[y];
 				_yPos = _lastYPosArr[y];
-				_platform = new Platform("row_" + _rowCount, {x:_xPos , y:_yPos, width:_rowWidth - _gapWidth, height: _rowHeight});
-				add(_platform);
+				// FOR NOW: use MovingPlatform
+				// ** TODO: Why can't I use Platform??
+				_movingPlatform = new  MovingPlatform("row_" + _rowCount, {x:_xPos , y:_yPos, width:_rowWidth - _gapWidth, height: _rowHeight, enabled:false});
+				add(_movingPlatform);
 				
 				_rowCount++
 			} 
