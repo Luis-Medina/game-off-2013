@@ -10,7 +10,7 @@ package com.states
 	import citrus.objects.platformer.nape.MovingPlatform;
 	import citrus.physics.nape.Nape;
 	
-	import com.components.CountdownToDestruction;
+	import com.components.Countdown;
 	import com.components.GameButton;
 	import com.components.Platform;
 	import com.constants.Game;
@@ -34,7 +34,7 @@ package com.states
 		private var _restartButton:Button;
 		private var _splashButton:Button;
 		
-		private var _countDown:CountdownToDestruction;
+		private var _countDown:Countdown;
 		private var _unstablePlatform:CitrusGroup;
 		
 		public function CarnageProtocol() {
@@ -81,7 +81,7 @@ package com.states
 			
 			addEntity(_unstablePlatform);
 			
-			_countDown = new CountdownToDestruction();
+			_countDown = new Countdown();
 			addChild(_countDown);
 		}
 		
