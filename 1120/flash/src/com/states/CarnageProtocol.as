@@ -15,6 +15,7 @@ package com.states
 	import com.constants.Game;
 	import com.constants.Textures;
 	import com.events.CreateEvent;
+	import com.events.ElevenTwentyEvent;
 	
 	import starling.display.Button;
 	import starling.display.DisplayObject;
@@ -74,6 +75,8 @@ package com.states
 			this.visible = true;
 			
 			_unstablePlatform = createUnstablePlatform();
+			this.addEventListener(ElevenTwentyEvent.ELEVEN, updateUnstablePlatform);
+			
 			addEntity(_unstablePlatform);
 			
 			_countDown = new CountdownToDestruction();
@@ -174,6 +177,11 @@ package com.states
 			} 
 			
 			return _platformGroup;
+		}
+		
+		public function updateUnstablePlatform(Event:ElevenTwentyEvent):void
+		{
+			trace("HERE")	
 		}
 		
 		public function handleUI(e:TouchEvent):void
