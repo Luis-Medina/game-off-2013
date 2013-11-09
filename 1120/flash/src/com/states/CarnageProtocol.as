@@ -55,7 +55,7 @@ package com.states
 			addChild(_bg);
 
 			var physics:Nape = new Nape("physics");
-			physics.visible = true;
+			//physics.visible = true;
 			add(physics);
 			
 			var hero:Hero = new Hero("hero", {x: 15, y: stage.height - 16, width:20, height:20});
@@ -90,6 +90,11 @@ package com.states
 			
 			_countDown = new Countdown();
 			addChild(_countDown);
+		}
+		
+		override public function update(timeDelta:Number):void
+		{
+			super.update(timeDelta);
 		}
 		
 		public function createUnstablePlatform(name:String="UnstablePlatform"):CitrusGroup
