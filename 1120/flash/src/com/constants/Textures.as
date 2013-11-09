@@ -10,6 +10,9 @@ package com.constants
 		[Embed(source="../assets/textures/splash2.png", mimeType="image/png")]
 		public static const SPLASH:Class;
 		
+		[Embed(source="../assets/textures/level_1_floor.png", mimeType="image/png")]
+		public static const FLOOR:Class;
+		
 		[Embed(source="../assets/textures/level_1_bg.png", mimeType="image/png")]
 		public static const LEVEL_1_BG:Class;
 		
