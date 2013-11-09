@@ -1,6 +1,7 @@
 package com.states
 {	
 	import citrus.core.starling.StarlingState;
+	import citrus.objects.CitrusSprite;
 	
 	import com.components.GameButton;
 	import com.constants.Colors;
@@ -28,7 +29,7 @@ package com.states
 		private var _height:Number = 60;
 		private var _width:Number = 100;
 		
-		private var _bg:Image;
+		private var _bg:CitrusSprite;
 		private var _buttonTexture:Texture;
 		private var _button:Button;
 		
@@ -45,25 +46,20 @@ package com.states
 		private function onAddedToStage(event:Event):void
 		{
 			this.removeEventListener(Event.ADDED_TO_STAGE, onAddedToStage);
+			super.initialize();
+			trace("MENU PROTOCOL")
+
+			var _bgSrc:Texture = Textures.SPLASH_TEXTURE;
+			_bg = new CitrusSprite("splash_img", {view:_bgSrc});
+			add(_bg);
 			
 			drawMenu();
 		}
 		
 		private function drawMenu():void
 		{
-			trace("MENU PROTOCOL")		
-			
-			/** SPLASH **/
-			_bg = new Image(Texture.fromBitmap(new Textures.SPLASH));
-			
-			this.addChild(_bg);
-			
 			/** MENU **/
-			var _buttons:Array = [Game.START, Game.EXIT];
-			
-			if(!_buttonTexture)
-				_buttonTexture = Texture.fromBitmap(new Textures.BLANK);
-			
+			var _buttons:Array = [Game.START, Game.EXIT];			
 			var x:Number, y:Number;
 			for (var i:int = 0; i < _buttons.length; i++)
 			{
@@ -101,8 +97,10 @@ package com.states
 		
 		override public function destroy():void
 		{
+			_bg.destroy();
 			_button.removeEventListener(TouchEvent.TOUCH, buttonHandler);
-			super.destroy();
+			this.removeChildren();
+			// super.destroy(); // dont call this... 
 		}
 		
 	}

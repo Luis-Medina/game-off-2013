@@ -82,7 +82,7 @@ package com.states
 			add(new Platform("right_wall", {x: stage.stageWidth + 5, y: stage.stageHeight,  width:10, height: stage.stageHeight * 2, _oneWay:false}));
 			
 			var _floorSrc:Texture = Textures.FLOOR_TEXTURE;
-			_floor = new CitrusSprite("floor_img", {view: _floorSrc, x: 0, y : Game.STAGE_HEIGHT - _floor.height/2});
+			_floor = new CitrusSprite("floor_img", {view: _floorSrc, x: 0, y : Game.STAGE_HEIGHT - 10});
 			add(_floor);
 				
 			/** UI **/
