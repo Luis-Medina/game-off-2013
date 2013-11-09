@@ -261,26 +261,22 @@ package com.states
 		override public function destroy():void
 		{
 			this.removeEventListener(TouchEvent.TOUCH, handleUI);
+			this.removeEventListener(ElevenTwentyEvent.ELEVEN, updateUnstablePlatform);
+			
 			_atmoParticles.stop();
-			if (_splashButton)
-			{
-				_splashButton.removeEventListener(TouchEvent.TOUCH, handleUI);
-				_splashButton = null;
-			}
+
+			_splashButton.removeEventListener(TouchEvent.TOUCH, handleUI);
+			_splashButton.dispose();
 			
-			if (_restartButton)
-			{
-				_restartButton.removeEventListener(TouchEvent.TOUCH, handleUI);
-				_restartButton = null;
-			}
+			_restartButton.removeEventListener(TouchEvent.TOUCH, handleUI);
+			_restartButton.dispose();
 			
-			if (_countDown)
-			{
-				_countDown.clear();
-				_countDown = null;
-			}
+			_countDown.clear();
+			_countDown.dispose();
 			
-			super.destroy();
+			_unstablePlatform.destroy();
+			
+			// super.destroy();
 			
 		}		
 	}
