@@ -27,13 +27,15 @@ package com.states
 	import starling.events.Touch;
 	import starling.events.TouchEvent;
 	import starling.events.TouchPhase;
+	import starling.extensions.particles.PDParticleSystem;
 	import starling.textures.Texture;
 	
 	public class CarnageProtocol extends StarlingState
 	{
-		private var _bg:Image;
+		private var _bg:CitrusSprite;
 		private var _restartButton:Button;
 		private var _splashButton:Button;
+		private var _atmoParticles:PDParticleSystem;
 		
 		private var _countDown:Countdown;
 		private var _unstablePlatform:CitrusGroup;
@@ -49,15 +51,26 @@ package com.states
 			
 			super.initialize();
 			
-			if (!_bg)
-				_bg = new Image(Texture.fromBitmap(new Textures.LEVEL_1_BG));
-			
-			addChild(_bg);
-
+			/** PHYSICS **/
 			var physics:Nape = new Nape("physics");
-			//physics.visible = true;
+			physics.visible = true;
 			add(physics);
 			
+			var _bgSrc:Image = new Image(Texture.fromBitmap(new Textures.LEVEL_1_BG));
+			_bg = new CitrusSprite("bg", {view:_bgSrc});
+			add(_bg);
+			
+			/** PARTICLES **/
+			var _atmoPsConfig:XML = XML(new Textures.PARTICLE_CONFIG());
+			var _atmoPsTexture:Texture = Texture.fromBitmap(new Textures.PARTICLE_TEXTURE());
+			_atmoParticles = new PDParticleSystem(_atmoPsConfig, _atmoPsTexture);
+			_atmoParticles.start();
+			
+			var psv:CitrusSprite = new CitrusSprite("atmosphere", {view: _atmoParticles, parallaxX:1.7, parallaxY:1.7});
+			moveEmitter(psv, stage.stageWidth >> 1, stage.stageHeight >> 1);
+			add(psv);
+			
+			/** PROTAGONIST **/
 			var hero:Hero = new Hero("hero", {x: 15, y: stage.height - 16, width:20, height:20});
 			add(hero);
 			
@@ -67,7 +80,6 @@ package com.states
 			add(new Platform("left_wall", {x:-6, y: stage.stageHeight,  width:10, height: stage.stageHeight * 2, _oneWay:false}));
 			add(new Platform("right_wall", {x: stage.stageWidth + 5, y: stage.stageHeight,  width:10, height: stage.stageHeight * 2, _oneWay:false}));
 			
-			// ADDING TEXTURES ABOVE FOR SOME CUSTOMIZED LOOKING-ASS SHIT
 			var _floor:Image =  new Image(Texture.fromBitmap(new Textures.FLOOR));
 			_floor.x = 0;
 			_floor.y = Game.STAGE_HEIGHT - _floor.height/2;
@@ -95,6 +107,12 @@ package com.states
 		override public function update(timeDelta:Number):void
 		{
 			super.update(timeDelta);
+		}
+		
+		private function moveEmitter(sprite:CitrusSprite, x:int, y:int):void
+		{
+			(sprite.view as PDParticleSystem).emitterX = x;
+			(sprite.view as PDParticleSystem).emitterY = y;
 		}
 		
 		public function createUnstablePlatform(name:String="UnstablePlatform"):CitrusGroup
@@ -230,7 +248,6 @@ package com.states
 				{					
 					 if(touch.phase == TouchPhase.ENDED)
 					{
-						 clear();
 						 if(button.name == Game.RESTART)
 						 	dispatchEvent(new CreateEvent(CreateEvent.CREATE, {type: Game.RESTART}, true));
 						 else if (button.name == Game.SPLASH)
@@ -242,15 +259,14 @@ package com.states
 			}	
 		}
 		
-		private function clear():void
+		override public function destroy():void
 		{
-			if (_bg)
-				_bg = null;
-			
-			if (_countDown)
+			this.removeEventListener(TouchEvent.TOUCH, handleUI);
+			_atmoParticles.stop();
+			if (_splashButton)
 			{
-				_countDown.clear();
-				_countDown = null;
+				_splashButton.removeEventListener(TouchEvent.TOUCH, handleUI);
+				_splashButton = null;
 			}
 			
 			if (_restartButton)
@@ -259,16 +275,14 @@ package com.states
 				_restartButton = null;
 			}
 			
-			if (_splashButton)
+			if (_countDown)
 			{
-				_splashButton.removeEventListener(TouchEvent.TOUCH, handleUI);
-				_splashButton = null;
+				_countDown.clear();
+				_countDown = null;
 			}
 			
-			this.removeEventListener(TouchEvent.TOUCH, handleUI);
-			this.removeChildren();
-			this.dispose();
-		}
-		
+			super.destroy();
+			
+		}		
 	}
 }
