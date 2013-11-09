@@ -11,7 +11,7 @@ package com.components
 	{
 		public static function textButton(text:String, name:String, fontSize:Number, width:Number, height:Number, x:Number, y:Number):Button
 		{
-			var _buttonTexture:Texture = Texture.fromBitmap(new Textures.BLANK);
+			var _buttonTexture:Texture = Textures.BLANK_TEXTURE;
 			var _button:Button = new Button(_buttonTexture);
 			_button.visible = true;
 			_button.fontSize = fontSize;
@@ -29,9 +29,9 @@ package com.components
 			return _button;
 		}
 		
-		public static function imageButton(imgTexture:*, name:String, width:Number, height:Number, x:Number, y:Number):Button
+		public static function imageButton(imgTexture:Texture, name:String, width:Number, height:Number, x:Number, y:Number):Button
 		{
-			var _buttonTexture:Texture = Texture.fromBitmap(new imgTexture);
+			var _buttonTexture:Texture = imgTexture;
 			var _button:Button = new Button(_buttonTexture);
 			_button.visible = true;
 			_button.enabled = true;

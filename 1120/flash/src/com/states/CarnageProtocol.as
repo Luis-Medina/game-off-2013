@@ -33,6 +33,7 @@ package com.states
 	public class CarnageProtocol extends StarlingState
 	{
 		private var _bg:CitrusSprite;
+		private var _floor:CitrusSprite;
 		private var _restartButton:Button;
 		private var _splashButton:Button;
 		private var _atmoParticles:PDParticleSystem;
@@ -56,13 +57,13 @@ package com.states
 			physics.visible = true;
 			add(physics);
 			
-			var _bgSrc:Image = new Image(Texture.fromBitmap(new Textures.LEVEL_1_BG));
+			var _bgSrc:Texture = Textures.BG_TEXTURE;
 			_bg = new CitrusSprite("bg", {view:_bgSrc});
 			add(_bg);
 			
 			/** PARTICLES **/
 			var _atmoPsConfig:XML = XML(new Textures.PARTICLE_CONFIG());
-			var _atmoPsTexture:Texture = Texture.fromBitmap(new Textures.PARTICLE_TEXTURE());
+			var _atmoPsTexture:Texture = Textures.PARTICLE_TEXTURE_TEXTURE;
 			_atmoParticles = new PDParticleSystem(_atmoPsConfig, _atmoPsTexture);
 			_atmoParticles.start();
 			
@@ -80,14 +81,13 @@ package com.states
 			add(new Platform("left_wall", {x:-6, y: stage.stageHeight,  width:10, height: stage.stageHeight * 2, _oneWay:false}));
 			add(new Platform("right_wall", {x: stage.stageWidth + 5, y: stage.stageHeight,  width:10, height: stage.stageHeight * 2, _oneWay:false}));
 			
-			var _floor:Image =  new Image(Texture.fromBitmap(new Textures.FLOOR));
-			_floor.x = 0;
-			_floor.y = Game.STAGE_HEIGHT - _floor.height/2;
-			addChild(_floor);
+			var _floorSrc:Texture = Textures.FLOOR_TEXTURE;
+			_floor = new CitrusSprite("floor_img", {view: _floorSrc, x: 0, y : Game.STAGE_HEIGHT - _floor.height/2});
+			add(_floor);
 				
 			/** UI **/
-			_restartButton = GameButton.imageButton(Textures.BUTTON_RESTART, Game.RESTART, 46, 46, 845, 15); 
-			_splashButton = GameButton.imageButton(Textures.BUTTON_EXIT, Game.SPLASH, 46, 46, 900, 15); 
+			_restartButton = GameButton.imageButton(Textures.BUTTON_RESTART_TEXTURE, Game.RESTART, 46, 46, 845, 15); 
+			_splashButton = GameButton.imageButton(Textures.BUTTON_EXIT_TEXTURE, Game.SPLASH, 46, 46, 900, 15); 
 			_restartButton.addEventListener(TouchEvent.TOUCH, handleUI);
 			_splashButton.addEventListener(TouchEvent.TOUCH, handleUI);
 			addChild(_restartButton);
