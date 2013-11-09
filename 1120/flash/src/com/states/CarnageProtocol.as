@@ -214,7 +214,6 @@ package com.states
 		public function updateUnstablePlatform(Event:ElevenTwentyEvent):void
 		{
 			var _jitter:Number = Math.floor(Math.random() * 15);
-			trace("jitter", _jitter);
 			
 			var _allPlatforms:Vector.<CitrusObject> = getObjectsByType(Platform);
 			var _toChange:Array = ArrayUtils.getNumRandomValuesInRange(5, 40, _jitter);
