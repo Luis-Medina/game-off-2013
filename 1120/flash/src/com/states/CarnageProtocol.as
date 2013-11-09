@@ -5,6 +5,7 @@ package com.states
 	import citrus.core.CitrusObject;
 	import citrus.core.starling.StarlingCitrusEngine;
 	import citrus.core.starling.StarlingState;
+	import citrus.objects.CitrusSprite;
 	import citrus.objects.NapePhysicsObject;
 	import citrus.objects.platformer.nape.Hero;
 	import citrus.objects.platformer.nape.MovingPlatform;
@@ -61,11 +62,17 @@ package com.states
 			add(hero);
 			
 			/** WALLS **/
-			add(new Platform("bottom", {x:stage.stageWidth / 2, y:stage.stageHeight, width:stage.stageWidth, height: 20, _oneWay:false}));
+			add(new Platform("bottom", {x: stage.stageWidth / 2, y: stage.stageHeight, width: stage.stageWidth, height: 20, _oneWay:false}));
 			add(new Platform("roof", {x:stage.stageWidth / 2, y:-6, width:stage.stageWidth, height: 10, _oneWay:false}));
 			add(new Platform("left_wall", {x:-6, y: stage.stageHeight,  width:10, height: stage.stageHeight * 2, _oneWay:false}));
 			add(new Platform("right_wall", {x: stage.stageWidth + 5, y: stage.stageHeight,  width:10, height: stage.stageHeight * 2, _oneWay:false}));
-					
+			
+			// ADDING TEXTURES ABOVE FOR SOME CUSTOMIZED LOOKING-ASS SHIT
+			var _floor:Image =  new Image(Texture.fromBitmap(new Textures.FLOOR));
+			_floor.x = 0;
+			_floor.y = Game.STAGE_HEIGHT - _floor.height/2;
+			addChild(_floor);
+				
 			/** UI **/
 			_restartButton = GameButton.imageButton(Textures.BUTTON_RESTART, Game.RESTART, 46, 46, 845, 15); 
 			_splashButton = GameButton.imageButton(Textures.BUTTON_EXIT, Game.SPLASH, 46, 46, 900, 15); 
