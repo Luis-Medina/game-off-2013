@@ -17,6 +17,7 @@ package com.components {
 	 * 
 	 * Properties:
 	 * oneWay - Makes the platform only collidable when falling from above it.
+	 * touchable - is touchable?
 	 */
 	
 	public class Platform extends NapePhysicsObject {
@@ -99,10 +100,15 @@ package com.components {
 		
 		override public function handlePreContact(callback:PreCallback):PreFlag
 		{
-			if ((callback.arbiter.collisionArbiter.normal.y > 0) != callback.swapped)
+			if (!touchable)
+			{
+				if ((callback.arbiter.collisionArbiter.normal.y > 0) != callback.swapped)
+					return PreFlag.IGNORE;
+				else
+					return PreFlag.ACCEPT;
+			} else {
 				return PreFlag.IGNORE;
-			else
-				return PreFlag.ACCEPT;
+			}
 		}
 	}
 }
