@@ -54,8 +54,7 @@ package com.states
 			trace("MENU PROTOCOL")		
 			
 			/** SPLASH **/
-			if (!_bg)
-				_bg = new Image(Texture.fromBitmap(new Textures.SPLASH));
+			_bg = new Image(Texture.fromBitmap(new Textures.SPLASH));
 			
 			this.addChild(_bg);
 			
@@ -89,7 +88,6 @@ package com.states
 				{		
 					if(touch.phase == TouchPhase.ENDED)
 					{
-						clear();
 						button.removeEventListener(TouchEvent.TOUCH, buttonHandler);
 						if (button.name == Game.START)
 							dispatchEvent(new CreateEvent(CreateEvent.CREATE, {type: Game.START}, true));
@@ -101,11 +99,10 @@ package com.states
 			
 		}
 		
-		private function clear():void
+		override public function destroy():void
 		{
-			this.removeEventListener(TouchEvent.TOUCH, buttonHandler);
-			this.removeChildren();
-			this.dispose();
+			_button.removeEventListener(TouchEvent.TOUCH, buttonHandler);
+			super.destroy();
 		}
 		
 	}
