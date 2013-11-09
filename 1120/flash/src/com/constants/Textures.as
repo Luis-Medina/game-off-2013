@@ -28,5 +28,14 @@ package com.constants
 		[Embed(source="../assets/textures/button_restart.png", mimeType="image/png")]
 		public static const BUTTON_RESTART:Class;
 		
+		[Embed(source="../assets/particles/texture.png")]
+		public static const PARTICLE_TEXTURE:Class;
+		
+		[Embed(source="../assets/particles/particle.pex", mimeType="application/octet-stream")]
+		public static const PARTICLE_CONFIG:Class;
+		
+		
+		
+		
 	}
 }
