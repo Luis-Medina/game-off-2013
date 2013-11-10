@@ -322,7 +322,16 @@ package com.states
 		
 		private function handleCoinTouch(interactionCallback:InteractionCallback):void
 		{
+			var _coin:Coin = NapeUtils.CollisionGetObjectByType(Coin, interactionCallback) as Coin;
 			
+			var _moneyConfig:XML = XML(new Textures.SPARE_SOME_CHANGE_CONFIG());
+			var _spareSomeChangeTexture:Texture = Textures.MONEY_TEXTURE_TEXTURE;
+			var _spareSomeChangeDawg:PDParticleSystem = new PDParticleSystem(_moneyConfig, _spareSomeChangeTexture);
+			_spareSomeChangeDawg.start(0.05);
+			
+			var _particleSprite:CitrusSprite = new CitrusSprite("spared_some_change", {view: _spareSomeChangeDawg, parallaxX:1.7, parallaxY:1.7});
+			moveEmitter(_particleSprite, _coin.x, _coin.y);
+			add(_particleSprite);
 		}
 		
 		public function handleUI(e:TouchEvent):void
