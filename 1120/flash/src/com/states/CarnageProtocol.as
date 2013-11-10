@@ -136,7 +136,6 @@ package com.states
 			var _yPos:Number = (Game.STAGE_HEIGHT - _colHeight/2) - 11;
 			var _xPos:Number = 0;
 			var _platform:DynamicPlatform;
-			var _staticPlatform:Platform;
 			var _name:String;
 			var _count:int = 0;
 			
@@ -193,8 +192,11 @@ package com.states
 					_allYPos.push(_platform.y);
 					
 					// GAPS
-					_staticPlatform = new Platform("gap_" + _gapCount, {x:_rowXPosArr[_rowCount] , y:_yPos, width:_colWidth, height: _rowHeight});
-					add(_staticPlatform);
+					_platform = new DynamicPlatform("gap_" + _gapCount, {x:_rowXPosArr[_rowCount] , y:_yPos, width:_colWidth, height: _rowHeight});
+					add(_platform);
+					
+					_allXPos.push(_platform.x);
+					_allYPos.push(_platform.y);
 					
 					_rowCount++
 					_gapCount++
@@ -229,8 +231,8 @@ package com.states
 			
 			var _allPlatforms:Vector.<CitrusObject> = getObjectsByType(DynamicPlatform);
 			var _toChange:Array = ArrayUtils.getNumRandomValuesInRange(5, _allPlatforms.length - 1, _jitter);
-			// trace(_allPlatforms.length);
-			// trace(_allXPos.length)
+			trace(_allPlatforms.length);
+			trace(_allXPos.length)
 			
 			var _platForm:DynamicPlatform;
 			var _idx:int;
