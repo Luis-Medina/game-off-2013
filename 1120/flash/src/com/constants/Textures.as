@@ -52,8 +52,8 @@ package com.constants
 		public static const PARTICLE_TEXTURE_IMG:Texture = Texture.fromBitmap(new PARTICLE_TEXTURE);
 		public static const PARTICLE_TEXTURE_TEXTURE:Texture = Texture.fromTexture(PARTICLE_TEXTURE_IMG);
 		
-		[Embed(source="../assets/particles/particle.pex", mimeType="application/octet-stream")]
-		public static const PARTICLE_CONFIG:Class;
+		[Embed(source="../assets/particles/Atmosphere.pex", mimeType="application/octet-stream")]
+		public static const ATMOSPHERE_CONFIG:Class;
 		
 		[Embed(source="../assets/particles/ProphetArrival.pex", mimeType="application/octet-stream")]
 		public static const PROPHET_ARRIVAL_CONFIG:Class;
