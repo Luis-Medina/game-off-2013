@@ -9,11 +9,12 @@ package com.states
 	import citrus.objects.NapePhysicsObject;
 	import citrus.objects.platformer.nape.Hero;
 	import citrus.objects.platformer.nape.MovingPlatform;
+	import citrus.objects.platformer.nape.Platform;
 	import citrus.physics.nape.Nape;
 	
 	import com.components.Countdown;
+	import com.components.DynamicPlatform;
 	import com.components.GameButton;
-	import com.components.Platform;
 	import com.constants.Game;
 	import com.constants.Textures;
 	import com.events.CreateEvent;
@@ -80,10 +81,10 @@ package com.states
 			add(hero);
 			
 			/** WALLS **/
-			add(new Platform("bottom", {x: stage.stageWidth / 2, y: stage.stageHeight, width: stage.stageWidth, height: 20, _oneWay:false}));
-			add(new Platform("roof", {x:stage.stageWidth / 2, y:-6, width:stage.stageWidth, height: 10, _oneWay:false}));
-			add(new Platform("left_wall", {x:-6, y: stage.stageHeight,  width:10, height: stage.stageHeight * 2, _oneWay:false}));
-			add(new Platform("right_wall", {x: stage.stageWidth + 5, y: stage.stageHeight,  width:10, height: stage.stageHeight * 2, _oneWay:false}));
+			add(new Platform("bottom", {x: stage.stageWidth / 2, y: stage.stageHeight, width: stage.stageWidth, height: 20}));
+			add(new Platform("roof", {x:stage.stageWidth / 2, y:-6, width:stage.stageWidth, height: 10}));
+			add(new Platform("left_wall", {x:-6, y: stage.stageHeight,  width:10, height: stage.stageHeight * 2}));
+			add(new Platform("right_wall", {x: stage.stageWidth + 5, y: stage.stageHeight,  width:10, height: stage.stageHeight * 2}));
 			
 			var _floorSrc:Texture = Textures.FLOOR_TEXTURE;
 			_floor = new CitrusSprite("floor_img", {view: _floorSrc, x: 0, y : Game.STAGE_HEIGHT - 10});
@@ -134,7 +135,8 @@ package com.states
 			
 			var _yPos:Number = (Game.STAGE_HEIGHT - _colHeight/2) - 11;
 			var _xPos:Number = 0;
-			var _platform:Platform;
+			var _platform:DynamicPlatform;
+			var _staticPlatform:Platform;
 			var _name:String;
 			var _count:int = 0;
 			
@@ -156,7 +158,7 @@ package com.states
 					_width = _colWidth;
 					
 					// COLUMNS
-					_platform = new Platform(_name, {x:_xPos, y:_yPos-1, width:_width, height: _height + 10});
+					_platform = new DynamicPlatform(_name, {x:_xPos, y:_yPos-1, width:_width, height: _height + 10});
 					_rowXPosArr.push(_platform.x);
 					_rowYPosArr.push(_platform.y);
 					add(_platform);
@@ -184,18 +186,15 @@ package com.states
 					_yPos = _rowYPosArr[_rowCount] - _colHeight/2 - _rowHeight/2 - 1.5;
 					
 					// ROWS
-					_platform = new Platform(_name, {x:_xPos, y:_yPos, width:_rowWidth - _colWidth - 0.5, height: _rowHeight, visible:false});
+					_platform = new DynamicPlatform(_name, {x:_xPos, y:_yPos, width:_rowWidth - _colWidth - 0.5, height: _rowHeight});
 					add(_platform);
 					
 					_allXPos.push(_platform.x);
 					_allYPos.push(_platform.y);
 					
 					// GAPS
-					_platform = new Platform("gap_" + _gapCount, {x:_rowXPosArr[_rowCount] , y:_yPos, width:_colWidth, height: _rowHeight});
-					add(_platform);
-					
-					_allXPos.push(_platform.x);
-					_allYPos.push(_platform.y);
+					_staticPlatform = new Platform("gap_" + _gapCount, {x:_rowXPosArr[_rowCount] , y:_yPos, width:_colWidth, height: _rowHeight});
+					add(_staticPlatform);
 					
 					_rowCount++
 					_gapCount++
@@ -207,16 +206,16 @@ package com.states
 					_lastYPosArr.push(_yPos)
 				}
 			}
-			var _movingPlatform:MovingPlatform;
 			for (var y:int = 0; y < _lastXPosArr.length; y++)
 			{
 				// LAST ROWS
 				_xPos = _lastXPosArr[y];
 				_yPos = _lastYPosArr[y];
-				// FOR NOW: use MovingPlatform
-				// ** TODO: Why can't I use Platform??
-				_movingPlatform = new  MovingPlatform("row_" + _rowCount, {x:_xPos , y:_yPos, width:_rowWidth - _gapWidth, height: _rowHeight, enabled:false});
-				add(_movingPlatform);
+				_platform = new DynamicPlatform("row_" + _rowCount, {x:_xPos , y:_yPos, width:_rowWidth - _gapWidth, height: _rowHeight});
+				add(_platform);
+				
+				_allXPos.push(_platform.x);
+				_allYPos.push(_platform.y);
 				
 				_rowCount++
 			} 
@@ -228,16 +227,18 @@ package com.states
 		{
 			var _jitter:Number = Math.floor(Math.random() * 30);
 			
-			var _allPlatforms:Vector.<CitrusObject> = getObjectsByType(Platform);
+			var _allPlatforms:Vector.<CitrusObject> = getObjectsByType(DynamicPlatform);
 			var _toChange:Array = ArrayUtils.getNumRandomValuesInRange(5, _allPlatforms.length - 1, _jitter);
+			// trace(_allPlatforms.length);
+			// trace(_allXPos.length)
 			
-			var _platForm:Platform;
+			var _platForm:DynamicPlatform;
 			var _idx:int;
 			var _name:String;
 			for (var i:int = 0; i < _toChange.length; i++)
 			{
 				_idx = _toChange[i];
-				_platForm = _allPlatforms[_idx] as Platform;
+				_platForm = _allPlatforms[_idx] as DynamicPlatform;
 				_name = _platForm.name;
 				if (_name.indexOf("row_") != -1 || _name.indexOf("col_") != -1)
 				{
