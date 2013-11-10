@@ -20,14 +20,14 @@ package com.components {
 	 * touchable - is touchable?
 	 */
 	
-	public class Platform extends NapePhysicsObject {
+	public class DynamicPlatform extends NapePhysicsObject {
 		
 		public static const ONEWAY_PLATFORM:CbType = new CbType();
 		
 		public var _oneWay:Boolean = true;
 		private var _preListener:PreListener;
 		
-		public function Platform(name:String, params:Object = null) {
+		public function DynamicPlatform(name:String, params:Object = null) {
 			
 			super(name, params);
 		}
@@ -56,7 +56,7 @@ package com.components {
 			if (_oneWay && !_preListener)
 			{
 				// _preListener = new PreListener(InteractionType.ANY, Platform.ONEWAY_PLATFORM, CbType.ANY_BODY, handlePreContact);
-				_preListener = new PreListener(InteractionType.COLLISION, Platform.ONEWAY_PLATFORM, CbType.ANY_BODY, handlePreContact,0,true);
+				_preListener = new PreListener(InteractionType.COLLISION, DynamicPlatform.ONEWAY_PLATFORM, CbType.ANY_BODY, handlePreContact,0,true);
 				_body.space.listeners.add(_preListener);
 				_body.cbTypes.add(ONEWAY_PLATFORM);
 			}
@@ -100,15 +100,10 @@ package com.components {
 		
 		override public function handlePreContact(callback:PreCallback):PreFlag
 		{
-			if (!touchable)
-			{
-				if ((callback.arbiter.collisionArbiter.normal.y > 0) != callback.swapped)
-					return PreFlag.IGNORE;
-				else
-					return PreFlag.ACCEPT;
-			} else {
+			if ((callback.arbiter.collisionArbiter.normal.y > 0) != callback.swapped)
 				return PreFlag.IGNORE;
-			}
+			else
+				return PreFlag.ACCEPT;
 		}
 	}
 }
