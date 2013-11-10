@@ -66,7 +66,13 @@ package com.components
 		
 		private function updateDisplay(newTime:*):void
 		{
-			_timerDisplay.text = (newTime/1000).toString();
+			var timeToDisplay:int = newTime/1000;
+			_timerDisplay.text = (timeToDisplay).toString();
+			
+			if (timeToDisplay < (_totalTime/1000)/2)
+				_timerDisplay.color = Colors.RED;
+			else
+				_timerDisplay.color = Colors.WHITE;
 		}
 		
 		private function handleTimeEvent(e:TimerEvent):void
