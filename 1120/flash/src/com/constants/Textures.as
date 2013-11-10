@@ -55,5 +55,8 @@ package com.constants
 		[Embed(source="../assets/particles/particle.pex", mimeType="application/octet-stream")]
 		public static const PARTICLE_CONFIG:Class;
 		
+		[Embed(source="../assets/particles/ProphetArrival.pex", mimeType="application/octet-stream")]
+		public static const PROPHET_ARRIVAL_CONFIG:Class;
+		
 	}
 }
