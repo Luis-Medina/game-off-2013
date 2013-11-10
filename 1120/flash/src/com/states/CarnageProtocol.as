@@ -38,8 +38,12 @@ package com.states
 		private var _splashButton:Button;
 		private var _atmoParticles:PDParticleSystem;
 		
+		private var physics:Nape;
+		
 		private var _countDown:Countdown;
 		private var _unstablePlatform:CitrusGroup;
+		private var _allXPos:Array = [];
+		private var _allYPos:Array = [];
 		
 		public function CarnageProtocol() {
 			
@@ -53,7 +57,7 @@ package com.states
 			super.initialize();
 			
 			/** PHYSICS **/
-			var physics:Nape = new Nape("physics");
+			physics = new Nape("physics");
 			physics.visible = true;
 			add(physics);
 			
@@ -157,6 +161,9 @@ package com.states
 					_rowYPosArr.push(_platform.y);
 					add(_platform);
 					
+					_allXPos.push(_platform.x);
+					_allYPos.push(_platform.y);
+					
 					_xPos = j * _rowWidth;
 					_count++
 				}
@@ -177,12 +184,18 @@ package com.states
 					_yPos = _rowYPosArr[_rowCount] - _colHeight/2 - _rowHeight/2 - 1.5;
 					
 					// ROWS
-					_platform = new Platform(_name, {x:_xPos, y:_yPos, width:_rowWidth - _colWidth - 0.5, height: _rowHeight});
+					_platform = new Platform(_name, {x:_xPos, y:_yPos, width:_rowWidth - _colWidth - 0.5, height: _rowHeight, visible:false});
 					add(_platform);
+					
+					_allXPos.push(_platform.x);
+					_allYPos.push(_platform.y);
 					
 					// GAPS
 					_platform = new Platform("gap_" + _gapCount, {x:_rowXPosArr[_rowCount] , y:_yPos, width:_colWidth, height: _rowHeight});
 					add(_platform);
+					
+					_allXPos.push(_platform.x);
+					_allYPos.push(_platform.y);
 					
 					_rowCount++
 					_gapCount++
@@ -210,13 +223,13 @@ package com.states
 			
 			return _platformGroup;
 		}
-		
+
 		public function updateUnstablePlatform(Event:ElevenTwentyEvent):void
 		{
-			var _jitter:Number = Math.floor(Math.random() * 15);
+			var _jitter:Number = Math.floor(Math.random() * 30);
 			
 			var _allPlatforms:Vector.<CitrusObject> = getObjectsByType(Platform);
-			var _toChange:Array = ArrayUtils.getNumRandomValuesInRange(5, 40, _jitter);
+			var _toChange:Array = ArrayUtils.getNumRandomValuesInRange(5, _allPlatforms.length - 1, _jitter);
 			
 			var _platForm:Platform;
 			var _idx:int;
@@ -226,12 +239,17 @@ package com.states
 				_idx = _toChange[i];
 				_platForm = _allPlatforms[_idx] as Platform;
 				_name = _platForm.name;
-				
 				if (_name.indexOf("row_") != -1 || _name.indexOf("col_") != -1)
 				{
-					_platForm.visible = false;
-					_platForm.touchable = false;
-					// _platForm.kill = true;
+					if(_platForm.x != -100)
+					{
+						// MOVE OUT OF THE SCREEN
+						_platForm.x = -100; 
+						
+					} else {
+						// MOVE BACK TO ORIGINAL LOC
+						_platForm.x = _allXPos[_idx]; 
+					}					
 				}
 			}
 			
