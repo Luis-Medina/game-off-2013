@@ -52,11 +52,19 @@ package com.constants
 		public static const PARTICLE_TEXTURE_IMG:Texture = Texture.fromBitmap(new PARTICLE_TEXTURE);
 		public static const PARTICLE_TEXTURE_TEXTURE:Texture = Texture.fromTexture(PARTICLE_TEXTURE_IMG);
 		
+		[Embed(source="../assets/particles/money.png")]
+		public static const MONEY_TEXTURE:Class;
+		public static const MONEY_TEXTURE_IMG:Texture = Texture.fromBitmap(new MONEY_TEXTURE);
+		public static const MONEY_TEXTURE_TEXTURE:Texture = Texture.fromTexture(MONEY_TEXTURE_IMG);
+		
 		[Embed(source="../assets/particles/Atmosphere.pex", mimeType="application/octet-stream")]
 		public static const ATMOSPHERE_CONFIG:Class;
 		
 		[Embed(source="../assets/particles/ProphetArrival.pex", mimeType="application/octet-stream")]
 		public static const PROPHET_ARRIVAL_CONFIG:Class;
+		
+		[Embed(source="../assets/particles/SpareSomeChange.pex", mimeType="application/octet-stream")]
+		public static const SPARE_SOME_CHANGE_CONFIG:Class;
 		
 	}
 }
