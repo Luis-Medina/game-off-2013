@@ -14,5 +14,6 @@ package com.constants
 		public static const SPLASH:String = "SPLASH";
 		public static const EXIT:String = "EXIT";
 		public static const ELEVEN_TWENTY:String = "ELEVEN_TWENTY"
+		public static const ELEVEN_TWENTY_HALF:String = "ELEVEN_TWENTY_HALF"
 	}
 }
