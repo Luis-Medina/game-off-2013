@@ -106,5 +106,11 @@ package com.components
 				_timer = null;
 			}
 		}
+		
+		override public function dispose():void
+		{
+			clear();
+			super.dispose();
+		}
 	}
 }
