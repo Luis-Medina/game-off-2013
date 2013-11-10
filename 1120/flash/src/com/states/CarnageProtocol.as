@@ -15,6 +15,7 @@ package com.states
 	import com.components.Countdown;
 	import com.components.DynamicPlatform;
 	import com.components.GameButton;
+	import com.components.PettyCash;
 	import com.constants.Game;
 	import com.constants.Textures;
 	import com.events.CreateEvent;
@@ -42,6 +43,7 @@ package com.states
 		private var physics:Nape;
 		
 		private var _countDown:Countdown;
+		private var _cash:PettyCash;
 		private var _unstablePlatform:CitrusGroup;
 		private var _allXPos:Array = [];
 		private var _allYPos:Array = [];
@@ -107,6 +109,9 @@ package com.states
 			
 			_countDown = new Countdown();
 			addChild(_countDown);
+			
+			_cash = new PettyCash();
+			addChild(_cash);
 		}
 		
 		override public function update(timeDelta:Number):void
