@@ -258,6 +258,13 @@ package com.states
 
 		public function updateUnstablePlatform(Event:ElevenTwentyEvent):void
 		{
+			var _allActiveCoins:Vector.<CitrusObject> = getObjectsByType(Coin);
+			var _coin:Coin;
+			for (var x:int = 0; x < _allActiveCoins.length; x++)
+			{
+				_coin = _allActiveCoins[x] as Coin;
+				_coin.kill = true;
+			}
 			_spareChangeGroup = createCoins();
 			
 			var _jitter:Number = Math.floor(Math.random() * 30);
@@ -298,6 +305,7 @@ package com.states
 			var coinSize:Number;
 			var xPos:Number;
 			var yPos:Number;
+			currCoinNames = [];
 			for (var i:int = 0; i < numCoins; i++)
 			{
 				idx = Math.floor(ArrayUtils.randomRange(5, _allRowXPos.length - 10));
