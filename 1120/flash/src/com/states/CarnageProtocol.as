@@ -41,6 +41,7 @@ package com.states
 		private var _atmoParticles:PDParticleSystem;
 		
 		private var physics:Nape;
+		private var hero:Hero;
 		
 		private var _countDown:Countdown;
 		private var _cash:PettyCash;
@@ -79,7 +80,9 @@ package com.states
 			add(psv);
 			
 			/** PROTAGONIST **/
-			var hero:Hero = new Hero("hero", {x: 15, y: stage.height - 16, width:20, height:20});
+			hero = new Hero("hero", {x: 15, y: stage.height - 16, width:20, height:20});
+			hero.acceleration = 2.1;
+			hero.jumpAcceleration = 4;
 			add(hero);
 			
 			/** WALLS **/
