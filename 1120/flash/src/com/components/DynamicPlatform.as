@@ -55,7 +55,7 @@ package com.components {
 			
 			if (_oneWay && !_preListener)
 			{
-				// _preListener = new PreListener(InteractionType.ANY, Platform.ONEWAY_PLATFORM, CbType.ANY_BODY, handlePreContact);
+				// _preListener = new PreListener(InteractionType.ANY, DynamicPlatform.ONEWAY_PLATFORM, CbType.ANY_BODY, handlePreContact);
 				_preListener = new PreListener(InteractionType.COLLISION, DynamicPlatform.ONEWAY_PLATFORM, CbType.ANY_BODY, handlePreContact,0,true);
 				_body.space.listeners.add(_preListener);
 				_body.cbTypes.add(ONEWAY_PLATFORM);
@@ -91,7 +91,7 @@ package com.components {
 			
 			super.createConstraint();
 			if (_oneWay) {
-				// _preListener = new PreListener(InteractionType.COLLISION, ONEWAY_PLATFORM, CbType.ANY_BODY, handlePreContact,0,true);
+				// _preListener = new PreListener(InteractionType.COLLISION, ONEWAY_PLATFORM, CbType.ANY_BODY, this.handlePreContact);
 				 _preListener = new PreListener(InteractionType.COLLISION, ONEWAY_PLATFORM, CbType.ANY_BODY, handlePreContact,0,true);
 				_body.cbTypes.add(ONEWAY_PLATFORM);
 				_body.space.listeners.add(_preListener);

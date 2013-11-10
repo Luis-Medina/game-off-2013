@@ -136,6 +136,7 @@ package com.states
 			var _yPos:Number = (Game.STAGE_HEIGHT - _colHeight/2) - 11;
 			var _xPos:Number = 0;
 			var _platform:DynamicPlatform;
+			var _movingPlatform:MovingPlatform;
 			var _name:String;
 			var _count:int = 0;
 			
@@ -208,16 +209,20 @@ package com.states
 					_lastYPosArr.push(_yPos)
 				}
 			}
+			var _endY:Number;
 			for (var y:int = 0; y < _lastXPosArr.length; y++)
 			{
 				// LAST ROWS
 				_xPos = _lastXPosArr[y];
 				_yPos = _lastYPosArr[y];
-				_platform = new DynamicPlatform("row_" + _rowCount, {x:_xPos , y:_yPos, width:_rowWidth - _gapWidth, height: _rowHeight});
-				add(_platform);
 				
-				_allXPos.push(_platform.x);
-				_allYPos.push(_platform.y);
+				if (y < _lastXPosArr.length - 2)
+					_endY = _lastYPosArr[y + 1];
+				else
+					_endY = _yPos;
+				
+				_movingPlatform = new MovingPlatform("row_" + _rowCount, {x:_xPos , y:_yPos, width:_rowWidth - _gapWidth, height: _rowHeight, startX:_xPos, endX: _xPos, startY: _yPos, endY:_endY, speed: 8, waitForPassenger:false});
+				add(_movingPlatform);
 				
 				_rowCount++
 			} 
@@ -230,9 +235,7 @@ package com.states
 			var _jitter:Number = Math.floor(Math.random() * 30);
 			
 			var _allPlatforms:Vector.<CitrusObject> = getObjectsByType(DynamicPlatform);
-			var _toChange:Array = ArrayUtils.getNumRandomValuesInRange(5, _allPlatforms.length - 1, _jitter);
-			trace(_allPlatforms.length);
-			trace(_allXPos.length)
+			var _toChange:Array = ArrayUtils.getNumRandomValuesInRange(0, _allPlatforms.length - 6, _jitter);
 			
 			var _platForm:DynamicPlatform;
 			var _idx:int;
