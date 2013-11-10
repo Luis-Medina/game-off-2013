@@ -7,10 +7,12 @@ package com.states
 	import citrus.core.starling.StarlingState;
 	import citrus.objects.CitrusSprite;
 	import citrus.objects.NapePhysicsObject;
+	import citrus.objects.platformer.nape.Coin;
 	import citrus.objects.platformer.nape.Hero;
 	import citrus.objects.platformer.nape.MovingPlatform;
 	import citrus.objects.platformer.nape.Platform;
 	import citrus.physics.nape.Nape;
+	import citrus.physics.nape.NapeUtils;
 	
 	import com.components.Countdown;
 	import com.components.DynamicPlatform;
@@ -22,6 +24,7 @@ package com.states
 	import com.events.ElevenTwentyEvent;
 	import com.utils.ArrayUtils;
 	
+	import nape.callbacks.InteractionCallback;
 	import nape.geom.Vec2;
 	
 	import starling.display.Button;
@@ -48,8 +51,16 @@ package com.states
 		private var _countDown:Countdown;
 		private var _cash:PettyCash;
 		private var _unstablePlatform:CitrusGroup;
+		private var _spareChangeGroup:CitrusGroup;
 		private var _allXPos:Array = [];
 		private var _allYPos:Array = [];
+		private var _allRowXPos:Array = [];
+		private var _allRowYPos:Array = [];
+		
+		private var possibleCoinValues:Array = [0.5, 0.11, 0.20, 0.37, 0.45, 0.89];
+		private var coinSizes:Array = [5, 11, 20, 37, 45, 60];
+		private var currCoinNames:Array = [];
+		private var currCoinValues:Array = [];
 		
 		public function CarnageProtocol() {
 			
@@ -110,8 +121,10 @@ package com.states
 			
 			_unstablePlatform = createUnstablePlatform();
 			this.addEventListener(ElevenTwentyEvent.ELEVEN, updateUnstablePlatform);
-			
 			addEntity(_unstablePlatform);
+			
+			_spareChangeGroup = new CitrusGroup("visible_coins");
+			addEntity(_spareChangeGroup)
 			
 			_countDown = new Countdown();
 			addChild(_countDown);
@@ -202,6 +215,8 @@ package com.states
 					
 					_allXPos.push(_platform.x);
 					_allYPos.push(_platform.y);
+					_allRowXPos.push(_platform.x);
+					_allRowYPos.push(_platform.y);
 					
 					// GAPS
 					_platform = new DynamicPlatform("gap_" + _gapCount, {x:_rowXPosArr[_rowCount] , y:_yPos, width:_colWidth, height: _rowHeight});
@@ -243,6 +258,8 @@ package com.states
 
 		public function updateUnstablePlatform(Event:ElevenTwentyEvent):void
 		{
+			_spareChangeGroup = createCoins();
+			
 			var _jitter:Number = Math.floor(Math.random() * 30);
 			
 			var _allPlatforms:Vector.<CitrusObject> = getObjectsByType(DynamicPlatform);
@@ -270,6 +287,28 @@ package com.states
 				}
 			}
 			
+		}
+		
+		private function createCoins():CitrusGroup
+		{				
+			var currCoins:CitrusGroup = new CitrusGroup("visible_coins")
+			var numCoins:int = Math.floor(ArrayUtils.randomRange(1, 5));
+			var coin:Coin;
+			var idx:int;
+			var coinSize:Number;
+			var xPos:Number;
+			var yPos:Number;
+			for (var i:int = 0; i < numCoins; i++)
+			{
+				idx = Math.floor(ArrayUtils.randomRange(5, _allRowXPos.length - 10));
+				coinSize = ArrayUtils.getRandomElementOf(coinSizes);
+				xPos = _allRowXPos[idx];
+				yPos = _allRowYPos[idx] - (6 +  coinSize/2);
+				coin = new Coin("coin_" + i, {x:xPos, y:yPos, width:coinSize, height:coinSize, collectorClass:Hero});
+				currCoinNames.push(coin.name);
+				add(coin);
+			}
+			return currCoins;
 		}
 		
 		public function handleUI(e:TouchEvent):void
