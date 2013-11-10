@@ -22,6 +22,8 @@ package com.states
 	import com.events.ElevenTwentyEvent;
 	import com.utils.ArrayUtils;
 	
+	import nape.geom.Vec2;
+	
 	import starling.display.Button;
 	import starling.display.DisplayObject;
 	import starling.display.Image;
@@ -63,6 +65,7 @@ package com.states
 			/** PHYSICS **/
 			physics = new Nape("physics");
 			physics.visible = true;
+			physics.gravity = new Vec2(0, 620);
 			add(physics);
 			
 			var _bgSrc:Texture = Textures.BG_TEXTURE;
