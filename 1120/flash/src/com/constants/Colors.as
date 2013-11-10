@@ -9,6 +9,7 @@ package com.constants
 		public static const CONCRETE2:uint = 0x171717;
 		public static const GREEN:uint = 0x4db348;
 		public static const BLUE:uint = 0x105b92;
+		public static const RED:uint = 0xb82131;
 		
 	}
 }
