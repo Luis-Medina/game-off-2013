@@ -84,7 +84,7 @@ package com.states
 			add(_bg);
 			
 			/** PARTICLES **/
-			var _atmoPsConfig:XML = XML(new Textures.PARTICLE_CONFIG());
+			var _atmoPsConfig:XML = XML(new Textures.ATMOSPHERE_CONFIG());
 			var _atmoPsTexture:Texture = Textures.PARTICLE_TEXTURE_TEXTURE;
 			_atmoParticles = new PDParticleSystem(_atmoPsConfig, _atmoPsTexture);
 			_atmoParticles.start();
@@ -313,10 +313,16 @@ package com.states
 				xPos = _allRowXPos[idx];
 				yPos = _allRowYPos[idx] - (6 +  coinSize/2);
 				coin = new Coin("coin_" + i, {x:xPos, y:yPos, width:coinSize, height:coinSize, collectorClass:Hero});
+				coin.onBeginContact.add(handleCoinTouch);
 				currCoinNames.push(coin.name);
 				add(coin);
 			}
 			return currCoins;
+		}
+		
+		private function handleCoinTouch(interactionCallback:InteractionCallback):void
+		{
+			
 		}
 		
 		public function handleUI(e:TouchEvent):void
