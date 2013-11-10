@@ -42,8 +42,8 @@ package com.components
 			_timerDisplay.y = 12;
 			addChild(_timerDisplay);
 			
-			if (!_timerLabel)
-				_timerLabel = new Image(Texture.fromBitmap(new Textures.TIME_LABEL));
+			// TODO: not like this:
+			_timerLabel = new Image(Texture.fromBitmap(new Textures.TIME_LABEL));
 			
 			_timerLabel.x = 375;
 			_timerLabel.y = 12;
@@ -109,7 +109,6 @@ package com.components
 		
 		override public function dispose():void
 		{
-			clear();
 			super.dispose();
 		}
 	}
