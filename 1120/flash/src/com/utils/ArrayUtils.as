@@ -2,7 +2,7 @@ package com.utils
 {
 	public class ArrayUtils
 	{
-		public static function getRandomElementOf(array:Array):Object
+		public static function getRandomElementOf(array:Array):*
 		{
 			var idx:int=Math.floor(Math.random() * array.length);
 			return array[idx];
