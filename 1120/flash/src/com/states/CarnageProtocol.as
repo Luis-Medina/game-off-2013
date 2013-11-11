@@ -24,6 +24,8 @@ package com.states
 	import com.events.ElevenTwentyEvent;
 	import com.utils.ArrayUtils;
 	
+	import flash.geom.Point;
+	
 	import nape.callbacks.InteractionCallback;
 	import nape.geom.Vec2;
 	
@@ -62,6 +64,11 @@ package com.states
 		private var coinSizes:Array = [11, 15, 23, 37, 45, 57];
 		private var currCoinNames:Array = [];
 		private var currCoinValues:Array = [];
+		
+		private var _prophetConfig:XML = XML(new Textures.PROPHET_ARRIVAL_CONFIG());
+		private var prophetParticles:PDParticleSystem = new PDParticleSystem(_prophetConfig, Textures.PARTICLE_TEXTURE_TEXTURE);
+		private var prophetParticlesSprite:CitrusSprite;
+		private var prophetCoordinates:Point = new Point(0,0);
 		
 		public function CarnageProtocol() {
 			
@@ -132,10 +139,24 @@ package com.states
 			
 			_cash = new PettyCash();
 			addChild(_cash);
+			
+			prophetCoordinates.x = 900;
+			prophetCoordinates.y = 140;
+			
+			prophetParticlesSprite = new CitrusSprite("prophet_arrival", {view: prophetParticles, parallaxX:1.7, parallaxY:1.7});
+			moveEmitter(prophetParticlesSprite, prophetCoordinates.x, prophetCoordinates.y);
+			add(prophetParticlesSprite);
 		}
 		
 		override public function update(timeDelta:Number):void
-		{
+		{		
+			if (currentCoinCount >= 3.90){	
+				moveEmitter(prophetParticlesSprite, prophetCoordinates.x, prophetCoordinates.y);
+				prophetParticles.start();
+			} else if (currentCoinCount < 3.90) {
+				prophetParticles.stop();
+			}
+			
 			super.update(timeDelta);
 		}
 		
@@ -252,7 +273,7 @@ package com.states
 				add(_movingPlatform);
 				
 				_rowCount++
-			} 
+			}
 			
 			return _platformGroup;
 		}
@@ -345,7 +366,7 @@ package com.states
 			
 			currentCoinCount += num;
 			currentCoinCount = ArrayUtils.trim(currentCoinCount, 2);
-			_cash.updateDisplay(currentCoinCount)
+			_cash.updateDisplay(currentCoinCount);
 		}
 		
 		public function handleUI(e:TouchEvent):void
