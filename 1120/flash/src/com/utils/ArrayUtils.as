@@ -39,5 +39,12 @@ package com.utils
 			
 			return theNumber;
 		}
+		
+		public static function sumArray(arr:Array):Number
+		{
+			var sum:Number = 0;
+			for (var i in arr) sum += arr[i];
+			return sum;
+		}
 	}
 }
