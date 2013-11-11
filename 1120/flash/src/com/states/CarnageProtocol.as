@@ -60,7 +60,7 @@ package com.states
 		private var _allRowYPos:Array = [];
 		
 		private var currentCoinCount:Number = 0;
-		private var possibleCoinValues:Array = [0.5, 0.11, 0.20, 0.37, 0.45, 0.89];
+		private var possibleCoinValues:Array = [0.01, 0.05, 0.11, 0.17, 0.23, 0.35];
 		private var coinSizes:Array = [11, 15, 23, 37, 45, 57];
 		private var currCoinNames:Array = [];
 		private var currCoinValues:Array = [];
@@ -103,8 +103,10 @@ package com.states
 			
 			/** PROTAGONIST **/
 			hero = new Hero("hero", {x: 15, y: stage.height - 16, width:20, height:20});
-			// hero.acceleration = 2.1;
-			// hero.jumpAcceleration = 4;
+			hero.acceleration = 10; // default is 30
+			hero.jumpAcceleration = 7; // default is 9
+			hero.maxVelocity = 120; // default is 240
+			hero.jumpHeight = 280; // default is 330
 			add(hero);
 			
 			/** WALLS **/
