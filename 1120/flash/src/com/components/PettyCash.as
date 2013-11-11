@@ -30,7 +30,7 @@ package com.components
 		{
 			this.removeEventListener(Event.ADDED_TO_STAGE, onAddedToStage);
 			
-			_numDisplay = new TextField(80, 40, '$0.00', "ProtestPaintBB", 38, Colors.WHITE, false);
+			_numDisplay = new TextField(100, 40, '$0.00', "ProtestPaintBB", 38, Colors.WHITE, false);
 			_numDisplay.x = 280;
 			_numDisplay.y = 12;
 			addChild(_numDisplay);
@@ -38,7 +38,7 @@ package com.components
 			// TODO: not like this:
 			_numLabel = new Image(Texture.fromBitmap(new Textures.CHANGE_LABEL));
 			
-			_numLabel.x = 175;
+			_numLabel.x = 185;
 			_numLabel.y = 12;
 			addChild(_numLabel);
 		}
