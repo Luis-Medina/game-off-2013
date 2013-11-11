@@ -43,7 +43,11 @@ package com.utils
 		public static function sumArray(arr:Array):Number
 		{
 			var sum:Number = 0;
-			for (var i in arr) sum += arr[i];
+			for (var i:int = 0; i < arr.length; i++)
+			{
+				sum += arr[i];
+			}
+				
 			return sum;
 		}
 	}
