@@ -271,7 +271,7 @@ package com.states
 				else
 					_endY = _yPos;
 				
-				_movingPlatform = new MovingPlatform("row_" + _rowCount, {x:_xPos , y:_yPos, width:_rowWidth - _gapWidth, height: _rowHeight, startX:_xPos, endX: _xPos, startY: _yPos, endY:_endY, speed: 8, waitForPassenger:false});
+				_movingPlatform = new MovingPlatform("row_" + _rowCount, {x:_xPos , y:_yPos, width:_rowWidth - _gapWidth, height: _rowHeight, startX:_xPos, endX: _xPos, startY: _yPos, endY:_endY, speed: 12, waitForPassenger:false});
 				add(_movingPlatform);
 				
 				_rowCount++
