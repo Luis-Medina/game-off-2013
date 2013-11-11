@@ -37,6 +37,11 @@ package com.constants
 		public static const TIME_LABEL_IMG:Texture = Texture.fromBitmap(new TIME_LABEL);
 		public static const TIME_LABEL_TEXTURE:Texture = Texture.fromTexture(TIME_LABEL_IMG);
 		
+		[Embed(source="../assets/textures/label_left.png", mimeType="image/png")]
+		public static const LEFT_LABEL:Class;
+		public static const LEFT_LABEL_IMG:Texture = Texture.fromBitmap(new LEFT_LABEL);
+		public static const LEFT_LABEL_TEXTURE:Texture = Texture.fromTexture(LEFT_LABEL_IMG);
+		
 		[Embed(source="../assets/textures/button_exit.png", mimeType="image/png")]
 		public static const BUTTON_EXIT:Class;
 		public static const BUTTON_EXIT_IMG:Texture = Texture.fromBitmap(new BUTTON_EXIT);
