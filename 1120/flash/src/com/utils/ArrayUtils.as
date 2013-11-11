@@ -1,5 +1,7 @@
 package com.utils
 {
+	/** MATH && ARRAY UTILS **/
+	
 	public class ArrayUtils
 	{
 		public static function getRandomElementOf(array:Array):*
@@ -27,6 +29,15 @@ package com.utils
 			}
 			
 			return arr;
+		}
+		
+		public static function trim(theNumber:Number, decPlaces:Number) : Number {
+			if (decPlaces >= 0) {
+				var temp:Number = Math.pow(10, decPlaces);
+				return Math.round(theNumber * temp) / temp;
+			}
+			
+			return theNumber;
 		}
 	}
 }
