@@ -52,6 +52,7 @@ package com.states
 		
 		private var _countDown:Countdown;
 		private var _cash:PettyCash;
+		private var _remaining:PettyCash;
 		private var _unstablePlatform:CitrusGroup;
 		private var _spareChangeGroup:CitrusGroup;
 		private var _allXPos:Array = [];
@@ -60,6 +61,7 @@ package com.states
 		private var _allRowYPos:Array = [];
 		
 		private var currentCoinCount:Number = 0;
+		private var currentRemainingCount:Number = 0;
 		private var possibleCoinValues:Array = [0.01, 0.05, 0.11, 0.17, 0.23, 0.35];
 		private var coinSizes:Array = [11, 15, 23, 37, 45, 57];
 		private var currCoinNames:Array = [];
@@ -141,6 +143,12 @@ package com.states
 			
 			_cash = new PettyCash();
 			addChild(_cash);
+			
+			_remaining = new PettyCash();
+			_remaining.numLabelX = 500;
+			_remaining.numDisplayX = 570;
+			_remaining.numLabelTexture = Texture.fromBitmap(new Textures.LEFT_LABEL);
+			addChild(_remaining);
 			
 			prophetCoordinates.x = 900;
 			prophetCoordinates.y = 140;
@@ -282,6 +290,10 @@ package com.states
 
 		public function updateUnstablePlatform(Event:ElevenTwentyEvent):void
 		{
+			currentCoinCount -= currentRemainingCount;
+			currentCoinCount = Math.max(0, ArrayUtils.trim(currentCoinCount, 2));
+			_cash.updateDisplay(currentCoinCount);
+			
 			var _allActiveCoins:Vector.<CitrusObject> = getObjectsByType(Coin);
 			var _coin:Coin;
 			for (var x:int = 0; x < _allActiveCoins.length; x++)
@@ -326,21 +338,33 @@ package com.states
 			var numCoins:int = Math.floor(ArrayUtils.randomRange(1, 5));
 			var coin:Coin;
 			var idx:int;
+			var _coinIdx:int;
 			var coinSize:Number;
+			var coinValue:Number;
 			var xPos:Number;
 			var yPos:Number;
 			currCoinNames = [];
+			currCoinValues = [];
 			for (var i:int = 0; i < numCoins; i++)
 			{
 				idx = Math.floor(ArrayUtils.randomRange(5, _allRowXPos.length - 10));
-				coinSize = ArrayUtils.getRandomElementOf(coinSizes);
+				_coinIdx = Math.floor(ArrayUtils.randomRange(0, possibleCoinValues.length - 1));
+				coinValue = possibleCoinValues[_coinIdx];
+				coinSize = coinSizes[_coinIdx];
 				xPos = _allRowXPos[idx];
 				yPos = _allRowYPos[idx] - (6 +  coinSize/2);
 				coin = new Coin("coin_" + i, {x:xPos, y:yPos, width:coinSize, height:coinSize, collectorClass:Hero});
 				coin.onBeginContact.add(handleCoinTouch);
 				currCoinNames.push(coin.name);
+				currCoinValues.push(coinValue);
 				add(coin);
 			}
+			
+			// UPDATE
+			currentRemainingCount = ArrayUtils.sumArray(currCoinValues);
+			currentRemainingCount = Math.max(0, ArrayUtils.trim(currentRemainingCount, 2));
+			_remaining.updateDisplay(currentRemainingCount)
+			
 			return currCoins;
 		}
 		
@@ -369,6 +393,11 @@ package com.states
 			currentCoinCount += num;
 			currentCoinCount = Math.max(0, ArrayUtils.trim(currentCoinCount, 2));
 			_cash.updateDisplay(currentCoinCount);
+			
+			// remaining
+			currentRemainingCount -= num;
+			currentRemainingCount = Math.max(0, ArrayUtils.trim(currentRemainingCount, 2));
+			_remaining.updateDisplay(currentRemainingCount);
 		}
 		
 		public function handleUI(e:TouchEvent):void
