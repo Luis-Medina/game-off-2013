@@ -42,7 +42,7 @@ package com.components
 			addChild(_numLabel);
 		}
 		
-		private function updateDisplay(money:Number):void
+		public function updateDisplay(money:Number):void
 		{
 			var currentCash:String = "$" + money;
 			_numDisplay.text = currentCash;

@@ -57,8 +57,9 @@ package com.states
 		private var _allRowXPos:Array = [];
 		private var _allRowYPos:Array = [];
 		
+		private var currentCoinCount:Number = 0;
 		private var possibleCoinValues:Array = [0.5, 0.11, 0.20, 0.37, 0.45, 0.89];
-		private var coinSizes:Array = [5, 11, 20, 37, 45, 60];
+		private var coinSizes:Array = [11, 15, 23, 37, 45, 57];
 		private var currCoinNames:Array = [];
 		private var currCoinValues:Array = [];
 		
@@ -332,6 +333,19 @@ package com.states
 			var _particleSprite:CitrusSprite = new CitrusSprite("spared_some_change", {view: _spareSomeChangeDawg, parallaxX:1.7, parallaxY:1.7});
 			moveEmitter(_particleSprite, _coin.x, _coin.y);
 			add(_particleSprite);
+			
+			var num:Number = 0;
+			for (var i:int = 0; i < coinSizes.length; i++)
+			{
+				if (_coin.width == coinSizes[i]){
+					num = possibleCoinValues[i];
+					break;
+				}
+			}
+			
+			currentCoinCount += num;
+			trace(currentCoinCount);
+			_cash.updateDisplay(currentCoinCount)
 		}
 		
 		public function handleUI(e:TouchEvent):void
