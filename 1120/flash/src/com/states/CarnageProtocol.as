@@ -90,9 +90,8 @@ package com.states
 			// physics.visible = true;
 			// physics.gravity = new Vec2(0, 620);
 			add(physics);
-			
-			var _bgSrc:Texture = Textures.BG_TEXTURE;
-			_bg = new CitrusSprite("bg", {view:_bgSrc});
+
+			_bg = new CitrusSprite("bg", {view: Textures.BG_TEXTURE});
 			add(_bg);
 			
 			/** PARTICLES **/
