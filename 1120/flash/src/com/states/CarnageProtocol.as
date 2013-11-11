@@ -72,6 +72,8 @@ package com.states
 		private var prophetParticlesSprite:CitrusSprite;
 		private var prophetCoordinates:Point = new Point(0,0);
 		
+		private var greenStatus:CitrusSprite;
+		
 		public function CarnageProtocol() {
 			
 			trace("CARNAGE PROTOCOL")
@@ -85,7 +87,7 @@ package com.states
 			
 			/** PHYSICS **/
 			physics = new Nape("physics");
-			physics.visible = true;
+			// physics.visible = true;
 			// physics.gravity = new Vec2(0, 620);
 			add(physics);
 			
@@ -94,14 +96,14 @@ package com.states
 			add(_bg);
 			
 			/** PARTICLES **/
-			var _atmoPsConfig:XML = XML(new Textures.ATMOSPHERE_CONFIG());
-			var _atmoPsTexture:Texture = Textures.PARTICLE_TEXTURE_TEXTURE;
-			_atmoParticles = new PDParticleSystem(_atmoPsConfig, _atmoPsTexture);
-			_atmoParticles.start();
+			// var _atmoPsConfig:XML = XML(new Textures.ATMOSPHERE_CONFIG());
+			// var _atmoPsTexture:Texture = Textures.PARTICLE_TEXTURE_TEXTURE;
+			// _atmoParticles = new PDParticleSystem(_atmoPsConfig, _atmoPsTexture);
+			// _atmoParticles.start();
 			
-			var psv:CitrusSprite = new CitrusSprite("atmosphere", {view: _atmoParticles, parallaxX:1.7, parallaxY:1.7});
-			moveEmitter(psv, stage.stageWidth >> 1, stage.stageHeight >> 1);
-			add(psv);
+			// var psv:CitrusSprite = new CitrusSprite("atmosphere", {view: _atmoParticles, parallaxX:1.7, parallaxY:1.7});
+			// moveEmitter(psv, stage.stageWidth >> 1, stage.stageHeight >> 1);
+			// add(psv);
 			
 			/** PROTAGONIST **/
 			hero = new Hero("hero", {x: 15, y: stage.height - 16, width:20, height:20});
@@ -122,8 +124,8 @@ package com.states
 			add(_floor);
 				
 			/** UI **/
-			_restartButton = GameButton.imageButton(Textures.BUTTON_RESTART_TEXTURE, Game.RESTART, 46, 46, 845, 15); 
-			_splashButton = GameButton.imageButton(Textures.BUTTON_EXIT_TEXTURE, Game.SPLASH, 46, 46, 900, 15); 
+			_restartButton = GameButton.imageButton(Textures.BUTTON_RESTART_TEXTURE, Game.RESTART, 46, 46, 840, 10); 
+			_splashButton = GameButton.imageButton(Textures.BUTTON_EXIT_TEXTURE, Game.SPLASH, 46, 46, 900, 10); 
 			_restartButton.addEventListener(TouchEvent.TOUCH, handleUI);
 			_splashButton.addEventListener(TouchEvent.TOUCH, handleUI);
 			addChild(_restartButton);
@@ -149,6 +151,9 @@ package com.states
 			_remaining.numDisplayX = 570;
 			_remaining.numLabelTexture = Texture.fromBitmap(new Textures.LEFT_LABEL);
 			addChild(_remaining);
+			
+			greenStatus = new CitrusSprite("status_icon", {view: Textures.STATUS_NEUTRAL_TEXTURE, x: 10, y: 5});
+			add(greenStatus);
 			
 			prophetCoordinates.x = 900;
 			prophetCoordinates.y = 140;
@@ -426,7 +431,7 @@ package com.states
 			this.removeEventListener(TouchEvent.TOUCH, handleUI);
 			this.removeEventListener(ElevenTwentyEvent.ELEVEN, updateUnstablePlatform);
 			
-			_atmoParticles.stop();
+			// _atmoParticles.stop();
 
 			_splashButton.removeEventListener(TouchEvent.TOUCH, handleUI);
 			_splashButton.dispose();
