@@ -20,6 +20,16 @@ package com.components
 		private var _numDisplay:TextField;
 		private var _numLabel:Image;
 		
+		public var startValue:String = '$0.00';
+		public var numDisplayX:Number = 280;
+		public var numDisplayY:Number = 12;
+		public var numDisplayWidth:Number = 100;
+		public var numDisplayHeight:Number = 40;
+		
+		public var numLabelTexture:Texture = Texture.fromBitmap(new Textures.CHANGE_LABEL);
+		public var numLabelX:Number = 185;
+		public var numLabelY:Number = 12;
+		
 		public function PettyCash()
 		{
 			super();
@@ -30,16 +40,15 @@ package com.components
 		{
 			this.removeEventListener(Event.ADDED_TO_STAGE, onAddedToStage);
 			
-			_numDisplay = new TextField(100, 40, '$0.00', "ProtestPaintBB", 38, Colors.WHITE, false);
-			_numDisplay.x = 280;
-			_numDisplay.y = 12;
+			_numDisplay = new TextField(numDisplayWidth, numDisplayHeight, startValue, "ProtestPaintBB", 38, Colors.WHITE, false);
+			_numDisplay.x = numDisplayX;
+			_numDisplay.y = numDisplayY;
 			addChild(_numDisplay);
 			
-			// TODO: not like this:
-			_numLabel = new Image(Texture.fromBitmap(new Textures.CHANGE_LABEL));
+			_numLabel = new Image(numLabelTexture);
 			
-			_numLabel.x = 185;
-			_numLabel.y = 12;
+			_numLabel.x = numLabelX;
+			_numLabel.y = numLabelY;
 			addChild(_numLabel);
 		}
 		
