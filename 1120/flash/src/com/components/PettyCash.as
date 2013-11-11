@@ -54,7 +54,7 @@ package com.components
 		
 		public function updateDisplay(money:Number):void
 		{
-			var currentCash:String = "$" + money;
+			var currentCash:String = "$" + ((money == 0) ? "0.00" : money);
 			_numDisplay.text = currentCash;
 		}
 		
