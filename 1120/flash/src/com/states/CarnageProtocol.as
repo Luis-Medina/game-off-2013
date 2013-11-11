@@ -77,7 +77,7 @@ package com.states
 			/** PHYSICS **/
 			physics = new Nape("physics");
 			physics.visible = true;
-			physics.gravity = new Vec2(0, 620);
+			// physics.gravity = new Vec2(0, 620);
 			add(physics);
 			
 			var _bgSrc:Texture = Textures.BG_TEXTURE;
@@ -96,8 +96,8 @@ package com.states
 			
 			/** PROTAGONIST **/
 			hero = new Hero("hero", {x: 15, y: stage.height - 16, width:20, height:20});
-			hero.acceleration = 2.1;
-			hero.jumpAcceleration = 4;
+			// hero.acceleration = 2.1;
+			// hero.jumpAcceleration = 4;
 			add(hero);
 			
 			/** WALLS **/
