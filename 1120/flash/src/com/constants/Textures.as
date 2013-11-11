@@ -4,6 +4,7 @@ package com.constants
 	
 	import starling.display.Image;
 	import starling.textures.Texture;
+	import starling.textures.TextureAtlas;
 
 	public class Textures
 	{
@@ -52,6 +53,26 @@ package com.constants
 		public static const BUTTON_RESTART_IMG:Texture = Texture.fromBitmap(new BUTTON_RESTART);
 		public static const BUTTON_RESTART_TEXTURE:Texture = Texture.fromTexture(BUTTON_RESTART_IMG);
 		
+		[Embed(source="../assets/textures/status_neutral.png", mimeType="image/png")]
+		public static const STATUS_NEUTRAL:Class;
+		public static const STATUS_NEUTRAL_IMG:Texture = Texture.fromBitmap(new STATUS_NEUTRAL);
+		public static const STATUS_NEUTRAL_TEXTURE:Texture = Texture.fromTexture(STATUS_NEUTRAL_IMG);
+		
+		[Embed(source="../assets/textures/status_happy.png", mimeType="image/png")]
+		public static const STATUS_HAPPY:Class;
+		public static const STATUS_HAPPY_IMG:Texture = Texture.fromBitmap(new STATUS_HAPPY);
+		public static const STATUS_HAPPY_TEXTURE:Texture = Texture.fromTexture(STATUS_HAPPY_IMG);
+		
+		[Embed(source="../assets/textures/status_angry.png", mimeType="image/png")]
+		public static const STATUS_ANGRY:Class;
+		public static const STATUS_ANGRY_IMG:Texture = Texture.fromBitmap(new STATUS_ANGRY);
+		public static const STATUS_ANGRY_TEXTURE:Texture = Texture.fromTexture(STATUS_ANGRY_IMG);
+		
+		[Embed(source="../assets/textures/status_embarrassed.png", mimeType="image/png")]
+		public static const STATUS_EMBARRASSED:Class;
+		public static const STATUS_EMBARRASSED_IMG:Texture = Texture.fromBitmap(new STATUS_EMBARRASSED);
+		public static const STATUS_EMBARRASSED_TEXTURE:Texture = Texture.fromTexture(STATUS_EMBARRASSED_IMG);
+		
 		[Embed(source="../assets/particles/texture.png")]
 		public static const PARTICLE_TEXTURE:Class;
 		public static const PARTICLE_TEXTURE_IMG:Texture = Texture.fromBitmap(new PARTICLE_TEXTURE);
@@ -62,6 +83,19 @@ package com.constants
 		public static const MONEY_TEXTURE_IMG:Texture = Texture.fromBitmap(new MONEY_TEXTURE);
 		public static const MONEY_TEXTURE_TEXTURE:Texture = Texture.fromTexture(MONEY_TEXTURE_IMG);
 		
+		/*
+		[Embed(source="../assets/textures/status_sprites.png")]
+		public static const STATUS_ICON:Class;
+		public static const STATUS_ICON_TEXTURE_IMG:Texture = Texture.fromBitmap(new STATUS_ICON);
+		public static const STATUS_ICON_TEXTURE:Texture = Texture.fromTexture(STATUS_ICON_TEXTURE_IMG);
+		
+		[Embed(source="../assets/textures/status_sprites.xml", mimeType="text/xml")]
+		public static const STATUS_ICON_CONFIG:Class;
+		public static const STATUS_ICON_XML:XML = XML(new STATUS_ICON_CONFIG());
+		*/
+		
+		/** PARTICLE CONFIGS **/
+		
 		[Embed(source="../assets/particles/Atmosphere.pex", mimeType="application/octet-stream")]
 		public static const ATMOSPHERE_CONFIG:Class;
 		
@@ -70,6 +104,16 @@ package com.constants
 		
 		[Embed(source="../assets/particles/SpareSomeChange.pex", mimeType="application/octet-stream")]
 		public static const SPARE_SOME_CHANGE_CONFIG:Class;
+		
+		/*
+		public static const STATUS_ICON_TEXTURE_ATLAS:TextureAtlas = new TextureAtlas (STATUS_ICON_TEXTURE, STATUS_ICON_XML);
+		
+		public static function getTexture(name:String, _textureAtlas:TextureAtlas):Texture { 
+			return STATUS_ICON_TEXTURE_ATLAS.getTexture(name);  
+		}
+		*/
+		
+		
 		
 	}
 }
