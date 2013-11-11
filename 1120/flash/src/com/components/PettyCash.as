@@ -4,6 +4,7 @@ package com.components
 	import com.constants.Game;
 	import com.constants.Textures;
 	import com.events.ElevenTwentyEvent;
+	import com.utils.ArrayUtils;
 	
 	import flash.events.TimerEvent;
 	import flash.utils.Timer;
@@ -44,7 +45,7 @@ package com.components
 		
 		public function updateDisplay(money:Number):void
 		{
-			var currentCash:String = "$" + money;
+			var currentCash:String = "$" + ArrayUtils.trim(money, 2);
 			_numDisplay.text = currentCash;
 		}
 		
