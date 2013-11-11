@@ -45,7 +45,7 @@ package com.components
 		
 		public function updateDisplay(money:Number):void
 		{
-			var currentCash:String = "$" + ArrayUtils.trim(money, 2);
+			var currentCash:String = "$" + money;
 			_numDisplay.text = currentCash;
 		}
 		
