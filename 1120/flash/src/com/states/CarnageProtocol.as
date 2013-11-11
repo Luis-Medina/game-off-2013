@@ -367,7 +367,7 @@ package com.states
 			}
 			
 			currentCoinCount += num;
-			currentCoinCount = ArrayUtils.trim(currentCoinCount, 2);
+			currentCoinCount = Math.max(0, ArrayUtils.trim(currentCoinCount, 2));
 			_cash.updateDisplay(currentCoinCount);
 		}
 		
