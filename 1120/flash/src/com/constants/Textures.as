@@ -99,7 +99,7 @@ package com.constants
 		public static const PROPHET:Class;
 		public static const PROPHET_TEXTURE_IMG:Texture = Texture.fromBitmap(new PROPHET);
 		public static const PROPHET_TEXTURE:Texture = Texture.fromTexture(PROPHET_TEXTURE_IMG);
-		public static const PROPHET_TEXTURE_ATLAS:TextureAtlas = new TextureAtlas (PROPHET_TEXTURE_IMG, PROPHET_XML);
+		public static const PROPHET_TEXTURE_ATLAS:TextureAtlas = new TextureAtlas (PROPHET_TEXTURE, PROPHET_XML);
 		
 		/** PARTICLE CONFIGS **/
 		
