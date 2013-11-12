@@ -39,14 +39,14 @@ package com.components
 			
 			_timerDisplay = new TextField(80, 40, '', "ProtestPaintBB", 38, Colors.WHITE, false);
 			_timerDisplay.x = 445;
-			_timerDisplay.y = 12;
+			_timerDisplay.y = 15;
 			addChild(_timerDisplay);
 			
 			// TODO: not like this:
 			_timerLabel = new Image(Texture.fromBitmap(new Textures.TIME_LABEL));
 			
 			_timerLabel.x = 380;
-			_timerLabel.y = 12;
+			_timerLabel.y = 15;
 			addChild(_timerLabel);
 			
 			initTimer();
