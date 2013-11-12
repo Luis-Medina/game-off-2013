@@ -22,13 +22,13 @@ package com.components
 		
 		public var startValue:String = '$0.00';
 		public var numDisplayX:Number = 280;
-		public var numDisplayY:Number = 12;
+		public var numDisplayY:Number = 15;
 		public var numDisplayWidth:Number = 100;
 		public var numDisplayHeight:Number = 40;
 		
 		public var numLabelTexture:Texture = Texture.fromBitmap(new Textures.CHANGE_LABEL);
 		public var numLabelX:Number = 185;
-		public var numLabelY:Number = 12;
+		public var numLabelY:Number = 15;
 		
 		public function PettyCash()
 		{
