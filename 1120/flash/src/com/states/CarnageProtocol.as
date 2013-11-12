@@ -61,6 +61,7 @@ package com.states
 		private var _allRowXPos:Array = [];
 		private var _allRowYPos:Array = [];
 		
+		public static const THREE_NINETY:Number = 3.90;
 		private var currentCoinCount:Number = 0;
 		private var currentRemainingCount:Number = 0;
 		private var possibleCoinValues:Array = [0.01, 0.05, 0.11, 0.17, 0.23, 0.35];
@@ -76,6 +77,8 @@ package com.states
 		private var greenStatus:CitrusSprite;
 		private var green:CitrusSprite;
 		
+		private var _prophetGroup:CitrusGroup;
+		private var isProphetAdded:Boolean = false;
 		private var prophet:Sensor;
 		private var _prophetIdle:Array = Textures.getTextureProperties("prophet_idle", Textures.PROPHET_TEXTURE_ATLAS);
 		private var _prophetAttack:Array = Textures.getTextureProperties("prophet_attack", Textures.PROPHET_TEXTURE_ATLAS);
@@ -135,8 +138,8 @@ package com.states
 			addEntity(_unstablePlatform);
 			
 			_spareChangeGroup = new CitrusGroup("visible_coins");
-			addEntity(_spareChangeGroup)
-			
+			addEntity(_spareChangeGroup);
+						
 			_countDown = new Countdown();
 			addChild(_countDown);
 			
@@ -166,22 +169,32 @@ package com.states
 			hero.maxVelocity = 120; // default is 240
 			hero.jumpHeight = 290; // default is 330
 			add(hero);
-			
-			prophet = new Sensor("prophet", {view: _prophetIdle[0], width: _prophetIdle[1], height: _prophetIdle[2], x: prophetCoordinates.x, y: prophetCoordinates.y});
-			add(prophet);
+
 		}
 		
 		override public function update(timeDelta:Number):void
-		{		
-			if (currentCoinCount >= 3.90){	
+		{
+			if (currentCoinCount >= THREE_NINETY){	
 				moveEmitter(prophetParticlesSprite, prophetCoordinates.x, prophetCoordinates.y);
 				greenStatus.view = Textures.STATUS_HAPPY_TEXTURE;
-				prophetParticles.start();
-				prophet.view = _prophetAttack[0];
-			} else if (currentCoinCount < 3.90) {
-				prophetParticles.stop();
+				
+				if(isProphetAdded)
+				{
+					prophet.onBeginContact.add(handleProphetTouch);
+					prophetParticles.start();
+					prophet.view = _prophetAttack[0];
+				}
+				
+			} else if (currentCoinCount < THREE_NINETY) {
+				
 				greenStatus.view = Textures.STATUS_NEUTRAL_TEXTURE;
-				prophet.view = _prophetIdle[0];
+				
+				if (isProphetAdded)
+				{
+					prophetParticles.stop();
+					prophet.view = _prophetIdle[0];
+				}
+				
 			}
 			
 			super.update(timeDelta);
@@ -301,7 +314,6 @@ package com.states
 				
 				_rowCount++
 			}
-			
 			return _platformGroup;
 		}
 
@@ -382,6 +394,15 @@ package com.states
 			currentRemainingCount = Math.max(0, ArrayUtils.trim(currentRemainingCount, 2));
 			_remaining.updateDisplay(currentRemainingCount)
 			
+			// putting this here for now.
+			if(!isProphetAdded)
+			{
+				prophet = new Sensor("prophet", {view: _prophetIdle[0], width: _prophetIdle[1], height: _prophetIdle[2], x: prophetCoordinates.x, y: prophetCoordinates.y});
+				prophet.onBeginContact.add(handleProphetTouch);
+				add(prophet);
+				isProphetAdded = true;
+			} 
+			
 			return currCoins;
 		}
 		
@@ -415,6 +436,18 @@ package com.states
 			currentRemainingCount -= num;
 			currentRemainingCount = Math.max(0, ArrayUtils.trim(currentRemainingCount, 2));
 			_remaining.updateDisplay(currentRemainingCount);
+		}
+
+		private function handleProphetTouch(interactionCallback:InteractionCallback):void
+		{
+			var _prophet:Sensor = NapeUtils.CollisionGetObjectByType(Sensor, interactionCallback) as Sensor;
+			if (NapeUtils.CollisionGetOther(_prophet, interactionCallback) is Hero)
+			{
+				if (currentCoinCount < THREE_NINETY)
+					trace("YOU ARE NOT WORTHY")
+				else
+					trace("COME TO ME CHILD, FOR THIS IS THE PROPHECY")
+			}
 		}
 		
 		public function handleUI(e:TouchEvent):void
