@@ -73,6 +73,13 @@ package com.constants
 		public static const STATUS_EMBARRASSED_IMG:Texture = Texture.fromBitmap(new STATUS_EMBARRASSED);
 		public static const STATUS_EMBARRASSED_TEXTURE:Texture = Texture.fromTexture(STATUS_EMBARRASSED_IMG);
 		
+		/*
+		[Embed(source="../assets/textures/green.png", mimeType="image/png")]
+		public static const GREEN:Class;
+		public static const GREEN_IMG:Texture = Texture.fromBitmap(new GREEN);
+		public static const GREEN_TEXTURE:Texture = Texture.fromTexture(GREEN_IMG);
+		*/
+		
 		[Embed(source="../assets/particles/texture.png")]
 		public static const PARTICLE_TEXTURE:Class;
 		public static const PARTICLE_TEXTURE_IMG:Texture = Texture.fromBitmap(new PARTICLE_TEXTURE);
@@ -83,16 +90,16 @@ package com.constants
 		public static const MONEY_TEXTURE_IMG:Texture = Texture.fromBitmap(new MONEY_TEXTURE);
 		public static const MONEY_TEXTURE_TEXTURE:Texture = Texture.fromTexture(MONEY_TEXTURE_IMG);
 		
-		/*
-		[Embed(source="../assets/textures/status_sprites.png")]
-		public static const STATUS_ICON:Class;
-		public static const STATUS_ICON_TEXTURE_IMG:Texture = Texture.fromBitmap(new STATUS_ICON);
-		public static const STATUS_ICON_TEXTURE:Texture = Texture.fromTexture(STATUS_ICON_TEXTURE_IMG);
+		/** SPRITES **/
+		[Embed(source="../assets/textures/prophet_sprite.xml", mimeType="application/octet-stream")]
+		public static const PROPHET_CONFIG:Class;
+		public static const PROPHET_XML:XML = new XML(new PROPHET_CONFIG());
 		
-		[Embed(source="../assets/textures/status_sprites.xml", mimeType="text/xml")]
-		public static const STATUS_ICON_CONFIG:Class;
-		public static const STATUS_ICON_XML:XML = XML(new STATUS_ICON_CONFIG());
-		*/
+		[Embed(source="../assets/textures/prophet_sprite.png")]
+		public static const PROPHET:Class;
+		public static const PROPHET_TEXTURE_IMG:Texture = Texture.fromBitmap(new PROPHET);
+		public static const PROPHET_TEXTURE:Texture = Texture.fromTexture(PROPHET_TEXTURE_IMG);
+		public static const PROPHET_TEXTURE_ATLAS:TextureAtlas = new TextureAtlas (PROPHET_TEXTURE_IMG, PROPHET_XML);
 		
 		/** PARTICLE CONFIGS **/
 		
@@ -104,14 +111,21 @@ package com.constants
 		
 		[Embed(source="../assets/particles/SpareSomeChange.pex", mimeType="application/octet-stream")]
 		public static const SPARE_SOME_CHANGE_CONFIG:Class;
+
+		/** FUNCTIONS **/
 		
-		/*
-		public static const STATUS_ICON_TEXTURE_ATLAS:TextureAtlas = new TextureAtlas (STATUS_ICON_TEXTURE, STATUS_ICON_XML);
-		
-		public static function getTexture(name:String, _textureAtlas:TextureAtlas):Texture { 
-			return STATUS_ICON_TEXTURE_ATLAS.getTexture(name);  
+		public static function getTextureProperties(name:String, _textureAtlas:TextureAtlas):Array {
+			var properties:Array = [];
+			var texture:Texture = _textureAtlas.getTexture(name);
+			var width:Number = texture.width;
+			var height:Number = texture.height;
+			properties = [texture, width, height];
+			return properties;  
 		}
-		*/
+		
+		public static function getTexture(name:String, _textureAtlas:TextureAtlas):Texture {
+			return _textureAtlas.getTexture(name);
+		}
 		
 		
 		
