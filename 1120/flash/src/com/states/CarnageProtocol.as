@@ -11,6 +11,7 @@ package com.states
 	import citrus.objects.platformer.nape.Hero;
 	import citrus.objects.platformer.nape.MovingPlatform;
 	import citrus.objects.platformer.nape.Platform;
+	import citrus.objects.platformer.nape.Sensor;
 	import citrus.physics.nape.Nape;
 	import citrus.physics.nape.NapeUtils;
 	
@@ -73,6 +74,11 @@ package com.states
 		private var prophetCoordinates:Point = new Point(0,0);
 		
 		private var greenStatus:CitrusSprite;
+		private var green:CitrusSprite;
+		
+		private var prophet:Sensor;
+		private var _prophetIdle:Array = Textures.getTextureProperties("prophet_idle", Textures.PROPHET_TEXTURE_ATLAS);
+		private var _prophetAttack:Array = Textures.getTextureProperties("prophet_attack", Textures.PROPHET_TEXTURE_ATLAS);
 		
 		public function CarnageProtocol() {
 			
@@ -87,7 +93,7 @@ package com.states
 			
 			/** PHYSICS **/
 			physics = new Nape("physics");
-			// physics.visible = true;
+			physics.visible = true;
 			// physics.gravity = new Vec2(0, 620);
 			add(physics);
 
@@ -103,15 +109,7 @@ package com.states
 			// var psv:CitrusSprite = new CitrusSprite("atmosphere", {view: _atmoParticles, parallaxX:1.7, parallaxY:1.7});
 			// moveEmitter(psv, stage.stageWidth >> 1, stage.stageHeight >> 1);
 			// add(psv);
-			
-			/** PROTAGONIST **/
-			hero = new Hero("hero", {x: 15, y: stage.height - 16, width:20, height:20});
-			hero.acceleration = 10; // default is 30
-			hero.jumpAcceleration = 7; // default is 9
-			hero.maxVelocity = 120; // default is 240
-			hero.jumpHeight = 280; // default is 330
-			add(hero);
-			
+						
 			/** WALLS **/
 			add(new Platform("bottom", {x: stage.stageWidth / 2, y: stage.stageHeight, width: stage.stageWidth, height: 20}));
 			add(new Platform("roof", {x:stage.stageWidth / 2, y:-6, width:stage.stageWidth, height: 10}));
@@ -151,24 +149,39 @@ package com.states
 			_remaining.numLabelTexture = Texture.fromBitmap(new Textures.LEFT_LABEL);
 			addChild(_remaining);
 			
-			greenStatus = new CitrusSprite("status_icon", {view: Textures.STATUS_NEUTRAL_TEXTURE, x: 10, y: 5});
+			greenStatus = new CitrusSprite("status_icon", {view: Textures.STATUS_NEUTRAL_TEXTURE, x: 20, y: 15});
 			add(greenStatus);
 			
 			prophetCoordinates.x = 900;
-			prophetCoordinates.y = 140;
+			prophetCoordinates.y = 158;
 			
 			prophetParticlesSprite = new CitrusSprite("prophet_arrival", {view: prophetParticles, parallaxX:1.7, parallaxY:1.7});
 			moveEmitter(prophetParticlesSprite, prophetCoordinates.x, prophetCoordinates.y);
 			add(prophetParticlesSprite);
+			
+			/** PROTAGONIST **/
+			hero = new Hero("hero", {x: 0, y: stage.height - 16, width: 33, height: 53});
+			hero.acceleration = 10; // default is 30
+			hero.jumpAcceleration = 7; // default is 9
+			hero.maxVelocity = 120; // default is 240
+			hero.jumpHeight = 290; // default is 330
+			add(hero);
+			
+			prophet = new Sensor("prophet", {view: _prophetIdle[0], width: _prophetIdle[1], height: _prophetIdle[2], x: prophetCoordinates.x, y: prophetCoordinates.y});
+			add(prophet);
 		}
 		
 		override public function update(timeDelta:Number):void
 		{		
 			if (currentCoinCount >= 3.90){	
 				moveEmitter(prophetParticlesSprite, prophetCoordinates.x, prophetCoordinates.y);
+				greenStatus.view = Textures.STATUS_HAPPY_TEXTURE;
 				prophetParticles.start();
+				prophet.view = _prophetAttack[0];
 			} else if (currentCoinCount < 3.90) {
 				prophetParticles.stop();
+				greenStatus.view = Textures.STATUS_NEUTRAL_TEXTURE;
+				prophet.view = _prophetIdle[0];
 			}
 			
 			super.update(timeDelta);
