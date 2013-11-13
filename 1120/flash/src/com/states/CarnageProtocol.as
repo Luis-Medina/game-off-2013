@@ -80,11 +80,10 @@ package com.states
 		
 		private var _prophetGroup:CitrusGroup;
 		private var isProphetAdded:Boolean = false;
-		private var prophet:Sensor;
+		private var prophetSensor:Sensor;
 		private var _prophetIdle:Array = Textures.getTextureProperties("prophet_idle", Textures.PROPHET_TEXTURE_ATLAS);
 		private var _prophetAttack:Array = Textures.getTextureProperties("prophet_attack", Textures.PROPHET_TEXTURE_ATLAS);
-		private var _pIdle:Image = new Image(_prophetIdle[0]);
-		
+		private var _pSprite:CitrusSprite = new CitrusSprite("p_idle", {view: _prophetIdle[0]})
 		
 		public function CarnageProtocol() {
 			
@@ -166,7 +165,7 @@ package com.states
 			add(prophetParticlesSprite);
 			
 			/** PROTAGONIST **/
-			hero = new Hero("hero", {x: 0, y: stage.height - 16, width: 33, height: 53, view:_pIdle});
+			hero = new Hero("hero", {x: 0, y: stage.height - 16, width: 33, height: 53});
 			hero.acceleration = 10; // default is 30
 			hero.jumpAcceleration = 7; // default is 9
 			hero.maxVelocity = 120; // default is 240
@@ -181,16 +180,15 @@ package com.states
 		
 		override public function update(timeDelta:Number):void
 		{
-			// trace(hero.y)
 			if (currentCoinCount >= THREE_NINETY){	
 				moveEmitter(prophetParticlesSprite, prophetCoordinates.x, prophetCoordinates.y);
 				greenStatus.view = Textures.STATUS_HAPPY_TEXTURE;
 				
 				if(isProphetAdded)
 				{
-					prophet.onBeginContact.add(handleProphetTouch);
+					prophetSensor.onBeginContact.add(handleProphetTouch);
 					prophetParticles.start();
-					prophet.view = _prophetAttack[0];
+					_pSprite.view = _prophetAttack[0];
 				}
 				
 			} else if (currentCoinCount < THREE_NINETY) {
@@ -200,7 +198,7 @@ package com.states
 				if (isProphetAdded)
 				{
 					prophetParticles.stop();
-					prophet.view = _prophetIdle[0];
+					_pSprite.view = _prophetIdle[0];
 				}
 				
 			}
@@ -301,8 +299,8 @@ package com.states
 				
 				if (!isNaN(_xPos))
 				{
-					_lastXPosArr.push(_xPos + _rowWidth);
-					_lastYPosArr.push(_yPos)
+					_lastXPosArr.push(Math.floor(_xPos) + _rowWidth);
+					_lastYPosArr.push(Math.floor(_yPos))
 				}
 			}
 			var _endY:Number;
@@ -317,11 +315,13 @@ package com.states
 				else
 					_endY = _yPos;
 				
-				_movingPlatform = new MovingPlatform("row_" + _rowCount, {x:_xPos , y:_yPos, width:_rowWidth - _gapWidth, height: _rowHeight, startX:_xPos, endX: _xPos, startY: _yPos, endY:_endY, speed: 12, waitForPassenger:false});
+				_movingPlatform = new MovingPlatform("row_" + _rowCount, {x:_xPos , y:_yPos, width:_rowWidth - _gapWidth, height: _rowHeight, startX:_xPos, endX: _xPos, startY: _yPos, endY:_endY, speed: 12, waitForPassenger:false, touchable: false});
 				add(_movingPlatform);
 				
 				_rowCount++
 			}
+			
+			trace(_allYPos);
 			return _platformGroup;
 		}
 
@@ -405,10 +405,16 @@ package com.states
 			// putting this here for now.
 			if(!isProphetAdded)
 			{
-				prophet = new Sensor("prophet", {view: _prophetIdle[0], width: 33, height: 53, x: prophetCoordinates.x, y: prophetCoordinates.y});
-				prophet.touchable = false;
-				prophet.onBeginContact.add(handleProphetTouch);
-				add(prophet);
+				prophetSensor = new Sensor("prophet", {width: 33, height: 53, x: prophetCoordinates.x, y: prophetCoordinates.y});
+				prophetSensor.onBeginContact.add(handleProphetTouch);
+				add(prophetSensor);
+				
+				_pSprite.width = prophetSensor.width;
+				_pSprite.height = prophetSensor.height;
+				_pSprite.x = Math.floor(prophetSensor.x - _prophetIdle[1]/2);
+				_pSprite.y =  Math.floor(prophetSensor.y - _prophetIdle[2]/2);
+				
+				add(_pSprite);
 				isProphetAdded = true;
 			} 
 			
