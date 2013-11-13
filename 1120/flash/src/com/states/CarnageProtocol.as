@@ -39,6 +39,7 @@ package com.states
 	import starling.events.TouchPhase;
 	import starling.extensions.particles.PDParticleSystem;
 	import starling.textures.Texture;
+	import starling.textures.TextureSmoothing;
 	
 	public class CarnageProtocol extends StarlingState
 	{
@@ -82,6 +83,8 @@ package com.states
 		private var prophet:Sensor;
 		private var _prophetIdle:Array = Textures.getTextureProperties("prophet_idle", Textures.PROPHET_TEXTURE_ATLAS);
 		private var _prophetAttack:Array = Textures.getTextureProperties("prophet_attack", Textures.PROPHET_TEXTURE_ATLAS);
+		// private var _pIdle:Image = new Image(_prophetIdle[0]);
+		
 		
 		public function CarnageProtocol() {
 			
@@ -170,6 +173,8 @@ package com.states
 			hero.jumpHeight = 290; // default is 330
 			add(hero);
 
+			// _pIdle.blendMode = TextureSmoothing.NONE;
+			// _pIdle.smoothing = TextureSmoothing.NONE;
 		}
 		
 		override public function update(timeDelta:Number):void
