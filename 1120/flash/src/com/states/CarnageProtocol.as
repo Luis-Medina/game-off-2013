@@ -250,7 +250,7 @@ package com.states
 					_width = _colWidth;
 					
 					// COLUMNS
-					_platform = new DynamicPlatform(_name, {x:_xPos, y:_yPos-1, width:_width, height: _height + 10});
+					_platform = new DynamicPlatform(_name, {x:Math.floor(_xPos), y:Math.floor(_yPos-1), width:_width, height: _height + 10});
 					_rowXPosArr.push(_platform.x);
 					_rowYPosArr.push(_platform.y);
 					add(_platform);
