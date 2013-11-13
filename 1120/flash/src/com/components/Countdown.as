@@ -13,11 +13,12 @@ package com.components
 	import starling.events.Event;
 	import starling.text.TextField;
 	import starling.textures.Texture;
+	import starling.textures.TextureSmoothing;
 
 	public class Countdown extends Sprite
 	{
 		private var _timer:Timer;
-		private var _totalTime:Number = 10000;
+		private var _totalTime:Number = 2000; // 10000;
 		private var _rate:Number = 1000;
 		private var _numTimes:int = _totalTime/_rate + 1;
 		
