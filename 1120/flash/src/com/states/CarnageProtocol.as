@@ -83,7 +83,7 @@ package com.states
 		private var prophet:Sensor;
 		private var _prophetIdle:Array = Textures.getTextureProperties("prophet_idle", Textures.PROPHET_TEXTURE_ATLAS);
 		private var _prophetAttack:Array = Textures.getTextureProperties("prophet_attack", Textures.PROPHET_TEXTURE_ATLAS);
-		// private var _pIdle:Image = new Image(_prophetIdle[0]);
+		private var _pIdle:Image = new Image(_prophetIdle[0]);
 		
 		
 		public function CarnageProtocol() {
@@ -159,14 +159,14 @@ package com.states
 			add(greenStatus);
 			
 			prophetCoordinates.x = 900;
-			prophetCoordinates.y = 158;
+			prophetCoordinates.y = 160;
 			
 			prophetParticlesSprite = new CitrusSprite("prophet_arrival", {view: prophetParticles, parallaxX:1.7, parallaxY:1.7});
 			moveEmitter(prophetParticlesSprite, prophetCoordinates.x, prophetCoordinates.y);
 			add(prophetParticlesSprite);
 			
 			/** PROTAGONIST **/
-			hero = new Hero("hero", {x: 0, y: stage.height - 16, width: 33, height: 53});
+			hero = new Hero("hero", {x: 0, y: stage.height - 16, width: 33, height: 53, view:_pIdle});
 			hero.acceleration = 10; // default is 30
 			hero.jumpAcceleration = 7; // default is 9
 			hero.maxVelocity = 120; // default is 240
@@ -175,10 +175,13 @@ package com.states
 
 			// _pIdle.blendMode = TextureSmoothing.NONE;
 			// _pIdle.smoothing = TextureSmoothing.NONE;
+			//var test:CitrusSprite = new CitrusSprite("test", {view: _pIdle});
+			// add(test)
 		}
 		
 		override public function update(timeDelta:Number):void
 		{
+			// trace(hero.y)
 			if (currentCoinCount >= THREE_NINETY){	
 				moveEmitter(prophetParticlesSprite, prophetCoordinates.x, prophetCoordinates.y);
 				greenStatus.view = Textures.STATUS_HAPPY_TEXTURE;
@@ -277,7 +280,7 @@ package com.states
 					_yPos = _rowYPosArr[_rowCount] - _colHeight/2 - _rowHeight/2 - 1.5;
 					
 					// ROWS
-					_platform = new DynamicPlatform(_name, {x:_xPos, y:_yPos, width:_rowWidth - _colWidth - 0.5, height: _rowHeight});
+					_platform = new DynamicPlatform(_name, {x:Math.floor(_xPos), y:Math.floor(_yPos), width:_rowWidth - _colWidth - 0.5, height: _rowHeight});
 					add(_platform);
 					
 					_allXPos.push(_platform.x);
@@ -286,7 +289,7 @@ package com.states
 					_allRowYPos.push(_platform.y);
 					
 					// GAPS
-					_platform = new DynamicPlatform("gap_" + _gapCount, {x:_rowXPosArr[_rowCount] , y:_yPos, width:_colWidth, height: _rowHeight});
+					_platform = new DynamicPlatform("gap_" + _gapCount, {x:Math.floor(_rowXPosArr[_rowCount]) , y:Math.floor(_yPos), width:_colWidth, height: _rowHeight});
 					add(_platform);
 					
 					_allXPos.push(_platform.x);
@@ -402,7 +405,8 @@ package com.states
 			// putting this here for now.
 			if(!isProphetAdded)
 			{
-				prophet = new Sensor("prophet", {view: _prophetIdle[0], width: _prophetIdle[1], height: _prophetIdle[2], x: prophetCoordinates.x, y: prophetCoordinates.y});
+				prophet = new Sensor("prophet", {view: _prophetIdle[0], width: 33, height: 53, x: prophetCoordinates.x, y: prophetCoordinates.y});
+				prophet.touchable = false;
 				prophet.onBeginContact.add(handleProphetTouch);
 				add(prophet);
 				isProphetAdded = true;
