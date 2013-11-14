@@ -14,6 +14,7 @@ package com.states
 	import citrus.objects.platformer.nape.Sensor;
 	import citrus.physics.nape.Nape;
 	import citrus.physics.nape.NapeUtils;
+	import citrus.view.starlingview.AnimationSequence;
 	
 	import com.components.Countdown;
 	import com.components.DynamicPlatform;
@@ -164,8 +165,10 @@ package com.states
 			moveEmitter(prophetParticlesSprite, prophetCoordinates.x, prophetCoordinates.y);
 			add(prophetParticlesSprite);
 			
+			var anim:AnimationSequence = new AnimationSequence(Textures.GREEN_TEXTURE_ATLAS, ["walk", "jump", "idle"], "idle", 15, true);
+			
 			/** PROTAGONIST **/
-			hero = new Hero("hero", {x: 0, y: stage.height - 16, width: 33, height: 53});
+			hero = new Hero("hero", {x: 0, y: stage.height - 16, width: 30, height: 56, view: anim});
 			hero.acceleration = 10; // default is 30
 			hero.jumpAcceleration = 7; // default is 9
 			hero.maxVelocity = 120; // default is 240
@@ -321,7 +324,6 @@ package com.states
 				_rowCount++
 			}
 			
-			trace(_allYPos);
 			return _platformGroup;
 		}
 
