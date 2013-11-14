@@ -85,6 +85,8 @@ package com.states
 		private var _prophetIdle:Array = Textures.getTextureProperties("prophet_idle", Textures.PROPHET_TEXTURE_ATLAS);
 		private var _prophetAttack:Array = Textures.getTextureProperties("prophet_attack", Textures.PROPHET_TEXTURE_ATLAS);
 		private var _pSprite:CitrusSprite = new CitrusSprite("p_idle", {view: _prophetIdle[0]})
+			
+		private var _gSprite:CitrusSprite;
 		
 		public function CarnageProtocol() {
 			
@@ -165,10 +167,11 @@ package com.states
 			moveEmitter(prophetParticlesSprite, prophetCoordinates.x, prophetCoordinates.y);
 			add(prophetParticlesSprite);
 			
-			var anim:AnimationSequence = new AnimationSequence(Textures.GREEN_TEXTURE_ATLAS, ["walk", "jump", "idle"], "idle", 15, true);
+			// var anim:AnimationSequence = new AnimationSequence(Textures.GREEN_TEXTURE_ATLAS, ["walk", "jump", "idle"], "jump", 10, true);
 			
 			/** PROTAGONIST **/
-			hero = new Hero("hero", {x: 0, y: stage.height - 16, width: 30, height: 56, view: anim});
+			hero = new Hero("hero", {x: 0, y: stage.height - 16, width: 30, height: 56});
+			hero.canDuck = false;
 			hero.acceleration = 10; // default is 30
 			hero.jumpAcceleration = 7; // default is 9
 			hero.maxVelocity = 120; // default is 240
@@ -179,10 +182,14 @@ package com.states
 			// _pIdle.smoothing = TextureSmoothing.NONE;
 			//var test:CitrusSprite = new CitrusSprite("test", {view: _pIdle});
 			// add(test)
+			
+			// TODO: don't use hero.view to set anim b/c blurry. update _gSprite view instead.
+			//_gSprite = new CitrusSprite("g_sprite", {view:anim, x:300, y:300})
+			//add(_gSprite);
 		}
 		
 		override public function update(timeDelta:Number):void
-		{
+		{			
 			if (currentCoinCount >= THREE_NINETY){	
 				moveEmitter(prophetParticlesSprite, prophetCoordinates.x, prophetCoordinates.y);
 				greenStatus.view = Textures.STATUS_HAPPY_TEXTURE;
