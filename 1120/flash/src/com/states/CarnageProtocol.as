@@ -8,7 +8,6 @@ package com.states
 	import citrus.objects.CitrusSprite;
 	import citrus.objects.NapePhysicsObject;
 	import citrus.objects.platformer.nape.Coin;
-	import citrus.objects.platformer.nape.Hero;
 	import citrus.objects.platformer.nape.MovingPlatform;
 	import citrus.objects.platformer.nape.Platform;
 	import citrus.objects.platformer.nape.Sensor;
@@ -16,6 +15,7 @@ package com.states
 	import citrus.physics.nape.NapeUtils;
 	import citrus.view.starlingview.AnimationSequence;
 	
+	import com.components.Anarcho;
 	import com.components.Countdown;
 	import com.components.DynamicPlatform;
 	import com.components.GameButton;
@@ -51,7 +51,7 @@ package com.states
 		private var _atmoParticles:PDParticleSystem;
 		
 		private var physics:Nape;
-		private var hero:Hero;
+		private var hero:Anarcho;
 		
 		private var _countDown:Countdown;
 		private var _cash:PettyCash;
@@ -167,10 +167,10 @@ package com.states
 			moveEmitter(prophetParticlesSprite, prophetCoordinates.x, prophetCoordinates.y);
 			add(prophetParticlesSprite);
 			
-			// var anim:AnimationSequence = new AnimationSequence(Textures.GREEN_TEXTURE_ATLAS, ["walk", "jump", "idle"], "jump", 10, true);
+			 var anim:AnimationSequence = new AnimationSequence(Textures.GREEN_TEXTURE_ATLAS, ["walk", "jump", "idle"], "jump", 10, true);
 			
 			/** PROTAGONIST **/
-			hero = new Hero("hero", {x: 0, y: stage.height - 16, width: 30, height: 56});
+			hero = new Anarcho("hero", {x: 0, y: stage.height - 16, width: 30, height: 56, view: anim});
 			hero.canDuck = false;
 			hero.acceleration = 10; // default is 30
 			hero.jumpAcceleration = 7; // default is 9
@@ -399,7 +399,7 @@ package com.states
 				coinSize = coinSizes[_coinIdx];
 				xPos = _allRowXPos[idx];
 				yPos = _allRowYPos[idx] - (6 +  coinSize/2);
-				coin = new Coin("coin_" + i, {x:xPos, y:yPos, width:coinSize, height:coinSize, collectorClass:Hero});
+				coin = new Coin("coin_" + i, {x:xPos, y:yPos, width:coinSize, height:coinSize, collectorClass:Anarcho});
 				coin.onBeginContact.add(handleCoinTouch);
 				currCoinNames.push(coin.name);
 				currCoinValues.push(coinValue);
@@ -465,7 +465,7 @@ package com.states
 		private function handleProphetTouch(interactionCallback:InteractionCallback):void
 		{
 			var _prophet:Sensor = NapeUtils.CollisionGetObjectByType(Sensor, interactionCallback) as Sensor;
-			if (NapeUtils.CollisionGetOther(_prophet, interactionCallback) is Hero)
+			if (NapeUtils.CollisionGetOther(_prophet, interactionCallback) is Anarcho)
 			{
 				if (currentCoinCount < THREE_NINETY)
 					trace("YOU ARE NOT WORTHY")
