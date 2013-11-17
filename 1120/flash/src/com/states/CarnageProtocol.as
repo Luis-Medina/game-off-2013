@@ -146,7 +146,7 @@ package com.states
 			add(greenStatus);
 			
 			prophetCoordinates.x = 900;
-			prophetCoordinates.y = 160;
+			prophetCoordinates.y = 150;
 			
 			prophetParticlesSprite = new CitrusSprite("prophet_arrival", {view: prophetParticles, parallaxX:1.7, parallaxY:1.7});
 			moveEmitter(prophetParticlesSprite, prophetCoordinates.x, prophetCoordinates.y);
