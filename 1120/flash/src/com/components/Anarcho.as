@@ -10,9 +10,20 @@ package com.components
 		}
 		
 		override public function update(timeDelta:Number):void
-		{				
+		{
+			// trace(y)
 			super.update(timeDelta);
 		}
+		
+		/*public override function set x(value:Number):void
+		{
+			super.x = Math.floor(value);
+		}*/
+		
+		/*public override function set y(value:Number):void
+		{
+			super.y = Math.floor(value);
+		}*/
 		
 		override protected function updateAnimation():void
 		{
