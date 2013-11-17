@@ -174,7 +174,7 @@ package com.states
 			StarlingArt.setLoopAnimations(["prophet_neutral"]);
 			
 			prophetSpeechSprite = new CitrusSprite("prophet_speech", {view:prophetSpeechAnim, x: Game.STAGE_WIDTH - 250, y: Game.STAGE_HEIGHT - 270});
-			add(prophetSpeechSprite);
+			// add(prophetSpeechSprite);
 
 		}
 		
