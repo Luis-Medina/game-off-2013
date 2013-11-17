@@ -102,32 +102,17 @@ package com.states
 			/** PHYSICS **/
 			physics = new Nape("physics");
 			physics.visible = true;
-			// physics.gravity = new Vec2(0, 620);
 			add(physics);
 
 			_bg = new CitrusSprite("bg", {view: Textures.BG_TEXTURE});
 			add(_bg);
-			
-			/** PARTICLES **/
-			// var _atmoPsConfig:XML = XML(new Textures.ATMOSPHERE_CONFIG());
-			// var _atmoPsTexture:Texture = Textures.PARTICLE_TEXTURE_TEXTURE;
-			// _atmoParticles = new PDParticleSystem(_atmoPsConfig, _atmoPsTexture);
-			// _atmoParticles.start();
-			
-			// var psv:CitrusSprite = new CitrusSprite("atmosphere", {view: _atmoParticles, parallaxX:1.7, parallaxY:1.7});
-			// moveEmitter(psv, stage.stageWidth >> 1, stage.stageHeight >> 1);
-			// add(psv);
-						
+
 			/** WALLS **/
-			add(new Platform("bottom", {x: stage.stageWidth / 2, y: stage.stageHeight, width: stage.stageWidth, height: 20}));
+			add(new Platform("bottom", {x: (stage.stageWidth / 2), y: stage.stageHeight - 0.14 + 0.5, width: stage.stageWidth, height: 40}));
 			add(new Platform("roof", {x:stage.stageWidth / 2, y:-6, width:stage.stageWidth, height: 10}));
 			add(new Platform("left_wall", {x:-6, y: stage.stageHeight,  width:10, height: stage.stageHeight * 2}));
 			add(new Platform("right_wall", {x: stage.stageWidth + 5, y: stage.stageHeight,  width:10, height: stage.stageHeight * 2}));
-			
-			var _floorSrc:Texture = Textures.FLOOR_TEXTURE;
-			_floor = new CitrusSprite("floor_img", {view: _floorSrc, x: 0, y : Game.STAGE_HEIGHT - 10});
-			add(_floor);
-				
+
 			/** UI **/
 			_restartButton = GameButton.imageButton(Textures.BUTTON_RESTART_TEXTURE, Game.RESTART, 46, 46, 840, 10); 
 			_splashButton = GameButton.imageButton(Textures.BUTTON_EXIT_TEXTURE, Game.SPLASH, 46, 46, 900, 10); 
@@ -178,14 +163,6 @@ package com.states
 			hero.jumpHeight = 290; // default is 330
 			add(hero);
 
-			// _pIdle.blendMode = TextureSmoothing.NONE;
-			// _pIdle.smoothing = TextureSmoothing.NONE;
-			//var test:CitrusSprite = new CitrusSprite("test", {view: _pIdle});
-			// add(test)
-			
-			// TODO: don't use hero.view to set anim b/c blurry. update _gSprite view instead.
-			//_gSprite = new CitrusSprite("g_sprite", {view:anim, x:300, y:300})
-			//add(_gSprite);
 		}
 		
 		override public function update(timeDelta:Number):void
@@ -235,7 +212,7 @@ package com.states
 			var _gapWidth:Number = _colWidth;
 			var _rowWidth:Number = (Game.STAGE_WIDTH / (_numCols));
 			
-			var _yPos:Number = (Game.STAGE_HEIGHT - _colHeight/2) - 11;
+			var _yPos:Number = (Game.STAGE_HEIGHT - _colHeight/2) - 22;
 			var _xPos:Number = 0;
 			var _platform:DynamicPlatform;
 			var _movingPlatform:MovingPlatform;
@@ -248,6 +225,8 @@ package com.states
 			
 			var _width:Number = 0;
 			var _height:Number = 0;
+			
+			var FIX:Number = -0.14; // ................................
 
 			/** ADD COLUMNS **/
 			for (var i:int = 1; i < _numCols; i++)
@@ -260,7 +239,7 @@ package com.states
 					_width = _colWidth;
 					
 					// COLUMNS
-					_platform = new DynamicPlatform(_name, {x:Math.floor(_xPos), y:Math.floor(_yPos-1), width:_width, height: _height + 10});
+					_platform = new DynamicPlatform(_name, {x:_xPos, y:_yPos-1, width:_width, height: _height + 10});
 					_rowXPosArr.push(_platform.x);
 					_rowYPosArr.push(_platform.y);
 					add(_platform);
@@ -288,7 +267,7 @@ package com.states
 					_yPos = _rowYPosArr[_rowCount] - _colHeight/2 - _rowHeight/2 - 1.5;
 					
 					// ROWS
-					_platform = new DynamicPlatform(_name, {x:Math.floor(_xPos), y:Math.floor(_yPos), width:_rowWidth - _colWidth - 0.5, height: _rowHeight});
+					_platform = new DynamicPlatform(_name, {x:_xPos, y: _yPos + FIX, width:_rowWidth - _colWidth - 0.5, height: _rowHeight});
 					add(_platform);
 					
 					_allXPos.push(_platform.x);
@@ -297,7 +276,7 @@ package com.states
 					_allRowYPos.push(_platform.y);
 					
 					// GAPS
-					_platform = new DynamicPlatform("gap_" + _gapCount, {x:Math.floor(_rowXPosArr[_rowCount]) , y:Math.floor(_yPos), width:_colWidth, height: _rowHeight});
+					_platform = new DynamicPlatform("gap_" + _gapCount, {x:_rowXPosArr[_rowCount] , y:_yPos + FIX, width:_colWidth, height: _rowHeight});
 					add(_platform);
 					
 					_allXPos.push(_platform.x);
@@ -318,15 +297,17 @@ package com.states
 			{
 				// LAST ROWS
 				_xPos = _lastXPosArr[y];
-				_yPos = _lastYPosArr[y];
+				_yPos = _lastYPosArr[y] - FIX;
 				
-				if (y < _lastXPosArr.length - 2)
+				if (y < _lastXPosArr.length - 2){
 					_endY = _lastYPosArr[y + 1];
-				else
+				} else {
 					_endY = _yPos;
+					_movingPlatform = new MovingPlatform("row_" + _rowCount, {x:_xPos , y:_yPos, width:_rowWidth - _gapWidth, height: _rowHeight, startX:_xPos, endX: _xPos, startY: _yPos, endY:_endY, speed: 12, waitForPassenger:false, touchable: false});
+					add(_movingPlatform);
+				}
 				
-				_movingPlatform = new MovingPlatform("row_" + _rowCount, {x:_xPos , y:_yPos, width:_rowWidth - _gapWidth, height: _rowHeight, startX:_xPos, endX: _xPos, startY: _yPos, endY:_endY, speed: 12, waitForPassenger:false, touchable: false});
-				add(_movingPlatform);
+
 				
 				_rowCount++
 			}
