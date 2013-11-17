@@ -297,17 +297,16 @@ package com.states
 			{
 				// LAST ROWS
 				_xPos = _lastXPosArr[y];
-				_yPos = _lastYPosArr[y] - FIX;
+				_yPos = _lastYPosArr[y] + FIX + 0.5;
 				
-				if (y < _lastXPosArr.length - 2){
+				if (y < _lastXPosArr.length - 2)
+				{
 					_endY = _lastYPosArr[y + 1];
 				} else {
 					_endY = _yPos;
 					_movingPlatform = new MovingPlatform("row_" + _rowCount, {x:_xPos , y:_yPos, width:_rowWidth - _gapWidth, height: _rowHeight, startX:_xPos, endX: _xPos, startY: _yPos, endY:_endY, speed: 12, waitForPassenger:false, touchable: false});
 					add(_movingPlatform);
 				}
-				
-
 				
 				_rowCount++
 			}
