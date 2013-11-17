@@ -89,6 +89,8 @@ package com.states
 			
 		private var _gSprite:CitrusSprite;
 		
+		private var prophetSpeechSprite:CitrusSprite;
+		
 		public function CarnageProtocol() {
 			
 			trace("CARNAGE PROTOCOL")
@@ -153,7 +155,7 @@ package com.states
 			moveEmitter(prophetParticlesSprite, prophetCoordinates.x, prophetCoordinates.y);
 			add(prophetParticlesSprite);
 			
-			var anim:AnimationSequence = new AnimationSequence(Textures.GREEN_TEXTURE_ATLAS, ["walk_left", "walk_right", "jump_left", "jump_right", "idle", "dance"], "idle", 	10, true, "none");
+			var heroAnim:AnimationSequence = new AnimationSequence(Textures.GREEN_TEXTURE_ATLAS, ["walk_left", "walk_right", "jump_left", "jump_right", "idle", "dance"], "idle", 	10, true, "none");
 			StarlingArt.setLoopAnimations(["walk_left"]);
 			StarlingArt.setLoopAnimations(["walk_right"]);
 			StarlingArt.setLoopAnimations(["jump_left"]);
@@ -161,13 +163,20 @@ package com.states
 			StarlingArt.setLoopAnimations(["dance"]);
 			 
 			/** PROTAGONIST **/
-			hero = new Anarcho("hero", {x: 0, y: Game.STAGE_HEIGHT - 20, width: 30, height: 56, view: anim});
+			hero = new Anarcho("hero", {x: 0, y: Game.STAGE_HEIGHT - 20, width: 30, height: 56, view: heroAnim});
 			hero.canDuck = false;
 			hero.acceleration = 10; // default is 30
 			hero.jumpAcceleration = 7; // default is 9
 			hero.maxVelocity = 120; // default is 240
 			hero.jumpHeight = 290; // default is 330
 			add(hero);
+			
+			/** PROPHET SPEECH **/
+			var prophetSpeechAnim:AnimationSequence = new AnimationSequence(Textures.PROPHET_SPEECH_TEXTURE_ATLAS, ["prophet_laugh", "prophet_neutral"], "prophet_neutral", 6, true, "none");
+			StarlingArt.setLoopAnimations(["prophet_neutral"]);
+			
+			prophetSpeechSprite = new CitrusSprite("prophet_speech", {view:prophetSpeechAnim, x: Game.STAGE_WIDTH - 250, y: Game.STAGE_HEIGHT - 270});
+			add(prophetSpeechSprite);
 
 		}
 		
