@@ -73,13 +73,6 @@ package com.constants
 		public static const STATUS_EMBARRASSED_IMG:Texture = Texture.fromBitmap(new STATUS_EMBARRASSED);
 		public static const STATUS_EMBARRASSED_TEXTURE:Texture = Texture.fromTexture(STATUS_EMBARRASSED_IMG);
 		
-		/*
-		[Embed(source="../assets/textures/green.png", mimeType="image/png")]
-		public static const GREEN:Class;
-		public static const GREEN_IMG:Texture = Texture.fromBitmap(new GREEN);
-		public static const GREEN_TEXTURE:Texture = Texture.fromTexture(GREEN_IMG);
-		*/
-		
 		[Embed(source="../assets/particles/texture.png")]
 		public static const PARTICLE_TEXTURE:Class;
 		public static const PARTICLE_TEXTURE_IMG:Texture = Texture.fromBitmap(new PARTICLE_TEXTURE);
