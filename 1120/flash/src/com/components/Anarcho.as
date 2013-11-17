@@ -11,20 +11,10 @@ package com.components
 		
 		override public function update(timeDelta:Number):void
 		{
-			// trace(y)
+			// trace(_animation);
 			super.update(timeDelta);
 		}
-		
-		/*public override function set x(value:Number):void
-		{
-			super.x = Math.floor(value);
-		}*/
-		
-		/*public override function set y(value:Number):void
-		{
-			super.y = Math.floor(value);
-		}*/
-		
+
 		override protected function updateAnimation():void
 		{
 			var prevAnimation:String = _animation;
@@ -50,11 +40,11 @@ package com.components
 				
 				if (walkingSpeed < -acceleration) {
 					_inverted = false; // true
-					_animation = "walk";
+					_animation = "walk_left";
 					
 				} else if (walkingSpeed > acceleration) {
-					_inverted = true; // false
-					_animation = "walk";
+					_inverted = false; // false
+					_animation = "walk_right";
 					
 				} else
 					_animation = "idle";
