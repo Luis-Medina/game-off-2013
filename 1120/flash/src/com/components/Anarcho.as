@@ -32,6 +32,8 @@ package com.components
 					_animation = "jump_left";
 				else if (walkingSpeed > acceleration)
 					_animation = "jump_right";
+				else
+					_animation = "jump_left" // jump straight up
 				
 			} else if (_ducking)
 				_animation = "duck";
