@@ -26,12 +26,12 @@ package com.components
 				
 			else if (!_onGround) {
 				
-				_animation = "jump";
+				_inverted = false;
 				
 				if (walkingSpeed < -acceleration)
-					_inverted = false; // true
+					_animation = "jump_left";
 				else if (walkingSpeed > acceleration)
-					_inverted = true; // false;
+					_animation = "jump_right";
 				
 			} else if (_ducking)
 				_animation = "duck";
