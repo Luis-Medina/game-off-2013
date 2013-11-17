@@ -14,6 +14,7 @@ package com.states
 	import citrus.physics.nape.Nape;
 	import citrus.physics.nape.NapeUtils;
 	import citrus.view.starlingview.AnimationSequence;
+	import citrus.view.starlingview.StarlingArt;
 	
 	import com.components.Anarcho;
 	import com.components.Countdown;
@@ -152,10 +153,13 @@ package com.states
 			moveEmitter(prophetParticlesSprite, prophetCoordinates.x, prophetCoordinates.y);
 			add(prophetParticlesSprite);
 			
-			 var anim:AnimationSequence = new AnimationSequence(Textures.GREEN_TEXTURE_ATLAS, ["walk", "jump", "idle"], "jump", 10, true);
-			
+			 var anim:AnimationSequence = new AnimationSequence(Textures.GREEN_TEXTURE_ATLAS, ["walk_left", "walk_right", "jump", "idle"], "jump", 	10, true, "none");
+			 StarlingArt.setLoopAnimations(["walk_left"]);
+			 StarlingArt.setLoopAnimations(["walk_right"]);
+			 StarlingArt.setLoopAnimations(["jump"]);
+			 
 			/** PROTAGONIST **/
-			hero = new Anarcho("hero", {x: 0, y: stage.height - 16, width: 30, height: 56, view: anim});
+			hero = new Anarcho("hero", {x: 0, y: Game.STAGE_HEIGHT - 20, width: 30, height: 56, view: anim});
 			hero.canDuck = false;
 			hero.acceleration = 10; // default is 30
 			hero.jumpAcceleration = 7; // default is 9
