@@ -86,9 +86,7 @@ package com.states
 		private var _prophetIdle:Array = Textures.getTextureProperties("prophet_idle", Textures.PROPHET_TEXTURE_ATLAS);
 		private var _prophetAttack:Array = Textures.getTextureProperties("prophet_attack", Textures.PROPHET_TEXTURE_ATLAS);
 		private var _pSprite:CitrusSprite = new CitrusSprite("p_idle", {view: _prophetIdle[0]})
-			
-		private var _gSprite:CitrusSprite;
-		
+
 		private var prophetSpeechSprite:CitrusSprite;
 		
 		public function CarnageProtocol() {
