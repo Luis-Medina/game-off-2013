@@ -25,7 +25,7 @@ package
 		{
 			this.removeEventListener(Event.ADDED_TO_STAGE, onAddedToStage);
 			
-			setUpStarling(false);
+			setUpStarling(true);
 			_starling.stage.addEventListener(CreateEvent.CREATE, switchStates);
 			
 			state = new MenuProtocol();
