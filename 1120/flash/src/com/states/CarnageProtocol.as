@@ -153,11 +153,12 @@ package com.states
 			moveEmitter(prophetParticlesSprite, prophetCoordinates.x, prophetCoordinates.y);
 			add(prophetParticlesSprite);
 			
-			var anim:AnimationSequence = new AnimationSequence(Textures.GREEN_TEXTURE_ATLAS, ["walk_left", "walk_right", "jump_left", "jump_right", "idle"], "idle", 	10, true, "none");
+			var anim:AnimationSequence = new AnimationSequence(Textures.GREEN_TEXTURE_ATLAS, ["walk_left", "walk_right", "jump_left", "jump_right", "idle", "dance"], "idle", 	10, true, "none");
 			StarlingArt.setLoopAnimations(["walk_left"]);
 			StarlingArt.setLoopAnimations(["walk_right"]);
 			StarlingArt.setLoopAnimations(["jump_left"]);
 			StarlingArt.setLoopAnimations(["jump_right"]);
+			StarlingArt.setLoopAnimations(["dance"]);
 			 
 			/** PROTAGONIST **/
 			hero = new Anarcho("hero", {x: 0, y: Game.STAGE_HEIGHT - 20, width: 30, height: 56, view: anim});
