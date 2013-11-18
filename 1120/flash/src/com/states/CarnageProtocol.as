@@ -340,11 +340,13 @@ package com.states
 			var coinValue:Number;
 			var xPos:Number;
 			var yPos:Number;
+			var coins:Array = [];
 			currCoinNames = [];
 			currCoinValues = [];
+			coins = ArrayUtils.getNumRandomValuesInRange(Game.platforms.xCoords.length - 34, Game.platforms.xCoords.length - 1, numCoins);
 			for (var i:int = 0; i < numCoins; i++)
 			{
-				idx = Math.floor(ArrayUtils.randomRange(5, Game.platforms.xCoords.length - 10));
+				idx = coins[i];
 				_coinIdx = Math.floor(ArrayUtils.randomRange(0, possibleCoinValues.length - 1));
 				coinValue = possibleCoinValues[_coinIdx];
 				coinSize = coinSizes[_coinIdx];
