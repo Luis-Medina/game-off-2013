@@ -7,7 +7,6 @@ package com.states
 	import citrus.core.starling.StarlingState;
 	import citrus.objects.CitrusSprite;
 	import citrus.objects.NapePhysicsObject;
-	import citrus.objects.platformer.nape.Coin;
 	import citrus.objects.platformer.nape.MovingPlatform;
 	import citrus.objects.platformer.nape.Platform;
 	import citrus.objects.platformer.nape.Sensor;
@@ -17,6 +16,7 @@ package com.states
 	import citrus.view.starlingview.StarlingArt;
 	
 	import com.components.Anarcho;
+	import com.components.Coin;
 	import com.components.Countdown;
 	import com.components.DynamicPlatform;
 	import com.components.GameButton;
@@ -63,6 +63,14 @@ package com.states
 		private var _allYPos:Array = [];
 		private var _allRowXPos:Array = [];
 		private var _allRowYPos:Array = [];
+		private var _allName:Array = [];
+		
+		private var _numCols:Number = 7;
+		private var _numRows:Number = 7;
+		private var _colHeight:Number = 72;
+		private var _colWidth:Number = 12;
+		private var _rowHeight:Number = 12;
+		private var _rowWidth:Number = (Game.STAGE_WIDTH / (_numCols));
 		
 		public static const THREE_NINETY:Number = 3.90;
 		private var currentCoinCount:Number = 0;
@@ -75,7 +83,7 @@ package com.states
 		private var _prophetConfig:XML = XML(new Textures.PROPHET_ARRIVAL_CONFIG());
 		private var prophetParticles:PDParticleSystem = new PDParticleSystem(_prophetConfig, Textures.PARTICLE_TEXTURE_TEXTURE);
 		private var prophetParticlesSprite:CitrusSprite;
-		private var prophetCoordinates:Point = new Point(0,0);
+		private var prophetCoordinates:Point = new Point(900,150);
 		
 		private var greenStatus:CitrusSprite;
 		private var green:CitrusSprite;
@@ -102,7 +110,7 @@ package com.states
 			
 			/** PHYSICS **/
 			physics = new Nape("physics");
-			physics.visible = true;
+			// physics.visible = true;  
 			add(physics);
 
 			_bg = new CitrusSprite("bg", {view: Textures.BG_TEXTURE});
@@ -124,12 +132,8 @@ package com.states
 			
 			this.visible = true;
 			
-			_unstablePlatform = createUnstablePlatform();
+			createUnstablePlatform();
 			this.addEventListener(ElevenTwentyEvent.ELEVEN, updateUnstablePlatform);
-			addEntity(_unstablePlatform);
-			
-			_spareChangeGroup = new CitrusGroup("visible_coins");
-			addEntity(_spareChangeGroup);
 						
 			_countDown = new Countdown();
 			addChild(_countDown);
@@ -145,10 +149,7 @@ package com.states
 			
 			greenStatus = new CitrusSprite("status_icon", {view: Textures.STATUS_NEUTRAL_TEXTURE, x: 20, y: 15});
 			add(greenStatus);
-			
-			prophetCoordinates.x = 900;
-			prophetCoordinates.y = 150;
-			
+						
 			prophetParticlesSprite = new CitrusSprite("prophet_arrival", {view: prophetParticles, parallaxX:1.7, parallaxY:1.7});
 			moveEmitter(prophetParticlesSprite, prophetCoordinates.x, prophetCoordinates.y);
 			add(prophetParticlesSprite);
@@ -161,7 +162,7 @@ package com.states
 			StarlingArt.setLoopAnimations(["dance"]);
 			 
 			/** PROTAGONIST **/
-			hero = new Anarcho("hero", {x: 0, y: Game.STAGE_HEIGHT - 20, width: 30, height: 56, view: heroAnim});
+			hero = new Anarcho("hero", {x: 20, y: Game.STAGE_HEIGHT - 20, width: 30, height: 56, view: heroAnim});
 			hero.canDuck = false;
 			hero.acceleration = 10; // default is 30
 			hero.jumpAcceleration = 7; // default is 9
@@ -212,119 +213,52 @@ package com.states
 			(sprite.view as PDParticleSystem).emitterY = y;
 		}
 		
-		public function createUnstablePlatform(name:String="UnstablePlatform"):CitrusGroup
+		public function createUnstablePlatform():void
 		{
-			var _platformGroup:CitrusGroup = new CitrusGroup(name);
-			
-			var _numCols:int = 7;
-			var _numRows:int = 7;
-			var _colHeight:Number = 64;
-			var _colWidth:Number = 12;
-			var _rowHeight:Number = 12;
-			var _gapHeight:Number = _rowHeight;
-			var _gapWidth:Number = _colWidth;
-			var _rowWidth:Number = (Game.STAGE_WIDTH / (_numCols));
-			
-			var _yPos:Number = (Game.STAGE_HEIGHT - _colHeight/2) - 22;
-			var _xPos:Number = 0;
 			var _platform:DynamicPlatform;
 			var _movingPlatform:MovingPlatform;
 			var _name:String;
-			var _count:int = 0;
-			
-			var _gapYPos:Number = 0;
-			var _rowXPosArr:Array = [];
-			var _rowYPosArr:Array = [];
-			
-			var _width:Number = 0;
-			var _height:Number = 0;
-			
-			var FIX:Number = -0.14; // ................................
-
-			/** ADD COLUMNS **/
-			for (var i:int = 1; i < _numCols; i++)
+			var _xPos:Number;
+			var _yPos:Number;
+			var _width:Number;
+			var _height:Number;
+			var _texture:Texture;
+			var _isRow:Boolean;
+			for (var i:int = 0; i < Game.platforms.xCoords.length; i++)
 			{
-				_xPos = _rowWidth;
-				for (var j:int = 2; j < _numRows + 1; j++)
-				{
-					_name = "col_" + _count;
-					_height = _colHeight;
-					_width = _colWidth;
-					
-					// COLUMNS
-					_platform = new DynamicPlatform(_name, {x:_xPos, y:_yPos-1, width:_width, height: _height + 10});
-					_rowXPosArr.push(_platform.x);
-					_rowYPosArr.push(_platform.y);
-					add(_platform);
-					
-					_allXPos.push(_platform.x);
-					_allYPos.push(_platform.y);
-					
-					_xPos = j * _rowWidth;
-					_count++
-				}
-				_yPos -= (_colHeight + _rowHeight*1.5) - 1;
+				_name = Game.platforms.names[i];
+				_xPos = Game.platforms.xCoords[i];
+				_yPos = Game.platforms.yCoords[i];
+				
+				_isRow = _name.indexOf("row_") != -1;
+				_height = _isRow ? _rowHeight : _colHeight;
+				_width = _isRow ? _rowWidth : _colWidth;
+				_texture = _isRow ? Textures.ROW_TEXTURE : Textures.COL_TEXTURE;
+				
+				_platform = new DynamicPlatform(_name, {x: _xPos, y : _yPos, width: _width, height: _height, view: _texture});
+				add(_platform);
 			}
 			
-			/** ADD ROWS **/
-			var _lastXPosArr:Array = [];
-			var _lastYPosArr:Array = [];
-			var _rowCount:int = 0;
-			var _gapCount:int = 0;
-			for (var k:int = 0; k < _numCols; k++)
-			{
-				for (var l:int = 1; l < _numRows; l++)
-				{
-					_name = "row_" + _rowCount;		
-					_xPos = _rowXPosArr[_rowCount] - _rowWidth/2;
-					_yPos = _rowYPosArr[_rowCount] - _colHeight/2 - _rowHeight/2 - 1.5;
-					
-					// ROWS
-					_platform = new DynamicPlatform(_name, {x:_xPos, y: _yPos + FIX, width:_rowWidth - _colWidth - 0.5, height: _rowHeight});
-					add(_platform);
-					
-					_allXPos.push(_platform.x);
-					_allYPos.push(_platform.y);
-					_allRowXPos.push(_platform.x);
-					_allRowYPos.push(_platform.y);
-					
-					// GAPS
-					_platform = new DynamicPlatform("gap_" + _gapCount, {x:_rowXPosArr[_rowCount] , y:_yPos + FIX, width:_colWidth, height: _rowHeight});
-					add(_platform);
-					
-					_allXPos.push(_platform.x);
-					_allYPos.push(_platform.y);
-					
-					_rowCount++
-					_gapCount++
-				}
-				
-				if (!isNaN(_xPos))
-				{
-					_lastXPosArr.push(Math.floor(_xPos) + _rowWidth);
-					_lastYPosArr.push(Math.floor(_yPos))
-				}
-			}
-			var _endY:Number;
-			for (var y:int = 0; y < _lastXPosArr.length; y++)
-			{
-				// LAST ROWS
-				_xPos = _lastXPosArr[y];
-				_yPos = _lastYPosArr[y] + FIX + 0.5;
-				
-				if (y < _lastXPosArr.length - 2)
-				{
-					_endY = _lastYPosArr[y + 1];
-				} else {
-					_endY = _yPos;
-					_movingPlatform = new MovingPlatform("row_" + _rowCount, {x:_xPos , y:_yPos, width:_rowWidth - _gapWidth, height: _rowHeight, startX:_xPos, endX: _xPos, startY: _yPos, endY:_endY, speed: 12, waitForPassenger:false, touchable: false});
-					add(_movingPlatform);
-				}
-				
-				_rowCount++
-			}
+			_xPos = prophetCoordinates.x - 7;
+			_yPos = prophetCoordinates.y + 31;
+			_movingPlatform = new MovingPlatform("prophet_platform", {x:_xPos , y:_yPos, width:_rowWidth, height: _rowHeight, startX:_xPos, endX: _xPos, startY: _yPos, endY:_yPos, speed: 12, waitForPassenger:false, view: Textures.ROW_TEXTURE})
+			add(_movingPlatform);
 			
-			return _platformGroup;
+			if(!isProphetAdded)
+			{
+				prophetSensor = new Sensor("prophet", {width: 33, height: 53, x: prophetCoordinates.x, y: prophetCoordinates.y});
+				prophetSensor.onBeginContact.add(handleProphetTouch);
+				add(prophetSensor);
+				
+				_pSprite.width = prophetSensor.width;
+				_pSprite.height = prophetSensor.height;
+				_pSprite.x = Math.floor(prophetSensor.x - _prophetIdle[1]/2);
+				_pSprite.y =  Math.floor(prophetSensor.y - _prophetIdle[2]/2);
+				
+				add(_pSprite);
+				isProphetAdded = true;
+			}
+				
 		}
 
 		public function updateUnstablePlatform(Event:ElevenTwentyEvent):void
@@ -340,40 +274,70 @@ package com.states
 				_coin = _allActiveCoins[x] as Coin;
 				_coin.kill = true;
 			}
-			_spareChangeGroup = createCoins();
+			createCoins();
 			
 			var _jitter:Number = Math.floor(Math.random() * 30);
-			
 			var _allPlatforms:Vector.<CitrusObject> = getObjectsByType(DynamicPlatform);
-			var _toChange:Array = ArrayUtils.getNumRandomValuesInRange(0, _allPlatforms.length - 6, _jitter);
-			
-			var _platForm:DynamicPlatform;
+			var _toChange:Array = ArrayUtils.getNumRandomValuesInRange(0, Game.platforms.xCoords.length - 1, _jitter);
+			var _platform:DynamicPlatform;
 			var _idx:int;
+			
+			var _isRow:Boolean;
 			var _name:String;
+			var _width:Number;
+			var _height:Number;
+			var _texture:Texture;
+			var _xPos:Number;
+			var _yPos:Number;
+			var _status:Boolean;
+			var _pIndex:int;
+			var _pName:String;
 			for (var i:int = 0; i < _toChange.length; i++)
 			{
 				_idx = _toChange[i];
-				_platForm = _allPlatforms[_idx] as DynamicPlatform;
-				_name = _platForm.name;
-				if (_name.indexOf("row_") != -1 || _name.indexOf("col_") != -1)
+				_status = Game.platforms.status[_idx];
+				// trace("_status", _status);
+				if (_status == false)
 				{
-					if(_platForm.x != -100)
+					// trace("KILLED")
+					Game.platforms.status[_idx] = true;
+					
+					for (var y:int = 0; y < _allPlatforms.length; y++)
 					{
-						// MOVE OUT OF THE SCREEN
-						_platForm.x = -100; 
-						
-					} else {
-						// MOVE BACK TO ORIGINAL LOC
-						_platForm.x = _allXPos[_idx]; 
-					}					
+						_pName = (_allPlatforms[y] as DynamicPlatform).name;
+						if (_pName ==  Game.platforms.names[_idx])
+						{
+							_pIndex = y;
+							break;
+						}
+							
+					}
+					
+					_platform = _allPlatforms[_pIndex] as DynamicPlatform;
+					_platform.kill = true;
+					
+				} else {
+					
+					// trace("ADDED")
+					Game.platforms.status[_idx] = false;
+					_name = Game.platforms.names[_idx];
+					_xPos = Game.platforms.xCoords[_idx];
+					_yPos = Game.platforms.yCoords[_idx];
+					
+					_isRow = _name.indexOf("row_") != -1;
+					_height = _isRow ? _rowHeight : _colHeight;
+					_width = _isRow ? _rowWidth : _colWidth;
+					_texture = _isRow ? Textures.ROW_TEXTURE : Textures.COL_TEXTURE;
+					
+					_platform = new DynamicPlatform(_name, {x: _xPos, y : _yPos, width: _width, height: _height, view: _texture});
+					add(_platform);
 				}
 			}
 			
 		}
 		
-		private function createCoins():CitrusGroup
+		private function createCoins():void
 		{				
-			var currCoins:CitrusGroup = new CitrusGroup("visible_coins")
 			var numCoins:int = Math.floor(ArrayUtils.randomRange(1, 5));
 			var coin:Coin;
 			var idx:int;
@@ -392,35 +356,17 @@ package com.states
 				coinSize = coinSizes[_coinIdx];
 				xPos = _allRowXPos[idx];
 				yPos = _allRowYPos[idx] - (6 +  coinSize/2);
-				coin = new Coin("coin_" + i, {x:xPos, y:yPos, width:coinSize, height:coinSize, collectorClass:Anarcho});
+				coin = new Coin("coin_" + i, {x:xPos, y:yPos, width:coinSize, height:coinSize, view: Textures.PARTICLE_TEXTURE_TEXTURE});
 				coin.onBeginContact.add(handleCoinTouch);
 				currCoinNames.push(coin.name);
 				currCoinValues.push(coinValue);
-				add(coin);
+				// add(coin); //** TODO: WHY THE FUCK DOES ADDING COINS FUCK UP EVERYTHING???????
 			}
 			
 			// UPDATE
 			currentRemainingCount = ArrayUtils.sumArray(currCoinValues);
 			currentRemainingCount = Math.max(0, ArrayUtils.trim(currentRemainingCount, 2));
 			_remaining.updateDisplay(currentRemainingCount)
-			
-			// putting this here for now.
-			if(!isProphetAdded)
-			{
-				prophetSensor = new Sensor("prophet", {width: 33, height: 53, x: prophetCoordinates.x, y: prophetCoordinates.y});
-				prophetSensor.onBeginContact.add(handleProphetTouch);
-				add(prophetSensor);
-				
-				_pSprite.width = prophetSensor.width;
-				_pSprite.height = prophetSensor.height;
-				_pSprite.x = Math.floor(prophetSensor.x - _prophetIdle[1]/2);
-				_pSprite.y =  Math.floor(prophetSensor.y - _prophetIdle[2]/2);
-				
-				add(_pSprite);
-				isProphetAdded = true;
-			} 
-			
-			return currCoins;
 		}
 		
 		private function handleCoinTouch(interactionCallback:InteractionCallback):void
@@ -503,8 +449,6 @@ package com.states
 			
 			_countDown.clear();
 			_countDown.dispose();
-			
-			_unstablePlatform.destroy();
 			
 			// super.destroy();
 			
