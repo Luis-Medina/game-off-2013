@@ -12,7 +12,7 @@ package com.components {
 	 */
 	public class Coin extends Sensor {
 		
-		protected var _collectorClass:Class = Anarcho; // 
+		protected var _collectorClass:Class = Anarcho;
 		
 		public function Coin(name:String, params:Object = null) {
 			
