@@ -19,13 +19,26 @@ package com.utils
 		{
 			var arr:Array = [];
 			var val:Number;
+			var isRepeat:Boolean = false;
 			while (arr.length < numberValues)
 			{
 				val = randomRange(minNum, maxNum);
 				if (ints)
 					val = int(val);
 				
-				arr.push(val);
+				// no repeats.
+				isRepeat = false;
+				for (var i:int = 0; i < arr.length; i++)
+				{
+					if (val == arr[i])
+					{
+						isRepeat = true;
+						break;
+					}
+				}
+				
+				if (!isRepeat)
+					arr.push(val);
 			}
 			
 			return arr;
