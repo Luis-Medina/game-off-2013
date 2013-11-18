@@ -7,24 +7,12 @@ package com.components {
 	import nape.callbacks.PreFlag;
 	import nape.callbacks.PreListener;
 	import nape.phys.BodyType;
-	
-	/**
-	 * A Platform is a rectangular object that is meant to be stood on. It can be given any position, width, height, or rotation to suit your level's needs.
-	 * You can make your platform a "one-way" or "cloud" platform so that you can jump on from underneath (collision is only applied when coming from above it).
-	 * 
-	 * There are two ways of adding graphics for your platform. You can give your platform a graphic just like you would any other object (by passing a graphical
-	 * class into the view property) or you can leave your platform invisible and line it up with your backgrounds for a more custom look.
-	 * 
-	 * Properties:
-	 * oneWay - Makes the platform only collidable when falling from above it.
-	 * touchable - is touchable?
-	 */
-	
+
 	public class DynamicPlatform extends NapePhysicsObject {
 		
 		public static const ONEWAY_PLATFORM:CbType = new CbType();
 		
-		public var _oneWay:Boolean = true;
+		private var _oneWay:Boolean = true;
 		private var _preListener:PreListener;
 		
 		public function DynamicPlatform(name:String, params:Object = null) {
@@ -55,7 +43,6 @@ package com.components {
 			
 			if (_oneWay && !_preListener)
 			{
-				// _preListener = new PreListener(InteractionType.ANY, DynamicPlatform.ONEWAY_PLATFORM, CbType.ANY_BODY, handlePreContact);
 				_preListener = new PreListener(InteractionType.COLLISION, DynamicPlatform.ONEWAY_PLATFORM, CbType.ANY_BODY, handlePreContact,0,true);
 				_body.space.listeners.add(_preListener);
 				_body.cbTypes.add(ONEWAY_PLATFORM);
@@ -90,9 +77,9 @@ package com.components {
 		override protected function createConstraint():void {
 			
 			super.createConstraint();
+			
 			if (_oneWay) {
-				// _preListener = new PreListener(InteractionType.COLLISION, ONEWAY_PLATFORM, CbType.ANY_BODY, this.handlePreContact);
-				 _preListener = new PreListener(InteractionType.COLLISION, ONEWAY_PLATFORM, CbType.ANY_BODY, handlePreContact,0,true);
+				_preListener = new PreListener(InteractionType.COLLISION, ONEWAY_PLATFORM, CbType.ANY_BODY, handlePreContact,0,true);
 				_body.cbTypes.add(ONEWAY_PLATFORM);
 				_body.space.listeners.add(_preListener);
 			}
