@@ -28,6 +28,17 @@ package com.constants
 		public static const BG_IMG:Texture = Texture.fromBitmap(new BG);
 		public static const BG_TEXTURE:Texture = Texture.fromTexture(BG_IMG);
 		
+		[Embed(source="../assets/textures/platform_row.png", mimeType="image/png")]
+		public static const ROW:Class;
+		public static const ROW_IMG:Texture = Texture.fromBitmap(new ROW);
+		public static const ROW_TEXTURE:Texture = Texture.fromTexture(ROW_IMG);
+		
+		[Embed(source="../assets/textures/platform_col.png", mimeType="image/png")]
+		public static const COL:Class;
+		public static const COL_IMG:Texture = Texture.fromBitmap(new COL);
+		public static const COL_TEXTURE:Texture = Texture.fromTexture(COL_IMG);
+		
+		
 		[Embed(source="../assets/textures/label_change.png", mimeType="image/png")]
 		public static const CHANGE_LABEL:Class;
 		public static const CHANGE_LABEL_IMG:Texture = Texture.fromBitmap(new CHANGE_LABEL);
