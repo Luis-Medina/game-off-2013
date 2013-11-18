@@ -130,6 +130,9 @@ package com.states
 			addChild(_restartButton);
 			addChild(_splashButton);
 			
+			greenStatus = new CitrusSprite("status_icon", {view: Textures.STATUS_NEUTRAL_TEXTURE, x: 20, y: 15});
+			add(greenStatus);
+			
 			this.visible = true;
 			
 			createUnstablePlatform();
@@ -146,9 +149,6 @@ package com.states
 			_remaining.numDisplayX = 570;
 			_remaining.numLabelTexture = Texture.fromBitmap(new Textures.LEFT_LABEL);
 			addChild(_remaining);
-			
-			greenStatus = new CitrusSprite("status_icon", {view: Textures.STATUS_NEUTRAL_TEXTURE, x: 20, y: 15});
-			add(greenStatus);
 						
 			prophetParticlesSprite = new CitrusSprite("prophet_arrival", {view: prophetParticles, parallaxX:1.7, parallaxY:1.7});
 			moveEmitter(prophetParticlesSprite, prophetCoordinates.x, prophetCoordinates.y);
