@@ -30,7 +30,6 @@ package com.states
 	import flash.geom.Point;
 	
 	import nape.callbacks.InteractionCallback;
-	import nape.geom.Vec2;
 	
 	import starling.display.Button;
 	import starling.display.DisplayObject;
@@ -59,11 +58,6 @@ package com.states
 		private var _remaining:PettyCash;
 		private var _unstablePlatform:CitrusGroup;
 		private var _spareChangeGroup:CitrusGroup;
-		private var _allXPos:Array = [];
-		private var _allYPos:Array = [];
-		private var _allRowXPos:Array = [];
-		private var _allRowYPos:Array = [];
-		private var _allName:Array = [];
 		
 		private var _numCols:Number = 7;
 		private var _numRows:Number = 7;
@@ -350,17 +344,17 @@ package com.states
 			currCoinValues = [];
 			for (var i:int = 0; i < numCoins; i++)
 			{
-				idx = Math.floor(ArrayUtils.randomRange(5, _allRowXPos.length - 10));
+				idx = Math.floor(ArrayUtils.randomRange(5, Game.platforms.xCoords.length - 10));
 				_coinIdx = Math.floor(ArrayUtils.randomRange(0, possibleCoinValues.length - 1));
 				coinValue = possibleCoinValues[_coinIdx];
 				coinSize = coinSizes[_coinIdx];
-				xPos = _allRowXPos[idx];
-				yPos = _allRowYPos[idx] - (6 +  coinSize/2);
+				xPos = Game.platforms.xCoords[idx];
+				yPos = Game.platforms.yCoords[idx] - (6 +  coinSize/2);
 				coin = new Coin("coin_" + i, {x:xPos, y:yPos, width:coinSize, height:coinSize, view: Textures.PARTICLE_TEXTURE_TEXTURE});
 				coin.onBeginContact.add(handleCoinTouch);
 				currCoinNames.push(coin.name);
 				currCoinValues.push(coinValue);
-				// add(coin); //** TODO: WHY THE FUCK DOES ADDING COINS FUCK UP EVERYTHING???????
+				add(coin);
 			}
 			
 			// UPDATE
