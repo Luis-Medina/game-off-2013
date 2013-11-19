@@ -230,7 +230,7 @@ package com.states
 				_isRow = _name.indexOf("row_") != -1;
 				_height = _isRow ? _rowHeight : _colHeight;
 				_width = _isRow ? _rowWidth : _colWidth;
-				_texture = _isRow ? Textures.ROW_TEXTURE : Textures.COL_TEXTURE;
+				_texture = Textures.getPlatformTexture(_isRow);
 				
 				_platform = new DynamicPlatform(_name, {x: _xPos, y : _yPos, width: _width, height: _height});
 				add(_platform);
@@ -335,7 +335,7 @@ package com.states
 					_isRow = _name.indexOf("row_") != -1;
 					_height = _isRow ? _rowHeight : _colHeight;
 					_width = _isRow ? _rowWidth : _colWidth;
-					_texture = _isRow ? Textures.ROW_TEXTURE : Textures.COL_TEXTURE;
+					_texture = Textures.getPlatformTexture(_isRow); 
 					
 					_platform = new DynamicPlatform(_name, {x: _xPos, y : _yPos, width: _width, height: _height, view: _texture});
 					add(_platform);
