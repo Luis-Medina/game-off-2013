@@ -94,7 +94,7 @@ package com.states
 		
 		public function CarnageProtocol() {
 			
-			trace("CARNAGE PROTOCOL") 
+			trace("CARNAGE PROTOCOL")   
 			
 			super();
 		}
@@ -105,7 +105,7 @@ package com.states
 			
 			/** PHYSICS **/
 			physics = new Nape("physics");
-			physics.visible = true;  
+			// physics.visible = true;  
 			add(physics);
 
 			_bg = new CitrusSprite("bg", {view: Textures.BG_TEXTURE});
@@ -213,6 +213,7 @@ package com.states
 			var _platform:DynamicPlatform;
 			var _movingPlatform:MovingPlatform;
 			var _platFormSprite:PlatformSprite;
+			var _movingPlatformSprite:CitrusSprite;
 			var _name:String;
 			var _xPos:Number;
 			var _yPos:Number;
@@ -240,8 +241,11 @@ package com.states
 			
 			_xPos = prophetCoordinates.x - 7;
 			_yPos = prophetCoordinates.y + 31;
-			_movingPlatform = new MovingPlatform("prophet_platform", {x:_xPos , y:_yPos, width:_rowWidth, height: _rowHeight, startX:_xPos, endX: _xPos, startY: _yPos, endY:_yPos, speed: 12, waitForPassenger:false, view: Textures.ROW_TEXTURE})
+			_movingPlatform = new MovingPlatform("prophet_platform", {x:_xPos , y:_yPos, width:_rowWidth, height: _rowHeight, startX:_xPos, endX: _xPos, startY: _yPos, endY:_yPos, speed: 12, waitForPassenger:false})
 			add(_movingPlatform);
+			
+			_movingPlatformSprite = new CitrusSprite("prophet_platform_sprite", {x: Math.floor(_xPos - Textures.ROW_TEXTURE.width/2), y: Math.floor(_yPos - Textures.ROW_TEXTURE.height/2), view: Textures.ROW_TEXTURE});
+			add(_movingPlatformSprite);
 			
 			if(!isProphetAdded)
 			{
