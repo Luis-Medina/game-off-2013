@@ -1,5 +1,7 @@
 package com.constants
 {
+	import com.utils.ArrayUtils;
+	
 	import flash.display.Sprite;
 	
 	import starling.display.Image;
@@ -159,6 +161,27 @@ package com.constants
 		
 		public static function getTexture(name:String, _textureAtlas:TextureAtlas):Texture {
 			return _textureAtlas.getTexture(name);
+		}
+		
+		public static function getPlatformTexture(isRow:Boolean):Texture
+		{
+			var _textureAtlas:TextureAtlas = PLATFORMS_TEXTURE_ATLAS;
+			var _textureNames:Vector.<String> = _textureAtlas.getNames();
+			
+			var _text:String;
+			var _index:String;
+			_index = isRow ? "row" : "col";
+			var arr:Array = [];
+			for (var i:int = 0; i < _textureNames.length; i++)
+			{
+				_text = _textureNames[i];
+				
+				if (_text.indexOf(_index) != -1)
+					arr.push(_text);
+			}
+			var _name:String = ArrayUtils.getRandomElementOf(arr);
+			return _textureAtlas.getTexture(_name);
+
 		}
 		
 		
