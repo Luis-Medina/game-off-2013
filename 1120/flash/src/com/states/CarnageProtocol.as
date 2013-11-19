@@ -61,7 +61,7 @@ package com.states
 		
 		private var _numCols:Number = 7;
 		private var _numRows:Number = 7;
-		private var _colHeight:Number = 72;
+		private var _colHeight:Number = 94;
 		private var _colWidth:Number = 12;
 		private var _rowHeight:Number = 12;
 		private var _rowWidth:Number = (Game.STAGE_WIDTH / (_numCols));
@@ -93,7 +93,7 @@ package com.states
 		
 		public function CarnageProtocol() {
 			
-			trace("CARNAGE PROTOCOL")
+			trace("CARNAGE PROTOCOL")   
 			
 			super();
 		}
@@ -104,7 +104,7 @@ package com.states
 			
 			/** PHYSICS **/
 			physics = new Nape("physics");
-			// physics.visible = true;  
+			physics.visible = true;  
 			add(physics);
 
 			_bg = new CitrusSprite("bg", {view: Textures.BG_TEXTURE});
