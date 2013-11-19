@@ -125,6 +125,16 @@ package com.constants
 		public static const PROPHET_SPEECH_TEXTURE:Texture = Texture.fromTexture(PROPHET_SPEECH_TEXTURE_IMG);
 		public static const PROPHET_SPEECH_TEXTURE_ATLAS:TextureAtlas = new TextureAtlas (PROPHET_SPEECH_TEXTURE, PROPHET_SPEECH_XML);
 		
+		[Embed(source="../assets/textures/platform_sprites.xml", mimeType="application/octet-stream")]
+		public static const PLATFORMS_CONFIG:Class;
+		public static const PLATFORMS_XML:XML = new XML(new PLATFORMS_CONFIG());
+		
+		[Embed(source="../assets/textures/platform_sprites.png")]
+		public static const PLATFORMS:Class;
+		public static const PLATFORMS_TEXTURE_IMG:Texture = Texture.fromBitmap(new PLATFORMS);
+		public static const PLATFORMS_TEXTURE:Texture = Texture.fromTexture(PLATFORMS_TEXTURE_IMG);
+		public static const PLATFORMS_TEXTURE_ATLAS:TextureAtlas = new TextureAtlas (PLATFORMS_TEXTURE, PLATFORMS_XML);
+		
 		/** PARTICLE CONFIGS **/
 		
 		[Embed(source="../assets/particles/Atmosphere.pex", mimeType="application/octet-stream")]
