@@ -94,7 +94,7 @@ package com.states
 		
 		public function CarnageProtocol() {
 			
-			trace("CARNAGE PROTOCOL")   
+			trace("CARNAGE PROTOCOL") 
 			
 			super();
 		}
@@ -234,7 +234,7 @@ package com.states
 				_platform = new DynamicPlatform(_name, {x: _xPos, y : _yPos, width: _width, height: _height});
 				add(_platform);
 				
-				_platFormSprite = new PlatformSprite(_name + "_sprite", {x: _platform.x - _platform.width/2, y: _platform.y - _platform.height/2, width: _platform.width, height: _platform.height, view: _texture});
+				_platFormSprite = new PlatformSprite(_name + "_sprite", {x: Math.floor(_platform.x - _texture.width/2), y: Math.floor(_platform.y - _texture.height/2), view: _texture});
 				add(_platFormSprite);
 			}
 			
@@ -336,7 +336,7 @@ package com.states
 					_platform = new DynamicPlatform(_name, {x: _xPos, y : _yPos, width: _width, height: _height, view: _texture});
 					add(_platform);
 					
-					_platformSprite = new PlatformSprite(_name + "_sprite", {x: _platform.x - _platform.width/2, y: _platform.y - _platform.height/2, width: _platform.width, height: _platform.height, view: _texture});
+					_platformSprite = new PlatformSprite(_name + "_sprite", {x: Math.floor(_platform.x - _texture.width/2), y: Math.floor(_platform.y - _texture.height/2), view: _texture});
 					add(_platformSprite);
 				}
 			}
