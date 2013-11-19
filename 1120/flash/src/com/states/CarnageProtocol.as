@@ -21,6 +21,7 @@ package com.states
 	import com.components.DynamicPlatform;
 	import com.components.GameButton;
 	import com.components.PettyCash;
+	import com.components.PlatformSprite;
 	import com.constants.Game;
 	import com.constants.Textures;
 	import com.events.CreateEvent;
@@ -211,6 +212,7 @@ package com.states
 		{
 			var _platform:DynamicPlatform;
 			var _movingPlatform:MovingPlatform;
+			var _platFormSprite:PlatformSprite;
 			var _name:String;
 			var _xPos:Number;
 			var _yPos:Number;
@@ -229,8 +231,11 @@ package com.states
 				_width = _isRow ? _rowWidth : _colWidth;
 				_texture = _isRow ? Textures.ROW_TEXTURE : Textures.COL_TEXTURE;
 				
-				_platform = new DynamicPlatform(_name, {x: _xPos, y : _yPos, width: _width, height: _height, view: _texture});
+				_platform = new DynamicPlatform(_name, {x: _xPos, y : _yPos, width: _width, height: _height});
 				add(_platform);
+				
+				_platFormSprite = new PlatformSprite(_name + "_sprite", {x: _platform.x - _platform.width/2, y: _platform.y - _platform.height/2, width: _platform.width, height: _platform.height, view: _texture});
+				add(_platFormSprite);
 			}
 			
 			_xPos = prophetCoordinates.x - 7;
@@ -272,8 +277,10 @@ package com.states
 			
 			var _jitter:Number = Math.floor(Math.random() * 30);
 			var _allPlatforms:Vector.<CitrusObject> = getObjectsByType(DynamicPlatform);
+			var _allPlatformsSprites:Vector.<CitrusObject> = getObjectsByType(PlatformSprite);
 			var _toChange:Array = ArrayUtils.getNumRandomValuesInRange(0, Game.platforms.xCoords.length - 1, _jitter);
 			var _platform:DynamicPlatform;
+			var _platformSprite:PlatformSprite;
 			var _idx:int;
 			
 			var _isRow:Boolean;
@@ -310,6 +317,9 @@ package com.states
 					_platform = _allPlatforms[_pIndex] as DynamicPlatform;
 					_platform.kill = true;
 					
+					_platformSprite = _allPlatformsSprites[_pIndex] as PlatformSprite;
+					_platformSprite.kill = true;
+					
 				} else {
 					
 					// trace("ADDED")
@@ -325,6 +335,9 @@ package com.states
 					
 					_platform = new DynamicPlatform(_name, {x: _xPos, y : _yPos, width: _width, height: _height, view: _texture});
 					add(_platform);
+					
+					_platformSprite = new PlatformSprite(_name + "_sprite", {x: _platform.x - _platform.width/2, y: _platform.y - _platform.height/2, width: _platform.width, height: _platform.height, view: _texture});
+					add(_platformSprite);
 				}
 			}
 			
