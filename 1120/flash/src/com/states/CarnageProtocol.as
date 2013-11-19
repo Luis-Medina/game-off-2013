@@ -62,7 +62,7 @@ package com.states
 		
 		private var _numCols:Number = 7;
 		private var _numRows:Number = 7;
-		private var _colHeight:Number = 94;
+		private var _colHeight:Number = 91.5;
 		private var _colWidth:Number = 12;
 		private var _rowHeight:Number = 12;
 		private var _rowWidth:Number = (Game.STAGE_WIDTH / (_numCols));
