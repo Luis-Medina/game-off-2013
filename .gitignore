@@ -10,3 +10,4 @@ flash/.project
 flash/.settings
 flash/html-template
 flash/bin-debug/
+misc/*
