@@ -47,6 +47,7 @@ package com.states
 	public class CarnageProtocol extends StarlingState
 	{
 		private var _bg:CitrusSprite;
+		private var _fg:Image;
 		private var _floor:CitrusSprite;
 		private var _restartButton:Button;
 		private var _splashButton:Button;
@@ -55,7 +56,7 @@ package com.states
 		private var physics:Nape;
 		private var hero:Anarcho;
 		
-		private var _countDown:Countdown;
+		private var _countDown:Countdown; 
 		private var _cash:PettyCash;
 		private var _remaining:PettyCash;
 		private var _unstablePlatform:CitrusGroup;
@@ -70,7 +71,7 @@ package com.states
 		private var _rowWidth:Number = (Game.STAGE_WIDTH / (_numCols));
 		
 		public static const THREE_NINETY:Number = 3.90;
-		private var currentCoinCount:Number = 0;
+		private var currentCoinCount:Number = 0;            
 		private var currentRemainingCount:Number = 0;
 		private var possibleCoinValues:Array = [0.01, 0.05, 0.11, 0.17, 0.23, 0.35];
 		private var coinSizes:Array = [11, 15, 23, 37, 45, 57];
@@ -112,6 +113,9 @@ package com.states
 
 			_bg = new CitrusSprite("bg", {view: Textures.BG_TEXTURE});
 			add(_bg);
+			
+			_fg = new Image(Textures.FLOOR_TEXTURE);
+			addChild(_fg);
 
 			/** WALLS **/
 			add(new Platform("bottom", {x: (stage.stageWidth / 2), y: stage.stageHeight - 0.14 + 0.5, width: stage.stageWidth, height: 40}));
@@ -470,6 +474,7 @@ package com.states
 			_countDown.dispose();
 			
 			_round.dispose();
+			_fg.dispose();
 			
 			// super.destroy();
 			
