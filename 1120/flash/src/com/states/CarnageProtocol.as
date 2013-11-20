@@ -96,7 +96,7 @@ package com.states
 		
 		public function CarnageProtocol() {
 			
-			trace("CARNAGE PROTOCOL")   
+			trace("CARNAGE PROTOCOL")    
 			
 			super();
 		}
@@ -366,7 +366,7 @@ package com.states
 			var coins:Array = [];
 			currCoinNames = [];
 			currCoinValues = [];
-			coins = ArrayUtils.getNumRandomValuesInRange(Game.platforms.xCoords.length - 34, Game.platforms.xCoords.length - 1, numCoins);
+			coins = ArrayUtils.getNumRandomValuesInRange(Game.platforms.xCoords.length - 26, Game.platforms.xCoords.length - 1, numCoins);
 			for (var i:int = 0; i < numCoins; i++)
 			{
 				idx = coins[i];
