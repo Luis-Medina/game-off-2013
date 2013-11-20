@@ -56,6 +56,11 @@ package com.constants
 		public static const LEFT_LABEL_IMG:Texture = Texture.fromBitmap(new LEFT_LABEL);
 		public static const LEFT_LABEL_TEXTURE:Texture = Texture.fromTexture(LEFT_LABEL_IMG);
 		
+		[Embed(source="../assets/textures/score.png", mimeType="image/png")]
+		public static const SCORE:Class;
+		public static const SCORE_IMG:Texture = Texture.fromBitmap(new SCORE);
+		public static const SCORE_TEXTURE:Texture = Texture.fromTexture(SCORE_IMG);
+		
 		[Embed(source="../assets/textures/button_exit.png", mimeType="image/png")]
 		public static const BUTTON_EXIT:Class;
 		public static const BUTTON_EXIT_IMG:Texture = Texture.fromBitmap(new BUTTON_EXIT);
