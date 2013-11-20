@@ -22,6 +22,7 @@ package com.states
 	import com.components.GameButton;
 	import com.components.PettyCash;
 	import com.components.PlatformSprite;
+	import com.components.Rounds;
 	import com.constants.Game;
 	import com.constants.Textures;
 	import com.events.CreateEvent;
@@ -59,6 +60,7 @@ package com.states
 		private var _remaining:PettyCash;
 		private var _unstablePlatform:CitrusGroup;
 		private var _spareChangeGroup:CitrusGroup;
+		private var _round:Rounds;
 		
 		private var _numCols:Number = 7;
 		private var _numRows:Number = 7;
@@ -127,6 +129,9 @@ package com.states
 			
 			greenStatus = new CitrusSprite("status_icon", {view: Textures.STATUS_NEUTRAL_TEXTURE, x: 20, y: 15});
 			add(greenStatus);
+			
+			_round = new Rounds();
+			addChild(_round);
 			
 			this.visible = true;
 			
@@ -269,6 +274,7 @@ package com.states
 			currentCoinCount -= currentRemainingCount;
 			currentCoinCount = Math.max(0, ArrayUtils.trim(currentCoinCount, 2));
 			_cash.updateDisplay(currentCoinCount);
+			_round.updateRound();
 			
 			var _allActiveCoins:Vector.<CitrusObject> = getObjectsByType(Coin);
 			var _coin:Coin;
@@ -462,6 +468,8 @@ package com.states
 			
 			_countDown.clear();
 			_countDown.dispose();
+			
+			_round.dispose();
 			
 			// super.destroy();
 			
