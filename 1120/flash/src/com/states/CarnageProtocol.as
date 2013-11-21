@@ -14,6 +14,7 @@ package com.states
 	import citrus.physics.nape.NapeUtils;
 	import citrus.view.starlingview.AnimationSequence;
 	import citrus.view.starlingview.StarlingArt;
+	import citrus.view.starlingview.StarlingTileSystem;
 	
 	import com.components.Anarcho;
 	import com.components.Coin;
@@ -29,13 +30,15 @@ package com.states
 	import com.events.ElevenTwentyEvent;
 	import com.utils.ArrayUtils;
 	
-	import flash.geom.Point;
+	import flash.geom.Point; 
 	
 	import nape.callbacks.InteractionCallback;
 	
+	import starling.display.BlendMode;
 	import starling.display.Button;
 	import starling.display.DisplayObject;
 	import starling.display.Image;
+	import starling.display.MovieClip;
 	import starling.events.Event;
 	import starling.events.Touch;
 	import starling.events.TouchEvent;
@@ -46,7 +49,10 @@ package com.states
 	
 	public class CarnageProtocol extends StarlingState
 	{
-		private var _bg:CitrusSprite;
+		private var _bg_1:CitrusSprite;
+		private var _bg_2:CitrusSprite;
+		private var _endX:Number = Textures.BG_TEXTURE.width;
+		private var _buildings:CitrusSprite;
 		private var _fg:Image;
 		private var _floor:CitrusSprite;
 		private var _restartButton:Button;
@@ -97,7 +103,7 @@ package com.states
 		
 		public function CarnageProtocol() {
 			
-			trace("CARNAGE PROTOCOL")    
+			trace("CARNAGE PROTOCOL")       
 			
 			super();
 		}
@@ -107,12 +113,15 @@ package com.states
 			super.initialize();
 			
 			/** PHYSICS **/
-			physics = new Nape("physics");
-			// physics.visible = true;  
+			physics = new Nape("physics"); 
+			// physics.visible = true;    
 			add(physics);
-
-			_bg = new CitrusSprite("bg", {view: Textures.BG_TEXTURE});
-			add(_bg);
+			
+			_bg_1 = new CitrusSprite("bg_1", {view: Textures.BG_TEXTURE, parallaxX: 0.7});
+			add(_bg_1);
+			
+			//_buildings = new CitrusSprite("buildings", {view: Textures.BUILDINGS_TEXTURE});
+			//add(_buildings);       
 			
 			_fg = new Image(Textures.FLOOR_TEXTURE);
 			addChild(_fg);
@@ -184,7 +193,7 @@ package com.states
 		}
 		
 		override public function update(timeDelta:Number):void
-		{			
+		{	
 			if (currentCoinCount >= THREE_NINETY){	
 				moveEmitter(prophetParticlesSprite, prophetCoordinates.x, prophetCoordinates.y);
 				greenStatus.view = Textures.STATUS_HAPPY_TEXTURE;
@@ -239,7 +248,8 @@ package com.states
 				_isRow = _name.indexOf("row_") != -1;
 				_height = _isRow ? _rowHeight : _colHeight;
 				_width = _isRow ? _rowWidth : _colWidth;
-				_texture = Textures.getPlatformTexture(_isRow);
+				_texture = Textures.getPlatformTexture(_isRow); 
+				// _texture = _isRow ? Textures.ROW_TEXTURE : Textures.COL_TEXTURE; 
 				
 				_platform = new DynamicPlatform(_name, {x: _xPos, y : _yPos, width: _width, height: _height});
 				add(_platform);
@@ -253,7 +263,7 @@ package com.states
 			_movingPlatform = new MovingPlatform("prophet_platform", {x:_xPos , y:_yPos, width:_rowWidth, height: _rowHeight, startX:_xPos, endX: _xPos, startY: _yPos, endY:_yPos, speed: 12, waitForPassenger:false})
 			add(_movingPlatform);
 			
-			_movingPlatformSprite = new CitrusSprite("prophet_platform_sprite", {x: Math.floor(_xPos - Textures.ROW_TEXTURE.width/2), y: Math.floor(_yPos - Textures.ROW_TEXTURE.height/2), view: Textures.ROW_TEXTURE});
+			_movingPlatformSprite = new CitrusSprite("prophet_platform_sprite", {x: Math.floor(_xPos - Textures.ROW_TEXTURE.width/2), y: Math.floor(_yPos - Textures.ROW_TEXTURE.height/2), view:  Textures.getPlatformTexture(true)});
 			add(_movingPlatformSprite);
 			
 			if(!isProphetAdded)
@@ -346,6 +356,7 @@ package com.states
 					_height = _isRow ? _rowHeight : _colHeight;
 					_width = _isRow ? _rowWidth : _colWidth;
 					_texture = Textures.getPlatformTexture(_isRow); 
+					// _texture = _isRow ? Textures.ROW_TEXTURE : Textures.COL_TEXTURE; 
 					
 					_platform = new DynamicPlatform(_name, {x: _xPos, y : _yPos, width: _width, height: _height, view: _texture});
 					add(_platform);

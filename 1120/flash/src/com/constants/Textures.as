@@ -29,6 +29,12 @@ package com.constants
 		public static const BG:Class;
 		public static const BG_IMG:Texture = Texture.fromBitmap(new BG);
 		public static const BG_TEXTURE:Texture = Texture.fromTexture(BG_IMG);
+
+		[Embed(source="../assets/textures/level_1_buildings.png", mimeType="image/png")]
+		public static const BUILDINGS:Class;
+		public static const BUILDINGS_IMG:Texture = Texture.fromBitmap(new BUILDINGS);
+		public static const BUILDINGS_TEXTURE:Texture = Texture.fromTexture(BUILDINGS_IMG);
+		BUILDINGS_TEXTURE.repeat = true;
 		
 		[Embed(source="../assets/textures/platform_row.png", mimeType="image/png")]
 		public static const ROW:Class;
