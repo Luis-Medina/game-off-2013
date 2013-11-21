@@ -379,6 +379,7 @@ package com.states
 			var xPos:Number;
 			var yPos:Number;
 			var coins:Array = [];
+			var texture:String;
 			currCoinNames = [];
 			currCoinValues = [];
 			coins = ArrayUtils.getNumRandomValuesInRange(Game.platforms.xCoords.length - 26, Game.platforms.xCoords.length - 1, numCoins);
@@ -386,11 +387,12 @@ package com.states
 			{
 				idx = coins[i];
 				_coinIdx = Math.floor(ArrayUtils.randomRange(0, possibleCoinValues.length - 1));
-				coinValue = possibleCoinValues[_coinIdx];
-				coinSize = coinSizes[_coinIdx];
-				xPos = Game.platforms.xCoords[idx];
-				yPos = Game.platforms.yCoords[idx] - (6 +  coinSize/2);
-				coin = new Coin("coin_" + i, {x:xPos, y:yPos, width:coinSize, height:coinSize, view: Textures.PARTICLE_TEXTURE_TEXTURE});
+				coinValue = possibleCoinValues[_coinIdx]; 
+				coinSize = coinSizes[_coinIdx]; // also name.
+				texture = coinSize.toString();
+				xPos = Math.floor(Game.platforms.xCoords[idx]);
+				yPos = Math.floor(Game.platforms.yCoords[idx] - (8 +  coinSize/2));
+				coin = new Coin("coin_" + i, {x:xPos, y:yPos, width:coinSize, height:coinSize, view: Textures.getTexture(texture, Textures.COIN_TEXTURE_ATLAS)});
 				coin.onBeginContact.add(handleCoinTouch);
 				currCoinNames.push(coin.name);
 				currCoinValues.push(coinValue);
