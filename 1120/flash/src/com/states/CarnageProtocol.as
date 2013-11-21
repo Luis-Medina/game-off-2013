@@ -252,7 +252,7 @@ package com.states
 				// _texture = _isRow ? Textures.ROW_TEXTURE : Textures.COL_TEXTURE; 
 				
 				_platform = new DynamicPlatform(_name, {x: _xPos, y : _yPos, width: _width, height: _height});
-				add(_platform);
+				add(_platform);  
 				
 				_platFormSprite = new PlatformSprite(_name + "_sprite", {x: Math.floor(_platform.x - _texture.width/2), y: Math.floor(_platform.y - _texture.height/2), view: _texture});
 				add(_platFormSprite);
