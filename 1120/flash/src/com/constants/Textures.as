@@ -118,6 +118,16 @@ package com.constants
 		public static const PROPHET_TEXTURE:Texture = Texture.fromTexture(PROPHET_TEXTURE_IMG);
 		public static const PROPHET_TEXTURE_ATLAS:TextureAtlas = new TextureAtlas (PROPHET_TEXTURE, PROPHET_XML);
 		
+		[Embed(source="../assets/textures/coin_sprites.xml", mimeType="application/octet-stream")]
+		public static const COIN_CONFIG:Class;
+		public static const COIN_XML:XML = new XML(new COIN_CONFIG());
+		
+		[Embed(source="../assets/textures/coin_sprites.png")]
+		public static const COIN:Class;
+		public static const COIN_TEXTURE_IMG:Texture = Texture.fromBitmap(new COIN);
+		public static const COIN_TEXTURE:Texture = Texture.fromTexture(COIN_TEXTURE_IMG);
+		public static const COIN_TEXTURE_ATLAS:TextureAtlas = new TextureAtlas (COIN_TEXTURE, COIN_XML);
+		
 		[Embed(source="../assets/textures/green_sprites.xml", mimeType="application/octet-stream")]
 		public static const GREEN_CONFIG:Class;
 		public static const GREEN_XML:XML = new XML(new GREEN_CONFIG());
