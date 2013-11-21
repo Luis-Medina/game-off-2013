@@ -158,6 +158,16 @@ package com.constants
 		public static const PLATFORMS_TEXTURE:Texture = Texture.fromTexture(PLATFORMS_TEXTURE_IMG);
 		public static const PLATFORMS_TEXTURE_ATLAS:TextureAtlas = new TextureAtlas (PLATFORMS_TEXTURE, PLATFORMS_XML);
 		
+		[Embed(source="../assets/textures/eyes_sprites.xml", mimeType="application/octet-stream")]
+		public static const EYES_CONFIG:Class;
+		public static const EYES_XML:XML = new XML(new EYES_CONFIG());
+		
+		[Embed(source="../assets/textures/eyes_sprites.png")]
+		public static const EYES:Class;
+		public static const EYES_TEXTURE_IMG:Texture = Texture.fromBitmap(new EYES);
+		public static const EYES_TEXTURE:Texture = Texture.fromTexture(EYES_TEXTURE_IMG);
+		public static const EYES_TEXTURE_ATLAS:TextureAtlas = new TextureAtlas (EYES_TEXTURE, EYES_XML);
+		
 		/** PARTICLE CONFIGS **/
 		
 		[Embed(source="../assets/particles/Atmosphere.pex", mimeType="application/octet-stream")]

@@ -30,7 +30,7 @@ package com.states
 	import com.events.ElevenTwentyEvent;
 	import com.utils.ArrayUtils;
 	
-	import flash.geom.Point; 
+	import flash.geom.Point;
 	
 	import nape.callbacks.InteractionCallback;
 	
@@ -100,6 +100,9 @@ package com.states
 		private var _pSprite:CitrusSprite = new CitrusSprite("p_idle", {view: _prophetIdle[0]})
 
 		private var prophetSpeechSprite:CitrusSprite;
+		
+		private var eyesAnim:AnimationSequence;
+		private var eyesSprite:CitrusSprite;
 		
 		public function CarnageProtocol() {
 			
@@ -189,7 +192,12 @@ package com.states
 			
 			prophetSpeechSprite = new CitrusSprite("prophet_speech", {view:prophetSpeechAnim, x: Game.STAGE_WIDTH - 250, y: Game.STAGE_HEIGHT - 270});
 			// add(prophetSpeechSprite);
-
+			
+			/** EYES SPRITE **/
+			eyesAnim = new AnimationSequence(Textures.EYES_TEXTURE_ATLAS, ["eyes_1"], "eyes_1", 10, true, "none"); 
+			eyesSprite = new CitrusSprite("eyes_sprite", {view: eyesAnim, x: 100, y: 300});
+			// add(eyesSprite);
+			
 		}
 		
 		override public function update(timeDelta:Number):void
