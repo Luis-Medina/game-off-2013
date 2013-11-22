@@ -298,13 +298,7 @@ package com.states
 			_cash.updateDisplay(currentCoinCount);
 			_round.updateRound();
 			
-			var _allActiveCoins:Vector.<CitrusObject> = getObjectsByType(Coin);
-			var _coin:Coin;
-			for (var x:int = 0; x < _allActiveCoins.length; x++)
-			{
-				_coin = _allActiveCoins[x] as Coin;
-				_coin.kill = true;
-			}
+			destroyCoins();
 			createCoins();
 			
 			var _jitter:Number = Math.floor(Math.random() * 30);
@@ -413,6 +407,17 @@ package com.states
 			_remaining.updateDisplay(currentRemainingCount)
 		}
 		
+		private function destroyCoins():void
+		{
+			var _allActiveCoins:Vector.<CitrusObject> = getObjectsByType(Coin);
+			var _coin:Coin;
+			for (var x:int = 0; x < _allActiveCoins.length; x++)
+			{
+				_coin = _allActiveCoins[x] as Coin;
+				_coin.kill = true;
+			}
+		}
+		
 		private function handleCoinTouch(interactionCallback:InteractionCallback):void
 		{
 			var _coin:Coin = NapeUtils.CollisionGetObjectByType(Coin, interactionCallback) as Coin;
@@ -451,9 +456,12 @@ package com.states
 			if (NapeUtils.CollisionGetOther(_prophet, interactionCallback) is Anarcho)
 			{
 				if (currentCoinCount < THREE_NINETY)
+				{
 					trace("YOU ARE NOT WORTHY")
-				else
+				} else {
+					destroyCoins();
 					_countDown.reset();
+				}
 			}
 		}
 		
