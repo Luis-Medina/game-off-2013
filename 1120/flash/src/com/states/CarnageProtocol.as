@@ -476,6 +476,7 @@ package com.states
 				{					
 					 if(touch.phase == TouchPhase.ENDED)
 					{
+						 _ce.sound.playSound("click");
 						 if(button.name == Game.RESTART)
 						 	dispatchEvent(new CreateEvent(CreateEvent.CREATE, {type: Game.RESTART}, true));
 						 else if (button.name == Game.SPLASH)
