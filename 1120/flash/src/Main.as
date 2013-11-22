@@ -3,6 +3,7 @@ package
 	import citrus.core.starling.StarlingCitrusEngine;
 	import citrus.objects.CitrusSprite;
 	
+	import com.constants.Audio;
 	import com.constants.Game;
 	import com.events.CreateEvent;
 	import com.states.CarnageProtocol;
@@ -27,6 +28,9 @@ package
 			
 			setUpStarling(true);
 			_starling.stage.addEventListener(CreateEvent.CREATE, switchStates);
+			
+			
+			sound.addSound("click", {sound: Audio.CLICK});
 			
 			state = new MenuProtocol();
 			
