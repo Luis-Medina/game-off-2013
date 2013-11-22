@@ -54,7 +54,7 @@ package com.components
 		
 		public function updateDisplay(money:Number):void
 		{
-			var currentCash:String = "$" + ((money == 0) ? "0.00" : money);
+			var currentCash:String = "$" + setPrecision(money, 2); // ((money == 0) ? "0.00" : money);
 			_numDisplay.text = currentCash;
 		}
 		
@@ -67,6 +67,13 @@ package com.components
 		{
 			clear();
 			super.dispose();
+		}
+		
+		// http://stackoverflow.com/questions/632802/how-to-deal-with-number-precision-in-actionscript
+		private function setPrecision(number:Number, precision:int):Number
+		{
+			precision = Math.pow(10, precision);
+			return (Math.round(number * precision)/precision);
 		}
 	}
 }
