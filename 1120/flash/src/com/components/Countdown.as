@@ -21,6 +21,7 @@ package com.components
 		private var _totalTime:Number = 10000; // 10000;
 		private var _rate:Number = 1000;
 		private var _numTimes:int = _totalTime/_rate + 1;
+		private var _paused:Boolean = false;
 		
 		private var _count:int = 0;
 		private var _timeRemaining:Number = _totalTime;
@@ -100,7 +101,28 @@ package com.components
 		{
 			dispatchEvent(new ElevenTwentyEvent(ElevenTwentyEvent.ELEVEN, {}, true));
 			clear();
-			initTimer();
+			
+			if (!_paused)
+				initTimer();
+		}
+		
+		public function pause():void
+		{
+			_paused = true;
+		}
+		
+		public function unPause():void
+		{
+			_paused = false;
+		}
+		
+		public function reset():void
+		{
+			pause();
+			updateDisplay(_totalTime)
+			
+			if(_timer.running)
+				clear();
 		}
 		
 		public function clear():void
