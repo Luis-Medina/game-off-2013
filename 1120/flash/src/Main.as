@@ -35,7 +35,7 @@ package
 			sound.addSound("rumble", {sound: Audio.RUMBLE});
 			sound.addSound("rumble_v1", {sound: Audio.RUMBLE_V1});
 			sound.addSound("veloid", {sound: Audio.VELOID});
-			sound.addSound("veloid2", {sound: Audio.VELOID_2, volume: 0.4});
+			sound.addSound("veloid2", {sound: Audio.VELOID_2, volume: 0.4, permanent: true});
 
 			state = new MenuProtocol();
 			
