@@ -461,6 +461,7 @@ package com.states
 				} else {
 					destroyCoins();
 					_countDown.reset();
+					_remaining.updateDisplay(0);
 				}
 			}
 		}
