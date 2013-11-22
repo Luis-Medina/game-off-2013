@@ -138,6 +138,10 @@ package com.components
 		override public function dispose():void
 		{
 			clear();
+			
+			if(_timerDisplay)
+				_timerDisplay.dispose();
+			
 			super.dispose();
 		}
 	}
