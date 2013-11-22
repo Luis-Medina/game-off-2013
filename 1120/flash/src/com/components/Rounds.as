@@ -45,7 +45,12 @@ package com.components
 		public function updateRound():void
 		{
 			_round++
-			_countTextField.text = _round.toString();;
+			_countTextField.text = _round.toString();
+		}
+		
+		public function getRound():int
+		{
+			return _round;
 		}
 		
 		override public function dispose():void
