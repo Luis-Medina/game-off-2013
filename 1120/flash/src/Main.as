@@ -31,7 +31,12 @@ package
 			
 			
 			sound.addSound("click", {sound: Audio.CLICK});
-			
+			sound.addSound("hit_pick", {sound: Audio.HIT_PICK});
+			sound.addSound("rumble", {sound: Audio.RUMBLE});
+			sound.addSound("rumble_v1", {sound: Audio.RUMBLE_V1});
+			sound.addSound("veloid", {sound: Audio.VELOID});
+			sound.addSound("veloid2", {sound: Audio.VELOID_2, volume: 0.4});
+
 			state = new MenuProtocol();
 			
 		}
