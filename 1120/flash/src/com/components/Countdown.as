@@ -121,10 +121,10 @@ package com.components
 			pause();
 			updateDisplay(_totalTime)
 			
-			if(_timer.running)
+			if(_timer && _timer.running)
 				clear();
 		}
-		
+	
 		public function clear():void
 		{
 			if (_timer && _timer.hasEventListener(TimerEvent.TIMER))
