@@ -137,6 +137,7 @@ package com.components
 		
 		override public function dispose():void
 		{
+			clear();
 			super.dispose();
 		}
 	}
