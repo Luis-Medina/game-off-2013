@@ -293,6 +293,8 @@ package com.states
 
 		public function updateUnstablePlatform(Event:ElevenTwentyEvent):void
 		{
+			_ce.sound.playSound(_round.getRound() % 2 == 0 ? "rumble" : "rumble_v1");
+			
 			currentCoinCount -= currentRemainingCount;
 			currentCoinCount = Math.max(0, ArrayUtils.trim(currentCoinCount, 2));
 			_cash.updateDisplay(currentCoinCount);
@@ -420,6 +422,7 @@ package com.states
 		
 		private function handleCoinTouch(interactionCallback:InteractionCallback):void
 		{
+			_ce.sound.playSound("veloid2");
 			var _coin:Coin = NapeUtils.CollisionGetObjectByType(Coin, interactionCallback) as Coin;
 			
 			var _moneyConfig:XML = XML(new Textures.SPARE_SOME_CHANGE_CONFIG());
