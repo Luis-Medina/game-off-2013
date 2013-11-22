@@ -81,9 +81,10 @@ package com.states
 			{
 				var button:Button = e.currentTarget as Button;
 				if (button)
-				{		
+				{	
 					if(touch.phase == TouchPhase.ENDED)
 					{
+						_ce.sound.playSound("click");
 						button.removeEventListener(TouchEvent.TOUCH, buttonHandler);
 						if (button.name == Game.START)
 							dispatchEvent(new CreateEvent(CreateEvent.CREATE, {type: Game.START}, true));
