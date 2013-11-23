@@ -188,6 +188,8 @@ package com.states
 			hero.jumpAcceleration = 7; // default is 9
 			hero.maxVelocity = 120; // default is 240
 			hero.jumpHeight = 290; // default is 330
+			hero.onJump.add(handleHeroJump);
+			hero.onAnimationChange.add(handleHeroAnimationChange);
 			add(hero);
 			
 			/** PROPHET SPEECH **/
@@ -437,6 +439,17 @@ package com.states
 				_coin = _allActiveCoins[x] as Coin;
 				_coin.kill = true;
 			}
+		}
+		
+		private function handleHeroJump():void
+		{
+			// _ce.sound.playSound("jump")
+		}
+		
+		private function handleHeroAnimationChange():void
+		{
+			// if (hero.animation == "walk_left" || hero.animation == "walk_right")
+			// 	_ce.sound.playSound("walk")
 		}
 		
 		private function handleCoinTouch(interactionCallback:InteractionCallback):void
