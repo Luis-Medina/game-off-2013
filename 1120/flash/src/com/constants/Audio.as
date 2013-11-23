@@ -23,5 +23,13 @@ package com.constants
 		[Embed(source="../assets/audio/veloid2.mp3")]
 		public static const VELOID_2:Class;
 		
+		/*
+		[Embed(source="../assets/audio/walk.mp3")]
+		public static const WALK:Class;
+		
+		[Embed(source="../assets/audio/jump.mp3")]
+		public static const JUMP:Class;
+		*/
+		
 	}
 }
