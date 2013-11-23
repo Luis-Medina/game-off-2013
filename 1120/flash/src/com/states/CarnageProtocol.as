@@ -28,6 +28,7 @@ package com.states
 	import com.constants.Textures;
 	import com.events.CreateEvent;
 	import com.events.ElevenTwentyEvent;
+	import com.events.RestartTimerEvent;
 	import com.utils.ArrayUtils;
 	
 	import flash.geom.Point;
@@ -154,6 +155,7 @@ package com.states
 			
 			createUnstablePlatform();
 			this.addEventListener(ElevenTwentyEvent.ELEVEN, updateUnstablePlatform);
+			this.addEventListener(RestartTimerEvent.RESTART, restartTimer);
 						
 			_countDown = new Countdown();
 			addChild(_countDown);
@@ -295,6 +297,13 @@ package com.states
 				isProphetAdded = true;
 			}
 				
+		}
+		
+		public function restartTimer(Event:RestartTimerEvent):void
+		{
+			currentRemainingCount = 0;
+			_countDown.restart();
+			
 		}
 
 		public function updateUnstablePlatform(Event:ElevenTwentyEvent):void
