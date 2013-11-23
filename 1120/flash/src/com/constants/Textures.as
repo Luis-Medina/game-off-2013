@@ -44,8 +44,7 @@ package com.constants
 		[Embed(source="../assets/textures/platform_col.png", mimeType="image/png")]
 		public static const COL:Class;
 		public static const COL_IMG:Texture = Texture.fromBitmap(new COL);
-		public static const COL_TEXTURE:Texture = Texture.fromTexture(COL_IMG);
-		
+		public static const COL_TEXTURE:Texture = Texture.fromTexture(COL_IMG);	
 		
 		[Embed(source="../assets/textures/label_change.png", mimeType="image/png")]
 		public static const CHANGE_LABEL:Class;
@@ -167,6 +166,21 @@ package com.constants
 		public static const EYES_TEXTURE_IMG:Texture = Texture.fromBitmap(new EYES);
 		public static const EYES_TEXTURE:Texture = Texture.fromTexture(EYES_TEXTURE_IMG);
 		public static const EYES_TEXTURE_ATLAS:TextureAtlas = new TextureAtlas (EYES_TEXTURE, EYES_XML);
+		
+		[Embed(source="../assets/textures/powerup_sprites.xml", mimeType="application/octet-stream")]
+		public static const POWERUP_CONFIG:Class;
+		public static const POWERUP_XML:XML = new XML(new POWERUP_CONFIG());
+		
+		[Embed(source="../assets/textures/powerup_sprites.png")]
+		public static const POWERUP:Class;
+		public static const POWERUP_TEXTURE_IMG:Texture = Texture.fromBitmap(new POWERUP);
+		public static const POWERUP_TEXTURE:Texture = Texture.fromTexture(POWERUP_TEXTURE_IMG);
+		public static const POWERUP_TEXTURE_ATLAS:TextureAtlas = new TextureAtlas (POWERUP_TEXTURE, POWERUP_XML);
+		
+		[Embed(source="../assets/textures/powerup_overlay.png", mimeType="image/png")]
+		public static const POWERUP_OVERLAY:Class;
+		public static const POWERUP_OVERLAY_IMG:Texture = Texture.fromBitmap(new POWERUP_OVERLAY);
+		public static const POWERUP_OVERLAY_TEXTURE:Texture = Texture.fromTexture(POWERUP_OVERLAY_IMG);
 		
 		/** PARTICLE CONFIGS **/
 		
