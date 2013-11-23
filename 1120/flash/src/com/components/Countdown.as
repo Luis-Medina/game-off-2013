@@ -124,6 +124,12 @@ package com.components
 			if(_timer && _timer.running)
 				clear();
 		}
+		
+		public function restart():void
+		{
+			unPause();
+			initTimer();
+		}
 	
 		public function clear():void
 		{
