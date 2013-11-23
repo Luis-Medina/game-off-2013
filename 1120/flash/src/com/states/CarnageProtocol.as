@@ -315,9 +315,7 @@ package com.states
 			currentCoinCount -= currentRemainingCount;
 			currentCoinCount = Math.max(0, ArrayUtils.trim(currentCoinCount, 2));
 			_cash.updateDisplay(currentCoinCount);
-			
-			if (increaseRound)
-				_round.updateRound(increaseRound);
+			_round.updateRound(increaseRound);
 			
 			destroyCoins();
 			createCoins();
