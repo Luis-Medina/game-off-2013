@@ -96,13 +96,27 @@ package com.states
 				{					
 					if(touch.phase == TouchPhase.ENDED)
 					{
-						_ce.sound.playSound("click");
-						
+						if (button.name == "close_menu")
+						{
+							_ce.sound.playSound("click");
+							hide();
+						}
+				
 					}	
 					
 				}
 				
 			}	
+		}
+		
+		public function hide():void
+		{
+			this.visible = false;
+		}
+		
+		public function show():void
+		{
+			this.visible = true;
 		}
 		
 		override public function dispose():void
