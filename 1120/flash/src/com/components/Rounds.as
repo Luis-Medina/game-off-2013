@@ -42,9 +42,11 @@ package com.components
 		}
 
 		
-		public function updateRound():void
+		public function updateRound(increase:Boolean):void
 		{
-			_round++
+			if (increase)
+				_round++
+				
 			_countTextField.text = _round.toString();
 		}
 		
