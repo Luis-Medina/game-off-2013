@@ -69,6 +69,7 @@ package com.states
 		private var _unstablePlatform:CitrusGroup;
 		private var _spareChangeGroup:CitrusGroup;
 		private var _round:Rounds;
+		private var increaseRound:Boolean = false;
 		private var _powerups:PowerupProtocol;
 		
 		private var _numCols:Number = 7;
@@ -303,6 +304,7 @@ package com.states
 		{
 			currentRemainingCount = 0;
 			_countDown.restart();
+			increaseRound = false;
 			
 		}
 
@@ -313,7 +315,9 @@ package com.states
 			currentCoinCount -= currentRemainingCount;
 			currentCoinCount = Math.max(0, ArrayUtils.trim(currentCoinCount, 2));
 			_cash.updateDisplay(currentCoinCount);
-			_round.updateRound();
+			
+			if (increaseRound)
+				_round.updateRound(increaseRound);
 			
 			destroyCoins();
 			createCoins();
@@ -384,6 +388,8 @@ package com.states
 					add(_platformSprite);
 				}
 			}
+			
+			increaseRound = true;
 			
 		}
 		
