@@ -512,6 +512,7 @@ package com.states
 		{
 			this.removeEventListener(TouchEvent.TOUCH, handleUI);
 			this.removeEventListener(ElevenTwentyEvent.ELEVEN, updateUnstablePlatform);
+			this.removeEventListener(RestartTimerEvent.RESTART, restartTimer);
 			
 			// _atmoParticles.stop();
 
