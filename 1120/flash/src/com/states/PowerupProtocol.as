@@ -23,6 +23,7 @@ package com.states
 		private var _background:Image;
 		private var _closeButton:Button;
 		private var _ce:CitrusEngine = CitrusEngine.getInstance()
+		private var _alreadyPlayed:Boolean = false;
 		
 		private var _powerups:Array = ["colossal", "barewalk", "lettuce", "crack"]
 		
@@ -83,8 +84,7 @@ package com.states
 				_buttonDesc.y = Math.floor(_buttonName.y + 60);  
 				addChild(_buttonDesc);
 			}
-			
-			
+
 		}
 		
 		public function buttonHandler(e:TouchEvent):void
@@ -114,11 +114,18 @@ package com.states
 		public function hide():void
 		{
 			this.visible = false;
+			_alreadyPlayed = false; // reset
 		}
 		
 		public function show():void
 		{
 			this.visible = true;
+			
+			if (!_alreadyPlayed)
+			{
+				_alreadyPlayed = true;
+				_ce.sound.playSound("lick_chord");
+			}
 		}
 		
 		override public function dispose():void
