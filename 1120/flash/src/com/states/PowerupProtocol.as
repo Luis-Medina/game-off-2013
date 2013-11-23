@@ -6,6 +6,7 @@ package com.states
 	import com.constants.Audio;
 	import com.constants.Game;
 	import com.constants.Textures;
+	import com.events.RestartTimerEvent;
 	
 	import starling.display.Button;
 	import starling.display.Image;
@@ -100,6 +101,7 @@ package com.states
 						{
 							_ce.sound.playSound("click");
 							hide();
+							dispatchEvent(new RestartTimerEvent(RestartTimerEvent.RESTART, {}, true));
 						}
 				
 					}	
