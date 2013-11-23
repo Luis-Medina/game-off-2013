@@ -68,6 +68,7 @@ package com.states
 		private var _unstablePlatform:CitrusGroup;
 		private var _spareChangeGroup:CitrusGroup;
 		private var _round:Rounds;
+		private var _powerups:PowerupProtocol;
 		
 		private var _numCols:Number = 7;
 		private var _numRows:Number = 7;
@@ -197,6 +198,11 @@ package com.states
 			eyesAnim = new AnimationSequence(Textures.EYES_TEXTURE_ATLAS, ["eyes_1"], "eyes_1", 10, true, "none"); 
 			eyesSprite = new CitrusSprite("eyes_sprite", {view: eyesAnim, x: 100, y: 300});
 			// add(eyesSprite);
+			
+			/** POWERUPS **/
+			_powerups = new PowerupProtocol();
+			_powerups.hide();
+			addChild(_powerups);
 			
 		}
 		
@@ -463,8 +469,10 @@ package com.states
 					trace("YOU ARE NOT WORTHY")
 				} else {
 					destroyCoins();
+					
 					_countDown.reset();
 					_remaining.updateDisplay(0);
+					_powerups.show();
 				}
 			}
 		}
@@ -509,6 +517,8 @@ package com.states
 			
 			_round.dispose();
 			_fg.dispose();
+			
+			_powerups.dispose();
 			
 			// super.destroy();
 			
