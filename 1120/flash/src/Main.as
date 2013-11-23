@@ -37,6 +37,9 @@ package
 			sound.addSound("lick_chord", {sound: Audio.LICK_CHORD});
 			sound.addSound("veloid", {sound: Audio.VELOID});
 			sound.addSound("veloid2", {sound: Audio.VELOID_2, volume: 0.4});
+			
+			// sound.addSound("jump", {sound: Audio.JUMP, volume: 0.4});
+			// sound.addSound("walk", {sound: Audio.WALK, volume: 0.4});
 
 			state = new MenuProtocol();
 			
