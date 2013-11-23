@@ -69,17 +69,17 @@ package com.states
 			for (var i:int = 0; i < _numPowerups; i++)
 			{
 				_buttonTexture = Textures.getTexture("up_" + _powerups[i], Textures.POWERUP_TEXTURE_ATLAS)
-				_powerupButton = GameButton.imageButton(_buttonTexture, _powerups[i] + "_button", _buttonTexture.width, _buttonTexture.height, _layout[i], _background.y + 50);
+				_powerupButton = GameButton.imageButton(_buttonTexture, _powerups[i] + "_button", _buttonTexture.width, _buttonTexture.height, Math.floor(_layout[i]), Math.floor(_background.y + 50));
 				addChild(_powerupButton);
 				
 				_buttonName = new Image(Textures.getTexture("name_" + _powerups[i], Textures.POWERUP_TEXTURE_ATLAS))
-				_buttonName.x = _powerupButton.x - _nameWidth/4;
-				_buttonName.y = _powerupButton.y + 130;
+				_buttonName.x = Math.floor(_powerupButton.x - _nameWidth/4);
+				_buttonName.y = Math.floor(_powerupButton.y + 130);
 				addChild(_buttonName);
 				
 				_buttonDesc = new Image(Textures.getTexture("desc_" + _powerups[i], Textures.POWERUP_TEXTURE_ATLAS))
-				_buttonDesc.x = _buttonName.x
-				_buttonDesc.y = _buttonName.y + 30;
+				_buttonDesc.x = Math.floor(_buttonName.x);
+				_buttonDesc.y = Math.floor(_buttonName.y + 60);  
 				addChild(_buttonDesc);
 			}
 			
