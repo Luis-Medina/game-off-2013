@@ -14,6 +14,9 @@ package com.constants
 		[Embed(source="../assets/audio/hit_pick.mp3")]
 		public static const HIT_PICK:Class;
 		
+		[Embed(source="../assets/audio/lick_chord.mp3")]
+		public static const LICK_CHORD:Class;
+		
 		[Embed(source="../assets/audio/veloid.mp3")]
 		public static const VELOID:Class;
 		
