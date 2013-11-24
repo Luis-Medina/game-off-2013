@@ -630,6 +630,7 @@ package com.states
 			_powerupStatus.dispose();
 			
 			_fireParticles.dispose();
+			_atmoParticles.dispose();
 			
 			// super.destroy();
 			
