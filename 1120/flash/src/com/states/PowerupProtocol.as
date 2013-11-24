@@ -26,7 +26,11 @@ package com.states
 		private var _ce:CitrusEngine = CitrusEngine.getInstance()
 		private var _alreadyPlayed:Boolean = false;
 		
-		private var _powerupButton:Button;
+		private var _colossalButton:Button;
+		private var _barewalkButton:Button;
+		private var _lettuceButton:Button;
+		private var _crackButton:Button;
+		private var _powerupButtons:Array = [_colossalButton, _barewalkButton, _crackButton];
 		private var _powerups:Array = ["colossal", "barewalk", "lettuce", "crack"]
 		
 		public function PowerupProtocol()
@@ -72,13 +76,13 @@ package com.states
 			for (var i:int = 0; i < _numPowerups; i++)
 			{
 				_buttonTexture = Textures.getTexture("up_" + _powerups[i], Textures.POWERUP_TEXTURE_ATLAS)
-				_powerupButton = GameButton.imageButton(_buttonTexture, _powerups[i] + "_button", _buttonTexture.width, _buttonTexture.height, Math.floor(_layout[i]), Math.floor(_background.y + 50));
-				_powerupButton.addEventListener(TouchEvent.TOUCH, buttonHandler);
-				addChild(_powerupButton);
+				_powerupButtons[i] = GameButton.imageButton(_buttonTexture, _powerups[i] + "_button", _buttonTexture.width, _buttonTexture.height, Math.floor(_layout[i]), Math.floor(_background.y + 50));
+				_powerupButtons[i].addEventListener(TouchEvent.TOUCH, buttonHandler);
+				addChild(_powerupButtons[i]);
 				
 				_buttonName = new Image(Textures.getTexture("name_" + _powerups[i], Textures.POWERUP_TEXTURE_ATLAS))
-				_buttonName.x = Math.floor(_powerupButton.x - _nameWidth/4);
-				_buttonName.y = Math.floor(_powerupButton.y + 130);
+				_buttonName.x = Math.floor(_powerupButtons[i].x - _nameWidth/4);
+				_buttonName.y = Math.floor(_powerupButtons[i].y + 130);
 				addChild(_buttonName);
 				
 				_buttonDesc = new Image(Textures.getTexture("desc_" + _powerups[i], Textures.POWERUP_TEXTURE_ATLAS))
@@ -91,6 +95,7 @@ package com.states
 		
 		public function buttonHandler(e:TouchEvent):void
 		{
+
 			var touch:Touch = e.getTouch(this);
 			if(touch)
 			{
@@ -106,10 +111,9 @@ package com.states
 							_ce.sound.playSound("click");
 							dispatchEvent(new RestartTimerEvent(RestartTimerEvent.RESTART, {}, true));
 						
-						} else {
+						} else if (Game.coinCount >= Game.THREE_NINETY) {
+
 							var params:Object = new Object();
-							
-							// TODO*** if less than 390 / dont upgrade.
 							if (_name == "colossal_button")
 							{
 								params.type = "colossal"
@@ -132,16 +136,36 @@ package com.states
 								params.sound = ""
 							}
 							
+							params.sound = "click" // for now;
 							params.revert = false;
 							dispatchEvent(new PowerupEvent(PowerupEvent.POWERUP, params, true));
 							
-						} 
-				
+						} else {
+							// NOT ENOUGH CASH, BRAH!
+							_ce.sound.playSound("earthrot");
+						}
+						updateClickability(); // update button status after each 'purchase'
 					}	
 					
 				}
 				
 			}	
+		}
+		
+		public function updateClickability():void
+		{
+			if (Game.coinCount >= Game.THREE_NINETY)
+				updateButtonStatus(true);
+			else
+				updateButtonStatus(false);		
+		}
+		
+		public function updateButtonStatus(enabled:Boolean):void
+		{
+			for (var i:int = 0; i < _powerupButtons.length; i++)
+			{
+				_powerupButtons[i].enabled = enabled;
+			}
 		}
 		
 		public function hide():void
@@ -152,6 +176,7 @@ package com.states
 		
 		public function show():void
 		{
+			updateClickability();
 			this.visible = true;
 			
 			if (!_alreadyPlayed)
