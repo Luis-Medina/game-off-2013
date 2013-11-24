@@ -335,7 +335,7 @@ package com.states
 			var type:String = Event.params.type
 			var sound:String = Event.params.sound;
 			var revert:Boolean = Event.params.revert;
-			trace("powerup", type, sound, revert)
+			// trace("powerup", type, sound, revert)
 			
 			if (sound != '')
 				_ce.sound.playSound(sound);
