@@ -141,8 +141,9 @@ package com.states
 							dispatchEvent(new PowerupEvent(PowerupEvent.POWERUP, params, true));
 							
 						} else {
+							
 							// NOT ENOUGH CASH, BRAH!
-							_ce.sound.playSound("earthrot");
+							// _ce.sound.playSound("earthrot");
 						}
 						updateClickability(); // update button status after each 'purchase'
 					}	
