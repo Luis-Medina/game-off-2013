@@ -30,6 +30,7 @@ package com.states
 	import com.events.ElevenTwentyEvent;
 	import com.events.PowerupEvent;
 	import com.events.RestartTimerEvent;
+	import com.managers.PowerupManager;
 	import com.utils.ArrayUtils;
 	
 	import flash.geom.Point;
@@ -72,6 +73,7 @@ package com.states
 		private var _round:Rounds;
 		private var increaseRound:Boolean = false;
 		private var _powerups:PowerupProtocol;
+		private var _powerupStatus:PowerupManager;
 		
 		private var _numCols:Number = 7;
 		private var _numRows:Number = 7;
@@ -211,6 +213,9 @@ package com.states
 			_powerups.hide();
 			addChild(_powerups);
 			
+			_powerupStatus = new PowerupManager();
+			var _powerupStatusSprite:CitrusSprite = new CitrusSprite("powerup_statuses", {view:_powerupStatus});		
+			add(_powerupStatusSprite);
 		}
 		
 		override public function update(timeDelta:Number):void
@@ -307,7 +312,24 @@ package com.states
 		public function powerup(Event:PowerupEvent):void
 		{
 			var type:String = Event.params.type
-			trace("type", type)
+			var sound:String = Event.params.sound;
+			var revert:Boolean = Event.params.revert;
+			trace("powerup", type, sound, revert)
+			
+			if (type == "colossal")
+			{
+				
+			} else if (type == "barewalk")
+			{
+				
+			} else if (type == "lettuce")
+			{
+				
+			} else if (type == "crack") 
+			{
+				
+			}
+				
 		}
 		
 		public function restartTimer(Event:RestartTimerEvent):void
@@ -555,6 +577,7 @@ package com.states
 			_fg.dispose();
 			
 			_powerups.dispose();
+			_powerupStatus.dispose();
 			
 			// super.destroy();
 			
