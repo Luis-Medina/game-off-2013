@@ -166,8 +166,9 @@ package com.states
 			add(greenStatus);
 			
 			_round = new Rounds();
-			addChild(_round);
-			
+			var _roundSprite:CitrusSprite = new CitrusSprite("round_sprite", {view:_round})
+			add(_roundSprite);
+				
 			this.visible = true;
 			
 			createUnstablePlatform();
@@ -176,10 +177,12 @@ package com.states
 			this.addEventListener(PowerupEvent.POWERUP, powerup);
 						
 			_countDown = new Countdown();
-			addChild(_countDown);
-			
+			var _countDownSprite:CitrusSprite = new CitrusSprite("countdown_sprite", {view:_countDown})
+			add(_countDownSprite);
+				
 			_cash = new PettyCash();
-			addChild(_cash);
+			var _cashSprite:CitrusSprite = new CitrusSprite("cash_sprite", {view:_cash});
+			add(_cashSprite);
 			
 			_remaining = new PettyCash();
 			_remaining.numLabelX = Game.leftXPos;
@@ -187,7 +190,8 @@ package com.states
 			_remaining.numDisplayX = Game.leftXPos + Game.horGap;
 			_remaining.numDisplayY = Game.leftYPos;
 			_remaining.numLabelTexture = Texture.fromBitmap(new Textures.LEFT_LABEL);
-			addChild(_remaining);
+			var _remainingSprite:CitrusSprite = new CitrusSprite("remaining_sprite", {view:_remaining})
+			add(_remainingSprite);
 			
 			_lifeSprite = new CitrusSprite("lives", {view: _life});
 			add(_lifeSprite);
@@ -195,7 +199,7 @@ package com.states
 			/** POWERUPS **/
 			_powerups = new PowerupProtocol();
 			_powerups.hide();
-			addChild(_powerups);
+			addChild(_powerups); // THIS IS OK AS !CitrusSprite
 			
 			_powerupStatus = new PowerupManager();
 			// addChild(_powerupStatus);
