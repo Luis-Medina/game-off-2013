@@ -132,7 +132,7 @@ package com.states
 								params.sound = ""
 							}
 							
-							trace(params.type);
+							params.revert = false;
 							dispatchEvent(new PowerupEvent(PowerupEvent.POWERUP, params, true));
 							
 						} 
