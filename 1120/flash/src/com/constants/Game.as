@@ -16,6 +16,17 @@ package com.constants
 		public static const ELEVEN_TWENTY:String = "ELEVEN_TWENTY"
 		public static const ELEVEN_TWENTY_HALF:String = "ELEVEN_TWENTY_HALF"
 			
+		// MENU-INFO
+		public static const globalFontSize:Number = 24;
+		public static const horGap:Number = 120;
+		public static const changeXPos:Number = 100;
+		public static const timeXPos:Number = 100;
+		public static const leftXPos:Number = 100;
+		public static const changeYPos:Number = 20;
+		public static const timeYPos:Number = 50;
+		public static const leftYPos:Number = 80;
+		public static const globalWidth:Number = 60;
+		public static const globalHeight:Number = 20;
 			
 		// POWERUPS
 		public static var accelerationOrig:Number = 10;
