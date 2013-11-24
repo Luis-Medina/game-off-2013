@@ -132,6 +132,10 @@ package com.managers
 		private function updateLabels():void
 		{
 			// update all labels.
+			colossalLabel.text = colossalCount.toString();
+			barewalkLabel.text = barewalkCount.toString();
+			lettuceLabel.text = lettuceCount.toString();
+			crackLabel.text = crackCount.toString();
 		}
 		
 		override public function dispose():void
