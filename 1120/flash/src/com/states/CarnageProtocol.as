@@ -116,9 +116,9 @@ package com.states
 		
 		public function CarnageProtocol() {
 			
-			trace("CARNAGE PROTOCOL")       
+			trace("CARNAGE PROTOCOL")        
 			
-			super();
+			super(); 
 		}
 
 		override public function initialize():void {
