@@ -15,8 +15,8 @@ package com.components
 		private var _width:Number = 80;
 		private var _height:Number = 40;
 		private var _life:int = 3; // what a cliche.
-		private var _xPos:Number = 96;
-		private var _yPos:Number = 68;
+		private var _xPos:Number = 110;
+		private var _yPos:Number = 60;
 		
 		public function NewLife()
 		{

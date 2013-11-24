@@ -14,7 +14,7 @@ package com.components
 		
 		private var _round:int = 0;
 		public var xPos:Number = 700;
-		public var yPos:Number = 0;
+		public var yPos:Number = 5;
 		
 		private var _count:Image;
 		private var _countTextField:TextField;
