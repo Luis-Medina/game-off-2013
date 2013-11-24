@@ -52,10 +52,10 @@ package com.states
 			var _bgTexture:Texture = Textures.getTexture("menu_bg", Textures.POWERUP_TEXTURE_ATLAS);
 			_background = new Image(_bgTexture);
 			_background.x = Math.floor(_stageWidth * 0.5 - _bgTexture.width * 0.5);
-			_background.y = Math.floor(_stageHeight * 0.5 - _bgTexture.height * 0.5) - 10;
+			_background.y = Math.floor(_stageHeight * 0.5 - _bgTexture.height * 0.5) + 10;
 			addChild(_background);
 			
-			_closeButton = GameButton.imageButton(Textures.BUTTON_EXIT_TEXTURE, "close_menu", 46, 46, 825, 75); 
+			_closeButton = GameButton.imageButton(Textures.BUTTON_EXIT_TEXTURE, "close_menu", 46, 46, 820, 100); 
 			_closeButton.addEventListener(TouchEvent.TOUCH, buttonHandler);
 			addChild(_closeButton);
 			
@@ -76,7 +76,7 @@ package com.states
 			for (var i:int = 0; i < _numPowerups; i++)
 			{
 				_buttonTexture = Textures.getTexture("up_" + _powerups[i], Textures.POWERUP_TEXTURE_ATLAS)
-				_powerupButtons[i] = GameButton.imageButton(_buttonTexture, _powerups[i] + "_button", _buttonTexture.width, _buttonTexture.height, Math.floor(_layout[i]), Math.floor(_background.y + 50));
+				_powerupButtons[i] = GameButton.imageButton(_buttonTexture, _powerups[i] + "_button", _buttonTexture.width, _buttonTexture.height, Math.floor(_layout[i]), Math.floor(_background.y + 60));
 				_powerupButtons[i].addEventListener(TouchEvent.TOUCH, buttonHandler);
 				addChild(_powerupButtons[i]);
 				
