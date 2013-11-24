@@ -41,6 +41,7 @@ package com.components
 			
 			_timerDisplay = new TextField(Game.globalWidth, Game.globalHeight, '', "ProtestPaintBB", Game.globalFontSize, Colors.WHITE, false);
 			_timerDisplay.hAlign = "left";
+			_timerDisplay.autoScale = false;
 			_timerDisplay.x = Game.timeXPos + Game.horGap;
 			_timerDisplay.y = Game.timeYPos;
 			addChild(_timerDisplay);
