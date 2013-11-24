@@ -6,6 +6,7 @@ package com.states
 	import com.constants.Audio;
 	import com.constants.Game;
 	import com.constants.Textures;
+	import com.events.PowerupEvent;
 	import com.events.RestartTimerEvent;
 	
 	import starling.display.Button;
@@ -25,6 +26,7 @@ package com.states
 		private var _ce:CitrusEngine = CitrusEngine.getInstance()
 		private var _alreadyPlayed:Boolean = false;
 		
+		private var _powerupButton:Button;
 		private var _powerups:Array = ["colossal", "barewalk", "lettuce", "crack"]
 		
 		public function PowerupProtocol()
@@ -61,7 +63,6 @@ package com.states
 			var _descCenter:Number = _stageWidth*0.5 - _upWidth*0.5;
 			var _layout:Array = [_descCenter - _descWidth, _descCenter - _descWidth/3,_descCenter + _descWidth/3, _descCenter + _descWidth];
 			var _numPowerups:int = _powerups.length;
-			var _powerupButton:Button;
 			var _powerupButtonName:Image;
 			var _powerupButtonDesc:Image;
 			
@@ -72,6 +73,7 @@ package com.states
 			{
 				_buttonTexture = Textures.getTexture("up_" + _powerups[i], Textures.POWERUP_TEXTURE_ATLAS)
 				_powerupButton = GameButton.imageButton(_buttonTexture, _powerups[i] + "_button", _buttonTexture.width, _buttonTexture.height, Math.floor(_layout[i]), Math.floor(_background.y + 50));
+				_powerupButton.addEventListener(TouchEvent.TOUCH, buttonHandler);
 				addChild(_powerupButton);
 				
 				_buttonName = new Image(Textures.getTexture("name_" + _powerups[i], Textures.POWERUP_TEXTURE_ATLAS))
@@ -89,20 +91,51 @@ package com.states
 		
 		public function buttonHandler(e:TouchEvent):void
 		{
-			var touch:Touch = e.getTouch(stage);
+			var touch:Touch = e.getTouch(this);
 			if(touch)
 			{
 				var button:Button = e.currentTarget as Button;
 				if (button)
-				{					
+				{
 					if(touch.phase == TouchPhase.ENDED)
-					{
-						if (button.name == "close_menu")
+					{ 
+						var _name:String = button.name;
+						if (_name == "close_menu")
 						{
-							_ce.sound.playSound("click");
 							hide();
+							_ce.sound.playSound("click");
 							dispatchEvent(new RestartTimerEvent(RestartTimerEvent.RESTART, {}, true));
-						}
+						
+						} else {
+							var params:Object = new Object();
+							
+							// TODO*** if less than 390 / dont upgrade.
+							if (_name == "colossal_button")
+							{
+								params.type = "colossal"
+								params.sound = ""
+								
+							} else if (_name == "barewalk_button") 
+							{
+								params.type = "barewalk"
+								params.sound = ""
+									
+							} else if (_name == "lettuce_button") 
+							{
+									
+								params.type = "lettuce"
+								params.sound = ""
+									
+							} else if (_name == "crack_button")	
+							{
+								params.type = "crack"
+								params.sound = ""
+							}
+							
+							trace(params.type);
+							dispatchEvent(new PowerupEvent(PowerupEvent.POWERUP, params, true));
+							
+						} 
 				
 					}	
 					
