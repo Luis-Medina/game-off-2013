@@ -60,7 +60,8 @@ package com.states
 		private var _floor:CitrusSprite;
 		private var _restartButton:Button;
 		private var _splashButton:Button;
-		private var _atmoParticles:PDParticleSystem;
+		private var _atmoParticles:PDParticleSystem = new PDParticleSystem(XML(new Textures.ATMOSPHERE_CONFIG()), Textures.MONEY_TEXTURE_TEXTURE);
+		private var _atmoParticlesSprite:CitrusSprite;
 		
 		private var physics:Nape;
 		private var hero:Anarcho;
@@ -129,11 +130,17 @@ package com.states
 			// physics.visible = true;    
 			add(physics);
 			
-			_bg_1 = new CitrusSprite("bg_1", {view: Textures.BG_TEXTURE, parallaxX: 0.7});
+			_bg_1 = new CitrusSprite("bg_1", {view: Textures.BG_TEXTURE, parallaxX: 0.7}); // BACKGROUND
 			add(_bg_1);
 			
-			//_buildings = new CitrusSprite("buildings", {view: Textures.BUILDINGS_TEXTURE});
-			//add(_buildings);       
+			// atmoparticles
+			_atmoParticlesSprite = new CitrusSprite("atmo_particles", {view: _atmoParticles, parallaxX:1.7, parallaxY:1.7});
+			moveEmitter(_atmoParticlesSprite, Game.STAGE_WIDTH / 2, Game.STAGE_HEIGHT / 2);
+			add(_atmoParticlesSprite);
+			_atmoParticles.start();
+			
+			_buildings = new CitrusSprite("buildings", {view: Textures.BUILDINGS_TEXTURE}); // FOREGROUND
+			add(_buildings);         
 			
 			_fg = new Image(Textures.FLOOR_TEXTURE);
 			addChild(_fg);
