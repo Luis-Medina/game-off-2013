@@ -106,6 +106,26 @@ package com.constants
 		public static const MONEY_TEXTURE_IMG:Texture = Texture.fromBitmap(new MONEY_TEXTURE);
 		public static const MONEY_TEXTURE_TEXTURE:Texture = Texture.fromTexture(MONEY_TEXTURE_IMG);
 		
+		[Embed(source="../assets/textures/powerup_states/colossal_active.png", mimeType="image/png")]
+		public static const COLOSSAL_STATUS:Class;
+		public static const COLOSSAL_STATUS_IMG:Texture = Texture.fromBitmap(new COLOSSAL_STATUS);
+		public static const COLOSSAL_STATUS_TEXTURE:Texture = Texture.fromTexture(COLOSSAL_STATUS_IMG);
+		
+		[Embed(source="../assets/textures/powerup_states/barewalk_active.png", mimeType="image/png")]
+		public static const BAREWALK_STATUS:Class;
+		public static const BAREWALK_STATUS_IMG:Texture = Texture.fromBitmap(new BAREWALK_STATUS);
+		public static const BAREWALK_STATUS_TEXTURE:Texture = Texture.fromTexture(BAREWALK_STATUS_IMG);
+		
+		[Embed(source="../assets/textures/powerup_states/lettuce_active.png", mimeType="image/png")]
+		public static const LETTUCE_STATUS:Class;
+		public static const LETTUCE_STATUS_IMG:Texture = Texture.fromBitmap(new LETTUCE_STATUS);
+		public static const LETTUCE_STATUS_TEXTURE:Texture = Texture.fromTexture(LETTUCE_STATUS_IMG);
+		
+		[Embed(source="../assets/textures/powerup_states/crack_active.png", mimeType="image/png")]
+		public static const CRACK_STATUS:Class;
+		public static const CRACK_STATUS_IMG:Texture = Texture.fromBitmap(new CRACK_STATUS);
+		public static const CRACK_STATUS_TEXTURE:Texture = Texture.fromTexture(CRACK_STATUS_IMG);
+		
 		/** SPRITES **/
 		[Embed(source="../assets/textures/prophet_sprite.xml", mimeType="application/octet-stream")]
 		public static const PROPHET_CONFIG:Class;
