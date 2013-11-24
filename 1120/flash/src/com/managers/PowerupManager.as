@@ -19,7 +19,7 @@ package com.managers
 		private var horGap:Number = 55;
 		
 		private var labelXOffset:Number = 0 // 10;
-		private var labelYOffset:Number = 40; //10;
+		private var labelYOffset:Number = 40; //10; 
 		private var font:String = "ProtestPaintBB";
 		private var fontSize:int = 24;
 		private var col:uint = Colors.WHITE;

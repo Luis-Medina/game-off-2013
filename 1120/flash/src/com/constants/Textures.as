@@ -107,7 +107,7 @@ package com.constants
 		public static const FIRE_TEXTURE_TEXTURE:Texture = Texture.fromTexture(FIRE_TEXTURE_IMG);
 		
 		
-		[Embed(source="../assets/particles/money.png")]
+		[Embed(source="../assets/particles/texture.png")]
 		public static const MONEY_TEXTURE:Class;
 		public static const MONEY_TEXTURE_IMG:Texture = Texture.fromBitmap(new MONEY_TEXTURE);
 		public static const MONEY_TEXTURE_TEXTURE:Texture = Texture.fromTexture(MONEY_TEXTURE_IMG);
