@@ -16,6 +16,11 @@ package com.constants
 		public static const ELEVEN_TWENTY:String = "ELEVEN_TWENTY"
 		public static const ELEVEN_TWENTY_HALF:String = "ELEVEN_TWENTY_HALF"
 			
+			
+		// POWERUPS
+		public static var accelerationOrig:Number = 10;
+		public static var accelerationBoost:Number = 15;
+			
 		// GAME STATES (for tracking && for results screen)
 		public static var coinCount:Number;
 		public static var THREE_NINETY:Number = 0.11;
