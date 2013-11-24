@@ -146,7 +146,7 @@ package com.managers
 			
 			if (lettuceCount == 0)
 			{
-				
+				dispatchEvent(new PowerupEvent(PowerupEvent.POWERUP, {type: "lettuce", sound: '', revert: true}, true));
 			}
 			
 			if (crackCount == 0)

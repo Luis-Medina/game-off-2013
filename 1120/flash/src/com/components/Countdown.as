@@ -18,7 +18,7 @@ package com.components
 	public class Countdown extends Sprite
 	{
 		private var _timer:Timer;
-		public var _totalTime:Number = 10000; // 10000;
+		public var _totalTime:Number = Game.timeOrig;
 		public var _rate:Number = 1000;
 		private var _numTimes:int = _totalTime/_rate + 1;
 		private var _paused:Boolean = false;
@@ -129,8 +129,14 @@ package com.components
 		
 		public function restart():void
 		{
+			recalculate();
 			unPause();
 			initTimer();
+		}
+		
+		public function recalculate():void
+		{
+			_numTimes = _totalTime/_rate + 1;
 		}
 	
 		public function clear():void

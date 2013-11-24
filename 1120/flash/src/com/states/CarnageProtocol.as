@@ -385,6 +385,19 @@ package com.states
 			} else if (type == "lettuce")
 			{
 				
+				if (!revert)
+				{
+					_countDown._totalTime = Game.timeBoost;
+					_countDown.recalculate();
+					_countDown.reset();
+				} else {
+					
+					_countDown._totalTime = Game.timeOrig;
+					_countDown.recalculate();
+					_countDown.restart();
+				}
+				
+				
 			} else if (type == "crack") 
 			{
 				
