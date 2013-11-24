@@ -185,6 +185,7 @@ package com.states
 			addChild(_powerups);
 			
 			_powerupStatus = new PowerupManager();
+			// addChild(_powerupStatus);
 			var _powerupStatusSprite:CitrusSprite = new CitrusSprite("powerup_statuses", {view:_powerupStatus});		
 			add(_powerupStatusSprite);
 						
