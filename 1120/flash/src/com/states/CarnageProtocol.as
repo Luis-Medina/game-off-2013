@@ -28,6 +28,7 @@ package com.states
 	import com.constants.Textures;
 	import com.events.CreateEvent;
 	import com.events.ElevenTwentyEvent;
+	import com.events.PowerupEvent;
 	import com.events.RestartTimerEvent;
 	import com.utils.ArrayUtils;
 	
@@ -157,6 +158,7 @@ package com.states
 			createUnstablePlatform();
 			this.addEventListener(ElevenTwentyEvent.ELEVEN, updateUnstablePlatform);
 			this.addEventListener(RestartTimerEvent.RESTART, restartTimer);
+			this.addEventListener(PowerupEvent.POWERUP, powerup);
 						
 			_countDown = new Countdown();
 			addChild(_countDown);
@@ -300,6 +302,12 @@ package com.states
 				isProphetAdded = true;
 			}
 				
+		}
+		
+		public function powerup(Event:PowerupEvent):void
+		{
+			var type:String = Event.params.type
+			trace("type", type)
 		}
 		
 		public function restartTimer(Event:RestartTimerEvent):void
@@ -530,6 +538,7 @@ package com.states
 			this.removeEventListener(TouchEvent.TOUCH, handleUI);
 			this.removeEventListener(ElevenTwentyEvent.ELEVEN, updateUnstablePlatform);
 			this.removeEventListener(RestartTimerEvent.RESTART, restartTimer);
+			this.removeEventListener(PowerupEvent.POWERUP, powerup);
 			
 			// _atmoParticles.stop();
 
