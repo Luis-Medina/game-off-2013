@@ -82,7 +82,6 @@ package com.states
 		private var _rowHeight:Number = 12;
 		private var _rowWidth:Number = (Game.STAGE_WIDTH / (_numCols));
 		
-		public static const THREE_NINETY:Number = 0.3 // 3.90;
 		private var currentCoinCount:Number = 0;            
 		private var currentRemainingCount:Number = 0;
 		private var possibleCoinValues:Array = [0.01, 0.05, 0.11, 0.17, 0.23, 0.35];
@@ -219,8 +218,10 @@ package com.states
 		}
 		
 		override public function update(timeDelta:Number):void
-		{	
-			if (currentCoinCount >= THREE_NINETY){	
+		{		
+			Game.coinCount = currentCoinCount; // fail-safe
+			
+			if (currentCoinCount >= Game.THREE_NINETY){	
 				moveEmitter(prophetParticlesSprite, prophetCoordinates.x, prophetCoordinates.y);
 				greenStatus.view = Textures.STATUS_HAPPY_TEXTURE;
 				
@@ -231,7 +232,7 @@ package com.states
 					_pSprite.view = _prophetAttack[0];
 				}
 				
-			} else if (currentCoinCount < THREE_NINETY) {
+			} else if (currentCoinCount < Game.THREE_NINETY) {
 				
 				greenStatus.view = Textures.STATUS_NEUTRAL_TEXTURE;
 				
@@ -315,6 +316,12 @@ package com.states
 			var sound:String = Event.params.sound;
 			var revert:Boolean = Event.params.revert;
 			trace("powerup", type, sound, revert)
+			
+			_ce.sound.playSound(sound);
+			currentCoinCount -= Game.THREE_NINETY; // subtract cost of powerup
+			currentCoinCount = Math.max(0, currentCoinCount);
+			_cash.updateDisplay(currentCoinCount);
+			Game.coinCount = currentCoinCount;
 			
 			_powerupStatus.updateCount(type);
 			if (type == "colossal")
@@ -521,7 +528,7 @@ package com.states
 			var _prophet:Sensor = NapeUtils.CollisionGetObjectByType(Sensor, interactionCallback) as Sensor;
 			if (NapeUtils.CollisionGetOther(_prophet, interactionCallback) is Anarcho)
 			{
-				if (currentCoinCount < THREE_NINETY)
+				if (currentCoinCount < Game.THREE_NINETY)
 				{
 					trace("YOU ARE NOT WORTHY")
 				} else {
