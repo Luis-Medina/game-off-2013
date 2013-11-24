@@ -79,7 +79,7 @@ package com.states
 		private var _rowHeight:Number = 12;
 		private var _rowWidth:Number = (Game.STAGE_WIDTH / (_numCols));
 		
-		public static const THREE_NINETY:Number = 1.20 // 3.90;
+		public static const THREE_NINETY:Number = 0.3 // 3.90;
 		private var currentCoinCount:Number = 0;            
 		private var currentRemainingCount:Number = 0;
 		private var possibleCoinValues:Array = [0.01, 0.05, 0.11, 0.17, 0.23, 0.35];
