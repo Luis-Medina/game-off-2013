@@ -21,6 +21,7 @@ package com.states
 	import com.components.Countdown;
 	import com.components.DynamicPlatform;
 	import com.components.GameButton;
+	import com.components.NewLife;
 	import com.components.PettyCash;
 	import com.components.PlatformSprite;
 	import com.components.Rounds;
@@ -75,6 +76,8 @@ package com.states
 		private var increaseRound:Boolean = false;
 		private var _powerups:PowerupProtocol;
 		private var _powerupStatus:PowerupManager;
+		private var _life:NewLife = new NewLife();
+		private var _lifeSprite:CitrusSprite;
 		
 		private var _numCols:Number = 7;
 		private var _numRows:Number = 7;
@@ -185,6 +188,9 @@ package com.states
 			_remaining.numDisplayY = Game.leftYPos;
 			_remaining.numLabelTexture = Texture.fromBitmap(new Textures.LEFT_LABEL);
 			addChild(_remaining);
+			
+			_lifeSprite = new CitrusSprite("lives", {view: _life});
+			add(_lifeSprite);
 			
 			/** POWERUPS **/
 			_powerups = new PowerupProtocol();
@@ -631,6 +637,8 @@ package com.states
 			
 			_fireParticles.dispose();
 			_atmoParticles.dispose();
+			
+			_life.dispose();
 			
 			// super.destroy();
 			
