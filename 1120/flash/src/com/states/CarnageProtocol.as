@@ -196,7 +196,7 @@ package com.states
 			/** PROTAGONIST **/
 			hero = new Anarcho("hero", {x: 20, y: Game.STAGE_HEIGHT - 20, width: 30, height: 56, view: heroAnim});
 			hero.canDuck = false;
-			hero.acceleration = 10; // default is 30
+			hero.acceleration = Game.accelerationOrig; // default is 30
 			hero.jumpAcceleration = 7; // default is 9
 			hero.maxVelocity = 120; // default is 240
 			hero.jumpHeight = 290; // default is 330
@@ -317,18 +317,27 @@ package com.states
 			var revert:Boolean = Event.params.revert;
 			trace("powerup", type, sound, revert)
 			
-			_ce.sound.playSound(sound);
-			currentCoinCount -= Game.THREE_NINETY; // subtract cost of powerup
-			currentCoinCount = Math.max(0, currentCoinCount);
-			_cash.updateDisplay(currentCoinCount);
-			Game.coinCount = currentCoinCount;
+			if (sound != '')
+				_ce.sound.playSound(sound);
 			
-			_powerupStatus.updateCount(type);
+			if (!revert)
+			{ 	// HANDLE MADE A PURCHASE
+				currentCoinCount -= Game.THREE_NINETY; // subtract cost of powerup
+				currentCoinCount = Math.max(0, currentCoinCount);
+				_cash.updateDisplay(currentCoinCount);
+				Game.coinCount = currentCoinCount;
+				_powerupStatus.updateCount(type);
+			}
+			
 			if (type == "colossal")
 			{
 					
 			} else if (type == "barewalk")
 			{
+				if (!revert)
+					hero.acceleration = Game.accelerationBoost;
+				else
+					hero.acceleration = Game.accelerationOrig;			
 				
 			} else if (type == "lettuce")
 			{
