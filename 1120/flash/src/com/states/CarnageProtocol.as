@@ -94,6 +94,10 @@ package com.states
 		private var prophetParticlesSprite:CitrusSprite;
 		private var prophetCoordinates:Point = new Point(900,150);
 		
+		private var _fireConfig:XML = XML(new Textures.FIRE_CONFIG());
+		private var _fireParticles:PDParticleSystem = new PDParticleSystem(_fireConfig, Textures.FIRE_TEXTURE_TEXTURE);
+		private var _fireParticlesSprite:CitrusSprite;
+		
 		private var greenStatus:CitrusSprite;
 		private var green:CitrusSprite;
 		
@@ -186,6 +190,10 @@ package com.states
 			moveEmitter(prophetParticlesSprite, prophetCoordinates.x, prophetCoordinates.y);
 			add(prophetParticlesSprite);
 			
+			_fireParticlesSprite = new CitrusSprite("fire_particles", {view: _fireParticles});
+			moveEmitter(_fireParticlesSprite, 0, 0);
+			add(_fireParticlesSprite)
+			
 			var heroAnim:AnimationSequence = new AnimationSequence(Textures.GREEN_TEXTURE_ATLAS, ["walk_left", "walk_right", "jump_left", "jump_right", "idle", "dance"], "idle", 	10, true, "none");
 			StarlingArt.setLoopAnimations(["walk_left"]);
 			StarlingArt.setLoopAnimations(["walk_right"]);
@@ -242,6 +250,16 @@ package com.states
 					_pSprite.view = _prophetIdle[0];
 				}
 				
+			}
+			
+			if (hero.acceleration == Game.accelerationBoost){
+				_fireParticles.start();
+				_fireParticles.x = Math.floor(hero.x);
+				_fireParticles.y = Math.floor(hero.y + hero.height / 2);
+			}
+			else 
+			{
+				_fireParticles.stop();
 			}
 			
 			super.update(timeDelta);
@@ -595,6 +613,8 @@ package com.states
 			
 			_powerups.dispose();
 			_powerupStatus.dispose();
+			
+			_fireParticles.dispose();
 			
 			// super.destroy();
 			
