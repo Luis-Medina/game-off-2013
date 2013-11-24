@@ -316,9 +316,10 @@ package com.states
 			var revert:Boolean = Event.params.revert;
 			trace("powerup", type, sound, revert)
 			
+			_powerupStatus.updateCount(type);
 			if (type == "colossal")
 			{
-				
+					
 			} else if (type == "barewalk")
 			{
 				
@@ -348,6 +349,7 @@ package com.states
 			currentCoinCount = Math.max(0, ArrayUtils.trim(currentCoinCount, 2));
 			_cash.updateDisplay(currentCoinCount);
 			_round.updateRound(increaseRound);
+			_powerupStatus.roundHasEndedUpdateCount(increaseRound);
 			
 			destroyCoins();
 			createCoins();
@@ -420,7 +422,6 @@ package com.states
 			}
 			
 			increaseRound = true;
-			
 		}
 		
 		private function createCoins():void
