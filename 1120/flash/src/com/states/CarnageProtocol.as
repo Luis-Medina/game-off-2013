@@ -208,7 +208,7 @@ package com.states
 			hero.canDuck = false;
 			hero.acceleration = Game.accelerationOrig; // default is 30
 			hero.jumpAcceleration = 7; // default is 9
-			hero.maxVelocity = 120; // default is 240
+			hero.maxVelocity = Game.velocityOrig; // default is 240
 			hero.jumpHeight = 290; // default is 330
 			hero.onJump.add(handleHeroJump);
 			hero.onAnimationChange.add(handleHeroAnimationChange);
@@ -355,9 +355,14 @@ package com.states
 			} else if (type == "barewalk")
 			{
 				if (!revert)
+				{
 					hero.acceleration = Game.accelerationBoost;
-				else
-					hero.acceleration = Game.accelerationOrig;			
+					hero.maxVelocity = Game.velocityBoost;
+				} else 
+				{
+					hero.acceleration = Game.accelerationOrig;	
+					hero.maxVelocity = Game.velocityOrig;
+				}
 				
 			} else if (type == "lettuce")
 			{

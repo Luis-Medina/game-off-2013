@@ -30,7 +30,9 @@ package com.constants
 			
 		// POWERUPS
 		public static var accelerationOrig:Number = 10;
-		public static var accelerationBoost:Number = 15;
+		public static var accelerationBoost:Number = 16;
+		public static var velocityOrig:Number = 120;
+		public static var velocityBoost:Number = 140;
 			
 		// GAME STATES (for tracking && for results screen)
 		public static var coinCount:Number;
