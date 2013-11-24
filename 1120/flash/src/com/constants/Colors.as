@@ -10,6 +10,7 @@ package com.constants
 		public static const GREEN:uint = 0x4db348;
 		public static const BLUE:uint = 0x105b92;
 		public static const RED:uint = 0xb82131;
+		public static const DARK_RED:uint = 0x891925;
 		
 	}
 }
