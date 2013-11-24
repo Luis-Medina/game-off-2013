@@ -173,6 +173,15 @@ package com.states
 			_remaining.numDisplayX = 570;
 			_remaining.numLabelTexture = Texture.fromBitmap(new Textures.LEFT_LABEL);
 			addChild(_remaining);
+			
+			/** POWERUPS **/
+			_powerups = new PowerupProtocol();
+			_powerups.hide();
+			addChild(_powerups);
+			
+			_powerupStatus = new PowerupManager();
+			var _powerupStatusSprite:CitrusSprite = new CitrusSprite("powerup_statuses", {view:_powerupStatus});		
+			add(_powerupStatusSprite);
 						
 			prophetParticlesSprite = new CitrusSprite("prophet_arrival", {view: prophetParticles, parallaxX:1.7, parallaxY:1.7});
 			moveEmitter(prophetParticlesSprite, prophetCoordinates.x, prophetCoordinates.y);
@@ -207,15 +216,6 @@ package com.states
 			eyesAnim = new AnimationSequence(Textures.EYES_TEXTURE_ATLAS, ["eyes_1"], "eyes_1", 10, true, "none"); 
 			eyesSprite = new CitrusSprite("eyes_sprite", {view: eyesAnim, x: 100, y: 300});
 			// add(eyesSprite);
-			
-			/** POWERUPS **/
-			_powerups = new PowerupProtocol();
-			_powerups.hide();
-			addChild(_powerups);
-			
-			_powerupStatus = new PowerupManager();
-			var _powerupStatusSprite:CitrusSprite = new CitrusSprite("powerup_statuses", {view:_powerupStatus});		
-			add(_powerupStatusSprite);
 		}
 		
 		override public function update(timeDelta:Number):void
