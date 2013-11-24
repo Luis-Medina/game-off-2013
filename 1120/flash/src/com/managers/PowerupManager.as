@@ -2,6 +2,7 @@ package com.managers
 {
 	import com.constants.Colors;
 	import com.constants.Textures;
+	import com.events.PowerupEvent;
 	
 	import starling.display.Image;
 	import starling.display.Sprite;
@@ -10,7 +11,7 @@ package com.managers
 	
 	public class PowerupManager extends Sprite
 	{
-		public static const ADDED_ROUNDS:int = 11; // idk why 11, tbh.. but I already made the sprites so...
+		public static const ADDED_ROUNDS:int = 3; // 11; // idk why 11, tbh.. but I already made the sprites so...
 		public static const INACTIVE_ALPHA:Number = 1;
 
 		private var globalYPos:Number = 85;
@@ -29,7 +30,8 @@ package com.managers
 		public var barewalkCount:int = 0;
 		public var lettuceCount:int = 0;
 		public var crackCount:int = 0;
-				
+		private var countArr:Array = [colossalCount, barewalkCount, lettuceCount, crackCount];	
+		
 		private var colossalStatus:Image;
 		private var barewalkStatus:Image;
 		private var lettuceStatus:Image;
@@ -126,7 +128,31 @@ package com.managers
 			lettuceCount = Math.max(0, lettuceCount - 1);
 			crackCount = Math.max(0, crackCount - 1);
 			
+			hasPowerupEnded();
 			updateLabels();
+		}
+		
+		public function hasPowerupEnded():void
+		{
+			if (colossalCount == 0)
+			{
+				/// dispatchEvent(new PowerupEvent(PowerupEvent.POWERUP, {type: "colossal", sound: '', revert: true}, true));
+			}
+			
+			if (barewalkCount == 0)
+			{
+				dispatchEvent(new PowerupEvent(PowerupEvent.POWERUP, {type: "barewalk", sound: '', revert: true}, true));
+			}
+			
+			if (lettuceCount == 0)
+			{
+				
+			}
+			
+			if (crackCount == 0)
+			{
+				
+			}
 		}
 		
 		private function updateLabels():void
