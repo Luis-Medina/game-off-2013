@@ -21,14 +21,14 @@ package com.components
 		private var _numLabel:Image;
 		
 		public var startValue:String = '$0.00';
-		public var numDisplayX:Number = 280;
-		public var numDisplayY:Number = 15;
-		public var numDisplayWidth:Number = 100;
-		public var numDisplayHeight:Number = 40;
+		public var numDisplayX:Number = Game.changeXPos + Game.horGap;
+		public var numDisplayY:Number = Game.changeYPos;
+		public var numDisplayWidth:Number = Game.globalWidth;
+		public var numDisplayHeight:Number = Game.globalHeight;
 		
 		public var numLabelTexture:Texture = Texture.fromBitmap(new Textures.CHANGE_LABEL);
-		public var numLabelX:Number = 185;
-		public var numLabelY:Number = 15;
+		public var numLabelX:Number = Game.changeXPos;
+		public var numLabelY:Number = Game.changeYPos;
 		
 		public function PettyCash()
 		{
@@ -40,7 +40,8 @@ package com.components
 		{
 			this.removeEventListener(Event.ADDED_TO_STAGE, onAddedToStage);
 			
-			_numDisplay = new TextField(numDisplayWidth, numDisplayHeight, startValue, "ProtestPaintBB", 38, Colors.WHITE, false);
+			_numDisplay = new TextField(numDisplayWidth, numDisplayHeight, startValue, "ProtestPaintBB", Game.globalFontSize, Colors.WHITE, false);
+			_numDisplay.hAlign = "left";
 			_numDisplay.x = numDisplayX;
 			_numDisplay.y = numDisplayY;
 			addChild(_numDisplay);

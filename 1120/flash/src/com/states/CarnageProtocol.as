@@ -172,8 +172,10 @@ package com.states
 			addChild(_cash);
 			
 			_remaining = new PettyCash();
-			_remaining.numLabelX = 500;
-			_remaining.numDisplayX = 570;
+			_remaining.numLabelX = Game.leftXPos;
+			_remaining.numLabelY = Game.leftYPos;
+			_remaining.numDisplayX = Game.leftXPos + Game.horGap;
+			_remaining.numDisplayY = Game.leftYPos;
 			_remaining.numLabelTexture = Texture.fromBitmap(new Textures.LEFT_LABEL);
 			addChild(_remaining);
 			
@@ -254,7 +256,7 @@ package com.states
 			
 			if (hero.acceleration == Game.accelerationBoost){
 				_fireParticles.start();
-				_fireParticles.x = Math.floor(hero.x);
+				_fireParticles.x = Math.floor(hero.x); 
 				_fireParticles.y = Math.floor(hero.y + hero.height / 2);
 			}
 			else 

@@ -39,16 +39,17 @@ package com.components
 		{
 			this.removeEventListener(Event.ADDED_TO_STAGE, onAddedToStage);
 			
-			_timerDisplay = new TextField(80, 40, '', "ProtestPaintBB", 38, Colors.WHITE, false);
-			_timerDisplay.x = 445;
-			_timerDisplay.y = 15;
+			_timerDisplay = new TextField(Game.globalWidth, Game.globalHeight, '', "ProtestPaintBB", Game.globalFontSize, Colors.WHITE, false);
+			_timerDisplay.hAlign = "left";
+			_timerDisplay.x = Game.timeXPos + Game.horGap;
+			_timerDisplay.y = Game.timeYPos;
 			addChild(_timerDisplay);
 			
 			// TODO: not like this:
 			_timerLabel = new Image(Texture.fromBitmap(new Textures.TIME_LABEL));
 			
-			_timerLabel.x = 380;
-			_timerLabel.y = 15;
+			_timerLabel.x = Game.timeXPos;
+			_timerLabel.y = Game.timeYPos;
 			addChild(_timerLabel);
 			
 			initTimer();
