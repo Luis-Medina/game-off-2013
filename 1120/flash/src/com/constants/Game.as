@@ -16,6 +16,10 @@ package com.constants
 		public static const ELEVEN_TWENTY:String = "ELEVEN_TWENTY"
 		public static const ELEVEN_TWENTY_HALF:String = "ELEVEN_TWENTY_HALF"
 			
+		// GAME STATES (for tracking && for results screen)
+		public static var coinCount:Number;
+		public static var THREE_NINETY:Number = 0.11;
+			
 		// PLATFORM MANAGEMENT
 		public static const platforms:Object = {}; 
 		
