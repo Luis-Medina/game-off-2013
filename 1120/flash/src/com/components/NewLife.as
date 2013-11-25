@@ -42,6 +42,8 @@ package com.components
 		public function removeLife():void
 		{
 			_life--;
+			_life = Math.max(0, _life);
+			
 			updateLabel();
 			
 			if (_life == 0)
