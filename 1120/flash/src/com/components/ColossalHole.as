@@ -67,6 +67,17 @@ package com.components
 			_portalParticles1.start();
 			_portalParticles2.start();
 		}
+		
+		public static function destroyColossolalHole():void
+		{
+			_ce.state.remove(sensor1);
+			_ce.state.remove(sensor2);
+			_ce.state.remove(_s1PS);
+			_ce.state.remove(_s2PS);
+			
+			_portalParticles2.stop();
+			_portalParticles1.stop();
+		}
 
 		public static function handleSensor1Touch(interactionCallback:InteractionCallback):void
 		{
