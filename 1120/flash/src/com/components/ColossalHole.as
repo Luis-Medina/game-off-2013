@@ -46,8 +46,12 @@ package com.components
 		private static var timeOut:Number = 500;
 		private static var _timer:Timer;
 		
+		private static var alreadyCreated:Boolean = false;
+		
 		public static function createColossalHole():void
-		{			
+		{	
+			if (alreadyCreated) return;
+			
 			_portalParticles1 =  new PDParticleSystem(_portalConfig1, Textures.PARTICLE_TEXTURE_TEXTURE);
 			sensor1 = new Sensor("sensor_1", {view: _portalParticles1, x: sensor1X, y: sensor1Y});
 			sensor1.onBeginContact.add(handleSensor1Touch);
@@ -66,17 +70,31 @@ package com.components
 			_ce.state.add(sensor2);
 			_portalParticles1.start();
 			_portalParticles2.start();
+			
+			alreadyCreated = true;
 		}
 		
 		public static function destroyColossolalHole():void
 		{
-			_ce.state.remove(sensor1);
-			_ce.state.remove(sensor2);
-			_ce.state.remove(_s1PS);
-			_ce.state.remove(_s2PS);
+			if (sensor1)
+				sensor1.kill = true;
 			
-			_portalParticles2.stop();
-			_portalParticles1.stop();
+			if(sensor2)
+				sensor2.kill = true;
+			
+			if (_s1PS)
+				_s1PS.kill = true;
+			
+			if (_s2PS)
+				_s2PS.kill = true;
+			
+			if (_portalParticles2)
+				_portalParticles2.stop();
+			
+			if (_portalParticles1)
+				_portalParticles1.stop();
+			
+			alreadyCreated = false;
 		}
 
 		public static function handleSensor1Touch(interactionCallback:InteractionCallback):void
