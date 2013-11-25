@@ -8,7 +8,6 @@ package com.states
 	import citrus.core.starling.StarlingState;
 	import citrus.objects.CitrusSprite;
 	import citrus.objects.NapePhysicsObject;
-	import citrus.objects.platformer.nape.Cannon;
 	import citrus.objects.platformer.nape.MovingPlatform;
 	import citrus.objects.platformer.nape.Platform;
 	import citrus.objects.platformer.nape.Sensor;
@@ -19,6 +18,7 @@ package com.states
 	import citrus.view.starlingview.StarlingTileSystem;
 	
 	import com.components.Anarcho;
+	import com.components.Cannon;
 	import com.components.Coin;
 	import com.components.ColossalHole;
 	import com.components.Countdown;
