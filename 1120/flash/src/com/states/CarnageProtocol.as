@@ -22,6 +22,7 @@ package com.states
 	import com.components.ColossalHole;
 	import com.components.Countdown;
 	import com.components.DynamicPlatform;
+	import com.components.EyesInTheShadows;
 	import com.components.GameButton;
 	import com.components.Life;
 	import com.components.NewLife;
@@ -78,7 +79,6 @@ package com.states
 		private var increaseRound:Boolean = false;
 		private var _powerups:PowerupProtocol;
 		private var _powerupStatus:PowerupManager;
-		private var _life:NewLife = new NewLife();
 		private var _lifeSprite:CitrusSprite;
 		
 		private var _colossalHole:CitrusGroup;
@@ -197,7 +197,7 @@ package com.states
 			var _remainingSprite:CitrusSprite = new CitrusSprite("remaining_sprite", {view:_remaining})
 			add(_remainingSprite);
 			
-			_lifeSprite = new CitrusSprite("lives", {view: _life});
+			_lifeSprite = new CitrusSprite("lives", {view: Game.life});
 			add(_lifeSprite);
 			
 			/** POWERUPS **/
@@ -247,6 +247,8 @@ package com.states
 			eyesAnim = new AnimationSequence(Textures.EYES_TEXTURE_ATLAS, ["eyes_1"], "eyes_1", 10, true, "none"); 
 			eyesSprite = new CitrusSprite("eyes_sprite", {view: eyesAnim, x: 100, y: 300});
 			// add(eyesSprite);
+			
+			// EyesInTheShadows.createEyesInTheShadows();
 		}
 		
 		override public function update(timeDelta:Number):void
@@ -589,7 +591,7 @@ package com.states
 			_ce.sound.playSound("hit_pick");
 			var _heart:Life = NapeUtils.CollisionGetObjectByType(Life, interactionCallback) as Life;
 			
-			_life.addLife();
+			Game.life.addLife();
 		}
 		
 		private function handleHeroJump():void
@@ -702,8 +704,6 @@ package com.states
 			
 			_fireParticles.dispose();
 			_atmoParticles.dispose();
-			
-			_life.dispose();
 			
 			// super.destroy();
 			
