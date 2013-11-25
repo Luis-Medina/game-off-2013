@@ -6,10 +6,7 @@ package com.components {
 	import flash.utils.getDefinitionByName;
 	
 	import nape.callbacks.InteractionCallback;
-	
-	/**
-	 * Coin is basically a sensor that destroys itself when a particular class type touches it. 
-	 */
+
 	public class Coin extends Sensor {
 		
 		protected var _collectorClass:Class = Anarcho;
