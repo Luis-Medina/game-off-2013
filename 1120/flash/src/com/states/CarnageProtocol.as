@@ -560,7 +560,7 @@ package com.states
 		
 		private function createLife():void
 		{
-			var _createLife:Boolean = ArrayUtils.chance(5);
+			var _createLife:Boolean = ArrayUtils.chance(0.15);
 			if (!_createLife) return;
 			
 			// *** TODO: don't choose same index as coins, maybe
