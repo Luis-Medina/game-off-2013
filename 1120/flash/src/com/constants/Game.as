@@ -1,6 +1,7 @@
 package com.constants
 {
 	import com.components.Anarcho;
+	import com.components.NewLife;
 
 	public class Game
 	{
@@ -12,6 +13,7 @@ package com.constants
 		
 		// COMPONENTS THAT NEED TO GET ACCESSED BY MULTIPLE CLASSES DUE TO POOR DESIGN
 		public static var hero:Anarcho;
+		public static var life:NewLife = new NewLife();
 		
 		// EVENTS
 		public static const START:String = "START";
