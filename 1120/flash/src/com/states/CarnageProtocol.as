@@ -132,7 +132,7 @@ package com.states
 			
 			/** PHYSICS **/
 			physics = new Nape("physics"); 
-			physics.visible = true;    
+			//physics.visible = true;    
 			add(physics);
 			
 			_bg_1 = new CitrusSprite("bg_1", {view: Textures.BG_TEXTURE, parallaxX: 0.7}); // BACKGROUND
