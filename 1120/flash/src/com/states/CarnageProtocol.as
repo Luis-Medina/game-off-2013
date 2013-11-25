@@ -1,6 +1,7 @@
 package com.states
 {
 
+	import citrus.core.CitrusEngine;
 	import citrus.core.CitrusGroup;
 	import citrus.core.CitrusObject;
 	import citrus.core.starling.StarlingCitrusEngine;
@@ -22,6 +23,7 @@ package com.states
 	import com.components.Countdown;
 	import com.components.DynamicPlatform;
 	import com.components.GameButton;
+	import com.components.Life;
 	import com.components.NewLife;
 	import com.components.PettyCash;
 	import com.components.PlatformSprite;
@@ -433,8 +435,10 @@ package com.states
 			_round.updateRound(increaseRound);
 			_powerupStatus.roundHasEndedUpdateCount(increaseRound);
 			
+			destoryLife();
 			destroyCoins();
 			createCoins();
+			createLife();
 			
 			var _jitter:Number = Math.floor(Math.random() * 30);
 			var _allPlatforms:Vector.<CitrusObject> = getObjectsByType(DynamicPlatform);
@@ -552,6 +556,40 @@ package com.states
 				_coin = _allActiveCoins[x] as Coin;
 				_coin.kill = true;
 			}
+		}
+		
+		private function createLife():void
+		{
+			var _createLife:Boolean = ArrayUtils.chance(5);
+			if (!_createLife) return;
+			
+			// *** TODO: don't choose same index as coins, maybe
+			var idx:int = ArrayUtils.getNumRandomValuesInRange(Game.platforms.xCoords.length - 26, Game.platforms.xCoords.length - 1, 1)[0];
+			var texture:Texture = Textures.HEART_TEXTURE;
+			var xPos:int = Math.floor(Game.platforms.xCoords[idx]);
+			var yPos:int = Math.floor(Game.platforms.yCoords[idx] - (texture.height/2) - 8);
+			var heart:Life = new Life("life", {x:xPos, y:yPos, view: texture});
+			heart.onBeginContact.add(handleHeartTouch);
+			add(heart);	
+		}
+		
+		private function destoryLife():void
+		{
+			var _allActiveLife:Vector.<CitrusObject> = getObjectsByType(Life);
+			var _life:Life;
+			for (var x:int = 0; x < _allActiveLife.length; x++)
+			{
+				_life = _allActiveLife[x] as Life;
+				_life.kill = true;
+			}
+		}
+		
+		private function handleHeartTouch(interactionCallback:InteractionCallback):void
+		{
+			_ce.sound.playSound("hit_pick");
+			var _heart:Life = NapeUtils.CollisionGetObjectByType(Life, interactionCallback) as Life;
+			
+			_life.addLife();
 		}
 		
 		private function handleHeroJump():void
