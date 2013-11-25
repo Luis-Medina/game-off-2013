@@ -435,7 +435,7 @@ package com.states
 			_round.updateRound(increaseRound);
 			_powerupStatus.roundHasEndedUpdateCount(increaseRound);
 			
-			destoryLife();
+			destroyLife();
 			destroyCoins();
 			createCoins();
 			createLife();
@@ -573,7 +573,7 @@ package com.states
 			add(heart);	
 		}
 		
-		private function destoryLife():void
+		private function destroyLife():void
 		{
 			var _allActiveLife:Vector.<CitrusObject> = getObjectsByType(Life);
 			var _life:Life;
