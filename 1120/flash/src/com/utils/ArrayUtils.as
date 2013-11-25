@@ -15,6 +15,10 @@ package com.utils
 			return (Math.floor(Math.random() * (maxNum - minNum + 1)) + minNum);
 		}
 		
+		public static function chance(percent:Number):Boolean{
+			return (Math.random()<=percent);
+		}
+		
 		public static function getNumRandomValuesInRange(minNum:Number, maxNum:Number, numberValues:int, ints:Boolean = true):Array
 		{
 			var arr:Array = [];
