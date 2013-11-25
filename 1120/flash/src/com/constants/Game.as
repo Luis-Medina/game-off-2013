@@ -1,5 +1,7 @@
 package com.constants
 {
+	import com.components.Anarcho;
+
 	public class Game
 	{
 		// CONSTANTS
@@ -7,6 +9,9 @@ package com.constants
 		public static const FRAME_RATE:int = 30;
 		public static const STAGE_WIDTH:Number = 960;
 		public static const STAGE_HEIGHT:Number = 600;
+		
+		// COMPONENTS THAT NEED TO GET ACCESSED BY MULTIPLE CLASSES DUE TO POOR DESIGN
+		public static var hero:Anarcho;
 		
 		// EVENTS
 		public static const START:String = "START";
