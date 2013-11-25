@@ -226,6 +226,9 @@ package com.constants
 		
 		[Embed(source="../assets/particles/fire.pex", mimeType="application/octet-stream")]
 		public static const FIRE_CONFIG:Class;
+		
+		[Embed(source="../assets/particles/Portal.pex", mimeType="application/octet-stream")]
+		public static const PORTAL_CONFIG:Class;
 
 		/** FUNCTIONS **/
 		
