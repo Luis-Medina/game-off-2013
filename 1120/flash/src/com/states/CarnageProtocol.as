@@ -18,6 +18,7 @@ package com.states
 	
 	import com.components.Anarcho;
 	import com.components.Coin;
+	import com.components.ColossalHole;
 	import com.components.Countdown;
 	import com.components.DynamicPlatform;
 	import com.components.GameButton;
@@ -65,7 +66,6 @@ package com.states
 		private var _atmoParticlesSprite:CitrusSprite;
 		
 		private var physics:Nape;
-		private var hero:Anarcho;
 		
 		private var _countDown:Countdown; 
 		private var _cash:PettyCash;
@@ -78,6 +78,8 @@ package com.states
 		private var _powerupStatus:PowerupManager;
 		private var _life:NewLife = new NewLife();
 		private var _lifeSprite:CitrusSprite;
+		
+		private var _colossalHole:CitrusGroup;
 		
 		private var _numCols:Number = 7;
 		private var _numRows:Number = 7;
@@ -130,7 +132,7 @@ package com.states
 			
 			/** PHYSICS **/
 			physics = new Nape("physics"); 
-			// physics.visible = true;    
+			physics.visible = true;    
 			add(physics);
 			
 			_bg_1 = new CitrusSprite("bg_1", {view: Textures.BG_TEXTURE, parallaxX: 0.7}); // BACKGROUND
@@ -222,15 +224,15 @@ package com.states
 			StarlingArt.setLoopAnimations(["dance"]);
 			 
 			/** PROTAGONIST **/
-			hero = new Anarcho("hero", {x: 20, y: Game.STAGE_HEIGHT - 20, width: 30, height: 56, view: heroAnim});
-			hero.canDuck = false;
-			hero.acceleration = Game.accelerationOrig; // default is 30
-			hero.jumpAcceleration = 7; // default is 9
-			hero.maxVelocity = Game.velocityOrig; // default is 240
-			hero.jumpHeight = 290; // default is 330
-			hero.onJump.add(handleHeroJump);
-			hero.onAnimationChange.add(handleHeroAnimationChange);
-			add(hero);
+			Game.hero = new Anarcho("hero", {x: 20, y: Game.STAGE_HEIGHT - 20, width: 30, height: 56, view: heroAnim});
+			Game.hero.canDuck = false;
+			Game.hero.acceleration = Game.accelerationOrig; // default is 30
+			Game.hero.jumpAcceleration = 7; // default is 9
+			Game.hero.maxVelocity = Game.velocityOrig; // default is 240
+			Game.hero.jumpHeight = 290; // default is 330
+			Game.hero.onJump.add(handleHeroJump);
+			Game.hero.onAnimationChange.add(handleHeroAnimationChange);
+			add(Game.hero);
 			
 			/** PROPHET SPEECH **/
 			var prophetSpeechAnim:AnimationSequence = new AnimationSequence(Textures.PROPHET_SPEECH_TEXTURE_ATLAS, ["prophet_laugh", "prophet_neutral"], "prophet_neutral", 6, true, "none");
@@ -243,6 +245,9 @@ package com.states
 			eyesAnim = new AnimationSequence(Textures.EYES_TEXTURE_ATLAS, ["eyes_1"], "eyes_1", 10, true, "none"); 
 			eyesSprite = new CitrusSprite("eyes_sprite", {view: eyesAnim, x: 100, y: 300});
 			// add(eyesSprite);
+			
+			ColossalHole.createColossalHole();
+			// addEntity(_colossalHole);
 		}
 		
 		override public function update(timeDelta:Number):void
@@ -272,10 +277,10 @@ package com.states
 				
 			}
 			
-			if (hero.acceleration == Game.accelerationBoost){
+			if (Game.hero.acceleration == Game.accelerationBoost){
 				_fireParticles.start();
-				_fireParticles.x = Math.floor(hero.x); 
-				_fireParticles.y = Math.floor(hero.y + hero.height / 2);
+				_fireParticles.x = Math.floor(Game.hero.x); 
+				_fireParticles.y = Math.floor(Game.hero.y + Game.hero.height / 2);
 			}
 			else 
 			{
@@ -374,12 +379,12 @@ package com.states
 			{
 				if (!revert)
 				{
-					hero.acceleration = Game.accelerationBoost;
-					hero.maxVelocity = Game.velocityBoost;
+					Game.hero.acceleration = Game.accelerationBoost;
+					Game.hero.maxVelocity = Game.velocityBoost;
 				} else 
 				{
-					hero.acceleration = Game.accelerationOrig;	
-					hero.maxVelocity = Game.velocityOrig;
+					Game.hero.acceleration = Game.accelerationOrig;	
+					Game.hero.maxVelocity = Game.velocityOrig;
 				}
 				
 			} else if (type == "lettuce")
