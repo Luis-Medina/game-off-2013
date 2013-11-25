@@ -437,10 +437,12 @@ package com.states
 			_round.updateRound(increaseRound);
 			_powerupStatus.roundHasEndedUpdateCount(increaseRound);
 			
+			destroyEnemy();
 			destroyLife();
 			destroyCoins();
 			createCoins();
 			createLife();
+			createEnemy();
 			
 			var _jitter:Number = Math.floor(Math.random() * 30);
 			var _allPlatforms:Vector.<CitrusObject> = getObjectsByType(DynamicPlatform);
@@ -584,6 +586,19 @@ package com.states
 				_life = _allActiveLife[x] as Life;
 				_life.kill = true;
 			}
+		}
+		
+		private function createEnemy():void
+		{
+			var _createEnemies:Boolean = ArrayUtils.chance(1); // TODO: make dependent on current round
+			if (!_createEnemies) return;
+			
+			EnemyProtocol.buildEnemy();
+		}
+		
+		private function destroyEnemy():void
+		{
+			EnemyProtocol.destroyEnemy();
 		}
 		
 		private function handleHeartTouch(interactionCallback:InteractionCallback):void
