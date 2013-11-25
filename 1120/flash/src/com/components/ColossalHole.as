@@ -34,7 +34,12 @@ package com.components
 		
 		public static var _portalConfig1:XML = XML(new Textures.PROPHET_ARRIVAL_CONFIG());
 		public static var _portalConfig2:XML = XML(new Textures.PROPHET_ARRIVAL_CONFIG());
-
+		public static var _portalParticles1:PDParticleSystem;
+		public static var _portalParticles2:PDParticleSystem;
+		
+		public static var _s1PS:CitrusSprite;
+		public static var _s2PS:CitrusSprite;
+		
 		private static var _ce:CitrusEngine = CitrusEngine.getInstance()
 			
 		private static var isActive:Boolean = true;
@@ -43,18 +48,18 @@ package com.components
 		
 		public static function createColossalHole():void
 		{			
-			var _portalParticles1:PDParticleSystem =  new PDParticleSystem(_portalConfig1, Textures.PARTICLE_TEXTURE_TEXTURE);
+			_portalParticles1 =  new PDParticleSystem(_portalConfig1, Textures.PARTICLE_TEXTURE_TEXTURE);
 			sensor1 = new Sensor("sensor_1", {view: _portalParticles1, x: sensor1X, y: sensor1Y});
 			sensor1.onBeginContact.add(handleSensor1Touch);
 			
-			var _s1PS:CitrusSprite = new CitrusSprite("s1ps", {view: _portalParticles1, x: sensor1.x, y: sensor1.y});
+			_s1PS = new CitrusSprite("s1ps", {view: _portalParticles1, x: sensor1.x, y: sensor1.y});
 			_ce.state.add(_s1PS);		
 			
-			var _portalParticles2:PDParticleSystem =  new PDParticleSystem(_portalConfig2, Textures.PARTICLE_TEXTURE_TEXTURE);
+			_portalParticles2 =  new PDParticleSystem(_portalConfig2, Textures.PARTICLE_TEXTURE_TEXTURE);
 			sensor2 = new Sensor("sensor_2", {view: _portalParticles2, x: sensor2X, y: sensor2Y});
 			sensor2.onBeginContact.add(handleSensor2Touch);
 			
-			var _s2PS:CitrusSprite = new CitrusSprite("s2ps", {view: _portalParticles2, x: sensor2.x, y: sensor2.y});
+			_s2PS = new CitrusSprite("s2ps", {view: _portalParticles2, x: sensor2.x, y: sensor2.y});
 			_ce.state.add(_s2PS);
 			
 			_ce.state.add(sensor1);
@@ -62,14 +67,7 @@ package com.components
 			_portalParticles1.start();
 			_portalParticles2.start();
 		}
-		
-		public static function moveEmitter(sprite:CitrusSprite, x:int, y:int):void
-		{
-			(sprite.view as PDParticleSystem).emitterX = x - Game.STAGE_WIDTH/2 - sprite.width/2;
-			(sprite.view as PDParticleSystem).emitterY = y - Game.STAGE_HEIGHT/2;// - sprite.height/2;
-		}
-		
-		
+
 		public static function handleSensor1Touch(interactionCallback:InteractionCallback):void
 		{
 			var _sensor1:Sensor = NapeUtils.CollisionGetObjectByType(Sensor, interactionCallback) as Sensor;
