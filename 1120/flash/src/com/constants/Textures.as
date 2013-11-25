@@ -132,6 +132,11 @@ package com.constants
 		public static const CRACK_STATUS_IMG:Texture = Texture.fromBitmap(new CRACK_STATUS);
 		public static const CRACK_STATUS_TEXTURE:Texture = Texture.fromTexture(CRACK_STATUS_IMG);
 		
+		[Embed(source="../assets/textures/colossal_hole.png", mimeType="image/png")]
+		public static const COLOSSAL_HOLE:Class;
+		public static const COLOSSAL_HOLE_IMG:Texture = Texture.fromBitmap(new COLOSSAL_HOLE);
+		public static const COLOSSAL_HOLE_TEXTURE:Texture = Texture.fromTexture(COLOSSAL_HOLE_IMG);
+		
 		/** SPRITES **/
 		[Embed(source="../assets/textures/prophet_sprite.xml", mimeType="application/octet-stream")]
 		public static const PROPHET_CONFIG:Class;
