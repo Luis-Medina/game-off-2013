@@ -43,12 +43,20 @@ package com.components
 		{
 			_life--;
 			updateLabel();
+			
+			if (_life == 0)
+				devoidOfLife();
 		}
 		
 		public function addLife():void
 		{
 			_life++;
 			updateLabel();
+		}
+		
+		public function devoidOfLife():void
+		{
+			trace("DEVOID OF LIFE")
 		}
 		
 		private function updateLabel():void
