@@ -136,7 +136,7 @@ package com.managers
 		{
 			if (colossalCount == 0)
 			{
-				/// dispatchEvent(new PowerupEvent(PowerupEvent.POWERUP, {type: "colossal", sound: '', revert: true}, true));
+				 dispatchEvent(new PowerupEvent(PowerupEvent.POWERUP, {type: "colossal", sound: '', revert: true}, true));
 			}
 			
 			if (barewalkCount == 0)
