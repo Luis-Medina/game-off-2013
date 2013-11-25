@@ -30,8 +30,9 @@ package com.components {
 			
 			super.handleBeginContact(interactionCallback);
 			
-			if (_collectorClass && NapeUtils.CollisionGetOther(this, interactionCallback) is _collectorClass)
-				kill = true;
+			// timer will kill.
+			// if (_collectorClass && NapeUtils.CollisionGetOther(this, interactionCallback) is _collectorClass)
+			//	kill = true;
 		}
 	}
 }
