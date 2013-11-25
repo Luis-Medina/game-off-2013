@@ -106,7 +106,6 @@ package com.constants
 		public static const FIRE_TEXTURE_IMG:Texture = Texture.fromBitmap(new FIRE_TEXTURE);
 		public static const FIRE_TEXTURE_TEXTURE:Texture = Texture.fromTexture(FIRE_TEXTURE_IMG);
 		
-		
 		[Embed(source="../assets/particles/texture.png")]
 		public static const MONEY_TEXTURE:Class;
 		public static const MONEY_TEXTURE_IMG:Texture = Texture.fromBitmap(new MONEY_TEXTURE);
@@ -136,6 +135,11 @@ package com.constants
 		public static const COLOSSAL_HOLE:Class;
 		public static const COLOSSAL_HOLE_IMG:Texture = Texture.fromBitmap(new COLOSSAL_HOLE);
 		public static const COLOSSAL_HOLE_TEXTURE:Texture = Texture.fromTexture(COLOSSAL_HOLE_IMG);
+		
+		[Embed(source="../assets/textures/heart.png", mimeType="image/png")]
+		public static const HEART:Class;
+		public static const HEART_IMG:Texture = Texture.fromBitmap(new HEART);
+		public static const HEART_TEXTURE:Texture = Texture.fromTexture(HEART_IMG);
 		
 		/** SPRITES **/
 		[Embed(source="../assets/textures/prophet_sprite.xml", mimeType="application/octet-stream")]
