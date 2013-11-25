@@ -16,7 +16,8 @@ package com.utils
 		}
 		
 		public static function chance(percent:Number):Boolean{
-			return (Math.random()<=percent);
+			var chance:Number = Math.random();
+			return (chance<=percent);
 		}
 		
 		public static function getNumRandomValuesInRange(minNum:Number, maxNum:Number, numberValues:int, ints:Boolean = true):Array
