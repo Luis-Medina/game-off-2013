@@ -245,9 +245,6 @@ package com.states
 			eyesAnim = new AnimationSequence(Textures.EYES_TEXTURE_ATLAS, ["eyes_1"], "eyes_1", 10, true, "none"); 
 			eyesSprite = new CitrusSprite("eyes_sprite", {view: eyesAnim, x: 100, y: 300});
 			// add(eyesSprite);
-			
-			ColossalHole.createColossalHole();
-			// addEntity(_colossalHole);
 		}
 		
 		override public function update(timeDelta:Number):void
@@ -374,6 +371,14 @@ package com.states
 			
 			if (type == "colossal")
 			{
+				if (!revert)
+				{
+					ColossalHole.createColossalHole();
+				} else 
+				{
+					ColossalHole.destroyColossolalHole();
+				}
+				
 					
 			} else if (type == "barewalk")
 			{
