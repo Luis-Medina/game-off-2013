@@ -8,6 +8,7 @@ package com.states
 	import citrus.core.starling.StarlingState;
 	import citrus.objects.CitrusSprite;
 	import citrus.objects.NapePhysicsObject;
+	import citrus.objects.platformer.nape.Cannon;
 	import citrus.objects.platformer.nape.MovingPlatform;
 	import citrus.objects.platformer.nape.Platform;
 	import citrus.objects.platformer.nape.Sensor;
@@ -134,7 +135,7 @@ package com.states
 			
 			/** PHYSICS **/
 			physics = new Nape("physics"); 
-			//physics.visible = true;    
+			physics.visible = true;    
 			add(physics);
 			
 			_bg_1 = new CitrusSprite("bg_1", {view: Textures.BG_TEXTURE, parallaxX: 0.7}); // BACKGROUND
@@ -599,13 +600,22 @@ package com.states
 		private function destroyEnemy():void
 		{
 			EnemyProtocol.destroyEnemy();
+			
+			var _allCannons:Vector.<CitrusObject> = getObjectsByType(Cannon);
+			var _cannon:Cannon;
+			for (var x:int = 0; x < _allCannons.length; x++)
+			{
+				_cannon = _allCannons[x] as Cannon;
+				_cannon.kill = true;
+			}
 		}
 		
 		private function handleHeartTouch(interactionCallback:InteractionCallback):void
 		{
-			_ce.sound.playSound("hit_pick");
 			var _heart:Life = NapeUtils.CollisionGetObjectByType(Life, interactionCallback) as Life;
+			if ((NapeUtils.CollisionGetOther(_heart, interactionCallback) is Anarcho) == false) return;
 			
+			_ce.sound.playSound("hit_pick");
 			Game.life.addLife();
 		}
 		
@@ -622,9 +632,10 @@ package com.states
 		
 		private function handleCoinTouch(interactionCallback:InteractionCallback):void
 		{
-			_ce.sound.playSound("veloid2");
 			var _coin:Coin = NapeUtils.CollisionGetObjectByType(Coin, interactionCallback) as Coin;
+			if ((NapeUtils.CollisionGetOther(_coin, interactionCallback) is Anarcho) == false) return;
 			
+			_ce.sound.playSound("veloid2");
 			var _moneyConfig:XML = XML(new Textures.SPARE_SOME_CHANGE_CONFIG());
 			var _spareSomeChangeTexture:Texture = Textures.MONEY_TEXTURE_TEXTURE;
 			var _spareSomeChangeDawg:PDParticleSystem = new PDParticleSystem(_moneyConfig, _spareSomeChangeTexture);
