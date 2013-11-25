@@ -2,16 +2,21 @@ package com.states
 {
 	import citrus.core.CitrusEngine;
 	import citrus.objects.CitrusSprite;
-	import citrus.objects.platformer.nape.Cannon;
+	import citrus.objects.NapePhysicsObject;
 	import citrus.objects.platformer.nape.Missile;
+	import citrus.physics.nape.NapeUtils;
 	import citrus.view.starlingview.AnimationSequence;
 	import citrus.view.starlingview.StarlingArt;
 	
+	import com.components.Anarcho;
+	import com.components.Cannon;
 	import com.constants.Game;
 	import com.constants.Textures;
 	import com.utils.ArrayUtils;
 	
 	import flash.display3D.textures.Texture;
+	
+	import nape.callbacks.InteractionCallback;
 	
 	import starling.textures.TextureAtlas;
 	
@@ -34,6 +39,8 @@ package com.states
 		public static var enemySprite:CitrusSprite;
 		public static var enemyAnim:AnimationSequence;
 		
+		public static var cannon:Cannon;
+		
 		private static function chooseEnemy():String
 		{
 			var enemies:Array = ["mustache", "glasses", "canada"];
@@ -53,13 +60,38 @@ package com.states
 			_ce.state.add(enemySprite);
 
 			
-			// TODO: 
+			createCannons();
 		}
 		
 		public static function destroyEnemy():void
 		{
 			if (enemySprite)
 				enemySprite.kill = true;
+			
+			// destroy attacking objects in CarnageProtocol
+			
+			if (cannon)
+				cannon.kill = true;
+		}
+		
+		public static function createCannons():void
+		{
+			var numCannons:int = 1;
+			var xPos:Number;
+			var yPos:Number
+			for (var i:int = 0; i < numCannons; i++)
+			{
+				xPos = 70; // good: 70, 
+				yPos = 150;
+				cannon = new Cannon("cannon_" + i, {x:xPos, y:yPos, fireRate:1500, missileSpeed:900, missileFuseDuration: 5000, missileExplodeDuration: 0, openFire: true})
+				cannon.onGiveDamage.add(cannonHit);
+				_ce.state.add(cannon)
+			}
+		}
+		
+		public static function cannonHit(contact:NapePhysicsObject):void
+		{
+			trace("hit")
 		}
 		
 	}
