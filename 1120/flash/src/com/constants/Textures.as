@@ -217,6 +217,16 @@ package com.constants
 		public static const POWERUP_OVERLAY_IMG:Texture = Texture.fromBitmap(new POWERUP_OVERLAY);
 		public static const POWERUP_OVERLAY_TEXTURE:Texture = Texture.fromTexture(POWERUP_OVERLAY_IMG);
 		
+		[Embed(source="../assets/textures/enemies/enemies.xml", mimeType="application/octet-stream")]
+		public static const ENEMIES_CONFIG:Class;
+		public static const ENEMIES_XML:XML = new XML(new ENEMIES_CONFIG());
+		
+		[Embed(source="../assets/textures/enemies/enemies.png")]
+		public static const ENEMIES:Class;
+		public static const ENEMIES_TEXTURE_IMG:Texture = Texture.fromBitmap(new ENEMIES);
+		public static const ENEMIES_TEXTURE:Texture = Texture.fromTexture(ENEMIES_TEXTURE_IMG);
+		public static const ENEMIES_TEXTURE_ATLAS:TextureAtlas = new TextureAtlas (ENEMIES_TEXTURE, ENEMIES_XML);
+		
 		/** PARTICLE CONFIGS **/
 		
 		[Embed(source="../assets/particles/Atmosphere.pex", mimeType="application/octet-stream")]
