@@ -607,6 +607,7 @@ package com.states
 			{
 				_cannon = _allCannons[x] as Cannon;
 				_cannon.kill = true;
+				_cannon.destroy();
 			}
 		}
 		
@@ -693,10 +694,11 @@ package com.states
 					 if(touch.phase == TouchPhase.ENDED)
 					{
 						 _ce.sound.playSound("click");
-						 if(button.name == Game.RESTART)
+						 if(button.name == Game.RESTART){
 						 	dispatchEvent(new CreateEvent(CreateEvent.CREATE, {type: Game.RESTART}, true));
-						 else if (button.name == Game.SPLASH)
+						 }else if (button.name == Game.SPLASH){
 							 dispatchEvent(new CreateEvent(CreateEvent.CREATE, {type: Game.SPLASH}, true));
+						 }
 					}	
 					
 				}
@@ -732,7 +734,7 @@ package com.states
 			_atmoParticles.dispose();
 			
 			// super.destroy();
-			
+			destroyEnemy();
 		}		
 	}
 }

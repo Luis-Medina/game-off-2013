@@ -75,13 +75,11 @@ package com.states
 		
 		public static function destroyEnemy():void
 		{
-			if (enemySprite)
-				enemySprite.kill = true;
+			// if (enemySprite)
+			//	enemySprite.kill = true;
 			
-			// destroy attacking objects in CarnageProtocol
-			
-			if (cannon)
-				cannon.kill = true;
+			//if (cannon)
+			// 	cannon.kill = true;
 		}
 		
 		public static function createCannons():void{
