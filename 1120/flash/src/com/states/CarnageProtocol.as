@@ -591,7 +591,7 @@ package com.states
 		
 		private function createEnemy():void
 		{
-			var _createEnemies:Boolean = ArrayUtils.chance(1); // TODO: make dependent on current round
+			var _createEnemies:Boolean = ArrayUtils.chance(0.65 + _round.getRound()/100); 
 			if (!_createEnemies) return;
 			
 			EnemyProtocol.buildEnemy();
