@@ -68,5 +68,31 @@ package com.utils
 				
 			return sum;
 		}
+		
+		public static function randomizeArray(array:Array):Array
+		{
+			var newArray:Array = new Array();
+			while (array.length > 0)
+			{
+				var mn:int=Math.floor(Math.random()*array.length)
+				newArray[newArray.length]=array[mn]
+				array.splice(mn,1)
+			}
+			return newArray;
+		}
+		
+		// http://swati61.blogspot.com/2011/06/as3-shuffle-array_16.html
+		public static function arrayShuffle(array_arr:Array):Array
+		{
+			for(var i:Number = 0; i < array_arr.length; i++)
+			{
+				var randomNum_num:int = Math.floor(Math.random() * array_arr.length)
+				var arrayIndex:*  = array_arr[i];
+				array_arr[i] = array_arr[randomNum_num];
+				array_arr[randomNum_num] = arrayIndex;
+			}
+			return array_arr;
+		}  
+		
 	}
 }
