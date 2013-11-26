@@ -46,7 +46,7 @@ package com.constants
 			
 		// GAME STATES (for tracking && for results screen)
 		public static var coinCount:Number;
-		public static var THREE_NINETY:Number = 0.11;
+		public static var THREE_NINETY:Number = 3.90;
 			
 		// PLATFORM MANAGEMENT
 		public static const platforms:Object = {}; 
