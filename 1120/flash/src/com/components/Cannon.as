@@ -18,8 +18,15 @@ package com.components
 			if (contact != null)
 			{
 				// hacky, but ok.
+				// TODO *** FIGURE OUT HOW TO IGNORE 
 				if(contact.body.type != BodyType.STATIC)
 					onGiveDamage.dispatch(contact);
+
+				//trace(contact.name)
+				//trace(contact.type)
+				//trace(contact.body)
+				
+				// if (contact.name.indexOf("row_") != -1 || contact.name.indexOf("col_") != -1)
 			}
 		}
 	}
