@@ -11,7 +11,7 @@ package com.managers
 	
 	public class PowerupManager extends Sprite
 	{
-		public static const ADDED_ROUNDS:int = 3; // 11; // idk why 11, tbh.. but I already made the sprites so...
+		public static const ADDED_ROUNDS:int = 11; // idk why 11, tbh.. but I already made the sprites so...
 		public static const INACTIVE_ALPHA:Number = 1;
 
 		private var globalYPos:Number = 20 // 530// 
