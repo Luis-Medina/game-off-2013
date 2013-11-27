@@ -1,8 +1,10 @@
 package com.components
 {
-	import com.constants.Textures;
 	import com.constants.Colors;
+	import com.constants.Textures;
 	
+	import starling.animation.Transitions;
+	import starling.core.Starling;
 	import starling.display.Image;
 	import starling.display.Sprite;
 	import starling.events.Event;
@@ -46,8 +48,20 @@ package com.components
 		{
 			if (increase)
 				_round++
+			else
+				return;
 				
+			Starling.juggler.tween(_countTextField, 0.5, {
+				transition: Transitions.EASE_IN,
+				delay: 0,
+				repeatCount: 2,
+				reverse: true,
+				alpha: 0
+			});
+			
 			_countTextField.text = _round.toString();
+			
+			
 		}
 		
 		public function getRound():int
