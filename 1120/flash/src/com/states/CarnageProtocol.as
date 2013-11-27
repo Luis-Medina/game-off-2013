@@ -44,6 +44,9 @@ package com.states
 	import nape.callbacks.InteractionCallback;
 	import nape.geom.Vec2;
 	
+	import starling.animation.Transitions;
+	import starling.animation.Tween;
+	import starling.core.Starling;
 	import starling.display.BlendMode;
 	import starling.display.Button;
 	import starling.display.DisplayObject;
@@ -56,6 +59,7 @@ package com.states
 	import starling.extensions.particles.PDParticleSystem;
 	import starling.textures.Texture;
 	import starling.textures.TextureSmoothing;
+	import starling.utils.*
 	
 	public class CarnageProtocol extends StarlingState
 	{
@@ -546,6 +550,15 @@ package com.states
 				currCoinNames.push(coin.name);
 				currCoinValues.push(coinValue);
 				add(coin);
+				
+				// tween
+				Starling.juggler.tween(coin, 0.001, {
+					transition: Transitions.LINEAR,
+					delay: 0,
+					repeatCount: 11000,
+					reverse: false,
+					rotation: deg2rad(360)
+				});
 			}
 			
 			// UPDATE
