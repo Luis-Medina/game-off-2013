@@ -22,6 +22,7 @@ package com.states
 	import com.components.Coin;
 	import com.components.ColossalHole;
 	import com.components.Countdown;
+	import com.components.Darkness;
 	import com.components.DynamicPlatform;
 	import com.components.EyesInTheShadows;
 	import com.components.GameButton;
@@ -59,8 +60,8 @@ package com.states
 	import starling.extensions.particles.PDParticleSystem;
 	import starling.textures.Texture;
 	import starling.textures.TextureSmoothing;
-	import starling.utils.*
-	
+	import starling.utils.*;
+
 	public class CarnageProtocol extends StarlingState
 	{
 		private var _bg_1:CitrusSprite;
@@ -73,6 +74,7 @@ package com.states
 		private var _splashButton:Button;
 		private var _atmoParticles:PDParticleSystem = new PDParticleSystem(XML(new Textures.ATMOSPHERE_CONFIG()), Textures.MONEY_TEXTURE_TEXTURE);
 		private var _atmoParticlesSprite:CitrusSprite;
+		private var _theVoid:Darkness = new Darkness();
 		
 		private var physics:Nape;
 		
@@ -256,6 +258,9 @@ package com.states
 			// add(eyesSprite);
 			
 			// EyesInTheShadows.createEyesInTheShadows();
+			
+			// ALWAYS ON TOP
+			// addChild(_theVoid);
 		}
 		
 		override public function update(timeDelta:Number):void
@@ -444,12 +449,14 @@ package com.states
 			_round.updateRound(increaseRound);
 			_powerupStatus.roundHasEndedUpdateCount(increaseRound);
 			
+			// endDarkness(); 
 			destroyEnemy();
 			destroyLife();
 			destroyCoins();
 			createCoins();
 			createLife();
 			createEnemy();
+			// commenceDarkness();
 			
 			var _jitter:Number = Math.floor(Math.random() * 30);
 			var _allPlatforms:Vector.<CitrusObject> = getObjectsByType(DynamicPlatform);
@@ -626,6 +633,19 @@ package com.states
 			}
 		}
 		
+		private function commenceDarkness():void
+		{
+			var _darkness:Boolean = ArrayUtils.chance(1);// ArrayUtils.chance(0.65 + _round.getRound()/100); 
+			if (!_darkness) return;
+			
+			_theVoid.initDarkness();
+		}
+		
+		private function endDarkness():void
+		{
+			_theVoid.stopDarkness();
+		}
+		
 		private function handleHeartTouch(interactionCallback:InteractionCallback):void
 		{
 			var _heart:Life = NapeUtils.CollisionGetObjectByType(Life, interactionCallback) as Life;
@@ -747,6 +767,8 @@ package com.states
 			
 			_fireParticles.dispose();
 			_atmoParticles.dispose();
+			
+			_theVoid.dispose();
 			
 			// super.destroy();
 			destroyEnemy();
