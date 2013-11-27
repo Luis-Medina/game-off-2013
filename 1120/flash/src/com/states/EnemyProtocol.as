@@ -11,12 +11,17 @@ package com.states
 	import com.components.Anarcho;
 	import com.components.Cannon;
 	import com.constants.Game;
+	import com.constants.GearTextures;
 	import com.constants.Textures;
 	import com.utils.ArrayUtils;
 	
 	import nape.callbacks.InteractionCallback;
 	
+	import starling.animation.Transitions;
+	import starling.core.Starling;
 	import starling.textures.TextureAtlas;
+	
+	import starling.utils.*;
 	
 	public class EnemyProtocol
 	{
@@ -36,9 +41,9 @@ package com.states
 		// private static var cannonXPos:Array = [20, 940, 20, 940, 20, 940, 20, 940, 20, 940, 20, 940];
 		// private static var cannonYPos:Array = [160, 160, 240, 240, 320, 320, 400, 400, 480, 480, 560, 560];
 		private static var cannonPos:Array = [[20,160], [940, 160], [20, 240], [940, 240], [20,320], [940,320], [20, 400], [940, 400], [20, 480], [940, 480], [20, 560], [940, 560]]; 
-		private static var fireRateArr:Array = [2200, 2200, 2200, 2200, 2200, 2200, 2100, 2100, 2000, 2000, 1000, 500, 800, 700];
+		private static var fireRateArr:Array = [3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000];
 		private static var numCannonsArr:Array = [1,1,2,2,3,3,4,4,5,5,6,6,8,8,10,10, 12];
-		private static var speedArr:Array = [1200, 1200, 1200, 1200, 1200, 1200, 1200, 1200, 1200, 1200, 1200, 1200];
+		private static var speedArr:Array = [300, 300, 300, 300, 300, 300, 300, 300, 300, 300, 300, 300];
 		private static var speedVarArr:Array = [90, 90, 80, 80, 60, 60, 40, 40, 20, 20, 20, 20];
 		
 		/**
@@ -104,9 +109,17 @@ package com.states
 				speedVar = speedVarArr[i];
 				speed = ArrayUtils.randomRange(speedArr[i] - speedVar, speedArr[i] + speedVar);
 				direction = (xPos < Game.STAGE_WIDTH/2) ? "right" : "left";
-				cannon = new Cannon("cannon_" + i, {x:xPos, y:yPos, fireRate:fireRate, missileSpeed:speed, missileFuseDuration: 1000, missileExplodeDuration: 20, openFire: true, startingDirection: direction})
+				cannon = new Cannon("cannon_" + i, {x:xPos, y:yPos, fireRate:fireRate, missileSpeed:speed, missileFuseDuration: 1000, missileExplodeDuration: 20, openFire: true, startingDirection: direction, missileView:GearTextures.getRandomGearTexture()})
 				cannon.onGiveDamage.add(cannonHit);
-				_ce.state.add(cannon)
+				_ce.state.add(cannon) 
+					
+				Starling.juggler.tween(cannon, 0.001, {
+					transition: Transitions.LINEAR,
+					delay: 0,
+					repeatCount: 11000,
+					reverse: false,
+					rotation: deg2rad(360)
+				});
 			}
 		}
 		
