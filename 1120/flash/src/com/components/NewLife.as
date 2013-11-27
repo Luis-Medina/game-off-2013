@@ -2,6 +2,8 @@ package com.components
 {
 	import com.constants.Colors;
 	
+	import starling.animation.Transitions;
+	import starling.core.Starling;
 	import starling.display.Image;
 	import starling.display.Sprite;
 	import starling.events.Event;
@@ -63,6 +65,14 @@ package com.components
 		
 		private function updateLabel():void
 		{
+			Starling.juggler.tween(_lifeTextField, 0.5, {
+				transition: Transitions.EASE_IN,
+				delay: 0,
+				repeatCount: 2,
+				reverse: true,
+				alpha: 0
+			});
+			
 			_lifeTextField.text = _life.toString();
 		}
 		
