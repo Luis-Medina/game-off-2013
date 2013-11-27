@@ -65,6 +65,8 @@ package com.components
 		
 		private function updateLabel():void
 		{
+			_lifeTextField.alpha = 1;
+			_xTextField.alpha = 1;
 			Starling.juggler.tween(_lifeTextField, 0.5, {
 				transition: Transitions.EASE_IN,
 				delay: 0,
