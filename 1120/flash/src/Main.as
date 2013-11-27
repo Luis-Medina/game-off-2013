@@ -12,7 +12,7 @@ package
 	
 	import flash.events.Event;
 		
-	[SWF(width='960', height='600', backgroundColor='#080f13', frameRate='30', pageTitle='1120')]
+	[SWF(width='960', height='600', backgroundColor='#080f13', frameRate='60', pageTitle='1120')]
 	
 	public class Main extends StarlingCitrusEngine {
 
