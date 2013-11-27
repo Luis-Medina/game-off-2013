@@ -14,8 +14,6 @@ package com.states
 	import com.constants.Textures;
 	import com.utils.ArrayUtils;
 	
-	import flash.display3D.textures.Texture;
-	
 	import nape.callbacks.InteractionCallback;
 	
 	import starling.textures.TextureAtlas;
