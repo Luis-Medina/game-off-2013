@@ -36,10 +36,10 @@ package com.constants
 		public static const globalHeight:Number = 20;
 			
 		// POWERUPS
-		public static var accelerationOrig:Number = 10;
-		public static var accelerationBoost:Number = 16;
-		public static var velocityOrig:Number = 120;
-		public static var velocityBoost:Number = 140;
+		public static var accelerationOrig:Number = 4;
+		public static var accelerationBoost:Number = 8;
+		public static var velocityOrig:Number = 80;
+		public static var velocityBoost:Number = 100;
 		
 		public static var timeBoost:Number = 12000;
 		public static var timeOrig:Number = 10000;

@@ -42,6 +42,7 @@ package com.states
 	import flash.geom.Point;
 	
 	import nape.callbacks.InteractionCallback;
+	import nape.geom.Vec2;
 	
 	import starling.display.BlendMode;
 	import starling.display.Button;
@@ -135,7 +136,8 @@ package com.states
 			
 			/** PHYSICS **/
 			physics = new Nape("physics"); 
-			physics.visible = true;    
+			physics.gravity = new Vec2(0, 188);
+			// physics.visible = true;    
 			add(physics);
 			
 			_bg_1 = new CitrusSprite("bg_1", {view: Textures.BG_TEXTURE, parallaxX: 0.7}); // BACKGROUND
@@ -230,9 +232,9 @@ package com.states
 			Game.hero = new Anarcho("hero", {x: 20, y: Game.STAGE_HEIGHT - 20, width: 30, height: 56, view: heroAnim});
 			Game.hero.canDuck = false;
 			Game.hero.acceleration = Game.accelerationOrig; // default is 30
-			Game.hero.jumpAcceleration = 7; // default is 9
+			Game.hero.jumpAcceleration = 1.2; // default is 9
 			Game.hero.maxVelocity = Game.velocityOrig; // default is 240
-			Game.hero.jumpHeight = 290; // default is 330
+			Game.hero.jumpHeight = 195; // default is 330
 			Game.hero.onJump.add(handleHeroJump);
 			Game.hero.onAnimationChange.add(handleHeroAnimationChange);
 			add(Game.hero);
