@@ -73,6 +73,14 @@ package com.components
 				alpha: 0
 			});
 			
+			Starling.juggler.tween(_xTextField, 0.5, {
+				transition: Transitions.EASE_IN,
+				delay: 0,
+				repeatCount: 2,
+				reverse: true,
+				alpha: 0
+			});
+			
 			_lifeTextField.text = _life.toString();
 		}
 		
