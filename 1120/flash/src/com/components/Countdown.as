@@ -8,6 +8,8 @@ package com.components
 	import flash.events.TimerEvent;
 	import flash.utils.Timer;
 	
+	import starling.animation.Transitions;
+	import starling.core.Starling;
 	import starling.display.Image;
 	import starling.display.Sprite;
 	import starling.events.Event;
@@ -74,9 +76,23 @@ package com.components
 			_timerDisplay.text = (timeToDisplay).toString();
 			
 			if (timeToDisplay < (_totalTime/1000)/2)
+			{
 				_timerDisplay.color = Colors.RED;
-			else
+				Starling.juggler.tween(_timerDisplay, 0.05, {
+					transition: Transitions.EASE_IN_BOUNCE,
+					delay: 0,
+					repeatCount: 2,
+					reverse: true,
+					scaleX: 1.2,
+					scaleY: 1.2
+				});
+				
+			} else {
 				_timerDisplay.color = Colors.WHITE;
+				_timerDisplay.scaleX = 1;
+				_timerDisplay.scaleY = 1;
+				
+			}
 		}
 		
 		private function handleTimeEvent(e:TimerEvent):void
