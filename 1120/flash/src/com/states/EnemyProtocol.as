@@ -16,6 +16,7 @@ package com.states
 	import com.constants.Game;
 	import com.constants.GearTextures;
 	import com.constants.Textures;
+	import com.events.CreateEvent;
 	import com.events.InjuryEvent;
 	import com.utils.ArrayUtils;
 	
@@ -137,14 +138,20 @@ package com.states
 		  	if (contact.name == "hero")
 			{
 				Game.life.removeLife();
-				_eventDispatcher.dispatchEvent(new InjuryEvent(InjuryEvent.INJURY, {}, true));
 				
-				_ce.sound.playSound("earthrot");
+				if(Game.life.getNumLife() > 0)
+				{
+					_eventDispatcher.dispatchEvent(new InjuryEvent(InjuryEvent.INJURY, {}, true));
+					_ce.sound.playSound("earthrot");
+				} else {
+					return;
+				}
+				
 			} else {
 				
 				if (contact.name.indexOf("row_") != -1 || contact.name.indexOf("col_") != -1)
 				{
-					trace("break," + Game.BREAK_WALLS)
+					// trace("break," + Game.BREAK_WALLS)
 					if(Game.BREAK_WALLS == "no") return; 
 						
 					var _index:int = Game.getIndexByName(contact.name);
