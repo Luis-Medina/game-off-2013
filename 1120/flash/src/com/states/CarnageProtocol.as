@@ -230,7 +230,7 @@ package com.states
 			StarlingArt.setLoopAnimations(["dance"]);
 			 
 			/** PROTAGONIST **/
-			Game.hero = new Anarcho("hero", {x: 20, y: Game.STAGE_HEIGHT - 20, width: 30, height: 56, view: heroAnim});
+			Game.hero = new Anarcho("hero", {x: 120, y: Game.STAGE_HEIGHT - 20, width: 30, height: 56, view: heroAnim});
 			Game.hero.canDuck = false;
 			Game.hero.acceleration = Game.accelerationOrig; // default is 30
 			Game.hero.jumpAcceleration = 1.2; // default is 9
