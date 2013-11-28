@@ -7,6 +7,7 @@ package
 	import com.constants.Game;
 	import com.events.CreateEvent;
 	import com.states.CarnageProtocol;
+	import com.states.LifelessProtocol;
 	import com.states.MenuProtocol;
 	import com.states.TerminateProtocol;
 	
@@ -57,6 +58,9 @@ package
 				state = new MenuProtocol();
 			else if (type == Game.EXIT)
 				state = new TerminateProtocol();
+			else if (type == Game.DEATH)
+				state = new LifelessProtocol;
+				
 		}
 	}
 }
