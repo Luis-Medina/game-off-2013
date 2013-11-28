@@ -29,6 +29,9 @@ package com.constants
 		[Embed(source="../assets/audio/heart.mp3")]
 		public static const HEART:Class;
 		
+		[Embed(source="../assets/audio/horror.mp3")]
+		public static const HORROR:Class;
+		
 		/*
 		[Embed(source="../assets/audio/walk.mp3")]
 		public static const WALK:Class;
