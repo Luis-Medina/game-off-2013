@@ -137,12 +137,13 @@ package com.states
 		{
 		  	if (contact.name == "hero")
 			{
+				_ce.sound.playSound("earthrot");
 				Game.life.removeLife();
 				
 				if(Game.life.getNumLife() > 0)
 				{
 					_eventDispatcher.dispatchEvent(new InjuryEvent(InjuryEvent.INJURY, {}, true));
-					_ce.sound.playSound("earthrot");
+					// _ce.sound.playSound("earthrot");
 				} else {
 					return;
 				}

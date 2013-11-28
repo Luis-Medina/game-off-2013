@@ -146,6 +146,9 @@ package com.states
 			// physics.visible = true;    
 			add(physics);
 			
+			// reset params
+			Game.resetGameParams();
+			
 			// background
 			_dynamicBackground = new ShiftingBackground();
 			_dynamicBackgroundSprite = new CitrusSprite("dynamic_background", {view: _dynamicBackground});
