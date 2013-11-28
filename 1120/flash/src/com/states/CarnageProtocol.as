@@ -658,12 +658,12 @@ package com.states
 		
 		private function injury():void
 		{
-			var intensity:Number = ArrayUtils.randomRange(10, 100)
-			var duration:Number = ArrayUtils.randomRange(200, 500)
+			var intensity:Number = ArrayUtils.randomRange(5, 50);
+			var duration:Number = ArrayUtils.randomRange(50, 100);
 			shake(duration, intensity);
 		}
 
-		private function shake(duration:Number, intensity:Number = 20):void
+		private function shake(duration:Number, intensity:Number):void
 		{
 			this.x = Math.random() * intensity - intensity / 2;
 			this.y = Math.random() * intensity - intensity / 2;
@@ -675,12 +675,10 @@ package com.states
 		
 		private function shakeTimerCallback(e:TimerEvent):void
 		{
-			_shakeTimer.removeEventListener(TimerEvent.TIMER_COMPLETE, shakeTimerCallback);
-			
+			_shakeTimer.addEventListener(TimerEvent.TIMER_COMPLETE, shakeTimerCallback);
 			this.x = 0;
 			this.y = 0;
 		}
-		
 		
 		private function handleHeartTouch(interactionCallback:InteractionCallback):void
 		{
