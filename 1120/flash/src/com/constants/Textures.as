@@ -24,27 +24,11 @@ package com.constants
 		public static const FLOOR:Class;
 		public static const FLOOR_IMG:Texture = Texture.fromBitmap(new FLOOR);
 		public static const FLOOR_TEXTURE:Texture = Texture.fromTexture(FLOOR_IMG);
-		
-		[Embed(source="../assets/textures/level_1_bg.png", mimeType="image/png")]
-		public static const BG:Class;
-		public static const BG_IMG:Texture = Texture.fromBitmap(new BG);
-		public static const BG_TEXTURE:Texture = Texture.fromTexture(BG_IMG);
 
 		[Embed(source="../assets/textures/level_1_buildings.png", mimeType="image/png")]
 		public static const BUILDINGS:Class;
 		public static const BUILDINGS_IMG:Texture = Texture.fromBitmap(new BUILDINGS);
 		public static const BUILDINGS_TEXTURE:Texture = Texture.fromTexture(BUILDINGS_IMG);
-		BUILDINGS_TEXTURE.repeat = true;
-		
-		[Embed(source="../assets/textures/platform_row.png", mimeType="image/png")]
-		public static const ROW:Class;
-		public static const ROW_IMG:Texture = Texture.fromBitmap(new ROW);
-		public static const ROW_TEXTURE:Texture = Texture.fromTexture(ROW_IMG);
-		
-		[Embed(source="../assets/textures/platform_col.png", mimeType="image/png")]
-		public static const COL:Class;
-		public static const COL_IMG:Texture = Texture.fromBitmap(new COL);
-		public static const COL_TEXTURE:Texture = Texture.fromTexture(COL_IMG);	
 		
 		[Embed(source="../assets/textures/label_change.png", mimeType="image/png")]
 		public static const CHANGE_LABEL:Class;
@@ -131,11 +115,6 @@ package com.constants
 		public static const CRACK_STATUS_IMG:Texture = Texture.fromBitmap(new CRACK_STATUS);
 		public static const CRACK_STATUS_TEXTURE:Texture = Texture.fromTexture(CRACK_STATUS_IMG);
 		
-		[Embed(source="../assets/textures/colossal_hole.png", mimeType="image/png")]
-		public static const COLOSSAL_HOLE:Class;
-		public static const COLOSSAL_HOLE_IMG:Texture = Texture.fromBitmap(new COLOSSAL_HOLE);
-		public static const COLOSSAL_HOLE_TEXTURE:Texture = Texture.fromTexture(COLOSSAL_HOLE_IMG);
-		
 		[Embed(source="../assets/textures/heart.png", mimeType="image/png")]
 		public static const HEART:Class;
 		public static const HEART_IMG:Texture = Texture.fromBitmap(new HEART);
@@ -171,17 +150,7 @@ package com.constants
 		public static const GREEN_TEXTURE_IMG:Texture = Texture.fromBitmap(new GREEN);
 		public static const GREEN_TEXTURE:Texture = Texture.fromTexture(GREEN_TEXTURE_IMG);
 		public static const GREEN_TEXTURE_ATLAS:TextureAtlas = new TextureAtlas (GREEN_TEXTURE, GREEN_XML);
-		
-		[Embed(source="../assets/textures/prophet_speech.xml", mimeType="application/octet-stream")]
-		public static const PROPHET_SPEECH_CONFIG:Class;
-		public static const PROPHET_SPEECH_XML:XML = new XML(new PROPHET_SPEECH_CONFIG());
-		
-		[Embed(source="../assets/textures/prophet_speech.png")]
-		public static const PROPHET_SPEECH:Class;
-		public static const PROPHET_SPEECH_TEXTURE_IMG:Texture = Texture.fromBitmap(new PROPHET_SPEECH);
-		public static const PROPHET_SPEECH_TEXTURE:Texture = Texture.fromTexture(PROPHET_SPEECH_TEXTURE_IMG);
-		public static const PROPHET_SPEECH_TEXTURE_ATLAS:TextureAtlas = new TextureAtlas (PROPHET_SPEECH_TEXTURE, PROPHET_SPEECH_XML);
-		
+	
 		[Embed(source="../assets/textures/platform_sprites.xml", mimeType="application/octet-stream")]
 		public static const PLATFORMS_CONFIG:Class;
 		public static const PLATFORMS_XML:XML = new XML(new PLATFORMS_CONFIG());
@@ -191,16 +160,6 @@ package com.constants
 		public static const PLATFORMS_TEXTURE_IMG:Texture = Texture.fromBitmap(new PLATFORMS);
 		public static const PLATFORMS_TEXTURE:Texture = Texture.fromTexture(PLATFORMS_TEXTURE_IMG);
 		public static const PLATFORMS_TEXTURE_ATLAS:TextureAtlas = new TextureAtlas (PLATFORMS_TEXTURE, PLATFORMS_XML);
-		
-		[Embed(source="../assets/textures/eyes_sprites.xml", mimeType="application/octet-stream")]
-		public static const EYES_CONFIG:Class;
-		public static const EYES_XML:XML = new XML(new EYES_CONFIG());
-		
-		[Embed(source="../assets/textures/eyes_sprites.png")]
-		public static const EYES:Class;
-		public static const EYES_TEXTURE_IMG:Texture = Texture.fromBitmap(new EYES);
-		public static const EYES_TEXTURE:Texture = Texture.fromTexture(EYES_TEXTURE_IMG);
-		public static const EYES_TEXTURE_ATLAS:TextureAtlas = new TextureAtlas (EYES_TEXTURE, EYES_XML);
 		
 		[Embed(source="../assets/textures/powerup_sprites.xml", mimeType="application/octet-stream")]
 		public static const POWERUP_CONFIG:Class;

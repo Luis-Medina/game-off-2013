@@ -321,7 +321,8 @@ package com.states
 			_movingPlatform = new MovingPlatform("prophet_platform", {x:_xPos , y:_yPos, width:_rowWidth, height: _rowHeight, startX:_xPos, endX: _xPos, startY: _yPos, endY:_yPos, speed: 12, waitForPassenger:false})
 			add(_movingPlatform);
 			
-			_movingPlatformSprite = new CitrusSprite("prophet_platform_sprite", {x: Math.floor(_xPos - Textures.ROW_TEXTURE.width/2), y: Math.floor(_yPos - Textures.ROW_TEXTURE.height/2), view:  Textures.getPlatformTexture(true)});
+			var _movingPlatformTexture:Texture = Textures.getPlatformTexture(true);
+			_movingPlatformSprite = new CitrusSprite("prophet_platform_sprite", {x: Math.floor(_xPos - _movingPlatformTexture.width/2), y: Math.floor(_yPos - _movingPlatformTexture.height/2), view:  Textures.getPlatformTexture(true)});
 			add(_movingPlatformSprite);
 			
 			if(!isProphetAdded)
