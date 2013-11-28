@@ -15,6 +15,7 @@ package com.states
 	import citrus.physics.nape.NapeUtils;
 	import citrus.view.starlingview.AnimationSequence;
 	import citrus.view.starlingview.StarlingArt;
+	import citrus.view.starlingview.StarlingCamera;
 	import citrus.view.starlingview.StarlingTileSystem;
 	
 	import com.components.Anarcho;
@@ -35,12 +36,16 @@ package com.states
 	import com.constants.Textures;
 	import com.events.CreateEvent;
 	import com.events.ElevenTwentyEvent;
+	import com.events.InjuryEvent;
 	import com.events.PowerupEvent;
 	import com.events.RestartTimerEvent;
 	import com.managers.PowerupManager;
 	import com.utils.ArrayUtils;
 	
+	import flash.events.TimerEvent;
 	import flash.geom.Point;
+	import flash.geom.Rectangle;
+	import flash.utils.Timer;
 	
 	import nape.callbacks.InteractionCallback;
 	import nape.geom.Vec2;
@@ -129,6 +134,10 @@ package com.states
 		private var eyesAnim:AnimationSequence;
 		private var eyesSprite:CitrusSprite;
 		
+		private var shakeTween:Tween;
+		
+		private var _shakeTimer:Timer;
+		
 		public function CarnageProtocol() {
 			
 			trace("CARNAGE PROTOCOL")        
@@ -143,13 +152,13 @@ package com.states
 			/** PHYSICS **/
 			physics = new Nape("physics"); 
 			physics.gravity = new Vec2(0, 188);
-			// physics.visible = true;    
+			//physics.visible = true;    
 			add(physics);
 			
 			_bg_1 = new CitrusSprite("bg_1", {view: Textures.BG_TEXTURE, parallaxX: 0.7}); // BACKGROUND
 			add(_bg_1);
 			
-			// atmoparticles
+			// atmoparticles 
 			_atmoParticlesSprite = new CitrusSprite("atmo_particles", {view: _atmoParticles, parallaxX:1.7, parallaxY:1.7});
 			moveEmitter(_atmoParticlesSprite, Game.STAGE_WIDTH / 2, Game.STAGE_HEIGHT / 2);
 			add(_atmoParticlesSprite);
@@ -188,6 +197,7 @@ package com.states
 			this.addEventListener(ElevenTwentyEvent.ELEVEN, updateUnstablePlatform);
 			this.addEventListener(RestartTimerEvent.RESTART, restartTimer);
 			this.addEventListener(PowerupEvent.POWERUP, powerup);
+			EnemyProtocol._eventDispatcher.addEventListener(InjuryEvent.INJURY, injury);
 						
 			_countDown = new Countdown();
 			var _countDownSprite:CitrusSprite = new CitrusSprite("countdown_sprite", {view:_countDown})
@@ -588,7 +598,7 @@ package com.states
 		private function createLife():void
 		{
 			var _createLife:Boolean = ArrayUtils.chance(0.15);
-			if (!_createLife) return;
+			if (!_createLife) return; 
 			
 			// *** TODO: don't choose same index as coins, maybe
 			var idx:int = ArrayUtils.getNumRandomValuesInRange(Game.platforms.xCoords.length - 26, Game.platforms.xCoords.length - 1, 1)[0];
@@ -645,6 +655,32 @@ package com.states
 		{
 			_theVoid.stopDarkness();
 		}
+		
+		private function injury():void
+		{
+			var intensity:Number = ArrayUtils.randomRange(10, 100)
+			var duration:Number = ArrayUtils.randomRange(200, 500)
+			shake(duration, intensity);
+		}
+
+		private function shake(duration:Number, intensity:Number = 20):void
+		{
+			this.x = Math.random() * intensity - intensity / 2;
+			this.y = Math.random() * intensity - intensity / 2;
+			
+			_shakeTimer = new Timer(duration, 1);
+			_shakeTimer.addEventListener(TimerEvent.TIMER_COMPLETE, shakeTimerCallback);
+			_shakeTimer.start();
+		}
+		
+		private function shakeTimerCallback(e:TimerEvent):void
+		{
+			_shakeTimer.removeEventListener(TimerEvent.TIMER_COMPLETE, shakeTimerCallback);
+			
+			this.x = 0;
+			this.y = 0;
+		}
+		
 		
 		private function handleHeartTouch(interactionCallback:InteractionCallback):void
 		{
@@ -747,8 +783,9 @@ package com.states
 			this.removeEventListener(ElevenTwentyEvent.ELEVEN, updateUnstablePlatform);
 			this.removeEventListener(RestartTimerEvent.RESTART, restartTimer);
 			this.removeEventListener(PowerupEvent.POWERUP, powerup);
+			EnemyProtocol._eventDispatcher.removeEventListener(InjuryEvent.INJURY, injury);
 			
-			// _atmoParticles.stop();
+			// _atmoParticles.stop(); 
 
 			_splashButton.removeEventListener(TouchEvent.TOUCH, handleUI);
 			_splashButton.dispose();
