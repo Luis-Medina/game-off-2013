@@ -143,7 +143,7 @@ package com.states
 			/** PHYSICS **/
 			physics = new Nape("physics"); 
 			physics.gravity = new Vec2(0, 188);
-			//physics.visible = true;    
+			physics.visible = true;    
 			add(physics);
 			
 			// background
@@ -498,6 +498,7 @@ package com.states
 					
 					// trace("ADDED")
 					Game.platforms.status[_idx] = false;
+					Game.platforms.times_hit[_idx] = 0;
 					_name = Game.platforms.names[_idx];
 					_xPos = Game.platforms.xCoords[_idx];
 					_yPos = Game.platforms.yCoords[_idx];
@@ -513,6 +514,7 @@ package com.states
 					
 					_platformSprite = new PlatformSprite(_name + "_sprite", {x: Math.floor(_platform.x - _texture.width/2), y: Math.floor(_platform.y - _texture.height/2), view: _texture});
 					add(_platformSprite);
+					
 				}
 			}
 			
