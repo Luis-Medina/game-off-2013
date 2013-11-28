@@ -589,6 +589,13 @@ package com.states
 			var heart:Life = new Life("life", {x:xPos, y:yPos, view: texture});
 			heart.onBeginContact.add(handleHeartTouch);
 			add(heart);	
+			
+			Starling.juggler.tween(heart, 0.05, {
+				transition: Transitions.EASE_IN,
+				repeatCount: 11000,
+				reverse: true,
+				x: heart.x -1
+			});
 		}
 		
 		private function destroyLife():void
