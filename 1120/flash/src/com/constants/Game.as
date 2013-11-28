@@ -76,5 +76,10 @@ package com.constants
 			return index;
 		}
 		
+		public static function resetGameParams():void
+		{
+			coinCount = 0;
+			life.resetLife();
+		}
 	}
 }
