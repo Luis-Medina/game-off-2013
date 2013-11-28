@@ -29,6 +29,7 @@ package com.states
 	import com.components.PlatformSprite;
 	import com.components.Rounds;
 	import com.components.ShiftingBackground;
+	import com.constants.BackgroundTextures;
 	import com.constants.Game;
 	import com.constants.Textures;
 	import com.events.CreateEvent;
@@ -59,6 +60,7 @@ package com.states
 	import starling.events.TouchEvent;
 	import starling.events.TouchPhase;
 	import starling.extensions.particles.PDParticleSystem;
+	import starling.filters.BlurFilter;
 	import starling.textures.Texture;
 	import starling.textures.TextureSmoothing;
 	import starling.utils.*;
@@ -124,6 +126,8 @@ package com.states
 		
 		private var shakeTween:Tween;
 		private var _shakeTimer:Timer;
+		private var blurFilter:BlurFilter = new BlurFilter();
+		private var blurScreen:Image = new Image(BackgroundTextures.FILTER_TEXTURE)
 		
 		public function CarnageProtocol() {
 			
@@ -235,7 +239,20 @@ package com.states
 			Game.hero.onJump.add(handleHeroJump);
 			Game.hero.onAnimationChange.add(handleHeroAnimationChange);
 			add(Game.hero);
-
+			
+			//add(blurScreen)
+			//_ce.state.view.getArt(blurScreen).alpha = 1;
+			/*blurScreen.filter = BlurFilter.createDropShadow(0,0, 0x000000,0.05,10);
+			blurScreen.alpha = 0.05;
+			blurScreen.touchable = false;
+			addChild(blurScreen);
+			
+			Starling.juggler.tween(blurScreen, 2, {
+				transition: Transitions.EASE_IN,
+				repeatCount: 11000,
+				reverse: false,
+				scaleX: 10
+			});*/
 		}
 		
 		override public function update(timeDelta:Number):void
