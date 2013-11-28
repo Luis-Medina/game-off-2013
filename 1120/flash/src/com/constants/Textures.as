@@ -15,6 +15,16 @@ package com.constants
 		public static const BLANK_IMG:Texture = Texture.fromBitmap(new BLANK);
 		public static const BLANK_TEXTURE:Texture = Texture.fromTexture(BLANK_IMG);
 		
+		[Embed(source="../assets/textures/screens/devoid_of_life.png", mimeType="image/png")]
+		public static const LIFELESS:Class;
+		public static const LIFELESS_IMG:Texture = Texture.fromBitmap(new LIFELESS);
+		public static const LIFELESS_TEXTURE:Texture = Texture.fromTexture(LIFELESS_IMG);
+		
+		[Embed(source="../assets/textures/screens/black.png", mimeType="image/png")]
+		public static const BLACK:Class;
+		public static const BLACK_IMG:Texture = Texture.fromBitmap(new BLACK);
+		public static const BLACK_TEXTURE:Texture = Texture.fromTexture(BLACK_IMG);
+		
 		[Embed(source="../assets/textures/splash2.png", mimeType="image/png")]
 		public static const SPLASH:Class;
 		public static const SPLASH_IMG:Texture = Texture.fromBitmap(new SPLASH);
