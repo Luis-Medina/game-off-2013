@@ -39,6 +39,7 @@ package com.components
 		{
 			this.removeEventListener(Event.ADDED_TO_STAGE, onAddedToStage);
 			
+			resetLife();
 			_lifeTextField = new TextField(_width, _height, _life.toString(), "ProtestPaintBB", 46, Colors.DARK_RED, false);
 			_lifeTextField.x = _xPos;
 			_lifeTextField.y = _yPos;
@@ -48,10 +49,14 @@ package com.components
 			_xTextField.x = _xPos - 16;
 			_xTextField.y = _yPos + 4;
 			addChild(_xTextField);
+			
+			_lifeTextField.alpha = 1;
+			_xTextField.alpha = 1;
 		}
 		
 		public function resetLife():void
 		{
+			trace("ERERERE")
 			_life = _startingLife;
 		}
 		

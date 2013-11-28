@@ -80,6 +80,7 @@ package com.constants
 		{
 			coinCount = 0;
 			life.resetLife();
+			life = new NewLife();
 		}
 	}
 }
