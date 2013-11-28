@@ -56,7 +56,6 @@ package com.components
 		
 		public function resetLife():void
 		{
-			trace("ERERERE")
 			_life = _startingLife;
 		}
 		
@@ -111,12 +110,12 @@ package com.components
 		
 		private function updateLabel():void
 		{
-			_lifeTextField.alpha = 1;
-			_xTextField.alpha = 1;
+			resetAlpha();
 			Starling.juggler.tween(_lifeTextField, 0.5, {
 				transition: Transitions.EASE_IN,
 				delay: 0,
 				repeatCount: 2,
+				onComplete: resetAlpha,
 				reverse: true,
 				alpha: 0
 			});
@@ -130,6 +129,13 @@ package com.components
 			});
 			
 			_lifeTextField.text = _life.toString();
+		}
+		
+		public function resetAlpha():void
+		{
+			_lifeTextField.alpha = 1;
+			_xTextField.alpha = 1;
+			
 		}
 		
 		override public function dispose():void
