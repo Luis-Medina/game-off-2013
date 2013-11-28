@@ -53,7 +53,7 @@ package com.states
 	import starling.display.Button;
 	import starling.display.DisplayObject;
 	import starling.display.Image;
-	import starling.display.MovieClip;
+	import starling.display.Quad;
 	import starling.events.Event;
 	import starling.events.Touch;
 	import starling.events.TouchEvent;
@@ -122,11 +122,7 @@ package com.states
 
 		private var prophetSpeechSprite:CitrusSprite;
 		
-		private var eyesAnim:AnimationSequence;
-		private var eyesSprite:CitrusSprite;
-		
 		private var shakeTween:Tween;
-		
 		private var _shakeTimer:Timer;
 		
 		public function CarnageProtocol() {
@@ -239,23 +235,7 @@ package com.states
 			Game.hero.onJump.add(handleHeroJump);
 			Game.hero.onAnimationChange.add(handleHeroAnimationChange);
 			add(Game.hero);
-			
-			/** PROPHET SPEECH **/
-			var prophetSpeechAnim:AnimationSequence = new AnimationSequence(Textures.PROPHET_SPEECH_TEXTURE_ATLAS, ["prophet_laugh", "prophet_neutral"], "prophet_neutral", 6, true, "none");
-			StarlingArt.setLoopAnimations(["prophet_neutral"]);
-			
-			prophetSpeechSprite = new CitrusSprite("prophet_speech", {view:prophetSpeechAnim, x: Game.STAGE_WIDTH - 250, y: Game.STAGE_HEIGHT - 270});
-			// add(prophetSpeechSprite);
-			
-			/** EYES SPRITE **/
-			eyesAnim = new AnimationSequence(Textures.EYES_TEXTURE_ATLAS, ["eyes_1"], "eyes_1", 10, true, "none"); 
-			eyesSprite = new CitrusSprite("eyes_sprite", {view: eyesAnim, x: 100, y: 300});
-			// add(eyesSprite);
-			
-			// EyesInTheShadows.createEyesInTheShadows();
-			
-			// ALWAYS ON TOP
-			// addChild(_theVoid);
+
 		}
 		
 		override public function update(timeDelta:Number):void
