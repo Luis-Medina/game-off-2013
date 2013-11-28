@@ -1,6 +1,11 @@
 package com.components
 {
+	import citrus.core.CitrusEngine;
+	
 	import com.constants.Colors;
+	import com.constants.Game;
+	import com.constants.Textures;
+	import com.events.CreateEvent;
 	
 	import starling.animation.Transitions;
 	import starling.core.Starling;
@@ -13,12 +18,15 @@ package com.components
 	{
 		private var _xTextField:TextField;
 		private var _lifeTextField:TextField;
+		private var blackness:Image;
 		
 		private var _width:Number = 80;
 		private var _height:Number = 40;
 		private var _life:int = 3; // what a cliche.
 		private var _xPos:Number = 110;
 		private var _yPos:Number = 60;
+		
+		private var _ce:CitrusEngine = CitrusEngine.getInstance()
 		
 		public function NewLife()
 		{
@@ -48,7 +56,7 @@ package com.components
 			
 			updateLabel();
 			
-			if (_life == 0)
+			if (_life < 1)
 				devoidOfLife();
 		}
 		
@@ -58,9 +66,36 @@ package com.components
 			updateLabel();
 		}
 		
+		public function getNumLife():int
+		{
+			return _life;
+		}
+		
 		public function devoidOfLife():void
 		{
 			trace("DEVOID OF LIFE")
+			// Game.hero.controlsEnabled = false;
+			/*
+			blackness = new Image(Textures.BLACK_TEXTURE);
+			addChild(blackness);
+			blackness.alpha = 0;
+			
+			Starling.juggler.tween(blackness, 3, {
+				transition: Transitions.EASE_IN,
+				alpha: 1,
+				onComplete: finishedFade
+			})*/
+			sendDeathEvent();
+		}
+		
+		private function finishedFade():void
+		{
+			sendDeathEvent();
+		}
+		
+		public function sendDeathEvent():void
+		{
+			dispatchEvent(new CreateEvent(CreateEvent.CREATE, {type: Game.DEATH}, true));
 		}
 		
 		private function updateLabel():void
@@ -88,7 +123,14 @@ package com.components
 		
 		override public function dispose():void
 		{
-			_lifeTextField.dispose();
+			Starling.juggler.purge();
+			
+			if (_lifeTextField)
+				_lifeTextField.dispose();
+			
+			if (blackness)
+				blackness.dispose();
+			
 			super.dispose();
 		}
 	}
