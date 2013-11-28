@@ -243,6 +243,14 @@ package com.constants
 		
 		[Embed(source="../assets/particles/Portal.pex", mimeType="application/octet-stream")]
 		public static const PORTAL_CONFIG:Class;
+		
+		[Embed(source="../assets/particles/fireball.pex", mimeType="application/octet-stream")]
+		public static const FIREBALL_CONFIG:Class;
+		
+		[Embed(source="../assets/particles/fireball.png")]
+		public static const FIREBALL:Class;
+		public static const FIREBALL_IMG:Texture = Texture.fromBitmap(new FIREBALL);
+		public static const FIREBALL_TEXTURE:Texture = Texture.fromTexture(FIREBALL_IMG);
 
 		/** FUNCTIONS **/
 		

@@ -57,6 +57,11 @@ package com.constants
 		public static const GEAR_10_IMG:Texture = Texture.fromBitmap(new GEAR_10);
 		public static const GEAR_10_TEXTURE:Texture = Texture.fromTexture(GEAR_10_IMG);
 		
+		[Embed(source="../assets/textures/gears/cannon.png", mimeType="image/png")]
+		public static const CANNON:Class;
+		public static const CANNON_IMG:Texture = Texture.fromBitmap(new CANNON);
+		public static const CANNON_TEXTURE:Texture = Texture.fromTexture(CANNON_IMG);
+		
 		public static var GEAR_TEXTURES_ARRAY:Array = [GEAR_1_TEXTURE, GEAR_2_TEXTURE, GEAR_3_TEXTURE, GEAR_4_TEXTURE, GEAR_5_TEXTURE, GEAR_6_TEXTURE, GEAR_7_TEXTURE, GEAR_8_TEXTURE, GEAR_9_TEXTURE, GEAR_10_TEXTURE];
 		
 		public static function getRandomGearTexture():Texture
