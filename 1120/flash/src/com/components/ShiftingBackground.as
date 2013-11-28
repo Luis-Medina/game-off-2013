@@ -144,6 +144,10 @@ package com.components
 		
 		override public function dispose():void
 		{			
+			currentBackground.destroy();
+			nextBackground.destroy();
+			
+			Starling.juggler.purge();
 			super.dispose();
 		}
 	}

@@ -777,6 +777,9 @@ package com.states
 			_powerupStatus.dispose();
 			
 			_fireParticles.dispose();
+			
+			_dynamicBackground.dispose();
+			Starling.juggler.purge();
 
 			// super.destroy();
 			destroyEnemy();
