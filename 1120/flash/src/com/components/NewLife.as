@@ -20,9 +20,10 @@ package com.components
 		private var _lifeTextField:TextField;
 		private var blackness:Image;
 		
+		private var _startingLife:int = 3;
 		private var _width:Number = 80;
 		private var _height:Number = 40;
-		private var _life:int = 3; // what a cliche.
+		private var _life:int = _startingLife;
 		private var _xPos:Number = 110;
 		private var _yPos:Number = 60;
 		
@@ -47,6 +48,11 @@ package com.components
 			_xTextField.x = _xPos - 16;
 			_xTextField.y = _yPos + 4;
 			addChild(_xTextField);
+		}
+		
+		public function resetLife():void
+		{
+			_life = _startingLife;
 		}
 		
 		public function removeLife():void
