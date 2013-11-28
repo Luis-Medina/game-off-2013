@@ -7,11 +7,14 @@ package com.components
 	import com.constants.BackgroundTextures;
 	import com.constants.Textures;
 	
+	import starling.animation.Transitions;
 	import starling.animation.Tween;
 	import starling.core.Starling;
+	import starling.display.Image;
 	import starling.display.Sprite;
 	import starling.events.Event;
 	import starling.extensions.particles.PDParticleSystem;
+	import starling.filters.BlurFilter;
 	import starling.textures.Texture;
 	
 	public class ShiftingBackground extends Sprite
@@ -53,6 +56,13 @@ package com.components
 			
 			moon = new CitrusSprite("moon", {view: BackgroundTextures.MOON_TEXTURE})
 			_ce.state.add(moon);
+			Starling.juggler.tween(moon, 0.05, {
+				transition: Transitions.EASE_IN,
+				repeatCount: 2,
+				reverse: true,
+				onComplete: finishedMoon,
+				y: moon.y - 1.5
+			})
 				
 			// TODO*** filter alpha
 			// filterBackground = new CitrusSprite("filter_background", {view: BackgroundTextures.FILTER_IMG});
@@ -66,9 +76,20 @@ package com.components
 			
 			foreGround = new CitrusSprite("foreground", {view: Textures.BUILDINGS_TEXTURE})
 			_ce.state.add(foreGround);	
-			
+
 			initShift();
 			
+		}
+		
+		private function finishedMoon():void
+		{
+			Starling.juggler.tween(moon, 0.05, {
+				transition: Transitions.EASE_IN,
+				repeatCount: 2,
+				reverse: true,
+				onComplete: finishedMoon,
+				y: moon.y - 1
+			})
 		}
 		
 		private function initShift():void
@@ -119,6 +140,11 @@ package com.components
 		private function getTexture(index:int):Texture
 		{
 			return BackgroundTextures.BACKGROUND_TEXTURES_ARRAY[index];
+		}
+		
+		override public function dispose():void
+		{			
+			super.dispose();
 		}
 	}
 }
