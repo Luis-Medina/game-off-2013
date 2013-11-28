@@ -1,6 +1,7 @@
 package com.states
 {
 	import citrus.core.CitrusEngine;
+	import citrus.core.CitrusObject;
 	import citrus.objects.CitrusSprite;
 	import citrus.objects.NapePhysicsObject;
 	import citrus.objects.platformer.nape.Missile;
@@ -13,14 +14,20 @@ package com.states
 	import com.constants.Game;
 	import com.constants.GearTextures;
 	import com.constants.Textures;
+	import com.events.InjuryEvent;
 	import com.utils.ArrayUtils;
 	
 	import nape.callbacks.InteractionCallback;
 	
 	import starling.animation.Transitions;
 	import starling.core.Starling;
+	import starling.display.MovieClip;
+	import starling.display.Sprite;
+	import starling.events.Event;
+	import starling.events.EventDispatcher;
+	import starling.extensions.particles.PDParticleSystem;
+	import starling.textures.Texture;
 	import starling.textures.TextureAtlas;
-	
 	import starling.utils.*;
 	
 	public class EnemyProtocol
@@ -35,25 +42,17 @@ package com.states
 		public static var enemyAnim:AnimationSequence;
 		
 		public static var cannon:Cannon;
+		public static var _eventDispatcher:EventDispatcher = new EventDispatcher();
 				
 		// LEVEL DIFFICULTY PARAMS
 		private static var indices:Array = [0,1,2,3,4,5,6,7,8,9, 10, 11];
 		// private static var cannonXPos:Array = [20, 940, 20, 940, 20, 940, 20, 940, 20, 940, 20, 940];
 		// private static var cannonYPos:Array = [160, 160, 240, 240, 320, 320, 400, 400, 480, 480, 560, 560];
 		private static var cannonPos:Array = [[20,160], [940, 160], [20, 240], [940, 240], [20,320], [940,320], [20, 400], [940, 400], [20, 480], [940, 480], [20, 560], [940, 560]]; 
-		private static var fireRateArr:Array = [3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000];
+		private static var fireRateArr:Array = [2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000];
 		private static var numCannonsArr:Array = [1,1,2,2,3,3,4,4,5,5,6,6,8,8,10,10, 12];
-		private static var speedArr:Array = [300, 300, 300, 300, 300, 300, 300, 300, 300, 300, 300, 300];
-		private static var speedVarArr:Array = [90, 90, 80, 80, 60, 60, 40, 40, 20, 20, 20, 20];
-		
-		/**
-		 * enemy sits on top platform and unleashes attack for that round
-		 * 
-		 * canada - maple cannon - goes through platforms
-		 * mustache - mustache cannon - doesnt go through platforms
-		 * glasses - makes it rain kinematic objects? OR eyes-type deal (stream of damage-causing sensors)
-		 * 
-		 * */
+		private static var speedArr:Array = [220, 220, 220, 220, 220, 220, 180, 180, 180, 180, 180, 180];
+		private static var speedVarArr:Array = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 		
 		private static function chooseEnemy():String
 		{
@@ -82,7 +81,7 @@ package com.states
 			//	enemySprite.kill = true;
 			
 			//if (cannon)
-			// 	cannon.kill = true;
+			// 	cannon.kill = true;  
 		}
 		
 		public static function createCannons():void{
@@ -95,6 +94,10 @@ package com.states
 			var speed:Number;
 			var speedVar:Number;
 			var direction:String;
+			var missileTexture:Texture;
+			//var missileTextureVec:Vector.<Texture> = new Vector.<Texture>();
+			//var missileMC:MovieClip;
+			//var missileSprite:Sprite; 
 			
 			ArrayUtils.arrayShuffle(cannonPos);
 			ArrayUtils.arrayShuffle(fireRateArr);
@@ -109,26 +112,36 @@ package com.states
 				speedVar = speedVarArr[i];
 				speed = ArrayUtils.randomRange(speedArr[i] - speedVar, speedArr[i] + speedVar);
 				direction = (xPos < Game.STAGE_WIDTH/2) ? "right" : "left";
-				cannon = new Cannon("cannon_" + i, {x:xPos, y:yPos, fireRate:fireRate, missileSpeed:speed, missileFuseDuration: 1000, missileExplodeDuration: 20, openFire: true, startingDirection: direction, missileView:GearTextures.getRandomGearTexture()})
+				missileTexture = GearTextures.getRandomGearTexture();
+				missileTexture.repeat = false; 
+
+				/*
+				missileTextureVec.push(missileTexture);
+				missileMC = new MovieClip(missileTextureVec)
+				missileMC.pivotX = missileMC.width/2;
+				missileMC.pivotY = missileMC.height/2;
+				missileMC.x = 0;*/
+				
+				cannon = new Cannon("cannon_" + i, {view: GearTextures.CANNON_TEXTURE, x:xPos, y:yPos, fireRate:fireRate, missileSpeed:speed, missileFuseDuration: 2000, missileExplodeDuration: 20, openFire: true, startingDirection: direction, missileView: missileTexture})
 				cannon.onGiveDamage.add(cannonHit);
-				_ce.state.add(cannon) 
-					
-				Starling.juggler.tween(cannon, 0.001, {
-					transition: Transitions.LINEAR,
-					delay: 0,
-					repeatCount: 11000,
-					reverse: false,
-					rotation: deg2rad(360)
-				});
+				cannon.updateCallEnabled = true;
+				_ce.state.add(cannon);
+				
 			}
 		}
-		
+
 		public static function cannonHit(contact:NapePhysicsObject):void
 		{
 		  	if (contact.name == "hero")
 			{
 				Game.life.removeLife();
+				_eventDispatcher.dispatchEvent(new InjuryEvent(InjuryEvent.INJURY, {}, true));
+				
 				_ce.sound.playSound("earthrot");
+			} else {
+				
+				if (contact.name.indexOf("row_") != -1 || contact.name.indexOf("col_") != -1)
+					trace(" ")
 			}
 		}
 		
