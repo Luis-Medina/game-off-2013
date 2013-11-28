@@ -57,6 +57,11 @@ package com.constants
 		public static const BACKGROUND_10_IMG:Texture = Texture.fromBitmap(new BACKGROUND_10);
 		public static const BACKGROUND_10_TEXTURE:Texture = Texture.fromTexture(BACKGROUND_10_IMG);
 		
+		[Embed(source="../assets/textures/backgrounds/11.png", mimeType="image/png")]
+		public static const BACKGROUND_11:Class;
+		public static const BACKGROUND_11_IMG:Texture = Texture.fromBitmap(new BACKGROUND_11);
+		public static const BACKGROUND_11_TEXTURE:Texture = Texture.fromTexture(BACKGROUND_11_IMG);
+		
 		[Embed(source="../assets/textures/backgrounds/filter.png", mimeType="image/png")]
 		public static const FILTER:Class;
 		public static const FILTER_IMG:Texture = Texture.fromBitmap(new FILTER);
@@ -67,7 +72,7 @@ package com.constants
 		public static const MOON_IMG:Texture = Texture.fromBitmap(new MOON);
 		public static const MOON_TEXTURE:Texture = Texture.fromTexture(MOON_IMG);
 		
-		public static var BACKGROUND_TEXTURES_ARRAY:Array = [BACKGROUND_1_TEXTURE, BACKGROUND_2_TEXTURE, BACKGROUND_3_TEXTURE, BACKGROUND_4_TEXTURE, BACKGROUND_5_TEXTURE, BACKGROUND_6_TEXTURE, BACKGROUND_7_TEXTURE, BACKGROUND_8_TEXTURE, BACKGROUND_9_TEXTURE, BACKGROUND_10_TEXTURE];
+		public static var BACKGROUND_TEXTURES_ARRAY:Array = [BACKGROUND_1_TEXTURE, BACKGROUND_2_TEXTURE, BACKGROUND_3_TEXTURE, BACKGROUND_4_TEXTURE, BACKGROUND_5_TEXTURE, BACKGROUND_6_TEXTURE, BACKGROUND_7_TEXTURE, BACKGROUND_8_TEXTURE, BACKGROUND_9_TEXTURE, BACKGROUND_10_TEXTURE, BACKGROUND_11_TEXTURE];
 		
 		public static function getRandomGearTexture():Texture
 		{
