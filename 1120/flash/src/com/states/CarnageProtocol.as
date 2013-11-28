@@ -143,7 +143,7 @@ package com.states
 			/** PHYSICS **/
 			physics = new Nape("physics"); 
 			physics.gravity = new Vec2(0, 188);
-			physics.visible = true;    
+			// physics.visible = true;    
 			add(physics);
 			
 			// background
