@@ -15,23 +15,20 @@ package com.states
 	import citrus.physics.nape.NapeUtils;
 	import citrus.view.starlingview.AnimationSequence;
 	import citrus.view.starlingview.StarlingArt;
-	import citrus.view.starlingview.StarlingCamera;
-	import citrus.view.starlingview.StarlingTileSystem;
 	
 	import com.components.Anarcho;
 	import com.components.Cannon;
 	import com.components.Coin;
 	import com.components.ColossalHole;
 	import com.components.Countdown;
-	import com.components.Darkness;
 	import com.components.DynamicPlatform;
-	import com.components.EyesInTheShadows;
 	import com.components.GameButton;
 	import com.components.Life;
 	import com.components.NewLife;
 	import com.components.PettyCash;
 	import com.components.PlatformSprite;
 	import com.components.Rounds;
+	import com.components.ShiftingBackground;
 	import com.constants.Game;
 	import com.constants.Textures;
 	import com.events.CreateEvent;
@@ -44,7 +41,6 @@ package com.states
 	
 	import flash.events.TimerEvent;
 	import flash.geom.Point;
-	import flash.geom.Rectangle;
 	import flash.utils.Timer;
 	
 	import nape.callbacks.InteractionCallback;
@@ -69,17 +65,12 @@ package com.states
 
 	public class CarnageProtocol extends StarlingState
 	{
-		private var _bg_1:CitrusSprite;
-		private var _bg_2:CitrusSprite;
-		private var _endX:Number = Textures.BG_TEXTURE.width;
-		private var _buildings:CitrusSprite;
-		private var _fg:Image;
+		private var _dynamicBackground:ShiftingBackground;
+		private var _dynamicBackgroundSprite:CitrusSprite;
 		private var _floor:CitrusSprite;
+		private var _fg:Image;
 		private var _restartButton:Button;
 		private var _splashButton:Button;
-		private var _atmoParticles:PDParticleSystem = new PDParticleSystem(XML(new Textures.ATMOSPHERE_CONFIG()), Textures.MONEY_TEXTURE_TEXTURE);
-		private var _atmoParticlesSprite:CitrusSprite;
-		private var _theVoid:Darkness = new Darkness();
 		
 		private var physics:Nape;
 		
@@ -155,18 +146,12 @@ package com.states
 			//physics.visible = true;    
 			add(physics);
 			
-			_bg_1 = new CitrusSprite("bg_1", {view: Textures.BG_TEXTURE, parallaxX: 0.7}); // BACKGROUND
-			add(_bg_1);
+			// background
+			_dynamicBackground = new ShiftingBackground();
+			_dynamicBackgroundSprite = new CitrusSprite("dynamic_background", {view: _dynamicBackground});
+			add(_dynamicBackgroundSprite);
 			
-			// atmoparticles 
-			_atmoParticlesSprite = new CitrusSprite("atmo_particles", {view: _atmoParticles, parallaxX:1.7, parallaxY:1.7});
-			moveEmitter(_atmoParticlesSprite, Game.STAGE_WIDTH / 2, Game.STAGE_HEIGHT / 2);
-			add(_atmoParticlesSprite);
-			_atmoParticles.start();
-			
-			_buildings = new CitrusSprite("buildings", {view: Textures.BUILDINGS_TEXTURE}); // FOREGROUND
-			add(_buildings);         
-			
+			// floor
 			_fg = new Image(Textures.FLOOR_TEXTURE);
 			addChild(_fg);
 
@@ -459,14 +444,12 @@ package com.states
 			_round.updateRound(increaseRound);
 			_powerupStatus.roundHasEndedUpdateCount(increaseRound);
 			
-			// endDarkness(); 
 			destroyEnemy();
 			destroyLife();
 			destroyCoins();
 			createCoins();
 			createLife();
 			createEnemy();
-			// commenceDarkness();
 			
 			var _jitter:Number = Math.floor(Math.random() * 30);
 			var _allPlatforms:Vector.<CitrusObject> = getObjectsByType(DynamicPlatform);
@@ -643,19 +626,6 @@ package com.states
 			}
 		}
 		
-		private function commenceDarkness():void
-		{
-			var _darkness:Boolean = ArrayUtils.chance(1);// ArrayUtils.chance(0.65 + _round.getRound()/100); 
-			if (!_darkness) return;
-			
-			_theVoid.initDarkness();
-		}
-		
-		private function endDarkness():void
-		{
-			_theVoid.stopDarkness();
-		}
-		
 		private function injury():void
 		{
 			var intensity:Number = ArrayUtils.randomRange(5, 50);
@@ -795,16 +765,12 @@ package com.states
 			_countDown.dispose();
 			
 			_round.dispose();
-			_fg.dispose();
 			
 			_powerups.dispose();
 			_powerupStatus.dispose();
 			
 			_fireParticles.dispose();
-			_atmoParticles.dispose();
-			
-			_theVoid.dispose();
-			
+
 			// super.destroy();
 			destroyEnemy();
 		}		
