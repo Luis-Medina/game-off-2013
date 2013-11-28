@@ -144,10 +144,12 @@ package com.states
 				
 				if (contact.name.indexOf("row_") != -1 || contact.name.indexOf("col_") != -1)
 				{
+					trace("break," + Game.BREAK_WALLS)
+					if(Game.BREAK_WALLS == "no") return; 
+						
 					var _index:int = Game.getIndexByName(contact.name);
 					Game.platforms.times_hit[_index] = Game.platforms.times_hit[_index] + 1;
 					
-					trace(contact.name, Game.platforms.times_hit[_index])
 					var _wall:PlatformSprite = _ce.state.getObjectByName(contact.name + "_sprite") as PlatformSprite;
 					var intensity:Number = ArrayUtils.randomRange(3,10);
 					_wall.x = Math.floor(_wall.x - (Math.random() * intensity - intensity / 2));

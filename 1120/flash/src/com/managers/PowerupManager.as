@@ -151,7 +151,7 @@ package com.managers
 			
 			if (crackCount == 0)
 			{
-				
+				dispatchEvent(new PowerupEvent(PowerupEvent.POWERUP, {type: "crack", sound: '', revert: true}, true));
 			}
 		}
 		
