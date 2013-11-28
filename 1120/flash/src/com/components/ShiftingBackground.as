@@ -2,10 +2,13 @@ package com.components
 {
 	import citrus.core.CitrusEngine;
 	import citrus.objects.CitrusSprite;
+	import citrus.view.starlingview.*;
 	
 	import com.constants.BackgroundTextures;
 	import com.constants.Textures;
 	
+	import starling.animation.Tween;
+	import starling.core.Starling;
 	import starling.display.Sprite;
 	import starling.events.Event;
 	import starling.extensions.particles.PDParticleSystem;
@@ -25,6 +28,13 @@ package com.components
 		private var cIndex:int = 0;
 		private var nIndex:int = cIndex + 1;
 		
+		private var topImg:Tween;
+		private var bottomImg:Tween;
+		
+		private var delay:int = 5;
+		private var fade:int = 25;
+		private var max:int = BackgroundTextures.BACKGROUND_TEXTURES_ARRAY.length;
+		
 		public function ShiftingBackground()
 		{
 			super();
@@ -37,6 +47,8 @@ package com.components
 			
 			currentBackground = new CitrusSprite("current_color_background", {view: BackgroundTextures.BACKGROUND_TEXTURES_ARRAY[cIndex]})
 			nextBackground = new CitrusSprite("next_color_background", {view: BackgroundTextures.BACKGROUND_TEXTURES_ARRAY[nIndex]})
+			
+			_ce.state.add(nextBackground);
 			_ce.state.add(currentBackground);
 			
 			moon = new CitrusSprite("moon", {view: BackgroundTextures.MOON_TEXTURE})
@@ -54,9 +66,59 @@ package com.components
 			
 			foreGround = new CitrusSprite("foreground", {view: Textures.BUILDINGS_TEXTURE})
 			_ce.state.add(foreGround);	
+			
+			initShift();
+			
+		}
+		
+		private function initShift():void
+		{
+			topImg = new Tween(_ce.state.view.getArt(currentBackground), fade);
+			topImg.animate("alpha", 0);
+			topImg.onComplete = fadeOutComplete;
+			Starling.juggler.add(topImg);
+			
+			bottomImg = new Tween(_ce.state.view.getArt(nextBackground), fade);
+			bottomImg.delay = delay; 
+			bottomImg.animate("alpha", 1);
+			bottomImg.onComplete = fadeInComplete;
+			Starling.juggler.add(bottomImg);
+		}
+		
+		private function fadeOutComplete():void
+		{
+			cIndex++;			
+			if (cIndex == max)
+				cIndex = 0;	
+			
+			currentBackground.view = getTexture(cIndex);
+			var _alpha:int = _ce.state.view.getArt(currentBackground).alpha == 1 ? 0 : 1;
+			topImg = new Tween(_ce.state.view.getArt(currentBackground), fade);
+			topImg.animate("alpha", _alpha);
+			topImg.onComplete = fadeOutComplete;
+			Starling.juggler.add(topImg);
+			
 
-			
-			
+		}
+		
+		private function fadeInComplete():void
+		{
+			nIndex++;
+			if (nIndex == max)
+				nIndex = 0;	
+				
+			nextBackground.view = getTexture(cIndex);
+			var _alpha:int = _ce.state.view.getArt(nextBackground).alpha == 1 ? 0 : 1;
+			bottomImg = new Tween(_ce.state.view.getArt(nextBackground), fade);
+			bottomImg.animate("alpha", _alpha);
+			bottomImg.delay = 0;
+			bottomImg.onComplete = fadeInComplete;
+			Starling.juggler.add(bottomImg);
+		}
+		
+		private function getTexture(index:int):Texture
+		{
+			return BackgroundTextures.BACKGROUND_TEXTURES_ARRAY[index];
 		}
 	}
 }
