@@ -11,6 +11,8 @@ package com.states
 	
 	import com.components.Anarcho;
 	import com.components.Cannon;
+	import com.components.DynamicPlatform;
+	import com.components.PlatformSprite;
 	import com.constants.Game;
 	import com.constants.GearTextures;
 	import com.constants.Textures;
@@ -141,7 +143,26 @@ package com.states
 			} else {
 				
 				if (contact.name.indexOf("row_") != -1 || contact.name.indexOf("col_") != -1)
-					trace(" ")
+				{
+					var _index:int = Game.getIndexByName(contact.name);
+					Game.platforms.times_hit[_index] = Game.platforms.times_hit[_index] + 1;
+					
+					trace(contact.name, Game.platforms.times_hit[_index])
+					var _wall:PlatformSprite = _ce.state.getObjectByName(contact.name + "_sprite") as PlatformSprite;
+					var intensity:Number = ArrayUtils.randomRange(3,10);
+					_wall.x = Math.floor(_wall.x - (Math.random() * intensity - intensity / 2));
+					
+					if (Game.platforms.times_hit[_index] == 3)
+					{
+						var _platform:DynamicPlatform = _ce.state.getObjectByName(contact.name) as DynamicPlatform;
+						_platform.kill = true;
+						_wall.kill = true;
+						
+						Game.platforms.status[_index] = false
+						Game.platforms.times_hit[_index] = 0;
+					}
+					
+				}
 			}
 		}
 		
