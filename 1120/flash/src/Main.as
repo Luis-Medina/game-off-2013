@@ -35,9 +35,10 @@ package
 			sound.addSound("rumble", {sound: Audio.RUMBLE});
 			sound.addSound("rumble_v1", {sound: Audio.RUMBLE_V1});
 			sound.addSound("lick_chord", {sound: Audio.LICK_CHORD});
-			sound.addSound("veloid", {sound: Audio.VELOID});
+			sound.addSound("drone", {sound: Audio.DRONE});
 			sound.addSound("veloid2", {sound: Audio.VELOID_2, volume: 0.4});
 			sound.addSound("earthrot", {sound: Audio.EARTHROT, volume: 0.05});
+			sound.addSound("heart", {sound: Audio.HEART, volume: 0.1});
 			
 			// sound.addSound("jump", {sound: Audio.JUMP, volume: 0.4});
 			// sound.addSound("walk", {sound: Audio.WALK, volume: 0.4});

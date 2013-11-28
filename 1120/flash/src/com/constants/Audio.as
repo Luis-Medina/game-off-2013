@@ -17,14 +17,17 @@ package com.constants
 		[Embed(source="../assets/audio/lick_chord.mp3")]
 		public static const LICK_CHORD:Class;
 		
-		[Embed(source="../assets/audio/veloid.mp3")]
-		public static const VELOID:Class;
-		
 		[Embed(source="../assets/audio/veloid2.mp3")]
 		public static const VELOID_2:Class;
 		
 		[Embed(source="../assets/audio/earthrot.mp3")]
 		public static const EARTHROT:Class;
+		
+		[Embed(source="../assets/audio/drone.mp3")]
+		public static const DRONE:Class;
+		
+		[Embed(source="../assets/audio/heart.mp3")]
+		public static const HEART:Class;
 		
 		/*
 		[Embed(source="../assets/audio/walk.mp3")]

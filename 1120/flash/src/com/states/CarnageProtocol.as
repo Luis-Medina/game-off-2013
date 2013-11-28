@@ -598,7 +598,7 @@ package com.states
 			var heart:Life = new Life("life", {x:xPos, y:yPos, view: texture});
 			heart.onBeginContact.add(handleHeartTouch);
 			add(heart);	
-			
+			_ce.sound.playSound("heart");
 			Starling.juggler.tween(heart, 0.05, {
 				transition: Transitions.EASE_IN,
 				repeatCount: 11000,
