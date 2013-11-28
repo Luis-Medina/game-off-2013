@@ -22,6 +22,7 @@ package com.constants
 		public static const EXIT:String = "EXIT";
 		public static const ELEVEN_TWENTY:String = "ELEVEN_TWENTY"
 		public static const ELEVEN_TWENTY_HALF:String = "ELEVEN_TWENTY_HALF"
+		public static const DEATH:String = "DEATH"
 			
 		// MENU-INFO
 		public static const globalFontSize:Number = 24;
