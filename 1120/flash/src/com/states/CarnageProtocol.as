@@ -201,9 +201,6 @@ package com.states
 			var _remainingSprite:CitrusSprite = new CitrusSprite("remaining_sprite", {view:_remaining})
 			add(_remainingSprite);
 			
-			_lifeSprite = new CitrusSprite("lives", {view: Game.life});
-			add(_lifeSprite);
-			
 			/** POWERUPS **/
 			_powerups = new PowerupProtocol();
 			_powerups.hide();
@@ -221,6 +218,9 @@ package com.states
 			_fireParticlesSprite = new CitrusSprite("fire_particles", {view: _fireParticles});
 			moveEmitter(_fireParticlesSprite, 0, 0);
 			add(_fireParticlesSprite)
+			
+			_lifeSprite = new CitrusSprite("lives", {view: Game.life});
+			add(_lifeSprite);
 			
 			var heroAnim:AnimationSequence = new AnimationSequence(Textures.GREEN_TEXTURE_ATLAS, ["walk_left", "walk_right", "jump_left", "jump_right", "idle", "dance"], "idle", 	10, true, "none");
 			StarlingArt.setLoopAnimations(["walk_left"]);
@@ -758,7 +758,7 @@ package com.states
 				
 			}	
 		}
-		
+
 		override public function destroy():void
 		{
 			this.removeEventListener(TouchEvent.TOUCH, handleUI);
