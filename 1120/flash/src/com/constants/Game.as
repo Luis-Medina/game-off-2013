@@ -52,6 +52,7 @@ package com.constants
 		public static var velocityOrig:Number = 80;
 		public static var velocityBoost:Number = 100;
 		public static var BREAK_WALLS:String = "yes";
+		public static var IMMORTALITY:Boolean = false;
 		
 		public static var timeBoost:Number = 12000;
 		public static var timeOrig:Number = 10000;
