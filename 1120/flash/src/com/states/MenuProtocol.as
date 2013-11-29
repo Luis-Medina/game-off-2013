@@ -194,7 +194,9 @@ package com.states
 			_button.removeEventListener(TouchEvent.TOUCH, buttonHandler);
 			_repeatTimer.removeEventListener(TimerEvent.TIMER, droneRepeat);
 			_delay.removeEventListener(TimerEvent.TIMER, _delayTimerCallback);
-			_splashDelay.addEventListener(TimerEvent.TIMER, _splashDelayCallback);
+			
+			if (_splashDelay)
+				_splashDelay.removeEventListener(TimerEvent.TIMER, _splashDelayCallback);
 			
 			this.removeChildren();
 			// super.destroy(); // dont call this... 
