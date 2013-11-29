@@ -170,7 +170,7 @@ package com.constants
 		public static const GREEN_CONFIG:Class;
 		public static const GREEN_XML:XML = new XML(new GREEN_CONFIG());
 		
-		[Embed(source="../assets/textures/green_sprites.png")]
+		[Embed(source="../assets/textures/green_sprites.png")] 
 		public static const GREEN:Class;
 		public static const GREEN_TEXTURE_IMG:Texture = Texture.fromBitmap(new GREEN);
 		public static const GREEN_TEXTURE:Texture = Texture.fromTexture(GREEN_TEXTURE_IMG);

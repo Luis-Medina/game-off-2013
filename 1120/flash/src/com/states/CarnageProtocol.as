@@ -38,7 +38,7 @@ package com.states
 	import com.events.PowerupEvent;
 	import com.events.RestartTimerEvent;
 	import com.managers.PowerupManager;
-	import com.utils.ArrayUtils;
+	import com.utils.ArrayUtils; 
 	
 	import flash.events.TimerEvent;
 	import flash.geom.Point;
@@ -132,7 +132,6 @@ package com.states
 		public function CarnageProtocol() {
 			
 			trace("CARNAGE PROTOCOL")        
-			
 			super(); 
 		}
 
