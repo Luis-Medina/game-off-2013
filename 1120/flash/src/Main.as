@@ -1,7 +1,7 @@
 package
 {
+	import citrus.core.CitrusEngine;
 	import citrus.core.starling.StarlingCitrusEngine;
-	import citrus.objects.CitrusSprite;
 	
 	import com.constants.Audio;
 	import com.constants.Game;
@@ -16,6 +16,8 @@ package
 	[SWF(width='960', height='600', backgroundColor='#080f13', frameRate='60', pageTitle='1120')]
 	
 	public class Main extends StarlingCitrusEngine {
+		
+		private static var _ce:CitrusEngine = CitrusEngine.getInstance();
 
 		public function Main() {
 			
@@ -29,8 +31,7 @@ package
 			
 			setUpStarling(true);
 			_starling.stage.addEventListener(CreateEvent.CREATE, switchStates);
-			
-			
+
 			sound.addSound("click", {sound: Audio.CLICK});
 			sound.addSound("hit_pick", {sound: Audio.HIT_PICK});
 			sound.addSound("rumble", {sound: Audio.RUMBLE});
@@ -42,13 +43,9 @@ package
 			sound.addSound("heart", {sound: Audio.HEART, volume: 0.1});
 			sound.addSound("horror", {sound: Audio.HORROR, volume: 0.4});
 			
-			// sound.addSound("jump", {sound: Audio.JUMP, volume: 0.4});
-			// sound.addSound("walk", {sound: Audio.WALK, volume: 0.4});
-
 			state = new MenuProtocol();
-			
 		}
-		
+
 		private function switchStates(Event:CreateEvent):void
 		{
 			var type:String = Event.params.type
