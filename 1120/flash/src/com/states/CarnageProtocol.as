@@ -261,6 +261,7 @@ package com.states
 		override public function update(timeDelta:Number):void
 		{		
 			Game.coinCount = currentCoinCount; // fail-safe
+			Game.END_CASH = currentCoinCount
 			
 			// fail-safe
 			if (Game.hero.x < 0 || Game.hero.x > Game.STAGE_WIDTH)
@@ -382,7 +383,7 @@ package com.states
 			if (!revert)
 			{ 	// HANDLE MADE A PURCHASE
 				currentCoinCount -= Game.THREE_NINETY; // subtract cost of powerup
-				currentCoinCount = Math.max(0, currentCoinCount);
+				currentCoinCount = currentCoinCount;
 				_cash.updateDisplay(currentCoinCount);
 				Game.coinCount = currentCoinCount;
 				_powerupStatus.updateCount(type);
@@ -454,7 +455,6 @@ package com.states
 			_ce.sound.playSound(_round.getRound() % 2 == 0 ? "rumble" : "rumble_v1");
 			
 			currentCoinCount -= currentRemainingCount;
-			currentCoinCount = Math.max(0, ArrayUtils.trim(currentCoinCount, 2));
 			_cash.updateDisplay(currentCoinCount);
 			_round.updateRound(increaseRound);
 			_powerupStatus.roundHasEndedUpdateCount(increaseRound);
@@ -579,8 +579,7 @@ package com.states
 			}
 			
 			// UPDATE
-			currentRemainingCount = ArrayUtils.sumArray(currCoinValues);
-			currentRemainingCount = Math.max(0, ArrayUtils.trim(currentRemainingCount, 2));
+			currentRemainingCount = Math.max(0, ArrayUtils.sumArray(currCoinValues));
 			_remaining.updateDisplay(currentRemainingCount)
 		}
 		
@@ -717,14 +716,14 @@ package com.states
 					break;
 				}
 			}
-			
+
 			currentCoinCount += num;
-			currentCoinCount = Math.max(0, ArrayUtils.trim(currentCoinCount, 2));
+			// currentCoinCount = Math.max(0, ArrayUtils.trim(currentCoinCount, 2));
 			_cash.updateDisplay(currentCoinCount);
 			
 			// remaining
 			currentRemainingCount -= num;
-			currentRemainingCount = Math.max(0, ArrayUtils.trim(currentRemainingCount, 2));
+			// currentRemainingCount = Math.max(0, ArrayUtils.trim(currentRemainingCount, 2));
 			_remaining.updateDisplay(currentRemainingCount);
 		}
 
