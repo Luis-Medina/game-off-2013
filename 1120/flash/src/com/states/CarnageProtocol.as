@@ -741,6 +741,7 @@ package com.states
 					_countDown.reset();
 					_remaining.updateDisplay(0);
 					_powerups.show();
+					destroyEnemy();
 				}
 			}
 		}
