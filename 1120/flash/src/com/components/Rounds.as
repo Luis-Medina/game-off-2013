@@ -1,6 +1,7 @@
 package com.components
 {
 	import com.constants.Colors;
+	import com.constants.Game;
 	import com.constants.Textures;
 	
 	import starling.animation.Transitions;
@@ -60,7 +61,7 @@ package com.components
 			});
 			
 			_countTextField.text = _round.toString();
-			
+			Game.ROUNDS_SURVIVED = _round;
 			
 		}
 		

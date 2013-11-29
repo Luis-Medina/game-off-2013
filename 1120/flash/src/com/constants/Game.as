@@ -6,6 +6,12 @@ package com.constants
 	public class Game
 	{
 		public static var ALREADY_INITIATED:Boolean = false;
+
+		// RESULT SCREEN VARS
+		public static var END_CASH:Number = 0;
+		public static var TOTAL_CASH_LOST:Number = 0;
+		public static var TOTAL_CASH_COLLECTED:Number = 0;
+		public static var ROUNDS_SURVIVED:Number = 0;
 		
 		// CONSTANTS
 		public static const PAGE_TITLE:String = '1120';
@@ -85,6 +91,11 @@ package com.constants
 			coinCount = 0;
 			life.resetLife();
 			life = new NewLife();
+			
+			END_CASH = 0;
+			TOTAL_CASH_LOST = 0;
+			TOTAL_CASH_COLLECTED = 0;
+			ROUNDS_SURVIVED = 0;
 		}
 	}
 }
