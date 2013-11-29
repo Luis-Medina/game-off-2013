@@ -135,7 +135,9 @@ package com.states
 		public static function cannonHit(contact:NapePhysicsObject):void
 		{
 		  	if (contact.name == "hero")
-			{
+			{			
+				if(Game.IMMORTALITY) return;
+				
 				_ce.sound.playSound(Game.life.getNumLife() > 1 ? "earthrot" : "horror");
 				Game.life.removeLife();
 				
