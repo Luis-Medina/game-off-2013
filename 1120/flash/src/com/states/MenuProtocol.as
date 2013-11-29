@@ -17,6 +17,8 @@ package com.states
 	import flash.ui.MouseCursor;
 	import flash.utils.Timer;
 	
+	import starling.animation.Transitions;
+	import starling.core.Starling;
 	import starling.display.Button;
 	import starling.display.Image;
 	import starling.events.Event;
@@ -35,16 +37,19 @@ package com.states
 		private var _bg:CitrusSprite;
 		private var _buttonTexture:Texture;
 		private var _button:Button;
+		private var _splashDelay:Timer;
 		private var _delay:Timer;
 		private var _repeatTimer:Timer;
 		
 		private var _carnage:CarnageProtocol;
 		private var _terminate:TerminateProtocol;
 		
+		private var citrusSplash:Image;
+		private var unimpressedTurtleSplash:Image;
+		
 		public function MenuProtocol()
 		{
 			super();
-			this.visible = false;
 			this.addEventListener(Event.ADDED_TO_STAGE, onAddedToStage);		
 		}
 		
@@ -54,15 +59,63 @@ package com.states
 			super.initialize();
 			trace("MENU PROTOCOL")
 
-			var _bgSrc:Texture = Textures.SPLASH_TEXTURE;
-			_bg = new CitrusSprite("splash_img", {view:_bgSrc});
-			add(_bg);
+			if (!Game.ALREADY_INITIATED)
+			{
+				_splashDelay = new Timer(2000, 1);
+				_splashDelay.addEventListener(TimerEvent.TIMER, _splashDelayCallback);
+				_splashDelay.start();
+			}
+			else 
+			{
+				drawMenu();
+			}
+		}
+		
+		private function _splashDelayCallback(e:TimerEvent):void
+		{
+			Game.ALREADY_INITIATED = true;
+			_splashDelay.removeEventListener(TimerEvent.TIMER, _splashDelayCallback);
 			
-			drawMenu();
+			firstSplash();
+		}
+		
+		private function firstSplash():void
+		{			
+			citrusSplash = new Image(Textures.CITRUS_TEXTURE);
+			citrusSplash.alpha = 1;
+			addChild(citrusSplash);
+			
+			Starling.juggler.tween(citrusSplash, 6, {
+				transition: Transitions.EASE_IN,
+				onComplete: nextSplash //,
+				//alpha: 0
+			});
+		}
+		
+		private function nextSplash():void
+		{
+			removeChild(citrusSplash);
+			
+			unimpressedTurtleSplash = new Image(Textures.UNIMPRESSED_TEXTURE);
+			citrusSplash.alpha = 1;
+			addChild(unimpressedTurtleSplash)
+			
+			Starling.juggler.tween(unimpressedTurtleSplash, 6, {
+				transition: Transitions.EASE_IN,
+				onComplete: drawMenu //,
+				//alpha: 0
+			});
 		}
 		
 		private function drawMenu():void
 		{
+			if (unimpressedTurtleSplash)
+				removeChild(unimpressedTurtleSplash);
+			
+			var _bgSrc:Texture = Textures.SPLASH_TEXTURE;
+			_bg = new CitrusSprite("splash_img", {view:_bgSrc});
+			add(_bg);
+			
 			/** MENU **/
 			var _buttons:Array = [Game.START, Game.EXIT];			
 			var x:Number, y:Number;
@@ -75,8 +128,6 @@ package com.states
 				
 				this.addChild(_button);
 			}
-			
-			this.visible = true;
 			
 			_delay = new Timer(500, 1);
 			_delay.addEventListener(TimerEvent.TIMER, _delayTimerCallback);
@@ -131,9 +182,19 @@ package com.states
 		override public function destroy():void
 		{
 			_bg.destroy();
+			
+			if (citrusSplash)
+				citrusSplash.dispose();
+			
+			if (unimpressedTurtleSplash)
+				unimpressedTurtleSplash.dispose();
+			
+			Starling.juggler.purge();
+			
 			_button.removeEventListener(TouchEvent.TOUCH, buttonHandler);
 			_repeatTimer.removeEventListener(TimerEvent.TIMER, droneRepeat);
 			_delay.removeEventListener(TimerEvent.TIMER, _delayTimerCallback);
+			_splashDelay.addEventListener(TimerEvent.TIMER, _splashDelayCallback);
 			
 			this.removeChildren();
 			// super.destroy(); // dont call this... 

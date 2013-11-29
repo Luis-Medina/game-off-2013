@@ -20,6 +20,16 @@ package com.constants
 		public static const BLANK_SPLASH_IMG:Texture = Texture.fromBitmap(new BLANK_SPLASH);
 		public static const BLANK_SPLASH_TEXTURE:Texture = Texture.fromTexture(BLANK_SPLASH_IMG);
 		
+		[Embed(source="../assets/textures/screens/splash_citrusengine.png", mimeType="image/png")]
+		public static const CITRUS:Class;
+		public static const CITRUS_IMG:Texture = Texture.fromBitmap(new CITRUS);
+		public static const CITRUS_TEXTURE:Texture = Texture.fromTexture(CITRUS_IMG);
+		
+		[Embed(source="../assets/textures/screens/splash_unimpressedturtle.png", mimeType="image/png")]
+		public static const UNIMPRESSED:Class;
+		public static const UNIMPRESSED_IMG:Texture = Texture.fromBitmap(new UNIMPRESSED);
+		public static const UNIMPRESSED_TEXTURE:Texture = Texture.fromTexture(UNIMPRESSED_IMG);
+		
 		[Embed(source="../assets/textures/screens/devoid_of_life.png", mimeType="image/png")]
 		public static const LIFELESS:Class;
 		public static const LIFELESS_IMG:Texture = Texture.fromBitmap(new LIFELESS);
