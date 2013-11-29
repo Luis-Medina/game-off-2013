@@ -136,7 +136,7 @@ package com.states
 		{
 		  	if (contact.name == "hero")
 			{			
-				if(Game.IMMORTALITY) return;
+				if(Game.IMMORTALITY && Game.life.getNumLife() > 1) return;
 				
 				_ce.sound.playSound(Game.life.getNumLife() > 1 ? "earthrot" : "horror");
 				Game.life.removeLife();
