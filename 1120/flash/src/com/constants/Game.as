@@ -5,6 +5,8 @@ package com.constants
 
 	public class Game
 	{
+		public static var ALREADY_INITIATED:Boolean = false;
+		
 		// CONSTANTS
 		public static const PAGE_TITLE:String = '1120';
 		public static const FRAME_RATE:int = 30;
