@@ -92,6 +92,8 @@ package com.states
 		
 		private function playDrone():void
 		{
+			/// LOOPING THIS MANUALLY BECAUSE the "LOOP"/"TimesToRepeat" argument isn't doing jack shit.
+			
 			_repeatTimer = new Timer(7000, 1);
 			_repeatTimer.addEventListener(TimerEvent.TIMER, droneRepeat);
 			_repeatTimer.start();
