@@ -4,9 +4,11 @@ package com.states
 	import citrus.core.starling.StarlingState;
 	
 	import com.components.GameButton;
+	import com.constants.Colors;
 	import com.constants.Game;
 	import com.constants.Textures;
 	import com.events.CreateEvent;
+	import com.utils.ArrayUtils;
 	
 	import starling.animation.Transitions;
 	import starling.core.Starling;
@@ -17,6 +19,7 @@ package com.states
 	import starling.events.Touch;
 	import starling.events.TouchEvent;
 	import starling.events.TouchPhase;
+	import starling.text.TextField;
 	import starling.textures.Texture;
 	
 	public class LifelessProtocol extends StarlingState
@@ -25,6 +28,20 @@ package com.states
 		
 		private var _restartButton:Button;
 		private var _splashButton:Button;
+		
+		private var rounds:TextField;
+		private var net_cash_collected:TextField;
+		private var tot_cash_collected:TextField;
+		private var tot_cash_lost:TextField;
+		
+		private var fontSize:Number = 28;
+		private var col:uint = Colors.WHITE;
+		private var xPos:Number = 500;
+		private var yPos:Number = 198;
+		private var gap:Number = 33;
+		private var _width:Number = 100;
+		private var _height:Number = 32;
+		private var _hAlign:String = "left";
 		
 		private static var _ce:CitrusEngine = CitrusEngine.getInstance()
 		
@@ -40,6 +57,23 @@ package com.states
 			
 			lifelessScreen = new Image(Textures.LIFELESS_TEXTURE);
 			addChild(lifelessScreen);
+			
+			var _rounds:String = Game.ROUNDS_SURVIVED.toString();
+			rounds = new TextField(_width, _height, _rounds, "ProtestPaintBB", fontSize, Colors.WHITE, false);
+			rounds.hAlign = _hAlign;
+			rounds.x = xPos;
+			yPos += gap;
+			rounds.y = yPos;
+			
+			var _net:String = ArrayUtils.currency(Game.coinCount);
+			net_cash_collected = new TextField(_width, _height, _net, "ProtestPaintBB", fontSize, Colors.WHITE, false);
+			net_cash_collected.hAlign = _hAlign;
+			net_cash_collected.x = xPos;
+			yPos += gap;
+			net_cash_collected.y = yPos;
+			
+			addChild(rounds);
+			addChild(net_cash_collected);
 			
 			_restartButton = GameButton.imageButton(Textures.BUTTON_RESTART_TEXTURE, Game.RESTART, 46, 46, 840, 10); 
 			_splashButton = GameButton.imageButton(Textures.BUTTON_EXIT_TEXTURE, Game.SPLASH, 46, 46, 900, 10); 
@@ -99,6 +133,11 @@ package com.states
 			Starling.juggler.purge();
 			_restartButton.removeEventListener(TouchEvent.TOUCH, handleUI);
 			_splashButton.removeEventListener(TouchEvent.TOUCH, handleUI);
+			
+			removeChild(rounds);
+			removeChild(net_cash_collected);
+			removeChild(tot_cash_collected);
+			removeChild(tot_cash_lost);
 			
 			lifelessScreen.dispose();
 			_restartButton.dispose();
