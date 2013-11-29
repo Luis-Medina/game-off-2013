@@ -11,7 +11,7 @@ package com.components {
 		
 		protected var _collectorClass:Class = Anarcho;
 		
-		public function Life(name:String, params:Object = null) {
+		public function Immortality(name:String, params:Object = null) {
 			
 			super(name, params);
 		}
