@@ -52,6 +52,7 @@ package com.constants
 		public static var velocityOrig:Number = 80;
 		public static var velocityBoost:Number = 100;
 		public static var BREAK_WALLS:String = "yes";
+		public static var IMMORTALITY:Boolean = false;
 		
 		public static var timeBoost:Number = 12000;
 		public static var timeOrig:Number = 10000;
@@ -59,6 +60,7 @@ package com.constants
 		// GAME STATES (for tracking && for results screen)
 		public static var coinCount:Number;
 		public static var THREE_NINETY:Number = 3.90;
+		public static var THREE_NINETY_EVENTS:int = 0;
 			
 		// PLATFORM MANAGEMENT
 		public static const platforms:Object = {}; 
@@ -96,6 +98,7 @@ package com.constants
 			TOTAL_CASH_LOST = 0;
 			TOTAL_CASH_COLLECTED = 0;
 			ROUNDS_SURVIVED = 0;
+			THREE_NINETY_EVENTS = 0;
 		}
 	}
 }

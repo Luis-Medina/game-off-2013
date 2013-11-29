@@ -1,6 +1,7 @@
 package com.managers
 {
 	import com.constants.Colors;
+	import com.constants.Game;
 	import com.constants.Textures;
 	import com.events.PowerupEvent;
 	
@@ -30,17 +31,20 @@ package com.managers
 		public var barewalkCount:int = 0;
 		public var lettuceCount:int = 0;
 		public var crackCount:int = 0;
+		public var immortalityCount:int = 0;
 		private var countArr:Array = [colossalCount, barewalkCount, lettuceCount, crackCount];	
 		
 		private var colossalStatus:Image;
 		private var barewalkStatus:Image;
 		private var lettuceStatus:Image;
 		private var crackStatus:Image;
+		private var immortalityStatus:Image;
 		
 		private var colossalLabel:TextField;
 		private var barewalkLabel:TextField;
 		private var lettuceLabel:TextField;
 		private var crackLabel:TextField;
+		private var immortalityLabel:TextField;
 		
 		public function PowerupManager()
 		{
@@ -103,6 +107,19 @@ package com.managers
 			crackLabel.y = crackStatus.y + labelYOffset;
 			addChild(crackLabel);
 			
+			startingXPos += horGap;
+			
+			immortalityStatus = new Image(Textures.IMMORTALITY_STATUS_TEXTURE);
+			immortalityStatus.alpha = INACTIVE_ALPHA;
+			immortalityStatus.y = globalYPos;
+			immortalityStatus.x = startingXPos;	
+			addChild(immortalityStatus);
+			
+			immortalityLabel = new TextField(textWidth, textHeight, immortalityCount.toString(), font, fontSize, col, false);
+			immortalityLabel.x = immortalityStatus.x + labelXOffset;
+			immortalityLabel.y = immortalityStatus.y + labelYOffset;
+			addChild(immortalityLabel);
+			
 		}
 		
 		public function updateCount(type:String):void
@@ -115,6 +132,8 @@ package com.managers
 				lettuceCount += ADDED_ROUNDS;
 			else if (type == "crack")
 				crackCount += ADDED_ROUNDS;
+			else if (type == "immortality")
+				immortalityCount += 3;
 			
 			updateLabels();
 		}
@@ -127,6 +146,7 @@ package com.managers
 			barewalkCount = Math.max(0, barewalkCount - 1);
 			lettuceCount = Math.max(0, lettuceCount - 1);
 			crackCount = Math.max(0, crackCount - 1);
+			immortalityCount = Math.max(0, immortalityCount - 1);
 			
 			hasPowerupEnded();
 			updateLabels();
@@ -153,15 +173,19 @@ package com.managers
 			{
 				dispatchEvent(new PowerupEvent(PowerupEvent.POWERUP, {type: "crack", sound: '', revert: true}, true));
 			}
+			
+			if (immortalityCount == 0)
+				Game.IMMORTALITY = false;
 		}
 		
 		private function updateLabels():void
 		{
-			// update all labels.
+			// update all labels. 
 			colossalLabel.text = colossalCount.toString();
 			barewalkLabel.text = barewalkCount.toString();
 			lettuceLabel.text = lettuceCount.toString();
 			crackLabel.text = crackCount.toString();
+			immortalityLabel.text = immortalityCount.toString();
 		}
 		
 		override public function dispose():void
@@ -170,11 +194,13 @@ package com.managers
 			barewalkStatus.dispose();
 			lettuceStatus.dispose();
 			crackStatus.dispose();
+			immortalityStatus.dispose();
 			
 			colossalLabel.dispose()
 			barewalkLabel.dispose();
 			lettuceLabel.dispose();
 			crackLabel.dispose();
+			immortalityLabel.dispose();
 
 			super.dispose();
 		}

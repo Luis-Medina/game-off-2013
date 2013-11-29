@@ -33,11 +33,12 @@ package com.states
 		private var net_cash_collected:TextField;
 		private var tot_cash_collected:TextField;
 		private var tot_cash_lost:TextField;
+		private var three_ninety_event:TextField;
 		
 		private var fontSize:Number = 28;
 		private var col:uint = Colors.WHITE;
 		private var xPos:Number = 500;
-		private var yPos:Number = 198;
+		private var yPos:Number = 250;
 		private var gap:Number = 33;
 		private var _width:Number = 100;
 		private var _height:Number = 32;
@@ -72,8 +73,16 @@ package com.states
 			yPos += gap;
 			net_cash_collected.y = yPos;
 			
+			var _390Events:String = Game.THREE_NINETY_EVENTS.toString();
+			three_ninety_event = new TextField(_width, _height, _390Events, "ProtestPaintBB", fontSize, Colors.WHITE, false);
+			three_ninety_event.hAlign = _hAlign;
+			three_ninety_event.x = xPos;
+			yPos += gap;
+			three_ninety_event.y = yPos;
+			
 			addChild(rounds);
 			addChild(net_cash_collected);
+			addChild(three_ninety_event);
 			
 			_restartButton = GameButton.imageButton(Textures.BUTTON_RESTART_TEXTURE, Game.RESTART, 46, 46, 840, 10); 
 			_splashButton = GameButton.imageButton(Textures.BUTTON_EXIT_TEXTURE, Game.SPLASH, 46, 46, 900, 10); 

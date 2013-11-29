@@ -15,6 +15,16 @@ package com.constants
 		public static const BLANK_IMG:Texture = Texture.fromBitmap(new BLANK);
 		public static const BLANK_TEXTURE:Texture = Texture.fromTexture(BLANK_IMG);
 		
+		[Embed(source="../assets/textures/immortal.png", mimeType="image/png")]
+		public static const IMMORTALITY:Class;
+		public static const IMMORTALITY_IMG:Texture = Texture.fromBitmap(new IMMORTALITY);
+		public static const IMMORTALITY_TEXTURE:Texture = Texture.fromTexture(IMMORTALITY_IMG);
+		
+		[Embed(source="../assets/textures/powerup_states/immortal_sm.png", mimeType="image/png")]
+		public static const IMMORTALITY_STATUS:Class;
+		public static const IMMORTALITY_STATUS_IMG:Texture = Texture.fromBitmap(new IMMORTALITY_STATUS);
+		public static const IMMORTALITY_STATUS_TEXTURE:Texture = Texture.fromTexture(IMMORTALITY_STATUS_IMG);
+		
 		[Embed(source="../assets/textures/screens/blank_splash.png", mimeType="image/png")]
 		public static const BLANK_SPLASH:Class;
 		public static const BLANK_SPLASH_IMG:Texture = Texture.fromBitmap(new BLANK_SPLASH);
@@ -170,7 +180,7 @@ package com.constants
 		public static const GREEN_CONFIG:Class;
 		public static const GREEN_XML:XML = new XML(new GREEN_CONFIG());
 		
-		[Embed(source="../assets/textures/green_sprites.png")]
+		[Embed(source="../assets/textures/green_sprites.png")] 
 		public static const GREEN:Class;
 		public static const GREEN_TEXTURE_IMG:Texture = Texture.fromBitmap(new GREEN);
 		public static const GREEN_TEXTURE:Texture = Texture.fromTexture(GREEN_TEXTURE_IMG);

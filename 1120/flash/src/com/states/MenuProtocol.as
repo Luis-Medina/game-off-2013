@@ -85,7 +85,7 @@ package com.states
 			citrusSplash.alpha = 1;
 			addChild(citrusSplash);
 			
-			Starling.juggler.tween(citrusSplash, 6, {
+			Starling.juggler.tween(citrusSplash, 4, {
 				transition: Transitions.EASE_IN,
 				onComplete: nextSplash //,
 				//alpha: 0
@@ -100,7 +100,7 @@ package com.states
 			citrusSplash.alpha = 1;
 			addChild(unimpressedTurtleSplash)
 			
-			Starling.juggler.tween(unimpressedTurtleSplash, 6, {
+			Starling.juggler.tween(unimpressedTurtleSplash, 4, {
 				transition: Transitions.EASE_IN,
 				onComplete: drawMenu //,
 				//alpha: 0
@@ -194,7 +194,9 @@ package com.states
 			_button.removeEventListener(TouchEvent.TOUCH, buttonHandler);
 			_repeatTimer.removeEventListener(TimerEvent.TIMER, droneRepeat);
 			_delay.removeEventListener(TimerEvent.TIMER, _delayTimerCallback);
-			_splashDelay.addEventListener(TimerEvent.TIMER, _splashDelayCallback);
+			
+			if (_splashDelay)
+				_splashDelay.removeEventListener(TimerEvent.TIMER, _splashDelayCallback);
 			
 			this.removeChildren();
 			// super.destroy(); // dont call this... 

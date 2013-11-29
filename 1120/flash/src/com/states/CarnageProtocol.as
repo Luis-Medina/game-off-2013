@@ -23,6 +23,7 @@ package com.states
 	import com.components.Countdown;
 	import com.components.DynamicPlatform;
 	import com.components.GameButton;
+	import com.components.Immortality;
 	import com.components.Life;
 	import com.components.NewLife;
 	import com.components.PettyCash;
@@ -108,6 +109,10 @@ package com.states
 		private var prophetParticlesSprite:CitrusSprite;
 		private var prophetCoordinates:Point = new Point(900,150);
 		
+		private var _immortalityConfig:XML = XML(new Textures.PROPHET_ARRIVAL_CONFIG());
+		private var _immortalityParticles:PDParticleSystem = new PDParticleSystem(_immortalityConfig, Textures.IMMORTALITY_TEXTURE);
+		private var	_immortalityParticlesSprite:CitrusSprite;
+		
 		private var _fireConfig:XML = XML(new Textures.FIRE_CONFIG());
 		private var _fireParticles:PDParticleSystem = new PDParticleSystem(_fireConfig, Textures.FIRE_TEXTURE_TEXTURE);
 		private var _fireParticlesSprite:CitrusSprite;
@@ -132,7 +137,6 @@ package com.states
 		public function CarnageProtocol() {
 			
 			trace("CARNAGE PROTOCOL")        
-			
 			super(); 
 		}
 
@@ -217,6 +221,10 @@ package com.states
 			prophetParticlesSprite = new CitrusSprite("prophet_arrival", {view: prophetParticles, parallaxX:1.7, parallaxY:1.7});
 			moveEmitter(prophetParticlesSprite, prophetCoordinates.x, prophetCoordinates.y);
 			add(prophetParticlesSprite);
+			
+			_immortalityParticlesSprite = new CitrusSprite("immortality_sprite", {view: _immortalityParticles, parallaxX:1.7, parallaxY:1.7});
+			moveEmitter(_immortalityParticlesSprite, 0, 0);
+			add(_immortalityParticlesSprite)
 			
 			_fireParticlesSprite = new CitrusSprite("fire_particles", {view: _fireParticles});
 			moveEmitter(_fireParticlesSprite, 0, 0);
@@ -303,6 +311,15 @@ package com.states
 				_fireParticles.stop();
 			}
 			
+			if(Game.IMMORTALITY)
+			{
+				_immortalityParticles.start();
+				_immortalityParticles.x = Math.floor(Game.hero.x); 
+				_immortalityParticles.y = Math.floor(Game.hero.y);
+			} else {
+				_immortalityParticles.stop()
+			}
+			
 			super.update(timeDelta);
 		}
 		
@@ -387,6 +404,7 @@ package com.states
 				_cash.updateDisplay(currentCoinCount);
 				Game.coinCount = currentCoinCount;
 				_powerupStatus.updateCount(type);
+				Game.THREE_NINETY_EVENTS++;
 			}
 			
 			if (type == "colossal")
@@ -459,12 +477,14 @@ package com.states
 			_round.updateRound(increaseRound);
 			_powerupStatus.roundHasEndedUpdateCount(increaseRound);
 			
+			destroyImmortality();
 			destroyEnemy();
 			destroyLife();
 			destroyCoins();
 			createCoins();
 			createLife();
 			createEnemy();
+			createImmortality();
 			
 			var _jitter:Number = Math.floor(Math.random() * 30);
 			var _allPlatforms:Vector.<CitrusObject> = getObjectsByType(DynamicPlatform);
@@ -627,6 +647,39 @@ package com.states
 			}
 		}
 		
+		private function createImmortality():void
+		{
+			var _createImmortality:Boolean = ArrayUtils.chance(0.15);
+			if (!_createImmortality) return; 
+			
+			var idx:int = ArrayUtils.getNumRandomValuesInRange(Game.platforms.xCoords.length - 26, Game.platforms.xCoords.length - 1, 1)[0];
+			var texture:Texture = Textures.IMMORTALITY_TEXTURE;
+			var xPos:int = Math.floor(Game.platforms.xCoords[idx]);
+			var yPos:int = Math.floor(Game.platforms.yCoords[idx] - (texture.height/2) - 8);
+			var immortality:Immortality = new Immortality("temporary_immortality", {x:xPos, y:yPos, view: texture});
+			immortality.onBeginContact.add(handleImmortality);
+			add(immortality);
+			
+			_ce.sound.playSound("heart");
+			Starling.juggler.tween(immortality, 0.05, {
+				transition: Transitions.EASE_IN,
+				repeatCount: 11000,
+				reverse: true,
+				x: immortality.x -1
+			});
+		}
+		
+		private function destroyImmortality():void
+		{
+			var _allImmortality:Vector.<CitrusObject> = getObjectsByType(Immortality);
+			var _imm:Immortality;
+			for (var x:int = 0; x < _allImmortality.length; x++)
+			{
+				_imm = _allImmortality[x] as Immortality;
+				_imm.kill = true;
+			}
+		}
+		
 		private function createEnemy():void
 		{
 			var _createEnemies:Boolean = ArrayUtils.chance(0.65 + _round.getRound()/100); 
@@ -680,6 +733,17 @@ package com.states
 			
 			_ce.sound.playSound("hit_pick");
 			Game.life.addLife();
+		}
+		
+		private function handleImmortality(interactionCallback:InteractionCallback):void
+		{
+			var _imm:Immortality = NapeUtils.CollisionGetObjectByType(Immortality, interactionCallback) as Immortality;
+			if ((NapeUtils.CollisionGetOther(_imm, interactionCallback) is Anarcho) == false) return;
+			
+			_ce.sound.playSound("hit_pick");
+			
+			Game.IMMORTALITY = true;
+			_powerupStatus.updateCount("immortality");
 		}
 		
 		private function handleHeroJump():void

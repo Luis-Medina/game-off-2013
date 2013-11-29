@@ -20,8 +20,8 @@ package
 		private static var _ce:CitrusEngine = CitrusEngine.getInstance();
 
 		public function Main() {
-			
-			super();
+			 
+			super();  
 			this.addEventListener(Event.ADDED_TO_STAGE, onAddedToStage);
 		}
 		
@@ -29,7 +29,7 @@ package
 		{
 			this.removeEventListener(Event.ADDED_TO_STAGE, onAddedToStage);
 			
-			setUpStarling(true);
+			setUpStarling(false);
 			_starling.stage.addEventListener(CreateEvent.CREATE, switchStates);
 
 			sound.addSound("click", {sound: Audio.CLICK});
