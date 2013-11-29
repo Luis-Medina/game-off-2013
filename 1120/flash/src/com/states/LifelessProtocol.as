@@ -21,7 +21,7 @@ package com.states
 	
 	public class LifelessProtocol extends StarlingState
 	{
-		private var lifelessScreen:Image
+		private var lifelessScreen:Image;
 		
 		private var _restartButton:Button;
 		private var _splashButton:Button;
