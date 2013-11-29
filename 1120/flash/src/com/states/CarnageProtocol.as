@@ -404,6 +404,7 @@ package com.states
 				_cash.updateDisplay(currentCoinCount);
 				Game.coinCount = currentCoinCount;
 				_powerupStatus.updateCount(type);
+				Game.THREE_NINETY_EVENTS++;
 			}
 			
 			if (type == "colossal")
