@@ -2,6 +2,7 @@ package com.states
 {	
 	import citrus.core.starling.StarlingState;
 	import citrus.objects.CitrusSprite;
+	import citrus.sounds.CitrusSoundEvent;
 	
 	import com.components.GameButton;
 	import com.constants.Colors;
@@ -11,8 +12,10 @@ package com.states
 	import com.events.CreateEvent;
 	
 	import flash.display.BitmapData;
+	import flash.events.TimerEvent;
 	import flash.ui.Mouse;
 	import flash.ui.MouseCursor;
+	import flash.utils.Timer;
 	
 	import starling.display.Button;
 	import starling.display.Image;
@@ -32,6 +35,8 @@ package com.states
 		private var _bg:CitrusSprite;
 		private var _buttonTexture:Texture;
 		private var _button:Button;
+		private var _delay:Timer;
+		private var _repeatTimer:Timer;
 		
 		private var _carnage:CarnageProtocol;
 		private var _terminate:TerminateProtocol;
@@ -72,6 +77,31 @@ package com.states
 			}
 			
 			this.visible = true;
+			
+			_delay = new Timer(500, 1);
+			_delay.addEventListener(TimerEvent.TIMER, _delayTimerCallback);
+			_delay.start();
+		}
+		
+		private function _delayTimerCallback(e:TimerEvent):void
+		{
+			_delay.removeEventListener(TimerEvent.TIMER, _delayTimerCallback);
+			_ce.sound.playSound("drone");
+			playDrone();
+		}
+		
+		private function playDrone():void
+		{
+			_repeatTimer = new Timer(7000, 1);
+			_repeatTimer.addEventListener(TimerEvent.TIMER, droneRepeat);
+			_repeatTimer.start();
+		}
+		
+		private function droneRepeat(e:TimerEvent):void
+		{
+			_ce.sound.playSound("drone");
+			
+			playDrone();
 		}
 
 		private function buttonHandler(e:TouchEvent):void
@@ -100,6 +130,9 @@ package com.states
 		{
 			_bg.destroy();
 			_button.removeEventListener(TouchEvent.TOUCH, buttonHandler);
+			_repeatTimer.removeEventListener(TimerEvent.TIMER, droneRepeat);
+			_delay.removeEventListener(TimerEvent.TIMER, _delayTimerCallback);
+			
 			this.removeChildren();
 			// super.destroy(); // dont call this... 
 		}
