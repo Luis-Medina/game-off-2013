@@ -41,7 +41,7 @@ package
 			sound.addSound("veloid2", {sound: Audio.VELOID_2, volume: 0.4});
 			sound.addSound("earthrot", {sound: Audio.EARTHROT, volume: 0.05});
 			sound.addSound("heart", {sound: Audio.HEART, volume: 0.1});
-			sound.addSound("horror", {sound: Audio.HORROR, volume: 0.4});
+			sound.addSound("horror", {sound: Audio.HORROR, volume: 0.5});
 			
 			state = new MenuProtocol();
 		}
