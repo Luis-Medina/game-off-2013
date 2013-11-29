@@ -85,7 +85,7 @@ package com.states
 			citrusSplash.alpha = 1;
 			addChild(citrusSplash);
 			
-			Starling.juggler.tween(citrusSplash, 6, {
+			Starling.juggler.tween(citrusSplash, 4, {
 				transition: Transitions.EASE_IN,
 				onComplete: nextSplash //,
 				//alpha: 0
@@ -100,7 +100,7 @@ package com.states
 			citrusSplash.alpha = 1;
 			addChild(unimpressedTurtleSplash)
 			
-			Starling.juggler.tween(unimpressedTurtleSplash, 6, {
+			Starling.juggler.tween(unimpressedTurtleSplash, 4, {
 				transition: Transitions.EASE_IN,
 				onComplete: drawMenu //,
 				//alpha: 0
