@@ -15,6 +15,11 @@ package com.constants
 		public static const BLANK_IMG:Texture = Texture.fromBitmap(new BLANK);
 		public static const BLANK_TEXTURE:Texture = Texture.fromTexture(BLANK_IMG);
 		
+		[Embed(source="../assets/textures/screens/blank_splash.png", mimeType="image/png")]
+		public static const BLANK_SPLASH:Class;
+		public static const BLANK_SPLASH_IMG:Texture = Texture.fromBitmap(new BLANK_SPLASH);
+		public static const BLANK_SPLASH_TEXTURE:Texture = Texture.fromTexture(BLANK_SPLASH_IMG);
+		
 		[Embed(source="../assets/textures/screens/devoid_of_life.png", mimeType="image/png")]
 		public static const LIFELESS:Class;
 		public static const LIFELESS_IMG:Texture = Texture.fromBitmap(new LIFELESS);
@@ -195,6 +200,21 @@ package com.constants
 		public static const ENEMIES_TEXTURE_IMG:Texture = Texture.fromBitmap(new ENEMIES);
 		public static const ENEMIES_TEXTURE:Texture = Texture.fromTexture(ENEMIES_TEXTURE_IMG);
 		public static const ENEMIES_TEXTURE_ATLAS:TextureAtlas = new TextureAtlas (ENEMIES_TEXTURE, ENEMIES_XML);
+		
+		[Embed(source="../assets/textures/soc_media/twitter.png", mimeType="image/png")]
+		public static const TWITTER:Class;
+		public static const TWITTER_IMG:Texture = Texture.fromBitmap(new TWITTER);
+		public static const TWITTER_TEXTURE:Texture = Texture.fromTexture(TWITTER_IMG);
+		
+		[Embed(source="../assets/textures/soc_media/facebook.png", mimeType="image/png")]
+		public static const FACEBOOK:Class;
+		public static const FACEBOOK_IMG:Texture = Texture.fromBitmap(new FACEBOOK);
+		public static const FACEBOOK_TEXTURE:Texture = Texture.fromTexture(FACEBOOK_IMG);
+		
+		[Embed(source="../assets/textures/soc_media/github.png", mimeType="image/png")]
+		public static const GITHUB:Class;
+		public static const GITHUB_IMG:Texture = Texture.fromBitmap(new GITHUB);
+		public static const GITHUB_TEXTURE:Texture = Texture.fromTexture(GITHUB_IMG);
 		
 		/** PARTICLE CONFIGS **/
 		
