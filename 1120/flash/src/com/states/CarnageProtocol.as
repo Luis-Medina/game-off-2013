@@ -723,7 +723,7 @@ package com.states
 			
 			// remaining
 			currentRemainingCount -= num;
-			// currentRemainingCount = Math.max(0, ArrayUtils.trim(currentRemainingCount, 2));
+			currentRemainingCount = Math.max(0, ArrayUtils.trim(currentRemainingCount, 2));
 			_remaining.updateDisplay(currentRemainingCount);
 		}
 
