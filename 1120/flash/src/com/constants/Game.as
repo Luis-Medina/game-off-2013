@@ -99,6 +99,7 @@ package com.constants
 			TOTAL_CASH_COLLECTED = 0;
 			ROUNDS_SURVIVED = 0;
 			THREE_NINETY_EVENTS = 0;
+			Game.IMMORTALITY = false;
 		}
 	}
 }
