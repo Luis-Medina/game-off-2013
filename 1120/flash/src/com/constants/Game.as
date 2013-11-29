@@ -14,6 +14,8 @@ package com.constants
 		// COMPONENTS THAT NEED TO GET ACCESSED BY MULTIPLE CLASSES DUE TO POOR DESIGN
 		public static var hero:Anarcho;
 		public static var life:NewLife = new NewLife();
+		public static var heroStartX:Number = 150;
+		public static var heroStartY:Number = Game.STAGE_HEIGHT - 20
 		
 		// EVENTS
 		public static const START:String = "START";

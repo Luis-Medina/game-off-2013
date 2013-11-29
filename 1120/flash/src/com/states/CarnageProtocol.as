@@ -233,7 +233,7 @@ package com.states
 			StarlingArt.setLoopAnimations(["dance"]);
 			 
 			/** PROTAGONIST **/
-			Game.hero = new Anarcho("hero", {x: 120, y: Game.STAGE_HEIGHT - 20, width: 30, height: 56, view: heroAnim});
+			Game.hero = new Anarcho("hero", {x: Game.heroStartX, y: Game.heroStartY, width: 30, height: 56, view: heroAnim});
 			Game.hero.canDuck = false;
 			Game.hero.acceleration = Game.accelerationOrig; // default is 30
 			Game.hero.jumpAcceleration = 1.2; // default is 9
@@ -261,6 +261,13 @@ package com.states
 		override public function update(timeDelta:Number):void
 		{		
 			Game.coinCount = currentCoinCount; // fail-safe
+			
+			// fail-safe
+			if (Game.hero.x < 0 || Game.hero.x > Game.STAGE_WIDTH)
+			{
+				Game.hero.x = Game.heroStartX;
+				Game.hero.y = Game.heroStartY;
+			}
 			
 			if (currentCoinCount >= Game.THREE_NINETY){	
 				moveEmitter(prophetParticlesSprite, prophetCoordinates.x, prophetCoordinates.y);
