@@ -6,6 +6,7 @@ package com.components
 	
 	import com.constants.BackgroundTextures;
 	import com.constants.Textures;
+	import com.utils.ArrayUtils;
 	
 	import starling.animation.Transitions;
 	import starling.animation.Tween;
@@ -28,7 +29,7 @@ package com.components
 		private var _atmoParticlesSprite:CitrusSprite;
 		private var foreGround:CitrusSprite;
 		private var moon:CitrusSprite;
-		private var cIndex:int = 0;
+		private var cIndex:int = ArrayUtils.randomRange(0, 8);
 		private var nIndex:int = cIndex + 1;
 		
 		private var topImg:Tween;
