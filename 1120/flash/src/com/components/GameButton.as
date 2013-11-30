@@ -3,10 +3,10 @@ package com.components
 	import com.constants.*;
 	
 	import flash.display.Bitmap;
+	import flash.text.Font;
 	
 	import starling.display.Button;
 	import starling.textures.Texture;
-	import com.constants.Fonts;
 	
 	public class GameButton
 	{
@@ -17,7 +17,7 @@ package com.components
 			_button.visible = true;
 			_button.fontSize = fontSize;
 			_button.fontColor = Colors.WHITE;
-			_button.fontName = "DestroyEarthRoughBB";
+			_button.fontName = "DestroyEarthBB";
 			_button.text = text;
 			_button.enabled = true;
 			_button.width = width;

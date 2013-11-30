@@ -6,7 +6,6 @@ package com.states
 	
 	import com.components.GameButton;
 	import com.constants.Colors;
-	import com.constants.Fonts;
 	import com.constants.Game;
 	import com.constants.Textures;
 	import com.events.CreateEvent;

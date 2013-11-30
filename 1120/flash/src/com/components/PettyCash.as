@@ -5,7 +5,6 @@ package com.components
 	import com.constants.Textures;
 	import com.events.ElevenTwentyEvent;
 	import com.utils.ArrayUtils;
-	import com.constants.Fonts;
 	
 	import flash.events.TimerEvent;
 	import flash.globalization.CurrencyFormatter;

@@ -12,10 +12,23 @@ package
 	import com.states.TerminateProtocol;
 	
 	import flash.events.Event;
+	import flash.text.Font;
 		
 	[SWF(width='960', height='600', backgroundColor='#080f13', frameRate='60', pageTitle='1120')]
 	
 	public class Main extends StarlingCitrusEngine {
+		
+		[Embed(source="/com/assets/fonts/DestroyEarthBB.otf", fontName = "DestroyEarthBB",fontStyle = "Regular", mimeType="application/x-font-truetype")]
+		public static const DESTROY_EARTH:Class;
+		
+		[Embed(source="/com/assets/fonts/DestroyEarthRoughBB.otf", fontName = "DestroyEarthRoughBB",fontStyle = "Regular", mimeType="application/x-font-truetype")]
+		public static const DESTROY_EARTH_ROUGH:Class;
+		
+		[Embed(source="/com/assets/fonts/ProtestPaintBB.otf", fontName = "ProtestPaintBB",fontStyle = "Regular", mimeType="application/x-font-truetype")]
+		public static const PROTEST_PAINT:Class;
+		
+		[Embed(source="/com/assets/fonts/PalookaBB.otf", fontName = "PalookaBB",fontStyle = "Regular", mimeType="application/x-font-truetype")]
+		public static const PALOOKA:Class;
 		
 		private static var _ce:CitrusEngine = CitrusEngine.getInstance();
 
