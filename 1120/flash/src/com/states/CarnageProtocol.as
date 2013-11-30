@@ -203,7 +203,7 @@ package com.states
 			_remaining.numLabelX = Game.leftXPos;
 			_remaining.numLabelY = Game.leftYPos;
 			_remaining.numDisplayX = Game.leftXPos + Game.horGap;
-			_remaining.numDisplayY = Game.leftYPos;
+			_remaining.numDisplayY = Game.leftYPos - 5;
 			_remaining.numLabelTexture = Texture.fromBitmap(new Textures.LEFT_LABEL);
 			var _remainingSprite:CitrusSprite = new CitrusSprite("remaining_sprite", {view:_remaining})
 			add(_remainingSprite);

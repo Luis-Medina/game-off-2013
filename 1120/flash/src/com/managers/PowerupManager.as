@@ -15,12 +15,12 @@ package com.managers
 		public static const ADDED_ROUNDS:int = 11; // idk why 11, tbh.. but I already made the sprites so...
 		public static const INACTIVE_ALPHA:Number = 1;
 
-		private var globalYPos:Number = 20 // 530// 
-		private var startingXPos:Number = 380 // 750// 
+		private var globalYPos:Number = 16 // 530// 
+		private var startingXPos:Number = 378 // 750// 
 		private var horGap:Number = 55;
 		
 		private var labelXOffset:Number = 0 // 10;
-		private var labelYOffset:Number = 40; //10; 
+		private var labelYOffset:Number = 35; //10; 
 		private var font:String = "ProtestPaintBB";
 		private var fontSize:int = 24;
 		private var col:uint = Colors.WHITE;
