@@ -6,6 +6,7 @@ package com.components
 	
 	import starling.display.Button;
 	import starling.textures.Texture;
+	import com.constants.Fonts;
 	
 	public class GameButton
 	{

@@ -6,6 +6,7 @@ package com.components
 	import com.constants.Game;
 	import com.constants.Textures;
 	import com.events.CreateEvent;
+	import com.constants.Fonts;
 	
 	import starling.animation.Transitions;
 	import starling.core.Starling;

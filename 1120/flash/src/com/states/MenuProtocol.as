@@ -61,7 +61,7 @@ package com.states
 
 			if (!Game.ALREADY_INITIATED)
 			{
-				_splashDelay = new Timer(2000, 1);
+				_splashDelay = new Timer(500, 1);
 				_splashDelay.addEventListener(TimerEvent.TIMER, _splashDelayCallback);
 				_splashDelay.start();
 			}
