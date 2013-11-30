@@ -1,19 +1,19 @@
 @font-face {
     font-family: ProtestPaintBB;
-    src: local(ProtestPaintBB), url('../../flash/build/fonts/ProtestPaintBB.otf') format('opentype');
+    src: local(ProtestPaintBB), url('../../flash/build/com/assets/fonts/ProtestPaintBB.otf') format('opentype');
 }
 
 @font-face {
     font-family: DestroyEarthRoughBB;
-    src: local(DestroyEarthRoughBB), url('../../flash/build/fonts/DestroyEarthRoughBB.otf') format('opentype');
+    src: local(DestroyEarthRoughBB), url('../../flash/build/com/assets/fonts/DestroyEarthRoughBB.otf') format('opentype');
 }
 
 @font-face {
     font-family: DestroyEarthBB;
-    src: local(DestroyEarthBB), url('../../flash/build/fonts/DestroyEarthBB.otf') format('opentype');
+    src: local(DestroyEarthBB), url('../../flash/build/com/assets/fonts/DestroyEarthBB.otf') format('opentype');
 }
 
 @font-face {
     font-family: PalookaBB;
-    src: local(PalookaBB), url('../../flash/build/fonts/PalookaBB.otf') format('opentype');
+    src: local(PalookaBB), url('../../flash/build/com/assets/fonts/PalookaBB.otf') format('opentype');
 }
