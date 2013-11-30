@@ -55,6 +55,11 @@ package com.constants
 		public static const SPLASH_IMG:Texture = Texture.fromBitmap(new SPLASH);
 		public static const SPLASH_TEXTURE:Texture = Texture.fromTexture(SPLASH_IMG);
 		
+		[Embed(source="../assets/textures/splash.png", mimeType="image/png")]
+		public static const SPLASH_0:Class;
+		public static const SPLASH_0_IMG:Texture = Texture.fromBitmap(new SPLASH_0);
+		public static const SPLASH_0_TEXTURE:Texture = Texture.fromTexture(SPLASH_0_IMG);
+		
 		[Embed(source="../assets/textures/level_1_floor.png", mimeType="image/png")]
 		public static const FLOOR:Class;
 		public static const FLOOR_IMG:Texture = Texture.fromBitmap(new FLOOR);
@@ -94,6 +99,16 @@ package com.constants
 		public static const BUTTON_RESTART:Class;
 		public static const BUTTON_RESTART_IMG:Texture = Texture.fromBitmap(new BUTTON_RESTART);
 		public static const BUTTON_RESTART_TEXTURE:Texture = Texture.fromTexture(BUTTON_RESTART_IMG);
+		
+		[Embed(source="../assets/textures/button_previous.png", mimeType="image/png")]
+		public static const BUTTON_LEFT:Class;
+		public static const BUTTON_LEFT_IMG:Texture = Texture.fromBitmap(new BUTTON_LEFT);
+		public static const BUTTON_LEFT_TEXTURE:Texture = Texture.fromTexture(BUTTON_LEFT_IMG);
+		
+		[Embed(source="../assets/textures/button_next.png", mimeType="image/png")]
+		public static const BUTTON_RIGHT:Class;
+		public static const BUTTON_RIGHT_IMG:Texture = Texture.fromBitmap(new BUTTON_RIGHT);
+		public static const BUTTON_RIGHT_TEXTURE:Texture = Texture.fromTexture(BUTTON_RIGHT_IMG);
 		
 		[Embed(source="../assets/textures/status_neutral.png", mimeType="image/png")]
 		public static const STATUS_NEUTRAL:Class;

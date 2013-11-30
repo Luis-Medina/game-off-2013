@@ -9,6 +9,7 @@ package com.states
 	import com.constants.Game;
 	import com.constants.Textures;
 	import com.events.CreateEvent;
+	import com.managers.TipManager;
 	
 	import flash.display.BitmapData;
 	import flash.events.TimerEvent;
@@ -29,9 +30,9 @@ package com.states
 
 	public class MenuProtocol extends StarlingState
 	{
-		private var _size:Number = 32;
+		private var _size:Number = 26;
 		private var _height:Number = 60;
-		private var _width:Number = 100;
+		private var _width:Number = 200;
 		
 		private var _bg:CitrusSprite;
 		private var _buttonTexture:Texture;
@@ -45,6 +46,8 @@ package com.states
 		
 		private var citrusSplash:Image;
 		private var unimpressedTurtleSplash:Image;
+		
+		private var tips:TipManager = new TipManager();
 		
 		public function MenuProtocol()
 		{
@@ -116,7 +119,7 @@ package com.states
 			add(_bg);
 			
 			/** MENU **/
-			var _buttons:Array = [Game.START, Game.EXIT];			
+			var _buttons:Array = [Game.START, Game.INSTRUCTIONS, Game.EXIT];			
 			var x:Number, y:Number;
 			for (var i:int = 0; i < _buttons.length; i++)
 			{
@@ -126,7 +129,10 @@ package com.states
 				_button.addEventListener(TouchEvent.TOUCH, buttonHandler);
 				
 				this.addChild(_button);
-			}
+			} 
+			
+			addChild(tips);
+			tips.visible = false;
 			
 			_delay = new Timer(500, 1);
 			_delay.addEventListener(TimerEvent.TIMER, _delayTimerCallback);
@@ -167,11 +173,13 @@ package com.states
 					if(touch.phase == TouchPhase.ENDED)
 					{
 						_ce.sound.playSound("click");
-						button.removeEventListener(TouchEvent.TOUCH, buttonHandler);
+						//button.removeEventListener(TouchEvent.TOUCH, buttonHandler);
 						if (button.name == Game.START)
 							dispatchEvent(new CreateEvent(CreateEvent.CREATE, {type: Game.START}, true));
 						else if (button.name == Game.EXIT)
 							dispatchEvent(new CreateEvent(CreateEvent.CREATE, {type: Game.EXIT}, true));
+						else if (button.name == Game.INSTRUCTIONS)
+							tips.show();
 					}	
 				}
 			}
@@ -187,6 +195,9 @@ package com.states
 			
 			if (unimpressedTurtleSplash)
 				unimpressedTurtleSplash.dispose();
+			
+			if (tips)
+				tips.dispose();
 			
 			Starling.juggler.purge();
 			

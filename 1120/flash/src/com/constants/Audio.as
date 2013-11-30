@@ -32,13 +32,8 @@ package com.constants
 		[Embed(source="../assets/audio/horror.mp3")]
 		public static const HORROR:Class;
 		
-		/*
-		[Embed(source="../assets/audio/walk.mp3")]
-		public static const WALK:Class;
-		
-		[Embed(source="../assets/audio/jump.mp3")]
-		public static const JUMP:Class;
-		*/
+		[Embed(source="../assets/audio/warkle.mp3")]
+		public static const WARKLE:Class;
 		
 	}
 }

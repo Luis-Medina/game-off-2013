@@ -45,16 +45,17 @@ package
 			setUpStarling(false);
 			_starling.stage.addEventListener(CreateEvent.CREATE, switchStates);
 
-			sound.addSound("click", {sound: Audio.CLICK});
-			sound.addSound("hit_pick", {sound: Audio.HIT_PICK});
+			sound.addSound("click", {sound: Audio.CLICK, volume: 0.6});
+			sound.addSound("hit_pick", {sound: Audio.HIT_PICK, volume: 0.6});
 			sound.addSound("rumble", {sound: Audio.RUMBLE});
 			sound.addSound("rumble_v1", {sound: Audio.RUMBLE_V1});
 			sound.addSound("lick_chord", {sound: Audio.LICK_CHORD});
 			sound.addSound("drone", {sound: Audio.DRONE});
-			sound.addSound("veloid2", {sound: Audio.VELOID_2, volume: 0.4});
+			sound.addSound("veloid2", {sound: Audio.VELOID_2, volume: 0.3});
 			sound.addSound("earthrot", {sound: Audio.EARTHROT, volume: 0.05});
 			sound.addSound("heart", {sound: Audio.HEART, volume: 0.1});
 			sound.addSound("horror", {sound: Audio.HORROR, volume: 0.5});
+			sound.addSound("warkle", {sound: Audio.WARKLE, volume: 0.6});
 			
 			state = new MenuProtocol();
 		}
