@@ -124,7 +124,7 @@ package com.states
 			for (var i:int = 0; i < _buttons.length; i++)
 			{
 				x = Game.STAGE_WIDTH/2 - _width/2;
-				y = 100 + (Game.STAGE_HEIGHT/2) + (i * _size*1.7);
+				y = 100 + (Game.STAGE_HEIGHT/2) + (i * _size*1.5);
 				_button = GameButton.textButton(_buttons[i], _buttons[i], _size, _width, _height, x, y); 
 				_button.addEventListener(TouchEvent.TOUCH, buttonHandler);
 				
