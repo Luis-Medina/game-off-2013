@@ -1,11 +1,3 @@
-#pre-loader {
- background: url("../raw/spiffygif_152x152.gif") no-repeat center;
- height: 220px;
- width: 220px;
- margin: 0 auto;
- padding-top: 25%;
-}
-
 @font-face {
     font-family: ProtestPaintBB;
     src: local(ProtestPaintBB), url('../../flash/build/fonts/ProtestPaintBB.otf') format('opentype');
