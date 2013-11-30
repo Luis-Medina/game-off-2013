@@ -11,7 +11,6 @@ package com.states
 	import starling.display.Image;
 	import starling.display.Sprite;
 	import starling.events.Event;
-	import com.constants.Fonts;
 	
 	public class LoadingProtocol extends Sprite
 	{	

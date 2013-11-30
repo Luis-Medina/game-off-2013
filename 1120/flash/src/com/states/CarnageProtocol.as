@@ -33,7 +33,6 @@ package com.states
 	import com.constants.BackgroundTextures;
 	import com.constants.Game;
 	import com.constants.Textures;
-	import com.constants.Fonts;
 	import com.events.CreateEvent;
 	import com.events.ElevenTwentyEvent;
 	import com.events.InjuryEvent;

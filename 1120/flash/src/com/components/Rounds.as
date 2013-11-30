@@ -3,7 +3,6 @@ package com.components
 	import com.constants.Colors;
 	import com.constants.Game;
 	import com.constants.Textures;
-	import com.constants.Fonts;
 	
 	import starling.animation.Transitions;
 	import starling.core.Starling;
