@@ -1,7 +1,6 @@
 package
 {
 	import com.constants.Colors;
-	import com.constants.Fonts;
 	
 	import flash.display.DisplayObject;
 	import flash.display.Loader;
@@ -41,7 +40,7 @@ package
 			addChild(backRect);
 			
 			loadRect = new Shape; 
-			loadRect.graphics.beginFill(Colors.GREEN); 
+			loadRect.graphics.beginFill(Colors.BLUE); 
 			loadRect.graphics.drawRect(0, 0, loadWidth, rectHeight); // (x spacing, y spacing, width, height)
 			loadRect.graphics.endFill();
 			loadRect.x = stage.stageWidth / 2 - backRect.width / 2;
