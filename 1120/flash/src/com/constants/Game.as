@@ -26,6 +26,7 @@ package com.constants
 		public static var heroStartY:Number = Game.STAGE_HEIGHT - 20
 		
 		// EVENTS
+		public static const INSTRUCTIONS:String = "PROTOCOL";
 		public static const START:String = "START";
 		public static const RESTART:String = "RESTART";
 		public static const SPLASH:String = "SPLASH";

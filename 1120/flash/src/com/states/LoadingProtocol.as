@@ -27,7 +27,7 @@ package com.states
 		{
 			this.removeEventListener(Event.ADDED_TO_STAGE, onAddedToStage);
 		
-			lifelessScreen = new Image(Textures.BLANK_SPLASH_TEXTURE);
+			lifelessScreen = new Image(Textures.SPLASH_0_TEXTURE);
 			addChild(lifelessScreen);
 			
 			var heroAnim:AnimationSequence = new AnimationSequence(Textures.GREEN_TEXTURE_ATLAS, ["dance"], "dance",  10, true, "none");
