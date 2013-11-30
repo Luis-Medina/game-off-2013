@@ -151,7 +151,7 @@ package com.states
 		
 		private function droneRepeat(e:TimerEvent):void
 		{
-			_ce.sound.playSound("drone");
+			_ce.sound.playSound("pluck_chords");
 			
 			playDrone();
 		}

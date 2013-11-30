@@ -133,6 +133,8 @@ package com.states
 		private var _shakeTimer:Timer;
 		private var blurFilter:BlurFilter = new BlurFilter();
 		private var blurScreen:Image = new Image(BackgroundTextures.FILTER_TEXTURE)
+			
+		private var _loopTimer:Timer;
 		
 		public function CarnageProtocol() {
 			
@@ -251,19 +253,7 @@ package com.states
 			Game.hero.onAnimationChange.add(handleHeroAnimationChange);
 			add(Game.hero);
 			
-			//add(blurScreen)
-			//_ce.state.view.getArt(blurScreen).alpha = 1;
-			/*blurScreen.filter = BlurFilter.createDropShadow(0,0, 0x000000,0.05,10);
-			blurScreen.alpha = 0.05;
-			blurScreen.touchable = false;
-			addChild(blurScreen);
-			
-			Starling.juggler.tween(blurScreen, 2, {
-				transition: Transitions.EASE_IN,
-				repeatCount: 11000,
-				reverse: false,
-				scaleX: 10
-			});*/
+			playDrone();
 		}
 		
 		override public function update(timeDelta:Number):void
@@ -832,6 +822,22 @@ package com.states
 				
 			}	
 		}
+		
+		private function playDrone():void
+		{
+			/// LOOPING THIS MANUALLY BECAUSE the "LOOP"/"TimesToRepeat" argument isn't doing jack shit.
+			
+			_loopTimer = new Timer(3800, 1);
+			_loopTimer.addEventListener(TimerEvent.TIMER, playDroneCallback);
+			_loopTimer.start();
+		}
+		
+		private function playDroneCallback(e:TimerEvent):void
+		{
+			_ce.sound.playSound("warkle");
+			
+			playDrone();
+		}
 
 		override public function destroy():void
 		{
@@ -840,6 +846,8 @@ package com.states
 			this.removeEventListener(RestartTimerEvent.RESTART, restartTimer);
 			this.removeEventListener(PowerupEvent.POWERUP, powerup);
 			EnemyProtocol._eventDispatcher.removeEventListener(InjuryEvent.INJURY, injury);
+			
+			_loopTimer.removeEventListener(TimerEvent.TIMER, playDroneCallback);
 			
 			// _atmoParticles.stop(); 
 
