@@ -45,7 +45,8 @@ package com.components
 			_timerDisplay.hAlign = "left";
 			_timerDisplay.autoScale = false;
 			_timerDisplay.x = Game.timeXPos + Game.horGap;
-			_timerDisplay.y = Game.timeYPos;
+			_timerDisplay.y = Game.timeYPos - 6;
+			_timerDisplay.height = Game.globalFontSize + 2;
 			addChild(_timerDisplay);
 			
 			// TODO: not like this:

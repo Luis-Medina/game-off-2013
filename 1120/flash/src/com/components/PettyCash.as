@@ -23,7 +23,7 @@ package com.components
 		
 		public var startValue:String = '$0.00';
 		public var numDisplayX:Number = Game.changeXPos + Game.horGap;
-		public var numDisplayY:Number = Game.changeYPos;
+		public var numDisplayY:Number = Game.changeYPos - 5;
 		public var numDisplayWidth:Number = Game.globalWidth;
 		public var numDisplayHeight:Number = Game.globalHeight;
 		
@@ -43,9 +43,11 @@ package com.components
 			
 			_numDisplay = new TextField(numDisplayWidth, numDisplayHeight, startValue, "ProtestPaintBB", Game.globalFontSize, Colors.WHITE, false);
 			_numDisplay.hAlign = "left";
+			_numDisplay.vAlign = "center"
 			_numDisplay.autoScale = false;
 			_numDisplay.x = numDisplayX;
 			_numDisplay.y = numDisplayY;
+			_numDisplay.height = Game.globalFontSize + 2;
 			addChild(_numDisplay);
 			
 			_numLabel = new Image(numLabelTexture);

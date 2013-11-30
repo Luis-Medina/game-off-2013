@@ -38,7 +38,7 @@ package com.states
 		private var fontSize:Number = 28;
 		private var col:uint = Colors.WHITE;
 		private var xPos:Number = 500;
-		private var yPos:Number = 250;
+		private var yPos:Number = 245;
 		private var gap:Number = 33;
 		private var _width:Number = 100;
 		private var _height:Number = 32;

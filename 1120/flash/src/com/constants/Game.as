@@ -40,9 +40,9 @@ package com.constants
 		public static const changeXPos:Number = 120;
 		public static const timeXPos:Number = 120;
 		public static const leftXPos:Number = 120;
-		public static const changeYPos:Number = 20;
-		public static const leftYPos:Number = 50;
-		public static const timeYPos:Number = 80; 
+		public static const changeYPos:Number = 22;
+		public static const leftYPos:Number = 52;
+		public static const timeYPos:Number = 82; 
 		public static const globalWidth:Number = 60;
 		public static const globalHeight:Number = 20;
 			

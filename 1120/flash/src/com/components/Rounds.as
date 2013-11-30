@@ -40,7 +40,7 @@ package com.components
 			_countTextField = new TextField(_count.width, _count.height, _round.toString(), "ProtestPaintBB", 38, Colors.WHITE, false);
 			_countTextField.hAlign = "center"
 			_countTextField.x = xPos;
-			_countTextField.y = yPos + 10;
+			_countTextField.y = yPos + 6;
 			addChild(_countTextField);
 		}
 

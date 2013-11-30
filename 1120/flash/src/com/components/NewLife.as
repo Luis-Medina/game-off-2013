@@ -24,8 +24,8 @@ package com.components
 		private var _width:Number = 80;
 		private var _height:Number = 40;
 		private var _life:int = _startingLife;
-		private var _xPos:Number = 110;
-		private var _yPos:Number = 60;
+		private var _xPos:Number = 105;
+		private var _yPos:Number = 50;
 		
 		private var _ce:CitrusEngine = CitrusEngine.getInstance()
 		
@@ -43,11 +43,13 @@ package com.components
 			_lifeTextField = new TextField(_width, _height, _life.toString(), "ProtestPaintBB", 46, Colors.DARK_RED, false);
 			_lifeTextField.x = _xPos;
 			_lifeTextField.y = _yPos;
+			_lifeTextField.height = 47;
 			addChild(_lifeTextField);
 			
 			_xTextField = new TextField(_width, _height, "x", "ProtestPaintBB", 28, Colors.DARK_RED, false);
 			_xTextField.x = _xPos - 16;
-			_xTextField.y = _yPos + 4;
+			_xTextField.y = _yPos + 12;
+			_xTextField.height = 29;
 			addChild(_xTextField);
 			
 			_lifeTextField.alpha = 1;
