@@ -16,9 +16,9 @@ To survive in [People's Park](http://www.yelp.com/biz/peoples-park-berkeley-2), 
 ***
 
 #### ON THE WEB
-[Website](http://www.unimpressedturtle.com)
-[Twitter](http://www.twitter.com/uni_turtle)
-[Facebook](http://www.facebook.com/unimpressedturtle)
+* [Website](http://www.unimpressedturtle.com)
+* [Twitter](http://www.twitter.com/uni_turtle)
+* [Facebook](http://www.facebook.com/unimpressedturtle)
 
 ***
 
