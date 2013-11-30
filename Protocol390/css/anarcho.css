@@ -15,3 +15,13 @@
     font-family: DestroyEarthRoughBB;
     src: local(DestroyEarthRoughBB), url('../../flash/build/fonts/DestroyEarthRoughBB.otf') format('opentype');
 }
+
+@font-face {
+    font-family: DestroyEarthBB;
+    src: local(DestroyEarthBB), url('../../flash/build/fonts/DestroyEarthBB.otf') format('opentype');
+}
+
+@font-face {
+    font-family: PalookaBB;
+    src: local(PalookaBB), url('../../flash/build/fonts/PalookaBB.otf') format('opentype');
+}
