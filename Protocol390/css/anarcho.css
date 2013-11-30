@@ -5,3 +5,13 @@
  margin: 0 auto;
  padding-top: 25%;
 }
+
+@font-face {
+    font-family: ProtestPaintBB;
+    src: local(ProtestPaintBB), url('../../flash/build/fonts/ProtestPaintBB.otf') format('opentype');
+}
+
+@font-face {
+    font-family: DestroyEarthRoughBB;
+    src: local(DestroyEarthRoughBB), url('../../flash/build/fonts/DestroyEarthRoughBB.otf') format('opentype');
+}
