@@ -66,7 +66,6 @@ package com.states
 					{
 						_ce.sound.playSound("click");
 						// todo use ExternalController instead.
-						button.removeEventListener(TouchEvent.TOUCH, buttonHandler);
 						if (button.name == "twitter")
 							navigateToURL(new URLRequest("http://www.twitter.com/uni_turtle"), "_blank");
 						else if (button.name == "github")
