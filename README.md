@@ -6,7 +6,7 @@ To survive in [People's Park](http://www.yelp.com/biz/peoples-park-berkeley-2), 
 ***
 
 #### THE GAME
-[PROTOCOL 390](http://josegallegos07.github.io/game-off-2013/Protocol390/index.html)
+[PROTOCOL 390](http://www.unimpressedturtle.com/Protocol390.html)
 
 ***
 
