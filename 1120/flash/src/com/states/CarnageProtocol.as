@@ -571,10 +571,10 @@ package com.states
 				add(coin);
 				
 				// tween
-				Starling.juggler.tween(coin, 0.001, {
+				Starling.juggler.tween(coin, 0.05, {
 					transition: Transitions.LINEAR,
 					delay: 0,
-					repeatCount: 11000,
+					repeatCount: 0,
 					reverse: false,
 					rotation: deg2rad(360)
 				});
@@ -591,6 +591,8 @@ package com.states
 			var _coin:Coin;
 			for (var x:int = 0; x < _allActiveCoins.length; x++)
 			{
+				Starling.juggler.removeTweens((_coin))
+						
 				_coin = _allActiveCoins[x] as Coin;
 				_coin.kill = true;
 			}
@@ -612,8 +614,8 @@ package com.states
 			_ce.sound.playSound("heart");
 			Starling.juggler.tween(heart, 0.05, {
 				transition: Transitions.EASE_IN,
-				repeatCount: 11000,
-				reverse: true,
+				repeatCount: 0,
+				reverse: false,
 				x: heart.x -1
 			});
 		}
@@ -624,6 +626,8 @@ package com.states
 			var _life:Life;
 			for (var x:int = 0; x < _allActiveLife.length; x++)
 			{
+				Starling.juggler.removeTweens((_life))
+						
 				_life = _allActiveLife[x] as Life;
 				_life.kill = true;
 			}
@@ -645,8 +649,8 @@ package com.states
 			_ce.sound.playSound("heart");
 			Starling.juggler.tween(immortality, 0.05, {
 				transition: Transitions.EASE_IN,
-				repeatCount: 11000,
-				reverse: true,
+				repeatCount: 0,
+				reverse: false,
 				x: immortality.x -1
 			});
 		}
@@ -657,6 +661,8 @@ package com.states
 			var _imm:Immortality;
 			for (var x:int = 0; x < _allImmortality.length; x++)
 			{
+				Starling.juggler.removeTweens((_imm))
+				
 				_imm = _allImmortality[x] as Immortality;
 				_imm.kill = true;
 			}
@@ -713,6 +719,7 @@ package com.states
 			var _heart:Life = NapeUtils.CollisionGetObjectByType(Life, interactionCallback) as Life;
 			if ((NapeUtils.CollisionGetOther(_heart, interactionCallback) is Anarcho) == false) return;
 			
+			Starling.juggler.removeTweens(_heart)
 			_ce.sound.playSound("hit_pick");
 			Game.life.addLife();
 		}
@@ -722,6 +729,7 @@ package com.states
 			var _imm:Immortality = NapeUtils.CollisionGetObjectByType(Immortality, interactionCallback) as Immortality;
 			if ((NapeUtils.CollisionGetOther(_imm, interactionCallback) is Anarcho) == false) return;
 			
+			Starling.juggler.removeTweens(_imm)
 			_ce.sound.playSound("hit_pick");
 			
 			Game.IMMORTALITY = true;
@@ -733,6 +741,7 @@ package com.states
 			var _coin:Coin = NapeUtils.CollisionGetObjectByType(Coin, interactionCallback) as Coin;
 			if ((NapeUtils.CollisionGetOther(_coin, interactionCallback) is Anarcho) == false) return;
 			
+			Starling.juggler.removeTweens(_coin)
 			_ce.sound.playSound("veloid2");
 			var _moneyConfig:XML = XML(new Textures.SPARE_SOME_CHANGE_CONFIG());
 			var _spareSomeChangeTexture:Texture = Textures.MONEY_TEXTURE_TEXTURE;
@@ -821,7 +830,9 @@ package com.states
 		}
 
 		override public function destroy():void
-		{
+		{		
+			Starling.juggler.purge();
+			
 			this.removeEventListener(TouchEvent.TOUCH, handleUI);
 			this.removeEventListener(ElevenTwentyEvent.ELEVEN, updateUnstablePlatform);
 			this.removeEventListener(RestartTimerEvent.RESTART, restartTimer);
@@ -829,8 +840,6 @@ package com.states
 			EnemyProtocol._eventDispatcher.removeEventListener(InjuryEvent.INJURY, injury);
 			
 			_loopTimer.removeEventListener(TimerEvent.TIMER, playDroneCallback);
-			
-			// _atmoParticles.stop(); 
 
 			_splashButton.removeEventListener(TouchEvent.TOUCH, handleUI);
 			_splashButton.dispose();
@@ -838,18 +847,43 @@ package com.states
 			_restartButton.removeEventListener(TouchEvent.TOUCH, handleUI);
 			_restartButton.dispose();
 			
+			if(_countDown){
 			_countDown.clear();
 			_countDown.dispose();
+			}
 			
-			_round.dispose();
+			if(_round)
+				_round.dispose();
 			
-			_powerups.dispose();
-			_powerupStatus.dispose();
+			if(_powerups)
+				_powerups.dispose();
 			
-			_fireParticles.dispose();
+			if(_powerupStatus)
+				_powerupStatus.dispose();
 			
-			_dynamicBackground.dispose();
-			Starling.juggler.purge();
+			if(_fireParticles)
+				_fireParticles.dispose();
+			
+			if(_dynamicBackground)
+				_dynamicBackground.dispose();
+
+			if(_cash)
+				_cash.dispose();
+			
+			if(_remaining)
+				_remaining.dispose();
+			
+			if(_unstablePlatform)
+				_unstablePlatform.destroy();
+			
+			if(_spareChangeGroup)
+				_spareChangeGroup.destroy();
+
+			if(_lifeSprite)
+				_lifeSprite.destroy();
+			
+			if(_colossalHole)
+				_colossalHole.destroy();
 
 			// super.destroy();
 			destroyEnemy();

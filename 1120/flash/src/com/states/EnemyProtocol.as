@@ -117,13 +117,6 @@ package com.states
 				direction = (xPos < Game.STAGE_WIDTH/2) ? "right" : "left";
 				missileTexture = GearTextures.getRandomGearTexture();
 				missileTexture.repeat = false; 
-
-				/*
-				missileTextureVec.push(missileTexture);
-				missileMC = new MovieClip(missileTextureVec)
-				missileMC.pivotX = missileMC.width/2;
-				missileMC.pivotY = missileMC.height/2;
-				missileMC.x = 0;*/
 				
 				cannon = new Cannon("cannon_" + i, {view: GearTextures.CANNON_TEXTURE, x:xPos, y:yPos, fireRate:fireRate, missileSpeed:speed, missileFuseDuration: 2000, missileExplodeDuration: 20, openFire: true, startingDirection: direction, missileView: missileTexture})
 				cannon.onGiveDamage.add(cannonHit);

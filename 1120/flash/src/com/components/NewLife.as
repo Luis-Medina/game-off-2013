@@ -86,17 +86,6 @@ package com.components
 		public function devoidOfLife():void
 		{
 			trace("DEVOID OF LIFE")
-			// Game.hero.controlsEnabled = false;
-			/*
-			blackness = new Image(Textures.BLACK_TEXTURE);
-			addChild(blackness);
-			blackness.alpha = 0;
-			
-			Starling.juggler.tween(blackness, 3, {
-				transition: Transitions.EASE_IN,
-				alpha: 1,
-				onComplete: finishedFade
-			})*/
 			sendDeathEvent();
 		}
 		
@@ -126,6 +115,7 @@ package com.components
 				transition: Transitions.EASE_IN,
 				delay: 0,
 				repeatCount: 2,
+				onComplete: resetAlpha,
 				reverse: true,
 				alpha: 0
 			});
@@ -146,6 +136,9 @@ package com.components
 			
 			if (_lifeTextField)
 				_lifeTextField.dispose();
+			
+			if(_xTextField)
+				_xTextField.dispose();
 			
 			if (blackness)
 				blackness.dispose();

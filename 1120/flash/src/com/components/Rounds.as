@@ -74,6 +74,7 @@ package com.components
 		{
 			_count.dispose();
 			_countTextField.dispose();
+			Starling.juggler.purge();
 			
 			super.dispose();
 		}

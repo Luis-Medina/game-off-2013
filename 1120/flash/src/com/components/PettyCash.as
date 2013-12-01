@@ -70,7 +70,14 @@ package com.components
 		
 		override public function dispose():void
 		{
-			clear();
+			clear()
+			
+			if(_numDisplay)
+				_numDisplay.dispose();
+			
+			if(_numLabel)
+				_numLabel.dispose();
+			
 			super.dispose();
 		}
 		

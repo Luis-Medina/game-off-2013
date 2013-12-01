@@ -145,10 +145,25 @@ package com.components
 		
 		override public function dispose():void
 		{			
-			currentBackground.destroy();
-			nextBackground.destroy();
+			Starling.juggler.purge(); 
+			if(currentBackground)
+				currentBackground.destroy();
 			
-			Starling.juggler.purge();
+			if(nextBackground)
+				nextBackground.destroy();
+			
+			if (filterBackground)
+				filterBackground.destroy();
+			
+			if(moon)	
+				moon.destroy();
+			
+			if(_atmoParticles)
+				_atmoParticles.dispose();
+			
+			if(foreGround)
+				foreGround.destroy();
+
 			super.dispose();
 		}
 	}
