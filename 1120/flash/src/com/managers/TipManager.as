@@ -156,6 +156,8 @@ package com.managers
 			_background.dispose();
 			_overlay.dispose();
 			_overlay2.dispose();
+			
+			super.dispose();
 		}
 	}
 }

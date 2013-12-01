@@ -53,17 +53,13 @@ package com.states
 	import starling.core.Starling;
 	import starling.display.BlendMode;
 	import starling.display.Button;
-	import starling.display.DisplayObject;
 	import starling.display.Image;
-	import starling.display.Quad;
 	import starling.events.Event;
 	import starling.events.Touch;
 	import starling.events.TouchEvent;
 	import starling.events.TouchPhase;
 	import starling.extensions.particles.PDParticleSystem;
-	import starling.filters.BlurFilter;
 	import starling.textures.Texture;
-	import starling.textures.TextureSmoothing;
 	import starling.utils.*;
 
 	public class CarnageProtocol extends StarlingState
@@ -131,8 +127,6 @@ package com.states
 		
 		private var shakeTween:Tween;
 		private var _shakeTimer:Timer;
-		private var blurFilter:BlurFilter = new BlurFilter();
-		private var blurScreen:Image = new Image(BackgroundTextures.FILTER_TEXTURE)
 			
 		private var _loopTimer:Timer;
 		
@@ -249,8 +243,6 @@ package com.states
 			Game.hero.jumpAcceleration = 1.2; // default is 9
 			Game.hero.maxVelocity = Game.velocityOrig; // default is 240
 			Game.hero.jumpHeight = 195; // default is 330
-			Game.hero.onJump.add(handleHeroJump);
-			Game.hero.onAnimationChange.add(handleHeroAnimationChange);
 			add(Game.hero);
 			
 			playDrone();
@@ -734,17 +726,6 @@ package com.states
 			
 			Game.IMMORTALITY = true;
 			_powerupStatus.updateCount("immortality");
-		}
-		
-		private function handleHeroJump():void
-		{
-			// _ce.sound.playSound("jump")
-		}
-		
-		private function handleHeroAnimationChange():void
-		{
-			// if (hero.animation == "walk_left" || hero.animation == "walk_right")
-			// 	_ce.sound.playSound("walk")
 		}
 		
 		private function handleCoinTouch(interactionCallback:InteractionCallback):void
