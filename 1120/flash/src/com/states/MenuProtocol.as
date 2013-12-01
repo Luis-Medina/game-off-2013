@@ -78,7 +78,8 @@ package com.states
 			Game.ALREADY_INITIATED = true;
 			_splashDelay.removeEventListener(TimerEvent.TIMER, _splashDelayCallback);
 			
-			firstSplash();
+			nextSplash();
+			// firstSplash();
 		}
 		
 		private function firstSplash():void
@@ -99,7 +100,7 @@ package com.states
 			removeChild(citrusSplash);
 			
 			unimpressedTurtleSplash = new Image(Textures.UNIMPRESSED_TEXTURE);
-			citrusSplash.alpha = 1;
+			// citrusSplash.alpha = 1;
 			addChild(unimpressedTurtleSplash)
 			
 			Starling.juggler.tween(unimpressedTurtleSplash, 4, {

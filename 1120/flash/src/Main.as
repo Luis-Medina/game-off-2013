@@ -34,7 +34,7 @@ package
 
 		public function Main() {
 			 
-			super();  
+			super();   
 			this.addEventListener(Event.ADDED_TO_STAGE, onAddedToStage);
 		}
 		

@@ -15,6 +15,11 @@ package com.constants
 		public static const BLANK_IMG:Texture = Texture.fromBitmap(new BLANK);
 		public static const BLANK_TEXTURE:Texture = Texture.fromTexture(BLANK_IMG);
 		
+		[Embed(source="../assets/textures/screens/blank_correct_color.png", mimeType="image/png")]
+		public static const BLANK_CORRECT_COLOR:Class;
+		public static const BLANK_CORRECT_COLOR_IMG:Texture = Texture.fromBitmap(new BLANK_CORRECT_COLOR);
+		public static const BLANK_CORRECT_COLOR_TEXTURE:Texture = Texture.fromTexture(BLANK_CORRECT_COLOR_IMG);
+		
 		[Embed(source="../assets/textures/immortal.png", mimeType="image/png")]
 		public static const IMMORTALITY:Class;
 		public static const IMMORTALITY_IMG:Texture = Texture.fromBitmap(new IMMORTALITY);

@@ -38,7 +38,7 @@ package com.states
 			// lazy:
 			var height:int = 120;
 			var width:int = 120;
-			var yPos:int = 400;
+			var yPos:int = Game.STAGE_HEIGHT/2 - width/2;
 			var gap:int = 150;
 			var xPos:Array = [Game.STAGE_WIDTH/2 - width/2 - gap, Game.STAGE_WIDTH/2 - width/2, Game.STAGE_WIDTH/2 - width/2 + gap];
 			twitter = GameButton.imageButton(Textures.TWITTER_TEXTURE, "twitter", width, height, xPos[0], yPos);

@@ -27,7 +27,7 @@ package com.states
 		{
 			this.removeEventListener(Event.ADDED_TO_STAGE, onAddedToStage);
 		
-			lifelessScreen = new Image(Textures.SPLASH_0_TEXTURE);
+			lifelessScreen = new Image(Textures.BLANK_CORRECT_COLOR_TEXTURE);
 			addChild(lifelessScreen);
 			
 			var heroAnim:AnimationSequence = new AnimationSequence(Textures.GREEN_TEXTURE_ATLAS, ["dance"], "dance",  10, true, "none");
@@ -35,9 +35,9 @@ package com.states
 
 			heroAnimSprite = new CitrusSprite("hero_loading", {view:heroAnim});
 			heroAnim.x = Math.min(Game.STAGE_WIDTH/2 - heroAnim.width/2);
-			heroAnim.y = Math.min(Game.STAGE_HEIGHT/2 - heroAnim.width/2);
+			heroAnim.y = 150; // Math.min(Game.STAGE_HEIGHT/2 - heroAnim.width/2);
 			
-			addChild(heroAnim);
+			addChild(heroAnim); 
 		}
 		
 		override public function dispose():void
