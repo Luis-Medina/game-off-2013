@@ -23,4 +23,5 @@ To survive in [People's Park](http://www.yelp.com/biz/peoples-park-berkeley-2), 
 ***
 
 #### TOOLS OF THE TRADE
-[Citrus Engine](http://www.citrusengine.com)
+* [Citrus Engine](http://www.citrusengine.com)
+* [Blambot](http://www.blambot.com)
