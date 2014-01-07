@@ -6,7 +6,7 @@ To survive in [People's Park](http://www.yelp.com/biz/peoples-park-berkeley-2), 
 ***
 
 #### THE GAME
-[PROTOCOL 390](http://www.unimpressedturtle.com/Protocol390.html)
+[PROTOCOL 390](http://www.unimpressedturtle.com/Protocol390.html) was developed November 2013 for [GitHub Game Off II](https://github.com/github/game-off-2013) and was [selected](https://github.com/blog/1731-github-game-off-ii-winners) as one of 5 winners.
 
 ***
 
