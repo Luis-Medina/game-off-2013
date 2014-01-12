@@ -10,6 +10,7 @@ package com.states
 	import com.constants.Textures;
 	import com.events.CreateEvent;
 	import com.managers.TipManager;
+	import com.utils.ArrayUtils;
 	
 	import flash.display.BitmapData;
 	import flash.events.TimerEvent;
@@ -47,6 +48,7 @@ package com.states
 		private var _splashDelay:Timer;
 		private var _delay:Timer;
 		private var _repeatTimer:Timer;
+		private var _shakeTimer:Timer;
 		
 		private var _carnage:CarnageProtocol;
 		private var _terminate:TerminateProtocol;
@@ -183,6 +185,11 @@ package com.states
 		{
 			/// LOOPING THIS MANUALLY BECAUSE the "LOOP"/"TimesToRepeat" argument isn't doing jack shit.
 			
+			// logo shake
+			var intensity:Number = ArrayUtils.randomRange(5, 50);
+			var duration:Number = ArrayUtils.randomRange(50, 100);
+			shake(duration, intensity);
+			
 			_repeatTimer = new Timer(7000, 1);
 			_repeatTimer.addEventListener(TimerEvent.TIMER, droneRepeat);
 			_repeatTimer.start();
@@ -193,6 +200,24 @@ package com.states
 			_ce.sound.playSound("drone");
 			
 			playDrone();
+		}
+
+		
+		private function shake(duration:Number, intensity:Number):void
+		{
+			_logo.x = Math.random() * intensity - intensity / 2;
+			_logo.y = Math.random() * intensity - intensity / 2;
+			
+			_shakeTimer = new Timer(duration, 1);
+			_shakeTimer.addEventListener(TimerEvent.TIMER_COMPLETE, shakeTimerCallback);
+			_shakeTimer.start();
+		}
+		
+		private function shakeTimerCallback(e:TimerEvent):void
+		{
+			_shakeTimer.addEventListener(TimerEvent.TIMER_COMPLETE, shakeTimerCallback);
+			_logo.x = 0;
+			_logo.y = 0;
 		}
 
 		private function buttonHandler(e:TouchEvent):void
@@ -243,6 +268,7 @@ package com.states
 			_button.removeEventListener(TouchEvent.TOUCH, buttonHandler);
 			_repeatTimer.removeEventListener(TimerEvent.TIMER, droneRepeat);
 			_delay.removeEventListener(TimerEvent.TIMER, _delayTimerCallback);
+			_shakeTimer.removeEventListener(TimerEvent.TIMER, shakeTimerCallback);
 			
 			if (_splashDelay)
 				_splashDelay.removeEventListener(TimerEvent.TIMER, _splashDelayCallback);
