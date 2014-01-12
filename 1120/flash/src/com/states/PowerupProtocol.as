@@ -142,7 +142,7 @@ package com.states
 							
 						} else {
 							
-							// NOT ENOUGH CASH, BRAH!
+							// NOT ENOUGH CASH, BRAH!      
 							// _ce.sound.playSound("earthrot");
 						}
 						updateClickability(); // update button status after each 'purchase'
@@ -156,7 +156,7 @@ package com.states
 		public function updateClickability():void
 		{
 			if (Game.coinCount >= Game.THREE_NINETY)
-				updateButtonStatus(true);
+				updateButtonStatus(true); 
 			else
 				updateButtonStatus(false);		
 		}
