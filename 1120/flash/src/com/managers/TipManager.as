@@ -50,8 +50,8 @@ package com.managers
 		
 			this.removeEventListener(Event.ADDED_TO_STAGE, onAddedToStage);
 			
-			_overlay2 = new Image(Textures.SPLASH_TEXTURE);
-			addChild(_overlay2);   
+			//_overlay2 = new Image(Textures.SPLASH_TEXTURE);
+			//addChild(_overlay2);   
 			
 			_overlay = new Image(Textures.POWERUP_OVERLAY_TEXTURE);
 			addChild(_overlay);
@@ -155,7 +155,7 @@ package com.managers
 			
 			_background.dispose();
 			_overlay.dispose();
-			_overlay2.dispose();
+			//_overlay2.dispose();
 			
 			super.dispose();
 		}
