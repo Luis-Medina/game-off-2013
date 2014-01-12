@@ -55,15 +55,28 @@ package com.constants
 		public static const BLACK_IMG:Texture = Texture.fromBitmap(new BLACK);
 		public static const BLACK_TEXTURE:Texture = Texture.fromTexture(BLACK_IMG);
 		
-		[Embed(source="../assets/textures/splash2.png", mimeType="image/png")]
-		public static const SPLASH:Class;
-		public static const SPLASH_IMG:Texture = Texture.fromBitmap(new SPLASH);
-		public static const SPLASH_TEXTURE:Texture = Texture.fromTexture(SPLASH_IMG);
+		// menu textures
+		[Embed(source="../assets/textures/splash/back.png", mimeType="image/png")]
+		public static const MENU_BACK:Class;
+		public static const MENU_BACK_IMG:Texture = Texture.fromBitmap(new MENU_BACK);
+		public static const MENU_BACK_TEXTURE:Texture = Texture.fromTexture(MENU_BACK_IMG);
 		
-		[Embed(source="../assets/textures/splash.png", mimeType="image/png")]
-		public static const SPLASH_0:Class;
-		public static const SPLASH_0_IMG:Texture = Texture.fromBitmap(new SPLASH_0);
-		public static const SPLASH_0_TEXTURE:Texture = Texture.fromTexture(SPLASH_0_IMG);
+		[Embed(source="../assets/textures/splash/moon.png", mimeType="image/png")]
+		public static const MENU_MOON:Class;
+		public static const MENU_MOON_IMG:Texture = Texture.fromBitmap(new MENU_MOON);
+		public static const MENU_MOON_TEXTURE:Texture = Texture.fromTexture(MENU_MOON_IMG);
+		
+		[Embed(source="../assets/textures/splash/front.png", mimeType="image/png")]
+		public static const MENU_FRONT:Class;
+		public static const MENU_FRONT_IMG:Texture = Texture.fromBitmap(new MENU_FRONT);
+		public static const MENU_FRONT_TEXTURE:Texture = Texture.fromTexture(MENU_FRONT_IMG);
+		
+		[Embed(source="../assets/textures/splash/logo.png", mimeType="image/png")]
+		public static const MENU_LOGO:Class;
+		public static const MENU_LOGO_IMG:Texture = Texture.fromBitmap(new MENU_LOGO);
+		public static const MENU_LOGO_TEXTURE:Texture = Texture.fromTexture(MENU_LOGO_IMG);
+		
+		////
 		
 		[Embed(source="../assets/textures/level_1_floor.png", mimeType="image/png")]
 		public static const FLOOR:Class;
