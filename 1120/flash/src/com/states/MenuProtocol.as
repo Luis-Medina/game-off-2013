@@ -25,6 +25,7 @@ package com.states
 	import starling.events.Touch;
 	import starling.events.TouchEvent;
 	import starling.events.TouchPhase;
+	import starling.extensions.particles.PDParticleSystem;
 	import starling.text.TextField;
 	import starling.textures.Texture;
 
@@ -35,6 +36,12 @@ package com.states
 		private var _width:Number = 200;
 		
 		private var _bg:CitrusSprite;
+		private var _moon:CitrusSprite;
+		private var _front:CitrusSprite;
+		private var _logo:CitrusSprite;
+		private var _atmoParticles:PDParticleSystem;
+		private var _atmoParticlesSprite:CitrusSprite;
+		
 		private var _buttonTexture:Texture;
 		private var _button:Button;
 		private var _splashDelay:Timer;
@@ -115,11 +122,36 @@ package com.states
 			if (unimpressedTurtleSplash)
 				removeChild(unimpressedTurtleSplash);
 			
-			var _bgSrc:Texture = Textures.SPLASH_TEXTURE;
+			/** MENU BACKGROUNDS **/
+			var _bgSrc:Texture = Textures.MENU_BACK_TEXTURE;
 			_bg = new CitrusSprite("splash_img", {view:_bgSrc});
 			add(_bg);
 			
-			/** MENU **/
+			var _moonSrc:Texture = Textures.MENU_MOON_TEXTURE;
+			_moon = new CitrusSprite("moon_img", {view:_moonSrc});
+			add(_moon);
+			
+			_atmoParticles = new PDParticleSystem(XML(new Textures.ATMOSPHERE_CONFIG()), Textures.MONEY_TEXTURE_TEXTURE);
+			_atmoParticlesSprite = new CitrusSprite("atmo_particles_menu", {view: _atmoParticles, parallaxX:1.7, parallaxY:1.7});
+			_atmoParticlesSprite.x = Game.STAGE_WIDTH / 2;
+			add(_atmoParticlesSprite);
+			_atmoParticles.start();
+			
+			var _frontSrc:Texture = Textures.MENU_FRONT_TEXTURE;
+			_front = new CitrusSprite("front_img", {view:_frontSrc});
+			add(_front);
+			
+			var _logoSrc:Texture = Textures.MENU_LOGO_TEXTURE;
+			_logo = new CitrusSprite("splash_img", {view:_logoSrc});
+			add(_logo);
+			
+			Starling.juggler.tween(_moon, 0.1, {
+				transition: Transitions.EASE_IN,
+				repeatCount: 0,
+				y: _moon.y - 1.5
+			})
+						
+			/** MENU BUTTONS **/
 			var _buttons:Array = [Game.START, Game.INSTRUCTIONS, Game.EXIT];			
 			var x:Number, y:Number;
 			for (var i:int = 0; i < _buttons.length; i++)
@@ -190,6 +222,9 @@ package com.states
 		override public function destroy():void
 		{
 			_bg.destroy();
+			_moon.destroy();
+			_front.destroy();
+			_logo.destroy();
 			
 			if (citrusSplash)
 				citrusSplash.dispose();
@@ -199,6 +234,9 @@ package com.states
 			
 			if (tips)
 				tips.dispose();
+			
+			if(_atmoParticles)
+				_atmoParticles.dispose();
 			
 			Starling.juggler.purge();
 			
