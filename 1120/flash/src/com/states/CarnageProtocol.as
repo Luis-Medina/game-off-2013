@@ -130,6 +130,9 @@ package com.states
 			
 		private var _loopTimer:Timer;
 		
+		// 
+		private var sandbox:Boolean = true;
+		
 		public function CarnageProtocol() {
 			
 			trace("CARNAGE PROTOCOL")        
@@ -181,11 +184,14 @@ package com.states
 				
 			this.visible = true;
 			
+			if (!sandbox)
+			{
 			createUnstablePlatform();
 			this.addEventListener(ElevenTwentyEvent.ELEVEN, updateUnstablePlatform);
 			this.addEventListener(RestartTimerEvent.RESTART, restartTimer);
 			this.addEventListener(PowerupEvent.POWERUP, powerup);
 			EnemyProtocol._eventDispatcher.addEventListener(InjuryEvent.INJURY, injury);
+			}
 						
 			_countDown = new Countdown();
 			var _countDownSprite:CitrusSprite = new CitrusSprite("countdown_sprite", {view:_countDown})
