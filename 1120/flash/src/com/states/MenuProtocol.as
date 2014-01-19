@@ -154,7 +154,7 @@ package com.states
 			})
 						
 			/** MENU BUTTONS **/
-			var _buttons:Array = [Game.START, Game.INSTRUCTIONS, Game.EXIT];			
+			var _buttons:Array = [Game.START, Game.INSTRUCTIONS, Game.EXIT, Game.DEADPLANET];			
 			var x:Number, y:Number;
 			for (var i:int = 0; i < _buttons.length; i++)
 			{
@@ -238,6 +238,8 @@ package com.states
 							dispatchEvent(new CreateEvent(CreateEvent.CREATE, {type: Game.EXIT}, true));
 						else if (button.name == Game.INSTRUCTIONS)
 							tips.show();
+						else if (button.name == Game.DEADPLANET)
+							dispatchEvent(new CreateEvent(CreateEvent.CREATE, {type: Game.DEADPLANET}, true));
 					}	
 				}
 			}
