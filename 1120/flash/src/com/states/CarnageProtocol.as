@@ -21,6 +21,7 @@ package com.states
 	import com.components.Coin;
 	import com.components.ColossalHole;
 	import com.components.Countdown;
+	import com.components.DeadPlanet;
 	import com.components.DynamicPlatform;
 	import com.components.GameButton;
 	import com.components.Immortality;
@@ -130,9 +131,6 @@ package com.states
 			
 		private var _loopTimer:Timer;
 		
-		// 
-		private var sandbox:Boolean = true;
-		
 		public function CarnageProtocol() {
 			
 			trace("CARNAGE PROTOCOL")        
@@ -146,7 +144,7 @@ package com.states
 			/** PHYSICS **/
 			physics = new Nape("physics"); 
 			physics.gravity = new Vec2(0, 188);
-			// physics.visible = true;    
+			physics.visible = true;    
 			add(physics);
 			
 			// reset params
@@ -184,13 +182,19 @@ package com.states
 				
 			this.visible = true;
 			
-			if (!sandbox)
+			if (!Game.SANDBOX)
 			{
-			createUnstablePlatform();
-			this.addEventListener(ElevenTwentyEvent.ELEVEN, updateUnstablePlatform);
-			this.addEventListener(RestartTimerEvent.RESTART, restartTimer);
-			this.addEventListener(PowerupEvent.POWERUP, powerup);
-			EnemyProtocol._eventDispatcher.addEventListener(InjuryEvent.INJURY, injury);
+				// CARNAGE MODE
+				createUnstablePlatform();
+				this.addEventListener(ElevenTwentyEvent.ELEVEN, updateUnstablePlatform);
+				this.addEventListener(RestartTimerEvent.RESTART, restartTimer);
+				this.addEventListener(PowerupEvent.POWERUP, powerup);
+				EnemyProtocol._eventDispatcher.addEventListener(InjuryEvent.INJURY, injury);
+			} else 
+			{
+				// SANDBOX MODE
+				var _planet:DeadPlanet = new DeadPlanet("planet", {height: 300, width: 300, x: Game.STAGE_WIDTH / 2 - 150, y: Game.STAGE_HEIGHT / 2 - 150});
+				add(_planet);	
 			}
 						
 			_countDown = new Countdown();
@@ -257,7 +261,7 @@ package com.states
 		override public function update(timeDelta:Number):void
 		{		
 			Game.coinCount = currentCoinCount; // fail-safe
-			Game.END_CASH = currentCoinCount
+			Game.END_CASH = currentCoinCount;
 			
 			// fail-safe
 			if (Game.hero.x < 0 || Game.hero.x > Game.STAGE_WIDTH)
