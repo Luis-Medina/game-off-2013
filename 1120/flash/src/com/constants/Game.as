@@ -6,6 +6,7 @@ package com.constants
 	public class Game
 	{
 		public static var ALREADY_INITIATED:Boolean = false;
+		public static var SANDBOX:Boolean = false;
 
 		// RESULT SCREEN VARS
 		public static var END_CASH:Number = 0;
@@ -34,6 +35,7 @@ package com.constants
 		public static const ELEVEN_TWENTY:String = "ELEVEN_TWENTY"
 		public static const ELEVEN_TWENTY_HALF:String = "ELEVEN_TWENTY_HALF"
 		public static const DEATH:String = "DEATH"
+		public static const DEADPLANET:String = "DEAD PLANETS"
 			
 		// MENU-INFO
 		public static const globalFontSize:Number = 24;
