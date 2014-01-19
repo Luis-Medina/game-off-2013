@@ -64,14 +64,18 @@ package
 		{
 			var type:String = Event.params.type
 			
-			if(type == Game.START || type == Game.RESTART)
+			if(type == Game.START || type == Game.RESTART){
 				state = new CarnageProtocol();
-			else if (type == Game.SPLASH)
+			} else if (type == Game.SPLASH) {
 				state = new MenuProtocol();
-			else if (type == Game.EXIT)
+			} else if (type == Game.EXIT) {
 				state = new TerminateProtocol();
-			else if (type == Game.DEATH)
+			} else if (type == Game.DEATH) {
 				state = new LifelessProtocol;
+			} else if (type == Game.DEADPLANET) {
+				state = new CarnageProtocol;
+				Game.SANDBOX = true;	
+			}
 				
 		}
 	}
