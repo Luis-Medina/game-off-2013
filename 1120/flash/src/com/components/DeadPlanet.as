@@ -20,12 +20,19 @@ package com.components
 	{			
 		private var _sensor:Sensor;
 		private var _sensorName:String;
+		private var _isTouching:Boolean = false;
+		private var samplePoint:Body;
 		
-		public var touchZone:Number = 110;
+		public var touchZone:Number = 100;
 		
 		private static var _ce:CitrusEngine = CitrusEngine.getInstance();
 		
 		public function DeadPlanet(name:String, params:Object = null) {
+			
+			updateCallEnabled = true;
+			
+			samplePoint = new Body();
+			samplePoint.shapes.add(new Circle(0.001));
 			
 			super(name, params);
 
@@ -33,6 +40,16 @@ package com.components
 		
 		override public function update(timeDelta:Number):void {
 
+			if (_isTouching)
+			{	
+				_nape.gravity = new Vec2(0,0);
+				Game.hero.body.worldVectorToLocal(new Vec2(0, 10), false);
+				
+			} else {
+				
+				_nape.gravity = new Vec2(0,188);
+			}
+			
 			super.update(timeDelta);
 		}
 		
@@ -59,18 +76,16 @@ package com.components
 		{
 			var _sensor:Sensor = NapeUtils.CollisionGetObjectByType(Sensor, interactionCallback) as Sensor;
 			if ((NapeUtils.CollisionGetOther(_sensor, interactionCallback) is Anarcho) == false) return;
-			
-			var dx:Number = 0
-			var dy:Number = -1000;
-			
-			var impulse:Vec2 = Vec2.weak(dx, dy);
-			Game.hero.body.applyImpulse(impulse);
+	
+			_isTouching = true;
 		}
 		
 		private function handleDeadZoneDeath(interactionCallback:InteractionCallback):void
 		{
 			var _sensor:Sensor = NapeUtils.CollisionGetObjectByType(Sensor, interactionCallback) as Sensor;
 			if ((NapeUtils.CollisionGetOther(_sensor, interactionCallback) is Anarcho) == false) return;
+			
+			_isTouching = false;
 			
 		}
 		
