@@ -2,13 +2,13 @@
   <texture name="texture.png"/>
   <sourcePosition x="300.00" y="300.00"/>
   <sourcePositionVariance x="612.5" y="400"/>
-  <speed value="35"/>
+  <speed value="5"/>
   <speedVariance value="10"/>
   <particleLifeSpan value="3"/>
   <particleLifespanVariance value="0.5"/>
   <angle value="270"/>
   <angleVariance value="2"/>
-  <gravity x="0" y="11.05"/>
+  <gravity x="0" y="2"/>
   <radialAcceleration value="0"/>
   <tangentialAcceleration value="5.88"/>
   <radialAccelVariance value="46.88"/>
