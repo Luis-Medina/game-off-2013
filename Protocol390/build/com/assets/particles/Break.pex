@@ -2,25 +2,25 @@
 <particleEmitterConfig>
     <yCoordFlipped value="1"></yCoordFlipped>
     <sourcePosition x="150.00" y="50.00"></sourcePosition>
-    <sourcePositionVariance x="9.50" y="4.40"></sourcePositionVariance>
+    <sourcePositionVariance x="2" y="4"></sourcePositionVariance>
     <speed value="15.00"></speed>
-    <speedVariance value="155.00"></speedVariance>
+    <speedVariance value="27.51"></speedVariance>
     <particleLifeSpan value="0.0000"></particleLifeSpan>
     <particleLifespanVariance value="0.6500"></particleLifespanVariance>
     <angle value="360.00"></angle>
     <angleVariance value="360.00"></angleVariance>
-    <gravity x="0.00" y="-640.72"></gravity>
+    <gravity x="0.00" y="640.72"></gravity>
     <radialAcceleration value="0.00"></radialAcceleration>
     <tangentialAcceleration value="0.00"></tangentialAcceleration>
     <radialAccelVariance value="0.00"></radialAccelVariance>
     <tangentialAccelVariance value="0.00"></tangentialAccelVariance>
-    <startColor red="0.66" green="0.66" blue="0.66" alpha="1.00"></startColor>
+    <startColor red="1.00" green="1.00" blue="1.00" alpha="1.00"></startColor>
     <startColorVariance red="0.00" green="0.00" blue="0.00" alpha="0.00"></startColorVariance>
     <finishColor red="1.00" green="1.00" blue="1.00" alpha="1.00"></finishColor>
-    <finishColorVariance red="0.00" green="0.00" blue="0.00" alpha="0.00"></finishColorVariance>
+    <finishColorVariance red="0.00" green="0.00" blue="0.00" alpha="0.84"></finishColorVariance>
     <maxParticles value="2"></maxParticles>
-    <startParticleSize value="10.00"></startParticleSize>
-    <startParticleSizeVariance value="10.47"></startParticleSizeVariance>
+    <startParticleSize value="5.00"></startParticleSize>
+    <startParticleSizeVariance value="2"></startParticleSizeVariance>
     <finishParticleSize value="0.00"></finishParticleSize>
     <FinishParticleSizeVariance value="0.00"></FinishParticleSizeVariance>
     <duration value="0.07"></duration>
