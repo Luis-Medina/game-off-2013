@@ -1,4 +1,4 @@
-![Unimpressed Turtle: Protocol 390](https://raw2.github.com/josegallegos07/game-off-2013/development/Protocol390/raw/screenshot.png)
+![Unimpressed Turtle: Protocol 390](/Protocol390/raw/screenshot.png)
 
 ## Protocol 390
 To survive in [People's Park](http://www.yelp.com/biz/peoples-park-berkeley-2), you must supply the prophet with change.
