@@ -13,7 +13,7 @@ It was [selected](https://github.com/blog/1731-github-game-off-ii-winners) as a 
 ### Jose Gallegos
 
 `Roles:` programming, art, audio   
-`contact:` [homepage](http://josegallegos.info) // [email](mailto:josegallegos07@gmail.com) // [github](http://github.com/josegallegos07)
+`Contact:` [homepage](http://josegallegos.info) // [email](mailto:josegallegos07@gmail.com) // [github](http://github.com/josegallegos07)
 
 ## Tools
 
@@ -22,4 +22,4 @@ It was [selected](https://github.com/blog/1731-github-game-off-ii-winners) as a 
 Also: [Flash Builder](http://www.adobe.com/products/flash-builder.html), [FL Studio](http://www.image-line.com/flstudio/), [Massive](http://www.native-instruments.com/en/products/komplete/synths/massive/), [Blambot](http://www.blambot.com) fonts.
 
 ## License
-See [LICENSE](/LICENSE)
+See [LICENSE](/LICENSE).
