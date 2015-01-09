@@ -12,13 +12,14 @@ It was [selected](https://github.com/blog/1731-github-game-off-ii-winners) as a 
 
 ### Jose Gallegos
 
-Programming, Art,"Music"  
-
-[homepage](http://josegallegos.info) // [email](mailto:josegallegos07@gmail.com) // [github](http://github.com/josegallegos07)
+`Roles:` programming, art, audio   
+`contact:` [homepage](http://josegallegos.info) // [email](mailto:josegallegos07@gmail.com) // [github](http://github.com/josegallegos07)
 
 ## Tools
 
 [![Citrus Engine](http://aymericlamboley.fr/blog/wp-content/uploads/2012/11/citrus-logo-2D.png)](https://github.com/DaVikingCode/Citrus-Engine)
+
+Also: [Flash Builder](http://www.adobe.com/products/flash-builder.html), [FL Studio](http://www.image-line.com/flstudio/), [Massive](http://www.native-instruments.com/en/products/komplete/synths/massive/), [Blambot](http://www.blambot.com) fonts.
 
 ## License
 See [LICENSE](/LICENSE)
