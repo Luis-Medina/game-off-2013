@@ -12,8 +12,8 @@ It was [selected](https://github.com/blog/1731-github-game-off-ii-winners) as a 
 
 ### Jose Gallegos
 
-`Roles:` programming, art, audio
-`Contact:` [homepage](http://josegallegos.info) // [email](mailto:josegallegos07@gmail.com) // [github](http://github.com/josegallegos07)
+**Roles**: programming, art, audio  
+**Contact**: [homepage](http://josegallegos.info) // [email](mailto:josegallegos07@gmail.com) // [github](http://github.com/josegallegos07)
 
 ## Tools
 
